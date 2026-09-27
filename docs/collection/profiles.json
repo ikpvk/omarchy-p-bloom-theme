@@ -1,0 +1,4917 @@
+{
+ "version": 2,
+ "count": 42,
+ "default": "16x9-2880p",
+ "release": {
+  "note": "Archives are GitHub Release assets of the tag named in tools/wallpaper_profiles.py (RELEASE_TAG); the URL pattern is https://github.com/ncr/omarchy-p-bloom-theme/releases/download/<tag>/<archive>"
+ },
+ "readability": {
+  "rule": "floor_px = max(11, 14 * height / 2880)",
+  "note": "Smallest type on the native file after every transform. Lower resolutions are composed more compactly and drop secondary blocks; type is never shrunk."
+ },
+ "encoding": {
+  "format": "webp",
+  "lossless": false,
+  "quality": 90,
+  "method": 6,
+  "note": "Lossless intermediates are audited; shipped files are re-encoded."
+ },
+ "profiles": [
+  {
+   "id": "16x9-1080p",
+   "label": "16:9 \u00b7 1920 \u00d7 1080",
+   "aspect": "16:9",
+   "size": [
+    1920,
+    1080
+   ],
+   "layout": "duo",
+   "floor_px": 11.0,
+   "min_text_px": 11.0,
+   "bundled": false,
+   "archive": {
+    "name": "p-bloom-16x9-1080p.tar",
+    "bytes": 5969920,
+    "sha256": "b9faa20119d726d779f3c7398c00f51856c2dc2962b5382eeb3aa8b8ec2b5a11"
+   },
+   "files": [
+    {
+     "id": "o03",
+     "name": "03-fusion-transport.webp",
+     "sha256": "e3a148c2175c5ae691f2dc8ad02064087eed9b604905190058c72539b86cbd9b",
+     "bytes": 144646
+    },
+    {
+     "id": "o10",
+     "name": "10-truth-lamp.webp",
+     "sha256": "0ebfbed370c630eccdc52a777e1c63a87bd12c0b3a09728fb49bd3b06b558afc",
+     "bytes": 149850
+    },
+    {
+     "id": "o02",
+     "name": "02-sky-racer.webp",
+     "sha256": "74a4010bc65d563280cc54a6e6d86a3e21e131f78329491d4358ae441fb8f419",
+     "bytes": 156652
+    },
+    {
+     "id": "c087",
+     "name": "087-neutrino-bell.webp",
+     "sha256": "0e3ff5f86510e0ccc5e00d5d299101f2e8da8af760e8c335b8262c6dfd51b68b",
+     "bytes": 148938
+    },
+    {
+     "id": "o09",
+     "name": "09-tether-climber.webp",
+     "sha256": "b287fd2d306e7c4e1ffc55c83e15188e25a50e0e5760d00a706b2126619a92c6",
+     "bytes": 130328
+    },
+    {
+     "id": "c001",
+     "name": "001-light-sail.webp",
+     "sha256": "7663aa6827a6666a6a60ae8f161de3eb97afdf75971a4f466fa00efae7cdb176",
+     "bytes": 150612
+    },
+    {
+     "id": "o01",
+     "name": "01-quantum-simulator.webp",
+     "sha256": "75458c17a6bd746dfc2db59204d39f64ef0f905124f965ee2c609e6382cfb5a9",
+     "bytes": 170344
+    },
+    {
+     "id": "c025",
+     "name": "025-fibre-braid.webp",
+     "sha256": "4a621fbcb0d8d534201f5679e707e836d30ba9c903135cd2f07e3427b82f1827",
+     "bytes": 169460
+    },
+    {
+     "id": "o13",
+     "name": "13-proxy.webp",
+     "sha256": "4aff6f0dbee525bd1174097b603f1dda86c8bc35a1186fb914173f6e2ea728c6",
+     "bytes": 140906
+    },
+    {
+     "id": "c100",
+     "name": "100-plant-alibi.webp",
+     "sha256": "84a855f85798fa8c605be0896303c1bb24dcd2476cc26708889abacfbca46171",
+     "bytes": 121938
+    },
+    {
+     "id": "o11",
+     "name": "11-organ-foundry.webp",
+     "sha256": "dac66959ef0d6101ded5c9f76defacf219a5b62b2ec397a30d4cb02bef261843",
+     "bytes": 119290
+    },
+    {
+     "id": "o05",
+     "name": "05-cortical-mesh.webp",
+     "sha256": "a06de31a641d861f0006b9b03183898ebc7fc43545a5b5078a56c58844aa806c",
+     "bytes": 143186
+    },
+    {
+     "id": "c017",
+     "name": "017-memory-kiln.webp",
+     "sha256": "e528a5ed78faa40c7c771580c86dccb2f8270ff3eab1c3b1aa71a83f8dfdb321",
+     "bytes": 130746
+    },
+    {
+     "id": "c056",
+     "name": "056-dune-skimmer.webp",
+     "sha256": "76641398e9b41a88ab1e7f937c3aa38422d22dc198edfe420eef9f3d6c9abbb7",
+     "bytes": 151116
+    },
+    {
+     "id": "c010",
+     "name": "010-sock-oracle.webp",
+     "sha256": "22cb571de94ed38ccd3479c3e77af0d24798d90c1879a3adfe39f7264f5e6e74",
+     "bytes": 132764
+    },
+    {
+     "id": "c080",
+     "name": "080-compliment-mill.webp",
+     "sha256": "8ca37cbc70e772c751bd55ce7288eeb94ac4b4b5792c499c3375ba4d1c46be95",
+     "bytes": 127018
+    },
+    {
+     "id": "c031",
+     "name": "031-petal-eye.webp",
+     "sha256": "0d17f08a717aae75b344c2eda5c39f6901581fc1b325d65bfe6663855a19cde1",
+     "bytes": 148018
+    },
+    {
+     "id": "c018",
+     "name": "018-lunar-porch.webp",
+     "sha256": "bb42882614c32e8434d63e2e0dc6c8992d8497f5504db7b1b156b07d36a93553",
+     "bytes": 131982
+    },
+    {
+     "id": "o04",
+     "name": "04-greener.webp",
+     "sha256": "8dd028d17d0af57f0bc886c6a7e28aa01f3ddbb7ac20c42ce7b74a459c2cad35",
+     "bytes": 130852
+    },
+    {
+     "id": "o07",
+     "name": "07-air-refinery.webp",
+     "sha256": "3362d8cd3033ac01b959afa8dd5c1fd6a44403395aa3282559541a76c6fb0ce8",
+     "bytes": 132518
+    },
+    {
+     "id": "o06",
+     "name": "06-bounder.webp",
+     "sha256": "8a380b9225bfc136de00369d230b4e1a11aa78b68aeae22fc471e13b552dd4f1",
+     "bytes": 110372
+    },
+    {
+     "id": "c030",
+     "name": "030-advice-filter.webp",
+     "sha256": "09ca97ddf107892fc97ed236399a802307f77e1d4f03b91483e7d31e63638a53",
+     "bytes": 130386
+    },
+    {
+     "id": "c070",
+     "name": "070-queue-garden.webp",
+     "sha256": "c3dc46373a0eee10bacfe8e9f586e06c3ee2d604eb948d55fb3ca4b962fb2a4f",
+     "bytes": 126370
+    },
+    {
+     "id": "c044",
+     "name": "044-coral-cradle.webp",
+     "sha256": "64d5fe77466b44ea3b46405190dc8c35b7095871e61ef2c36d8e91833fa536e4",
+     "bytes": 143768
+    },
+    {
+     "id": "c002",
+     "name": "002-tidal-loom.webp",
+     "sha256": "f3846a0321e050ece0d1ff3d1235a0ab24cd08fecac80107ee99336ba2866fa4",
+     "bytes": 161140
+    },
+    {
+     "id": "o14",
+     "name": "14-presence-rig.webp",
+     "sha256": "0fe5d021a63de1d53705e0cd2542c60a18e10f67e97327fd19e47081e5ec5dbf",
+     "bytes": 137352
+    },
+    {
+     "id": "c099",
+     "name": "099-sleep-cocoon.webp",
+     "sha256": "8fab706a7e9e96e1635f2f01f04cd4d380f8836a46b020527de599f4f230d73c",
+     "bytes": 127044
+    },
+    {
+     "id": "c042",
+     "name": "042-wind-kite.webp",
+     "sha256": "d62be1cb34800e5e2d544ddfbd94ae3e3eaa229bed67ebe05ae527255b86c82b",
+     "bytes": 157784
+    },
+    {
+     "id": "c060",
+     "name": "060-meeting-buoy.webp",
+     "sha256": "2c02af3ff9b5c3762b3cf2ef2aa3922cf4b5d1c1f40bdf685fcc0563af329a2c",
+     "bytes": 125052
+    },
+    {
+     "id": "c006",
+     "name": "006-manta-foil.webp",
+     "sha256": "21e8befdbed1b0d8a0dfd704e70331369b50aeecf4cb7284e91dc8d3cfc3b6e9",
+     "bytes": 133892
+    },
+    {
+     "id": "c065",
+     "name": "065-seam-surgeon.webp",
+     "sha256": "4853792ee770b94fb1007318adcba594b9a723af46966c0e5d7b26ed127ca051",
+     "bytes": 141964
+    },
+    {
+     "id": "o12",
+     "name": "12-volumetric-stage.webp",
+     "sha256": "cc04eb3c681686b865c1ea0184f79e96b4e2cfbb0e1f18e9430de9944280dea7",
+     "bytes": 174416
+    },
+    {
+     "id": "o08",
+     "name": "08-aroma-organ.webp",
+     "sha256": "8515dcdba1f874f7db306e31a85c53319ed6c3ab0d913ed6e6e224fb2d30fec9",
+     "bytes": 151644
+    },
+    {
+     "id": "c038",
+     "name": "038-quiet-stair.webp",
+     "sha256": "5bd3b6295e5b1f21c6f08679d5b8749d890a26be250106a1a212015a14905a1e",
+     "bytes": 147042
+    },
+    {
+     "id": "c101",
+     "name": "101-velvet-hammer.webp",
+     "sha256": "fa052816862905dc86730145cb2d96d15c12ee9f6b22a3e1bd7cdcce775ea6f1",
+     "bytes": 133766
+    },
+    {
+     "id": "c103",
+     "name": "103-bubble-bailiff.webp",
+     "sha256": "f50230426ea5d2a9b83c996c42dd24c471becea95d150ea2fccf318b66b3ff69",
+     "bytes": 146118
+    },
+    {
+     "id": "c104",
+     "name": "104-key-concord.webp",
+     "sha256": "98c2b654aa40d6b2c23c8dc7e197b0e63020f027a813b559550319e2284ad521",
+     "bytes": 143320
+    },
+    {
+     "id": "c105",
+     "name": "105-metric-embassy.webp",
+     "sha256": "7fbfdaab9da5d3d934c42aa6ab2f1ba66d9e8627dd1b4a76c73ccba2ff2ceddd",
+     "bytes": 140262
+    },
+    {
+     "id": "c106",
+     "name": "106-muon-customs.webp",
+     "sha256": "bc558d3f98b428f63538749d2f206c1e13de7ff2f496feea8d9fe96ec8a2c22d",
+     "bytes": 150532
+    },
+    {
+     "id": "c107",
+     "name": "107-resonance-tailor.webp",
+     "sha256": "875a9ce4bc9ae5a2c351b651ee26a668f2432ac7864090de17687f78a91d52f3",
+     "bytes": 120774
+    },
+    {
+     "id": "c108",
+     "name": "108-suture-loom.webp",
+     "sha256": "dfae356adf01c8cecff5793a71602ecae7fb76e5039991dc6fa54c6bd8bf7729",
+     "bytes": 151226
+    },
+    {
+     "id": "c110",
+     "name": "110-spin-table.webp",
+     "sha256": "e0fe71b7a37512cbce1552d139d78a0592b17a1da502a885da3949d371a8bc40",
+     "bytes": 147066
+    }
+   ]
+  },
+  {
+   "id": "16x9-1440p",
+   "label": "16:9 \u00b7 2560 \u00d7 1440",
+   "aspect": "16:9",
+   "size": [
+    2560,
+    1440
+   ],
+   "layout": "triptych",
+   "floor_px": 11.0,
+   "min_text_px": 11.0,
+   "bundled": false,
+   "archive": {
+    "name": "p-bloom-16x9-1440p.tar",
+    "bytes": 8693760,
+    "sha256": "c44dac5f1f630c99e8032568d313829b279a1d185f0de30b1cab9d1dac1c9344"
+   },
+   "files": [
+    {
+     "id": "o03",
+     "name": "03-fusion-transport.webp",
+     "sha256": "e6dba82622efde611840a38524ff318db3dfb155936f82c7c5b013215d7c0f98",
+     "bytes": 201562
+    },
+    {
+     "id": "o10",
+     "name": "10-truth-lamp.webp",
+     "sha256": "cf7cd9e30fd9af9ba128d5058347f72c4db4e3494a773ae11ea523babb6a3d67",
+     "bytes": 208502
+    },
+    {
+     "id": "o02",
+     "name": "02-sky-racer.webp",
+     "sha256": "151bafa460b2fd4287f562d20f5e0a95869a7cb1ba3c2d1d094aa7fc0c6c5304",
+     "bytes": 201910
+    },
+    {
+     "id": "c087",
+     "name": "087-neutrino-bell.webp",
+     "sha256": "2bcd2e7c88c57be20b2f776828b0b396f94c94023b8362245a06ea4468a87c00",
+     "bytes": 225448
+    },
+    {
+     "id": "o09",
+     "name": "09-tether-climber.webp",
+     "sha256": "6e632dcfa610601640537ec416e1f3f9ec8e7f24592037b1e97e53650d8d8f16",
+     "bytes": 205482
+    },
+    {
+     "id": "c001",
+     "name": "001-light-sail.webp",
+     "sha256": "6843004ce2d843b9b063a3dfe014e5125492cf937695735d44c082e62047b9f8",
+     "bytes": 216236
+    },
+    {
+     "id": "o01",
+     "name": "01-quantum-simulator.webp",
+     "sha256": "441e51f2a2adf4eba732b2aada132877398767faf11fe404b9612a63d975ad74",
+     "bytes": 231230
+    },
+    {
+     "id": "c025",
+     "name": "025-fibre-braid.webp",
+     "sha256": "32c51b6e3abcdfac2a9f786d4cf3cc49215f6b2cf6afffacd6bd5a563c634028",
+     "bytes": 223280
+    },
+    {
+     "id": "o13",
+     "name": "13-proxy.webp",
+     "sha256": "624c4c426fa71a5f14b74c8f35903d4e317f3a995ddd5de93f757955d4600cf4",
+     "bytes": 202836
+    },
+    {
+     "id": "c100",
+     "name": "100-plant-alibi.webp",
+     "sha256": "5f01d43e8ad0957182d49149c4e83a88cc3ce4f449e9708afb3c22f07c4f67fc",
+     "bytes": 196870
+    },
+    {
+     "id": "o11",
+     "name": "11-organ-foundry.webp",
+     "sha256": "a53cb7900b4a51b704747e7c7c6223e97676c698e74b8343529f897747e48232",
+     "bytes": 189554
+    },
+    {
+     "id": "o05",
+     "name": "05-cortical-mesh.webp",
+     "sha256": "4318a4fdf83665b84e308c7e82303943ad40bd72051407363b38c393b28eacb3",
+     "bytes": 207884
+    },
+    {
+     "id": "c017",
+     "name": "017-memory-kiln.webp",
+     "sha256": "25727dbbfba5a3daf213412611a216015d86cf06d0b7350e66006bda37e683a5",
+     "bytes": 207466
+    },
+    {
+     "id": "c056",
+     "name": "056-dune-skimmer.webp",
+     "sha256": "a03f847db90366a6ea0f9f8d6169f870a0bdba79891080a0507ebbe544fe639a",
+     "bytes": 211586
+    },
+    {
+     "id": "c010",
+     "name": "010-sock-oracle.webp",
+     "sha256": "fd600280beb8259084633f73d421c97f86341cd30f2ceb1d72f10064971dd7f3",
+     "bytes": 204240
+    },
+    {
+     "id": "c080",
+     "name": "080-compliment-mill.webp",
+     "sha256": "f1a56d2beddb011903429b0ff10dc7a09be2dede54b5bb58f05c791013b04e34",
+     "bytes": 195714
+    },
+    {
+     "id": "c031",
+     "name": "031-petal-eye.webp",
+     "sha256": "5e5d7814144227c5b1889c5a1d068a627fc37b6180626acfce920bcdb870a8bf",
+     "bytes": 212706
+    },
+    {
+     "id": "c018",
+     "name": "018-lunar-porch.webp",
+     "sha256": "db5cb07c27ca680cf7ddc9b15abe6eac2cb4ddd3584d15197790ea309f75a190",
+     "bytes": 201304
+    },
+    {
+     "id": "o04",
+     "name": "04-greener.webp",
+     "sha256": "f7a731ed0da4406a0e55095301b4d3a034da8a6a4a346f91da1b7f87b5d12252",
+     "bytes": 212408
+    },
+    {
+     "id": "o07",
+     "name": "07-air-refinery.webp",
+     "sha256": "37526cca89d73e438bd443d71afa8c710d48d0e88eba8d0cde2a3585f7eb6304",
+     "bytes": 206314
+    },
+    {
+     "id": "o06",
+     "name": "06-bounder.webp",
+     "sha256": "65ebee0c1c526c8516e6f28a25aa31f6d0af122eeacbaa6510b2546d5fd5dc41",
+     "bytes": 186502
+    },
+    {
+     "id": "c030",
+     "name": "030-advice-filter.webp",
+     "sha256": "4e657419d1928bad9a48c1a00e0c6fd6dc59562e001f8f4e77cccefb37fc0d22",
+     "bytes": 188290
+    },
+    {
+     "id": "c070",
+     "name": "070-queue-garden.webp",
+     "sha256": "d15c699d13f9b1e93c344cd9d68923c5e603fd782e707f6d37367de660d99789",
+     "bytes": 196522
+    },
+    {
+     "id": "c044",
+     "name": "044-coral-cradle.webp",
+     "sha256": "bcb2ac5cdfc7dd52f2c3339ab97edd6489dd33fc8f2ce212c42bf63eb205d260",
+     "bytes": 210248
+    },
+    {
+     "id": "c002",
+     "name": "002-tidal-loom.webp",
+     "sha256": "37e9f7ed5499e042801e622deba9e132b1f28e97b33a3d58adaeadd8199c47a9",
+     "bytes": 234148
+    },
+    {
+     "id": "o14",
+     "name": "14-presence-rig.webp",
+     "sha256": "c0e7e6a4cbb408a3f9d47588e1b4812c2a6d2ac2007e5977657652e8af1d9add",
+     "bytes": 199920
+    },
+    {
+     "id": "c099",
+     "name": "099-sleep-cocoon.webp",
+     "sha256": "8f17c593ff253a6b4394290e07f068883e3750036b397b986857824f80c45256",
+     "bytes": 198526
+    },
+    {
+     "id": "c042",
+     "name": "042-wind-kite.webp",
+     "sha256": "1c0a13779c7314b97d9524f7920540b7c2c5e5c1fe82fe62976fa81b84247b67",
+     "bytes": 199828
+    },
+    {
+     "id": "c060",
+     "name": "060-meeting-buoy.webp",
+     "sha256": "bc76f7500e751e26a0dff80946ee8b79082bc52d47ee64d09ce90fffe9799456",
+     "bytes": 197252
+    },
+    {
+     "id": "c006",
+     "name": "006-manta-foil.webp",
+     "sha256": "7235899ad57561060c70cfa8ad2816a3b49c6f735e0b118864cc766e33f982c7",
+     "bytes": 191490
+    },
+    {
+     "id": "c065",
+     "name": "065-seam-surgeon.webp",
+     "sha256": "beca559212deaa62af371189bcc97e9f1fab4ef0c69e8f3519a984010fb7404c",
+     "bytes": 204236
+    },
+    {
+     "id": "o12",
+     "name": "12-volumetric-stage.webp",
+     "sha256": "6054945306c727469b3c5b5dcd6078e6f4c3e9ddb8dafb21195c5b18b6409ca3",
+     "bytes": 228794
+    },
+    {
+     "id": "o08",
+     "name": "08-aroma-organ.webp",
+     "sha256": "cc30c6f462d8e6c8ec2a210282553bbe114d53c841ba38d3cc5d8e83623d5729",
+     "bytes": 202160
+    },
+    {
+     "id": "c038",
+     "name": "038-quiet-stair.webp",
+     "sha256": "731852e65b120bb8578e430f7e03b733706dab42c70af92d92a2d26a2afdee07",
+     "bytes": 211004
+    },
+    {
+     "id": "c101",
+     "name": "101-velvet-hammer.webp",
+     "sha256": "550d164d22abf8ad09b0ccc1a7cb9832d18c54d9027ccc24d76815839083047f",
+     "bytes": 197892
+    },
+    {
+     "id": "c103",
+     "name": "103-bubble-bailiff.webp",
+     "sha256": "636124e9bf113b3df240d0754ba15b03247a1f59d8acc38d3f46ae2cb1fc3b0a",
+     "bytes": 200098
+    },
+    {
+     "id": "c104",
+     "name": "104-key-concord.webp",
+     "sha256": "2f61f99933f05b479f08121fb37faeeb14d851cc3f7fc1a5252d723909dd9641",
+     "bytes": 194552
+    },
+    {
+     "id": "c105",
+     "name": "105-metric-embassy.webp",
+     "sha256": "4d37d0c099b100ce5d3e2ac0d009bd49a2624ce19ee89df340bf20775dbce514",
+     "bytes": 208826
+    },
+    {
+     "id": "c106",
+     "name": "106-muon-customs.webp",
+     "sha256": "ba24ca7f51512e2ccdcf4c9a91f7f456beb7bfaf22ba5994115042772dd163fd",
+     "bytes": 218800
+    },
+    {
+     "id": "c107",
+     "name": "107-resonance-tailor.webp",
+     "sha256": "9167e9b71a006cc9c40d922b97653e64ce05bdff30f74e5e64117d3321d1ab87",
+     "bytes": 195926
+    },
+    {
+     "id": "c108",
+     "name": "108-suture-loom.webp",
+     "sha256": "3d5dfa0694c7251d44ac79db410dd3a30263cc90524b34ca128db0a726856de0",
+     "bytes": 216568
+    },
+    {
+     "id": "c110",
+     "name": "110-spin-table.webp",
+     "sha256": "ae6912441695f6caa9b0a47b4d8bf747a2237694a1e579e56571f42dd437a38a",
+     "bytes": 207146
+    }
+   ]
+  },
+  {
+   "id": "16x9-2160p",
+   "label": "16:9 \u00b7 3840 \u00d7 2160",
+   "aspect": "16:9",
+   "size": [
+    3840,
+    2160
+   ],
+   "layout": "triptych",
+   "floor_px": 11.0,
+   "min_text_px": 11.0,
+   "bundled": false,
+   "archive": {
+    "name": "p-bloom-16x9-2160p.tar",
+    "bytes": 15626240,
+    "sha256": "122520e4497533763571358e45eff242fa581475b79cd0145a15296e0263d455"
+   },
+   "files": [
+    {
+     "id": "o03",
+     "name": "03-fusion-transport.webp",
+     "sha256": "542a9df5e437765c351c92d60966b11ddf127e7d660bca7d6fbc9048c66a0741",
+     "bytes": 355368
+    },
+    {
+     "id": "o10",
+     "name": "10-truth-lamp.webp",
+     "sha256": "ed37826b8f1e556f1def81d005005e52e8f6ee57a15e0615c5a34bd59f7e3e0d",
+     "bytes": 352860
+    },
+    {
+     "id": "o02",
+     "name": "02-sky-racer.webp",
+     "sha256": "d0bbae57d4f35ccd043b11116e1330fc92393b238c1085d9504709f0c3da0c79",
+     "bytes": 353278
+    },
+    {
+     "id": "c087",
+     "name": "087-neutrino-bell.webp",
+     "sha256": "de3207f9fa436d8339af3b22aa4c7d2e27377cfc7e1e0d29d5aedb8ba252872d",
+     "bytes": 410370
+    },
+    {
+     "id": "o09",
+     "name": "09-tether-climber.webp",
+     "sha256": "608f4da389e593bfe3c415205c379fdbc556caa902c1b20b6cfd9a47ca92444a",
+     "bytes": 345996
+    },
+    {
+     "id": "c001",
+     "name": "001-light-sail.webp",
+     "sha256": "c6c590b11682bfe6365f57f2bdd4017d0735438983b9a9e9c1b1fc2d47268ef3",
+     "bytes": 406676
+    },
+    {
+     "id": "o01",
+     "name": "01-quantum-simulator.webp",
+     "sha256": "1d98aa68d78decd3d071554124e69c7de22c0e1d9924528596ec1eeb3f3a39cc",
+     "bytes": 400218
+    },
+    {
+     "id": "c025",
+     "name": "025-fibre-braid.webp",
+     "sha256": "525141b7c4b4ef0ce41bc6e3cd29956b783bebfe952df95af6256fa01b736c1b",
+     "bytes": 421588
+    },
+    {
+     "id": "o13",
+     "name": "13-proxy.webp",
+     "sha256": "2a89c8a14abee1607ed9392362ed591519cae98ca29447cb83805dbfad3fb477",
+     "bytes": 340108
+    },
+    {
+     "id": "c100",
+     "name": "100-plant-alibi.webp",
+     "sha256": "d262decc3464d4563773410b5cbeb6f93cba2b98d61563eb881bac66dd51f015",
+     "bytes": 364006
+    },
+    {
+     "id": "o11",
+     "name": "11-organ-foundry.webp",
+     "sha256": "de0e1da4504b9eb277a00b4cf1bb948d335aea37c5567cae06326bc98beb6cc8",
+     "bytes": 337726
+    },
+    {
+     "id": "o05",
+     "name": "05-cortical-mesh.webp",
+     "sha256": "87136c6c795b5d0ec09c7e0f24d4a48388858c74d52c3407a089ec1751146522",
+     "bytes": 362118
+    },
+    {
+     "id": "c017",
+     "name": "017-memory-kiln.webp",
+     "sha256": "9e1ed7b3dc58b233a70dbb06c0a94bf132fb26870b59a59f4d0f738ab018097c",
+     "bytes": 378482
+    },
+    {
+     "id": "c056",
+     "name": "056-dune-skimmer.webp",
+     "sha256": "d041d262480a68ab693ba3db7fe7071d378f8be3ecceccf8675fc7638764564b",
+     "bytes": 392166
+    },
+    {
+     "id": "c010",
+     "name": "010-sock-oracle.webp",
+     "sha256": "ff13eaa6b784e39ce5e2038405baf327717f26a081ba0645b0f8c3017872b2d2",
+     "bytes": 373600
+    },
+    {
+     "id": "c080",
+     "name": "080-compliment-mill.webp",
+     "sha256": "d187d98dfc9ebf53b4a4a13726a2fc47c55f0a1f7ece77d4425fe5c0353c84b9",
+     "bytes": 357418
+    },
+    {
+     "id": "c031",
+     "name": "031-petal-eye.webp",
+     "sha256": "98fadd93fccffaf1844dc239c456ecc052d522294909582fc91c371b2caf790d",
+     "bytes": 394632
+    },
+    {
+     "id": "c018",
+     "name": "018-lunar-porch.webp",
+     "sha256": "fb176925929361c54a72a4c413095cea42821f24a61a282550417900f3a744d3",
+     "bytes": 368902
+    },
+    {
+     "id": "o04",
+     "name": "04-greener.webp",
+     "sha256": "4f6180defdcbc80f2a04c56bd1b63e168e055d5dfd9936c63e49c64b1e220907",
+     "bytes": 372096
+    },
+    {
+     "id": "o07",
+     "name": "07-air-refinery.webp",
+     "sha256": "c9bc33ef1d23d6e8f543293dff4bdd48519518843e1626822153fad3037bd558",
+     "bytes": 351762
+    },
+    {
+     "id": "o06",
+     "name": "06-bounder.webp",
+     "sha256": "7a864d8301478e6233ff375682b56cc143965be9d80ba65593fe711cdd00a471",
+     "bytes": 329522
+    },
+    {
+     "id": "c030",
+     "name": "030-advice-filter.webp",
+     "sha256": "632e0dd792447a3435e46c967b43ac273ea2b87b405029038c724a513c147602",
+     "bytes": 343212
+    },
+    {
+     "id": "c070",
+     "name": "070-queue-garden.webp",
+     "sha256": "f58f207c5390fbad3a2a9447ffec1ff6ba0c56b591437df9bff4f924a657f367",
+     "bytes": 362106
+    },
+    {
+     "id": "c044",
+     "name": "044-coral-cradle.webp",
+     "sha256": "266dff25f6a2d640a44f6d3b98ee33a44da5e70f11564a55e55db263985d986d",
+     "bytes": 388574
+    },
+    {
+     "id": "c002",
+     "name": "002-tidal-loom.webp",
+     "sha256": "7ce8436a2b7e0e05b70a7eb3fb84dbe06f470ab282d16af1d74b5b5535699d4e",
+     "bytes": 421678
+    },
+    {
+     "id": "o14",
+     "name": "14-presence-rig.webp",
+     "sha256": "ca47aa4f7160bfb880f74f9d8acc3216f3bc7b9d8b6e21fc7f19371ee13e3606",
+     "bytes": 347130
+    },
+    {
+     "id": "c099",
+     "name": "099-sleep-cocoon.webp",
+     "sha256": "1b1c12cf25fe314baaea5825937b1ff914d00fda270db2ac173088073982ccb9",
+     "bytes": 360386
+    },
+    {
+     "id": "c042",
+     "name": "042-wind-kite.webp",
+     "sha256": "4274bea6061bf0b49c634a996e09ba9d46699df5e89e7d891f104321d23ae80a",
+     "bytes": 374644
+    },
+    {
+     "id": "c060",
+     "name": "060-meeting-buoy.webp",
+     "sha256": "19041907fb453fa3da0469387d8347f56a52a889e47484882f2ec74ab97402c1",
+     "bytes": 357664
+    },
+    {
+     "id": "c006",
+     "name": "006-manta-foil.webp",
+     "sha256": "1551d0cb6486c9fcf2151de71a78cfcfb930773dcb7f3e74130dd9ebf51f4c9f",
+     "bytes": 359762
+    },
+    {
+     "id": "c065",
+     "name": "065-seam-surgeon.webp",
+     "sha256": "fc7fc5e981522967527deb8d86bec84bea244bdc1c36c8575585cc10bad43d9d",
+     "bytes": 372602
+    },
+    {
+     "id": "o12",
+     "name": "12-volumetric-stage.webp",
+     "sha256": "e38d290a47d263e5eda3fc9bf9994fff52338775aea8b52336db143b721ea8d5",
+     "bytes": 410918
+    },
+    {
+     "id": "o08",
+     "name": "08-aroma-organ.webp",
+     "sha256": "dfb7e08c6de754feb55b0344835f538f72305b60a8557afd8c3b7581459c546c",
+     "bytes": 348094
+    },
+    {
+     "id": "c038",
+     "name": "038-quiet-stair.webp",
+     "sha256": "5c76d3eef540c7d9564f9c29e4f530b335a5244fdacffbda607d038985cb5dff",
+     "bytes": 384466
+    },
+    {
+     "id": "c101",
+     "name": "101-velvet-hammer.webp",
+     "sha256": "8866210a16fdec65745d36f330d6a5a4f60d651a3ec0510de9637b44d2db0f72",
+     "bytes": 360560
+    },
+    {
+     "id": "c103",
+     "name": "103-bubble-bailiff.webp",
+     "sha256": "82bed40a75a2bcffe216b56b48b75c8d29936c14b92cb4c68b020083b5a11eb5",
+     "bytes": 364374
+    },
+    {
+     "id": "c104",
+     "name": "104-key-concord.webp",
+     "sha256": "299ff5f36e6d16531d9ccbd8f897ad47b8c1acf57bdae6eb8b4a8e636b96f034",
+     "bytes": 357044
+    },
+    {
+     "id": "c105",
+     "name": "105-metric-embassy.webp",
+     "sha256": "034e909ba592950e247cebd3c1904a48f4a73dc14a1456f72ab40691b7f32d87",
+     "bytes": 377514
+    },
+    {
+     "id": "c106",
+     "name": "106-muon-customs.webp",
+     "sha256": "57a44fb0dbc84fdb7d467a8f2d16356b23dd5edb2efb4c3acc581da854411d15",
+     "bytes": 400818
+    },
+    {
+     "id": "c107",
+     "name": "107-resonance-tailor.webp",
+     "sha256": "bca6229588733d3c55014810f47764a49b882a7822d39bed12407472fd559f0d",
+     "bytes": 354390
+    },
+    {
+     "id": "c108",
+     "name": "108-suture-loom.webp",
+     "sha256": "b8e03cd4f27fb8f6663a48172968d4ad0532897b356b7ae971085c42fab40f96",
+     "bytes": 390796
+    },
+    {
+     "id": "c110",
+     "name": "110-spin-table.webp",
+     "sha256": "ebb492ca6f03213e4eba199a637ed1e88bfa7b49b2c7c281d2819cbe52b04291",
+     "bytes": 379094
+    }
+   ]
+  },
+  {
+   "id": "16x9-2880p",
+   "label": "16:9 \u00b7 5120 \u00d7 2880",
+   "aspect": "16:9",
+   "size": [
+    5120,
+    2880
+   ],
+   "layout": "native-master",
+   "floor_px": 14.0,
+   "min_text_px": 14.0,
+   "bundled": true,
+   "archive": {
+    "name": "p-bloom-16x9-2880p.tar",
+    "bytes": 24330240,
+    "sha256": "6e827a0c5cfe78885e016990bcd1fa12ba41b76018cde29104320829f5463da2"
+   },
+   "files": [
+    {
+     "id": "o03",
+     "name": "03-fusion-transport.webp",
+     "sha256": "fddfe64bf1496f8f8189a6cc14ababb53f369d322520b2d29c6403ed156e0a1d",
+     "bytes": 562780
+    },
+    {
+     "id": "o10",
+     "name": "10-truth-lamp.webp",
+     "sha256": "6fc4bd59f9d8d4a56eb2d242775d7ce0e21df53c2e96fbb304525b470b579a1b",
+     "bytes": 554190
+    },
+    {
+     "id": "o02",
+     "name": "02-sky-racer.webp",
+     "sha256": "da0857d9ff7f199b5ead4aea83140f98f9f61553b8679a3d65f1d28a1bc5c655",
+     "bytes": 551494
+    },
+    {
+     "id": "c087",
+     "name": "087-neutrino-bell.webp",
+     "sha256": "234987f6e6f89eb19403d0a50f4c793506df26537bd87ebb48d6372548007712",
+     "bytes": 638934
+    },
+    {
+     "id": "o09",
+     "name": "09-tether-climber.webp",
+     "sha256": "4afad45bfb6c8e12dfd196be105385963635f38a1cc332b159b514c2383941d6",
+     "bytes": 535914
+    },
+    {
+     "id": "c001",
+     "name": "001-light-sail.webp",
+     "sha256": "5dc7bf841db6aecd3d1b8fbda38b9a43cc837e85ecc693f7dc53a3bef49fc6a8",
+     "bytes": 628354
+    },
+    {
+     "id": "o01",
+     "name": "01-quantum-simulator.webp",
+     "sha256": "af63b98ca0802c896c422e9c82d17cdef526d85c9585d2ce5a9707b817c39024",
+     "bytes": 621084
+    },
+    {
+     "id": "c025",
+     "name": "025-fibre-braid.webp",
+     "sha256": "e4a364abe99e5cb42047b5ecc47f100b4a6756e0e76057f484b549991000bf6e",
+     "bytes": 667444
+    },
+    {
+     "id": "o13",
+     "name": "13-proxy.webp",
+     "sha256": "473816106b1d63e6321067b1f69a17004844ccbf1c7cf49832dfce1ee10667f4",
+     "bytes": 535408
+    },
+    {
+     "id": "c100",
+     "name": "100-plant-alibi.webp",
+     "sha256": "f1e3edeb87f6908ffea22c254a5c83ac2c10a0fecfe920547e04a47ebf5d6bc1",
+     "bytes": 563240
+    },
+    {
+     "id": "o11",
+     "name": "11-organ-foundry.webp",
+     "sha256": "76d11e322b5eb6dec8cadf23e14c468949904064b42e5beed20f6cff17d0b8d6",
+     "bytes": 525068
+    },
+    {
+     "id": "o05",
+     "name": "05-cortical-mesh.webp",
+     "sha256": "90708589e6841271297e56b70695a607ea856c532b515739ddf5cddd39d82d02",
+     "bytes": 562438
+    },
+    {
+     "id": "c017",
+     "name": "017-memory-kiln.webp",
+     "sha256": "a0ed5a8b64d8a812f77ad349757d9b678dcd1d9cf7c56acb16f58da4c3d21408",
+     "bytes": 591530
+    },
+    {
+     "id": "c056",
+     "name": "056-dune-skimmer.webp",
+     "sha256": "0dbfe44ed63c47909be1f1012e5dd8f5b21c95eca4901ca7b59d9068412180c5",
+     "bytes": 610362
+    },
+    {
+     "id": "c010",
+     "name": "010-sock-oracle.webp",
+     "sha256": "a7f1d9b8fb312c144a2cba48ed93324624c7ecb6b2dfcd486f9c83ef2f18336e",
+     "bytes": 581860
+    },
+    {
+     "id": "c080",
+     "name": "080-compliment-mill.webp",
+     "sha256": "38c70d2745ae99b16c496b7a6cb492c9c696b7197ece20649b6d19a6b0b9e9d5",
+     "bytes": 562374
+    },
+    {
+     "id": "c031",
+     "name": "031-petal-eye.webp",
+     "sha256": "17d18ac4c1b4ceb1dc2c5fef0d96c6531a96f6b0f3b9110e85b2ef3475feecca",
+     "bytes": 617098
+    },
+    {
+     "id": "c018",
+     "name": "018-lunar-porch.webp",
+     "sha256": "89e6d1d957c565f0ede4086339af033689004004d16320c9fc68562101bc5e72",
+     "bytes": 573800
+    },
+    {
+     "id": "o04",
+     "name": "04-greener.webp",
+     "sha256": "32728736f78e85617e0dfcc2c0694156e9d4982175f972981bb0952880cc8e2f",
+     "bytes": 568984
+    },
+    {
+     "id": "o07",
+     "name": "07-air-refinery.webp",
+     "sha256": "e88d536a8797738a03b607634f5330fa47746591d77fea786c108ec4a7eed94b",
+     "bytes": 549934
+    },
+    {
+     "id": "o06",
+     "name": "06-bounder.webp",
+     "sha256": "5d821404f898d2916799c8cb808d46605f10f65479006ef07e03ebb82ec0738f",
+     "bytes": 513362
+    },
+    {
+     "id": "c030",
+     "name": "030-advice-filter.webp",
+     "sha256": "cc4d3dfa21bd1f9f79cd400346076590020aa7892cce6ec6f4b296b0128f7a60",
+     "bytes": 538816
+    },
+    {
+     "id": "c070",
+     "name": "070-queue-garden.webp",
+     "sha256": "3673a9247c24ea232f7e7aefb2a696de165fefa9625269e284b2c11f1984f4b2",
+     "bytes": 562216
+    },
+    {
+     "id": "c044",
+     "name": "044-coral-cradle.webp",
+     "sha256": "3a13ac6ed782c87f8f2065d85150bbccd6aac62f4afe427e5213300abf94a5a6",
+     "bytes": 606502
+    },
+    {
+     "id": "c002",
+     "name": "002-tidal-loom.webp",
+     "sha256": "375a87d2d8b6ed0124c42e31bc776735fd3f12e5252a0ffa34190de438dd41e2",
+     "bytes": 654752
+    },
+    {
+     "id": "o14",
+     "name": "14-presence-rig.webp",
+     "sha256": "0e922ccefc7f9b04f8cd7759ff543c228bf55a6f79f199f51d8ea82c70b0fcc4",
+     "bytes": 536470
+    },
+    {
+     "id": "c099",
+     "name": "099-sleep-cocoon.webp",
+     "sha256": "b551fafcb6e1bd3af91ac525df0ba14c0b6aae314fac44bb363006ea9900f6a9",
+     "bytes": 561800
+    },
+    {
+     "id": "c042",
+     "name": "042-wind-kite.webp",
+     "sha256": "1cecab3a3b5f04cf9569151453f30054a2ccd4c53edc60d55be2ed6129f2c513",
+     "bytes": 595602
+    },
+    {
+     "id": "c060",
+     "name": "060-meeting-buoy.webp",
+     "sha256": "b59dcf45a23eae7cd61934e84a01b9f2c5cf48e58ae1dbc369a52c30371b9fe5",
+     "bytes": 561100
+    },
+    {
+     "id": "c006",
+     "name": "006-manta-foil.webp",
+     "sha256": "907c5a8b54329d878c35a75b646207afd52db00256d820e1f330031caeb4fa3e",
+     "bytes": 557316
+    },
+    {
+     "id": "c065",
+     "name": "065-seam-surgeon.webp",
+     "sha256": "26b14606b73c2313faa69557404f3d84d1479d46ae53738463fb0078aa2d5ea5",
+     "bytes": 579200
+    },
+    {
+     "id": "o12",
+     "name": "12-volumetric-stage.webp",
+     "sha256": "485b866e905d7981dfff0e266ebb7e724c4505626dbb468ca16410eade71ddd6",
+     "bytes": 630402
+    },
+    {
+     "id": "o08",
+     "name": "08-aroma-organ.webp",
+     "sha256": "70ebb80539138024243319a1f62a59b96eff4609fd8e7c1899095789fe549939",
+     "bytes": 543450
+    },
+    {
+     "id": "c038",
+     "name": "038-quiet-stair.webp",
+     "sha256": "50122494010506bf5cce8a8cefbebec54f5550f75f38806c3cf0b1c7d8e3fa23",
+     "bytes": 601864
+    },
+    {
+     "id": "c101",
+     "name": "101-velvet-hammer.webp",
+     "sha256": "b90ee54e19cc5f5a592495a67b8422d131290f67a775be72a22cf800b53854d9",
+     "bytes": 560756
+    },
+    {
+     "id": "c103",
+     "name": "103-bubble-bailiff.webp",
+     "sha256": "3d7046c0c6ce661c1032bf5b4caceeb0b234c3f270c73a26f5fc53849f25fbd8",
+     "bytes": 570248
+    },
+    {
+     "id": "c104",
+     "name": "104-key-concord.webp",
+     "sha256": "bbe85b6e286dd71ed4d43afc6d02784e93abd14a09dfc98d819d3feda750d00e",
+     "bytes": 558864
+    },
+    {
+     "id": "c105",
+     "name": "105-metric-embassy.webp",
+     "sha256": "c8c32415ac6f88e1836cea1debc9286207a97ea5212c8854e299d0627083a80a",
+     "bytes": 581850
+    },
+    {
+     "id": "c106",
+     "name": "106-muon-customs.webp",
+     "sha256": "75efb4baf4ec3ef1a433abc4dbd51d42e3d929ba5aabe815b337ae1c352ada8a",
+     "bytes": 625606
+    },
+    {
+     "id": "c107",
+     "name": "107-resonance-tailor.webp",
+     "sha256": "58a613cc4f2ccd09ac3db3ecdd6e988104e5cc0a3c42cdf32002d7279dde1c24",
+     "bytes": 554906
+    },
+    {
+     "id": "c108",
+     "name": "108-suture-loom.webp",
+     "sha256": "7ece56a8e7d5c07456351ddebbfd0243ad7a17bd10bd909e59872ce746249f9b",
+     "bytes": 606532
+    },
+    {
+     "id": "c110",
+     "name": "110-spin-table.webp",
+     "sha256": "6c711f1ff2f4aa49cfa89ba2a334ccf529d4b8f72523a0bb3c3d44ba3e4715d7",
+     "bytes": 588194
+    }
+   ]
+  },
+  {
+   "id": "16x10-1200p",
+   "label": "16:10 \u00b7 1920 \u00d7 1200",
+   "aspect": "16:10",
+   "size": [
+    1920,
+    1200
+   ],
+   "layout": "duo",
+   "floor_px": 11.0,
+   "min_text_px": 11.0,
+   "bundled": false,
+   "archive": {
+    "name": "p-bloom-16x10-1200p.tar",
+    "bytes": 6522880,
+    "sha256": "38f24f31317c46d95a62588c0752b3643328541b412ec28b87845e85f6169e36"
+   },
+   "files": [
+    {
+     "id": "o03",
+     "name": "03-fusion-transport.webp",
+     "sha256": "b0eb8ea6ae0c70fe8abefb939d5dbedd06ba950c721f24899330d8193ed06450",
+     "bytes": 156528
+    },
+    {
+     "id": "o10",
+     "name": "10-truth-lamp.webp",
+     "sha256": "a502a41cbf134eee2ddf243d76442fb8adc34416ce66d0661845225d85c5b0c6",
+     "bytes": 161632
+    },
+    {
+     "id": "o02",
+     "name": "02-sky-racer.webp",
+     "sha256": "2058b4d02b621b8d8b9e353fbf6285c267842b7e8740ff0a01c258b03781a54a",
+     "bytes": 158446
+    },
+    {
+     "id": "c087",
+     "name": "087-neutrino-bell.webp",
+     "sha256": "8c447ab700b9330d6218acd33cb18742778ae75f6b625fc4d32d1898f32e61a8",
+     "bytes": 168762
+    },
+    {
+     "id": "o09",
+     "name": "09-tether-climber.webp",
+     "sha256": "8183fcc1d29f362e1706ffd2ca21b4cf157225ba31384981f9e1baf973c34dd4",
+     "bytes": 148396
+    },
+    {
+     "id": "c001",
+     "name": "001-light-sail.webp",
+     "sha256": "21beb1fcf3ef9b68efb0b1729ccbb16d66e24f1a0b07acbfb28f4a94452a5d99",
+     "bytes": 162802
+    },
+    {
+     "id": "o01",
+     "name": "01-quantum-simulator.webp",
+     "sha256": "b719ec591ca44433bda7a75d9d3ac3af4459702c6d3fb923d6fcff1b7069d9ed",
+     "bytes": 182292
+    },
+    {
+     "id": "c025",
+     "name": "025-fibre-braid.webp",
+     "sha256": "d5b32837dccd682e361941a1a899a131b4d976f2bfcafdd02774a1e9a7daa0f7",
+     "bytes": 173942
+    },
+    {
+     "id": "o13",
+     "name": "13-proxy.webp",
+     "sha256": "49d97c1d606366e165e82ec0b30801306de6dbe5176a3c68f2e2f61fc67d8952",
+     "bytes": 153662
+    },
+    {
+     "id": "c100",
+     "name": "100-plant-alibi.webp",
+     "sha256": "11f35415f2360bfbbdc224e3e1b3c9655f98e3323b3161f70c1093aa000c78fd",
+     "bytes": 137958
+    },
+    {
+     "id": "o11",
+     "name": "11-organ-foundry.webp",
+     "sha256": "bfb1805575001fb7d944a23b639769ab92daebe907e98e08eca200a2c09f4432",
+     "bytes": 139832
+    },
+    {
+     "id": "o05",
+     "name": "05-cortical-mesh.webp",
+     "sha256": "91ba248a35041bf54fed0c9a102e01db3b11f4d364f70ea93f745c022a2cd20e",
+     "bytes": 162030
+    },
+    {
+     "id": "c017",
+     "name": "017-memory-kiln.webp",
+     "sha256": "8f7bc02878bd2d83680edbcaf5dc1c231aadd0a9ff8fbed4eaa363f665a94ab0",
+     "bytes": 153522
+    },
+    {
+     "id": "c056",
+     "name": "056-dune-skimmer.webp",
+     "sha256": "54e99de705a7edfae0092233f1f0bc5ff3df999fd278e0c518a4746be5ae7ef5",
+     "bytes": 162430
+    },
+    {
+     "id": "c010",
+     "name": "010-sock-oracle.webp",
+     "sha256": "20092088b31299046fc2c4f17e811e20e5159d700cbd25bf13e70147e3bb816b",
+     "bytes": 148534
+    },
+    {
+     "id": "c080",
+     "name": "080-compliment-mill.webp",
+     "sha256": "412ebfd3fa65b4813c098270a7929078e6ca884e933a3bbce19a679970fd2947",
+     "bytes": 146526
+    },
+    {
+     "id": "c031",
+     "name": "031-petal-eye.webp",
+     "sha256": "ac15fb6878eeacecf68a01019af7a6d20a98375cf8f390ab998bbd18e90e7283",
+     "bytes": 160510
+    },
+    {
+     "id": "c018",
+     "name": "018-lunar-porch.webp",
+     "sha256": "c8fdf3df57b1b4b73e2276f342037d1afdd9aa729330c83541bcf67f3a8c620f",
+     "bytes": 146004
+    },
+    {
+     "id": "o04",
+     "name": "04-greener.webp",
+     "sha256": "64b892945a013a5352b7d3e87cb87ffcdf0b6b12798718b931868eb7e278b951",
+     "bytes": 146806
+    },
+    {
+     "id": "o07",
+     "name": "07-air-refinery.webp",
+     "sha256": "3c5dd104ca7253477ca25c6d0e7744b51acb7527fa89a07ff1846767db2bb0be",
+     "bytes": 155428
+    },
+    {
+     "id": "o06",
+     "name": "06-bounder.webp",
+     "sha256": "82a9054fffaf9a8e42c99398dbe8254843e2e237075df969ab5d5fb7d4f363c9",
+     "bytes": 140422
+    },
+    {
+     "id": "c030",
+     "name": "030-advice-filter.webp",
+     "sha256": "151c3181c8f65bb9c0db6b6c5bb3810647c789344fabd3241129f896b471a8ef",
+     "bytes": 137576
+    },
+    {
+     "id": "c070",
+     "name": "070-queue-garden.webp",
+     "sha256": "ecf6171ef553432c3780f0fe62d535d098159fa97acbc09b86637e2ca1dd7f00",
+     "bytes": 143284
+    },
+    {
+     "id": "c044",
+     "name": "044-coral-cradle.webp",
+     "sha256": "1d6dc2590692b6839882711f1bf4f5236d298220fb7c846c3f20ba2afdb323a8",
+     "bytes": 155862
+    },
+    {
+     "id": "c002",
+     "name": "002-tidal-loom.webp",
+     "sha256": "bbbb3b040f618aa5cf1f0b341baa2eddb910f49cba49e15cd9151cd04b0d42a6",
+     "bytes": 171444
+    },
+    {
+     "id": "o14",
+     "name": "14-presence-rig.webp",
+     "sha256": "3aed97035fb5185134d727bacd0bf0cdc47d224e870c31dc0f60c6d9af3784b8",
+     "bytes": 154858
+    },
+    {
+     "id": "c099",
+     "name": "099-sleep-cocoon.webp",
+     "sha256": "2296cd2edd6baaa888bc997696c9b1aaa97830e00bab4810391292de6aeca004",
+     "bytes": 145482
+    },
+    {
+     "id": "c042",
+     "name": "042-wind-kite.webp",
+     "sha256": "dd97d1e22e27d3e671b600f6f645c29655574b730aae3404f2ed31bc04aa3ff6",
+     "bytes": 161290
+    },
+    {
+     "id": "c060",
+     "name": "060-meeting-buoy.webp",
+     "sha256": "90c69242eea614be53c3277020d54006951d83b787a8d74dfd11a4e4e1e42038",
+     "bytes": 142392
+    },
+    {
+     "id": "c006",
+     "name": "006-manta-foil.webp",
+     "sha256": "8d47a415db29033be5fa3c4e8c8207acad11f46f8f9ed15265144a707dde8d85",
+     "bytes": 137384
+    },
+    {
+     "id": "c065",
+     "name": "065-seam-surgeon.webp",
+     "sha256": "f2a68b20a728ee4b31ca959af009a065dcd62baa0a0a4211da352a44d0807216",
+     "bytes": 152308
+    },
+    {
+     "id": "o12",
+     "name": "12-volumetric-stage.webp",
+     "sha256": "4bc278770d70bd7d8842e22aeabdbce149bc2d2271a200145a1ee817a00d6ff6",
+     "bytes": 189654
+    },
+    {
+     "id": "o08",
+     "name": "08-aroma-organ.webp",
+     "sha256": "70efd99ccce403011d7ef887b0007f77dfb6b770163ed7774f08e06e577b465e",
+     "bytes": 152266
+    },
+    {
+     "id": "c038",
+     "name": "038-quiet-stair.webp",
+     "sha256": "0bc6103f4216364de347e9c2001e4caddfa7dc7a5a5356a3093a945211c57e00",
+     "bytes": 159458
+    },
+    {
+     "id": "c101",
+     "name": "101-velvet-hammer.webp",
+     "sha256": "e30347fc375a49558c8cbd0f0e04ddc491717e23e771defaf5548a0a50663392",
+     "bytes": 145770
+    },
+    {
+     "id": "c103",
+     "name": "103-bubble-bailiff.webp",
+     "sha256": "c4ee5725e1c38dacac8f3cd00d7202d10f1d07fae05020894afb1d958bb6af55",
+     "bytes": 148116
+    },
+    {
+     "id": "c104",
+     "name": "104-key-concord.webp",
+     "sha256": "4eb9862ff81b3184a2ff79239fd9b8b19bdad668d5fbcd538891bf7e42078fdb",
+     "bytes": 144530
+    },
+    {
+     "id": "c105",
+     "name": "105-metric-embassy.webp",
+     "sha256": "af1e93db4fe17b3db4948fd9ade92860ad9bae77642e745ac910e7c656215965",
+     "bytes": 153894
+    },
+    {
+     "id": "c106",
+     "name": "106-muon-customs.webp",
+     "sha256": "aaa013b8a8252e6e5f564fd30571224f44d916d64da5be26d6169d965421673a",
+     "bytes": 164734
+    },
+    {
+     "id": "c107",
+     "name": "107-resonance-tailor.webp",
+     "sha256": "85cc71f398a402daf46f2e881c7bffd665acc50d04aff2e1908ab7beaa9e20ba",
+     "bytes": 143040
+    },
+    {
+     "id": "c108",
+     "name": "108-suture-loom.webp",
+     "sha256": "d448649e60d22ac5515f8773d8b839e323c4692891b3c722a53ca04433929344",
+     "bytes": 155304
+    },
+    {
+     "id": "c110",
+     "name": "110-spin-table.webp",
+     "sha256": "fb4bd4bedc4eb895c62dbdadd7ad9e06792386a6da2ea32b54ad5a68cbe0541c",
+     "bytes": 156236
+    }
+   ]
+  },
+  {
+   "id": "16x10-1600p",
+   "label": "16:10 \u00b7 2560 \u00d7 1600",
+   "aspect": "16:10",
+   "size": [
+    2560,
+    1600
+   ],
+   "layout": "triptych",
+   "floor_px": 11.0,
+   "min_text_px": 11.0,
+   "bundled": false,
+   "archive": {
+    "name": "p-bloom-16x10-1600p.tar",
+    "bytes": 9082880,
+    "sha256": "ebac7382dd2d84b882fdf2219f9c3880ccefb031740764688ba68676bf8528ba"
+   },
+   "files": [
+    {
+     "id": "o03",
+     "name": "03-fusion-transport.webp",
+     "sha256": "c0272ca792b5c82b5469c8babe7b25cba9dca3f11a7b2e1670c9d69400351c57",
+     "bytes": 210412
+    },
+    {
+     "id": "o10",
+     "name": "10-truth-lamp.webp",
+     "sha256": "08ee3ac7e75c3a8c73109966b80eb67f016531b1e642f97515a9ef5d4119e862",
+     "bytes": 217172
+    },
+    {
+     "id": "o02",
+     "name": "02-sky-racer.webp",
+     "sha256": "a1c660bc69ba9e86f2ba22e7bdb78e2691494230568eaf36cfd7cd174a0b4c28",
+     "bytes": 210188
+    },
+    {
+     "id": "c087",
+     "name": "087-neutrino-bell.webp",
+     "sha256": "e7304b996840abb57085888bf0f09cbd02323538fb9760b03ef47b9fb4fc7f6c",
+     "bytes": 235222
+    },
+    {
+     "id": "o09",
+     "name": "09-tether-climber.webp",
+     "sha256": "bc71faf3d66b233133ad38ef1dd16bb20db10102b804f0f0298a542b04bdbd46",
+     "bytes": 210960
+    },
+    {
+     "id": "c001",
+     "name": "001-light-sail.webp",
+     "sha256": "43f7383a136275e2c2eef3de5c3a39f2269a3188c12bbf56b2e98587decf3aab",
+     "bytes": 226190
+    },
+    {
+     "id": "o01",
+     "name": "01-quantum-simulator.webp",
+     "sha256": "dec368b826124e8c666161b6ed008598d837df849c5c6cc46138a1a9c19f1d5c",
+     "bytes": 239958
+    },
+    {
+     "id": "c025",
+     "name": "025-fibre-braid.webp",
+     "sha256": "b1d9e37f478f11d7c6f7503be711b4997a160e1f6e7a68b409c72b1cf2f92036",
+     "bytes": 236180
+    },
+    {
+     "id": "o13",
+     "name": "13-proxy.webp",
+     "sha256": "196de6f7dd2e8965ade996d85440fd680e816cb7fb9f455a65e39f153b018082",
+     "bytes": 210606
+    },
+    {
+     "id": "c100",
+     "name": "100-plant-alibi.webp",
+     "sha256": "7df7165194be98a0a5e7ea81ebf62693cb01bccc827a0ec212716625d5254a5f",
+     "bytes": 209560
+    },
+    {
+     "id": "o11",
+     "name": "11-organ-foundry.webp",
+     "sha256": "f52e3b6e91643f73efb0c4516aed5d1efdb4285c6b439aa53e44958402de1d89",
+     "bytes": 197860
+    },
+    {
+     "id": "o05",
+     "name": "05-cortical-mesh.webp",
+     "sha256": "81faa9f3b55ed5d599d7b4844a71eed313c17663e00dbf5f14e58c2cb8b89d48",
+     "bytes": 215054
+    },
+    {
+     "id": "c017",
+     "name": "017-memory-kiln.webp",
+     "sha256": "d2395141a3dca9fb40951eb0709f93a617abfc9cbedbaabb19da9744a2ea2b3d",
+     "bytes": 218276
+    },
+    {
+     "id": "c056",
+     "name": "056-dune-skimmer.webp",
+     "sha256": "957352ff4cd861e9fbf0b66a8aa0f146a76153fa85d6708ae4df1712c7456c4c",
+     "bytes": 222452
+    },
+    {
+     "id": "c010",
+     "name": "010-sock-oracle.webp",
+     "sha256": "4682484541e69ad47d93e2ef74800fdc2b29f4f9ba0a55573d7e7a30cad29129",
+     "bytes": 214066
+    },
+    {
+     "id": "c080",
+     "name": "080-compliment-mill.webp",
+     "sha256": "306fb0347885ead34cc28099b84d5350dc91da3b6abf0a96d862f8bb009050ed",
+     "bytes": 206410
+    },
+    {
+     "id": "c031",
+     "name": "031-petal-eye.webp",
+     "sha256": "b555a066bdf9c821025359cb67d485a4b27ab939149ab001383df354fc5a10d7",
+     "bytes": 222874
+    },
+    {
+     "id": "c018",
+     "name": "018-lunar-porch.webp",
+     "sha256": "46f825c2fb66d41412f602a6f97a2e568384c2b7bb57788125e7a7da5be724fb",
+     "bytes": 210714
+    },
+    {
+     "id": "o04",
+     "name": "04-greener.webp",
+     "sha256": "d9a31ee8f9404ccb30a266de900128f5fc92fd03705a8b8908e64dcbf58d3533",
+     "bytes": 220886
+    },
+    {
+     "id": "o07",
+     "name": "07-air-refinery.webp",
+     "sha256": "7bffb3ce153b956f3e1e4d844f09519ae271abd4bbc8384b8156b5e7f15712a4",
+     "bytes": 215864
+    },
+    {
+     "id": "o06",
+     "name": "06-bounder.webp",
+     "sha256": "9bac1391005297b0ccb537a33b99651a00ce7596d459884c3ff1f5bf31df941b",
+     "bytes": 196154
+    },
+    {
+     "id": "c030",
+     "name": "030-advice-filter.webp",
+     "sha256": "71a50138b83c5bbf40f7b1cf7dc178f0724e0adb49423952748b527c7a495ea2",
+     "bytes": 197616
+    },
+    {
+     "id": "c070",
+     "name": "070-queue-garden.webp",
+     "sha256": "c486b5b55e4d67085c0ef85e48809273279636d702dfc150ba6f211841fb5f4b",
+     "bytes": 208062
+    },
+    {
+     "id": "c044",
+     "name": "044-coral-cradle.webp",
+     "sha256": "5263fcb050edda906c5dc7d150819f514597208d8ae682a8cba2b4578e9e27d9",
+     "bytes": 221634
+    },
+    {
+     "id": "c002",
+     "name": "002-tidal-loom.webp",
+     "sha256": "39241c18d7433ac66e60ef8eead89137bec3a02e18f7e8fe6e867e439cb76489",
+     "bytes": 241132
+    },
+    {
+     "id": "o14",
+     "name": "14-presence-rig.webp",
+     "sha256": "9f324f96aee731b5a54879dfae4cde4de81f8e6ed73e9905a6bdbcb327bf5f2f",
+     "bytes": 207802
+    },
+    {
+     "id": "c099",
+     "name": "099-sleep-cocoon.webp",
+     "sha256": "50b8ae17c522ad35db8d67ce1f407bb8527dad91d33bf5e5c540a4f51764899d",
+     "bytes": 205688
+    },
+    {
+     "id": "c042",
+     "name": "042-wind-kite.webp",
+     "sha256": "4898e038fce489a4d2db8d71cc3def9530d6aabdcd3ba21ebbc584efa5c13cd7",
+     "bytes": 209964
+    },
+    {
+     "id": "c060",
+     "name": "060-meeting-buoy.webp",
+     "sha256": "604701c3d0bb40562fad24133c8ca2562aa31665170a02026510828b2e460775",
+     "bytes": 207610
+    },
+    {
+     "id": "c006",
+     "name": "006-manta-foil.webp",
+     "sha256": "6bd0c4891e2809877369426912c984e3083b70bad3f5fc0bcebb3c68d3db11b4",
+     "bytes": 200808
+    },
+    {
+     "id": "c065",
+     "name": "065-seam-surgeon.webp",
+     "sha256": "3cfcb8d5d9f03b7f7123f28fc8c55d95d5e08e96694e9eb35d8a24ce4d58eaa7",
+     "bytes": 214154
+    },
+    {
+     "id": "o12",
+     "name": "12-volumetric-stage.webp",
+     "sha256": "f6cd8e1bfcb15bdb8fdd3360743c44c32fa44f3c0f54b6ab20a2db0f0ce6a35d",
+     "bytes": 235028
+    },
+    {
+     "id": "o08",
+     "name": "08-aroma-organ.webp",
+     "sha256": "6c5f07022932c478c098b9d1ba55f38e29a5f0f834b6193201a9e3cc62f0ed4b",
+     "bytes": 210378
+    },
+    {
+     "id": "c038",
+     "name": "038-quiet-stair.webp",
+     "sha256": "57a24540b4dec42c7718dc184cdc10aeed28407f5c715465ebf602e134c602b6",
+     "bytes": 220944
+    },
+    {
+     "id": "c101",
+     "name": "101-velvet-hammer.webp",
+     "sha256": "13c62cd03b64905c35bf4f1d58b38661e226357ac3d8b34c9bc2de37f18404c2",
+     "bytes": 207382
+    },
+    {
+     "id": "c103",
+     "name": "103-bubble-bailiff.webp",
+     "sha256": "57be31694aca293fbf666b31db6c570dd8bb985d9c754162aad065c5c2f2b235",
+     "bytes": 211118
+    },
+    {
+     "id": "c104",
+     "name": "104-key-concord.webp",
+     "sha256": "065e584264093eb5c336cdba06d0b0dc8d2b4e3601c30cf5c765b4d1c4b7c91b",
+     "bytes": 204272
+    },
+    {
+     "id": "c105",
+     "name": "105-metric-embassy.webp",
+     "sha256": "742b987a9760b1f472f788f647c86da90a4b36a33f892815e6dcb272fead4752",
+     "bytes": 219334
+    },
+    {
+     "id": "c106",
+     "name": "106-muon-customs.webp",
+     "sha256": "d07b59d81a78764aeb13c9094153876e0037228f1426a862b18e2de21e253d63",
+     "bytes": 229956
+    },
+    {
+     "id": "c107",
+     "name": "107-resonance-tailor.webp",
+     "sha256": "4c433d191ce61ff5552e7733a0eb29c8d5c0945b73511b0934c60ea1a365fd0b",
+     "bytes": 205532
+    },
+    {
+     "id": "c108",
+     "name": "108-suture-loom.webp",
+     "sha256": "8573c33cf39e1a079c4344c2facef145a41d30d0a6f05fac3431c60346073442",
+     "bytes": 223544
+    },
+    {
+     "id": "c110",
+     "name": "110-spin-table.webp",
+     "sha256": "abd7367ac611716835871718b2f2c0d9ca88c6659f42114404357df9c75bf629",
+     "bytes": 218076
+    }
+   ]
+  },
+  {
+   "id": "16x10-2400p",
+   "label": "16:10 \u00b7 3840 \u00d7 2400",
+   "aspect": "16:10",
+   "size": [
+    3840,
+    2400
+   ],
+   "layout": "triptych",
+   "floor_px": 11.67,
+   "min_text_px": 11.67,
+   "bundled": false,
+   "archive": {
+    "name": "p-bloom-16x10-2400p.tar",
+    "bytes": 16721920,
+    "sha256": "5c1b432fb2fddd1465c2c30b217a89252283c482c3f5a9c26f6584aa3a1fb39d"
+   },
+   "files": [
+    {
+     "id": "o03",
+     "name": "03-fusion-transport.webp",
+     "sha256": "27444172137333d5545e0fe3d132330dd7005ddea71f706ccf2333a82c4d6b7f",
+     "bytes": 377150
+    },
+    {
+     "id": "o10",
+     "name": "10-truth-lamp.webp",
+     "sha256": "82a394d00778ed7daabf0c2dc03699b2f185f2d9e23e0a966ee71d936ccb612d",
+     "bytes": 379634
+    },
+    {
+     "id": "o02",
+     "name": "02-sky-racer.webp",
+     "sha256": "4b35bc9a17da5df0f74c5ba36e29a9d76651e77c5c07fffc38c740cd6ab9486d",
+     "bytes": 376396
+    },
+    {
+     "id": "c087",
+     "name": "087-neutrino-bell.webp",
+     "sha256": "970738d5407377650a4c9fdc7a3f95151b86225813032182a6c3af323bc8a975",
+     "bytes": 437662
+    },
+    {
+     "id": "o09",
+     "name": "09-tether-climber.webp",
+     "sha256": "c27370142871a92a5d9a75647eb688e97464b82ef84876703c2bb9ecfb705fa9",
+     "bytes": 370500
+    },
+    {
+     "id": "c001",
+     "name": "001-light-sail.webp",
+     "sha256": "f93bf43f8d6f04c1b6d03e13cfad46eb2acf9e7c380463b2e521fd1e7fa65cc6",
+     "bytes": 426504
+    },
+    {
+     "id": "o01",
+     "name": "01-quantum-simulator.webp",
+     "sha256": "f53ac6be1c160b46b03b3f74727b654f30c3979e8bda7a9657a5539b98a90db6",
+     "bytes": 424634
+    },
+    {
+     "id": "c025",
+     "name": "025-fibre-braid.webp",
+     "sha256": "45f48a6f9dbd346884c85ebb9a24cc54c62d93ac7c8c4fb841b7a102bbd4cc83",
+     "bytes": 448606
+    },
+    {
+     "id": "o13",
+     "name": "13-proxy.webp",
+     "sha256": "f7db327d2d675710f2f943aaf2a20dc94ae67be4662a193f531c1fb89d09ffb3",
+     "bytes": 365562
+    },
+    {
+     "id": "c100",
+     "name": "100-plant-alibi.webp",
+     "sha256": "53b215d26ca64def6cee9c0451a1a5d434e6d1ea3c98145285d1432b838eedc5",
+     "bytes": 394006
+    },
+    {
+     "id": "o11",
+     "name": "11-organ-foundry.webp",
+     "sha256": "2d51232aad8dfad5249c07f41a92f224b5f91462c2ec8f3e587a8309a5ddbb06",
+     "bytes": 359972
+    },
+    {
+     "id": "o05",
+     "name": "05-cortical-mesh.webp",
+     "sha256": "51aba38ce093dc4ed9b7c724939332f367c44ea21dd01d7ca6b237ffba830ef7",
+     "bytes": 385354
+    },
+    {
+     "id": "c017",
+     "name": "017-memory-kiln.webp",
+     "sha256": "9e6c53fe057723e2bd6e2b993e94bb7c55a9916ec26e78ab26ef4c07445dc1aa",
+     "bytes": 407666
+    },
+    {
+     "id": "c056",
+     "name": "056-dune-skimmer.webp",
+     "sha256": "a5ef99a8eb28bf175c13fc64643beb2da5b8282da91b0f1adab67582562eb874",
+     "bytes": 419480
+    },
+    {
+     "id": "c010",
+     "name": "010-sock-oracle.webp",
+     "sha256": "30cdd83dd2c7bbabe5c98bdab5c3849d6eac3ef4f526c27e25780a78ab545d44",
+     "bytes": 400898
+    },
+    {
+     "id": "c080",
+     "name": "080-compliment-mill.webp",
+     "sha256": "85dad842ee02a73ed076f2f00729df97a847a8074f524461b661ec7fe31c0b5e",
+     "bytes": 386110
+    },
+    {
+     "id": "c031",
+     "name": "031-petal-eye.webp",
+     "sha256": "494ab613c835b77c9027f827262a511f4b49a80f57e0db65b537382e0331bc9f",
+     "bytes": 421312
+    },
+    {
+     "id": "c018",
+     "name": "018-lunar-porch.webp",
+     "sha256": "3350de742ab4332ec67118001b364ae9b1d83171efb7623a943f6ad39941f0dc",
+     "bytes": 395166
+    },
+    {
+     "id": "o04",
+     "name": "04-greener.webp",
+     "sha256": "d49d61aff552b784f5aea9bdbca1db955c4f769120cf1d5d22b493dde5885098",
+     "bytes": 397522
+    },
+    {
+     "id": "o07",
+     "name": "07-air-refinery.webp",
+     "sha256": "f4f4c0d88d680c10080524e21fb4e161d8d2d3257088bdb6665df77b7edeb3f6",
+     "bytes": 377732
+    },
+    {
+     "id": "o06",
+     "name": "06-bounder.webp",
+     "sha256": "8fbfcb5011cf5897f08a6f45b07ea4fecfae6cb5be06939e9b23661fd01146fc",
+     "bytes": 353798
+    },
+    {
+     "id": "c030",
+     "name": "030-advice-filter.webp",
+     "sha256": "42fa60ce77d77f2b8e89855cb083d15bb95273d3bcc257f8c6634dc9401b767d",
+     "bytes": 370736
+    },
+    {
+     "id": "c070",
+     "name": "070-queue-garden.webp",
+     "sha256": "a8f4a18e940f7692b185c3605efab5b3a2cb7df24c810d6da7b0165336182edc",
+     "bytes": 389852
+    },
+    {
+     "id": "c044",
+     "name": "044-coral-cradle.webp",
+     "sha256": "b9147dbacadd77d940c05bab73620c038507709c6bbb0fa99efe8171acd72f8f",
+     "bytes": 417660
+    },
+    {
+     "id": "c002",
+     "name": "002-tidal-loom.webp",
+     "sha256": "7fe87e97475f65340b3a6956cd9398366fac4d15d278a4f62a91b46f11bdbfc2",
+     "bytes": 449702
+    },
+    {
+     "id": "o14",
+     "name": "14-presence-rig.webp",
+     "sha256": "e190ec8c12c25c779f70c6d6b32687b4dca81a2ad0594dad27ed0076facc71ca",
+     "bytes": 369156
+    },
+    {
+     "id": "c099",
+     "name": "099-sleep-cocoon.webp",
+     "sha256": "3bbcda414e4752aea3ad6dd3ae25150842ce1197b8504498d69ac140b1d29d13",
+     "bytes": 387504
+    },
+    {
+     "id": "c042",
+     "name": "042-wind-kite.webp",
+     "sha256": "91ce1ad659ab59eb02a2176a518298c8f586155397daf9081fbef6d12df65795",
+     "bytes": 400504
+    },
+    {
+     "id": "c060",
+     "name": "060-meeting-buoy.webp",
+     "sha256": "baed2100d0ab7db196d264dc52f41beeeaa8bdff18be24354da0b2caae552116",
+     "bytes": 387382
+    },
+    {
+     "id": "c006",
+     "name": "006-manta-foil.webp",
+     "sha256": "1df46d0ef6758619215b1c54bd0b126b79d38cf23b159641896c010d604c24cc",
+     "bytes": 383536
+    },
+    {
+     "id": "c065",
+     "name": "065-seam-surgeon.webp",
+     "sha256": "e35cf2053675a4ea5b6d1d4339a7c488e1e9f509094847b73508672513c8e6cb",
+     "bytes": 399312
+    },
+    {
+     "id": "o12",
+     "name": "12-volumetric-stage.webp",
+     "sha256": "6cc29b017429a6548ab973eed2790043f4ba0e1e960d32def91aa012d2f4510b",
+     "bytes": 432352
+    },
+    {
+     "id": "o08",
+     "name": "08-aroma-organ.webp",
+     "sha256": "2bda10a195d5da8ad6efe936ef088f4988a925a843ca20ef3a5f539c66ca6d47",
+     "bytes": 371844
+    },
+    {
+     "id": "c038",
+     "name": "038-quiet-stair.webp",
+     "sha256": "c5498f3a7c50817ad2e04df4a77b5206e2f58be5d96d3d4c443506d1daa0add8",
+     "bytes": 412372
+    },
+    {
+     "id": "c101",
+     "name": "101-velvet-hammer.webp",
+     "sha256": "c6a5c5fa5d7a5e0837c0d5c719a28f18248d30a5e8b75da4e12b9365035ac105",
+     "bytes": 387668
+    },
+    {
+     "id": "c103",
+     "name": "103-bubble-bailiff.webp",
+     "sha256": "53bd8dd0236e86e0906a3b160bc8472c2e88130c41541971492e56753058f1e0",
+     "bytes": 392738
+    },
+    {
+     "id": "c104",
+     "name": "104-key-concord.webp",
+     "sha256": "e2eac75bdafb19f8f35c11c786a2135d6568050847d74f984330f754c7a51b76",
+     "bytes": 383040
+    },
+    {
+     "id": "c105",
+     "name": "105-metric-embassy.webp",
+     "sha256": "b5f728ae8006be36e54c44fd88f1743a298a51bc8f21fa3f6cb692b72f7c9195",
+     "bytes": 406622
+    },
+    {
+     "id": "c106",
+     "name": "106-muon-customs.webp",
+     "sha256": "80cfe84b0f2a26415541828b5db83bf3d253259d45e84952d72f7b8cde36a16d",
+     "bytes": 429754
+    },
+    {
+     "id": "c107",
+     "name": "107-resonance-tailor.webp",
+     "sha256": "13b16010c54d9241b04d7052f5aea0d19f39be271081187269b8fd573f9d7017",
+     "bytes": 382248
+    },
+    {
+     "id": "c108",
+     "name": "108-suture-loom.webp",
+     "sha256": "a85a191a70cf451db7d035c82b1ee401c58178bbbb0ae1515247e7b795486e89",
+     "bytes": 414878
+    },
+    {
+     "id": "c110",
+     "name": "110-spin-table.webp",
+     "sha256": "266e72aaf2d4ef2b1e5dc013726c9971425f03692160ba22eb8d4a931435daea",
+     "bytes": 407792
+    }
+   ]
+  },
+  {
+   "id": "3x2-1504p",
+   "label": "3:2 \u00b7 2256 \u00d7 1504",
+   "aspect": "3:2",
+   "size": [
+    2256,
+    1504
+   ],
+   "layout": "duo",
+   "floor_px": 11.0,
+   "min_text_px": 11.0,
+   "bundled": false,
+   "archive": {
+    "name": "p-bloom-3x2-1504p.tar",
+    "bytes": 7741440,
+    "sha256": "5ebb986ec03618b231f6a5d47d7fe559a13f46bf55cba0a3b9228239bfd39dee"
+   },
+   "files": [
+    {
+     "id": "o03",
+     "name": "03-fusion-transport.webp",
+     "sha256": "f1c8d5e8842aff046ffa05a15993e6c70b95a9624e56714fe19936ed7881d35a",
+     "bytes": 176778
+    },
+    {
+     "id": "o10",
+     "name": "10-truth-lamp.webp",
+     "sha256": "29b6ae8074de98e1a83e599844113d59b94567d8b9ed371a0bbe8d727186ee7e",
+     "bytes": 185320
+    },
+    {
+     "id": "o02",
+     "name": "02-sky-racer.webp",
+     "sha256": "9868c6e90351c1a19d7978b073d3975aa4bd63892ea17ecbc51432603c8c166b",
+     "bytes": 182488
+    },
+    {
+     "id": "c087",
+     "name": "087-neutrino-bell.webp",
+     "sha256": "eba63bd3e276af3127218aee3a7f7aa2190095478e6861092503b836428beb2c",
+     "bytes": 203584
+    },
+    {
+     "id": "o09",
+     "name": "09-tether-climber.webp",
+     "sha256": "896a9b097eb5d30632f5295ed55a58e80dc3d3a3b4ea4e7316b1f602a81305a1",
+     "bytes": 167700
+    },
+    {
+     "id": "c001",
+     "name": "001-light-sail.webp",
+     "sha256": "79a535342a66e62168b3712c4d3992b2285b0fce260c5e074a3071ad27f99bf4",
+     "bytes": 195656
+    },
+    {
+     "id": "o01",
+     "name": "01-quantum-simulator.webp",
+     "sha256": "84fc7379f0b15eb2d1d6ae3a034f0007ebd39a634b3d3206479f888777d4f8da",
+     "bytes": 212252
+    },
+    {
+     "id": "c025",
+     "name": "025-fibre-braid.webp",
+     "sha256": "c8f5056c6cbb18c4ab44c2478be4a6ac87396459453e83c7de99d803c0bc4f57",
+     "bytes": 209238
+    },
+    {
+     "id": "o13",
+     "name": "13-proxy.webp",
+     "sha256": "d6915c8640ea696c783bf75effb941abf0e7dfedd76a6646a3f60dfaa74e683e",
+     "bytes": 177444
+    },
+    {
+     "id": "c100",
+     "name": "100-plant-alibi.webp",
+     "sha256": "b1eb5ec12adb252478a45513f8a8297f42035f2202781aec4b4583355c871d0f",
+     "bytes": 165396
+    },
+    {
+     "id": "o11",
+     "name": "11-organ-foundry.webp",
+     "sha256": "88aee3c02540a2cc37ffc091a8442c01c86525c629e4dc50ee8c1f25e65d3d55",
+     "bytes": 162296
+    },
+    {
+     "id": "o05",
+     "name": "05-cortical-mesh.webp",
+     "sha256": "7bf9385d60050d6fc1f911c34431502480fdc41f0d079ccd4bf37fd357fc8782",
+     "bytes": 183058
+    },
+    {
+     "id": "c017",
+     "name": "017-memory-kiln.webp",
+     "sha256": "829adacae6b0cb5114754739ae5534c05a8e43e3c7c3c993e32ddc8ef761232d",
+     "bytes": 176908
+    },
+    {
+     "id": "c056",
+     "name": "056-dune-skimmer.webp",
+     "sha256": "7eb8885bca97fbba5e7b5b6e29671d7577093b8930245300c8086ade397919c6",
+     "bytes": 196514
+    },
+    {
+     "id": "c010",
+     "name": "010-sock-oracle.webp",
+     "sha256": "246904b5daf48b17c6a9e1caca43785567e9b755930469e5708fff1b56fb6039",
+     "bytes": 176464
+    },
+    {
+     "id": "c080",
+     "name": "080-compliment-mill.webp",
+     "sha256": "c8b2cabf5fe4baf61a43e9f8c4b56b8493121d43e8e7dd830b389c6073220324",
+     "bytes": 171652
+    },
+    {
+     "id": "c031",
+     "name": "031-petal-eye.webp",
+     "sha256": "7bfdb2256198474121e5d7afa6b314f57d7bee932e71a02bc752a4555d8c57ad",
+     "bytes": 197258
+    },
+    {
+     "id": "c018",
+     "name": "018-lunar-porch.webp",
+     "sha256": "2abf2f40b910414ca0c755e55dde35f11d058859db8122755d885f80ecf8853a",
+     "bytes": 173788
+    },
+    {
+     "id": "o04",
+     "name": "04-greener.webp",
+     "sha256": "20f8c15efb348f400e48b13dc57f637799f212ef2573388395c1aeb9b19370a2",
+     "bytes": 180912
+    },
+    {
+     "id": "o07",
+     "name": "07-air-refinery.webp",
+     "sha256": "67282d68e3cec251d2a445cfb9d92df51ad6915ab55896ad12bb26594a0ac275",
+     "bytes": 177122
+    },
+    {
+     "id": "o06",
+     "name": "06-bounder.webp",
+     "sha256": "7b838d20fc0286dc88f83076ffb991ff1ee58b3b525fc34f3322a9fec27716cf",
+     "bytes": 162766
+    },
+    {
+     "id": "c030",
+     "name": "030-advice-filter.webp",
+     "sha256": "6824808bb9be9db644fb0d6587edafd590031bd193df998d476407e24e006eb6",
+     "bytes": 165952
+    },
+    {
+     "id": "c070",
+     "name": "070-queue-garden.webp",
+     "sha256": "485eff4114ff718ef5dcb4c6967fa0fb0c80210b2575fa2183cba1098462aec5",
+     "bytes": 171174
+    },
+    {
+     "id": "c044",
+     "name": "044-coral-cradle.webp",
+     "sha256": "02228e1e4b9076da476e6c1471bad2f26c7ff093d3d1fc5988f64b478f2e50cb",
+     "bytes": 191748
+    },
+    {
+     "id": "c002",
+     "name": "002-tidal-loom.webp",
+     "sha256": "b1fac405650166d3a157f66549ff89e897ca7e1891ce7982c7169cb6d133a882",
+     "bytes": 209376
+    },
+    {
+     "id": "o14",
+     "name": "14-presence-rig.webp",
+     "sha256": "51101f1b889a55e668ba6e16b40a4792c37408d38657d06fda5526b69680cfb8",
+     "bytes": 176818
+    },
+    {
+     "id": "c099",
+     "name": "099-sleep-cocoon.webp",
+     "sha256": "3db9361276f4767fb09128cf1bb031b16c9fa28747a1dedf3814a02ff98fb042",
+     "bytes": 170408
+    },
+    {
+     "id": "c042",
+     "name": "042-wind-kite.webp",
+     "sha256": "3a21463db7ef51e70ed091fb620ab904809dfe25654a242b52a2cff834c66adb",
+     "bytes": 186080
+    },
+    {
+     "id": "c060",
+     "name": "060-meeting-buoy.webp",
+     "sha256": "1777e4cd4d194d4f592f669a51f10eaa5d60c52557d109a02c9b1d21eb433b3d",
+     "bytes": 170008
+    },
+    {
+     "id": "c006",
+     "name": "006-manta-foil.webp",
+     "sha256": "b11b3ef5b8e0a2d795a154e781a50a861204ea04e483bd44001849cd44f4dad9",
+     "bytes": 174084
+    },
+    {
+     "id": "c065",
+     "name": "065-seam-surgeon.webp",
+     "sha256": "6967432221e9aaa105f66ab40bcb7c0db1720225ae3d84d8307b5124576b2c5a",
+     "bytes": 187052
+    },
+    {
+     "id": "o12",
+     "name": "12-volumetric-stage.webp",
+     "sha256": "191116ab8f14a8704587dd7a0c4706a74d4196828ea549638cc0251a4dc619b9",
+     "bytes": 215506
+    },
+    {
+     "id": "o08",
+     "name": "08-aroma-organ.webp",
+     "sha256": "5a06faa9568f9d9bdcd72314c886ad61cd19324e76b18f2a996c75e02f82c41e",
+     "bytes": 182812
+    },
+    {
+     "id": "c038",
+     "name": "038-quiet-stair.webp",
+     "sha256": "f9c17648b5bba50f0652c277fc496043bb4a9b14e74df3d981b1f80158d1fefb",
+     "bytes": 194690
+    },
+    {
+     "id": "c101",
+     "name": "101-velvet-hammer.webp",
+     "sha256": "129ab66aa5b5c1d814b31cc971f6785d41160c08f9715c59735d11ad25caad8b",
+     "bytes": 178242
+    },
+    {
+     "id": "c103",
+     "name": "103-bubble-bailiff.webp",
+     "sha256": "15d23df59a39095a568b69fae0a23058f624cbb8d2875b5294dcdf530b7c684a",
+     "bytes": 181526
+    },
+    {
+     "id": "c104",
+     "name": "104-key-concord.webp",
+     "sha256": "6211365e581e6d6c77b1952e85fd9675406c9462a0df33c1930b3773bec92043",
+     "bytes": 178522
+    },
+    {
+     "id": "c105",
+     "name": "105-metric-embassy.webp",
+     "sha256": "6f59c17887776ddf53504b00c12b7029e53882fb48f64950549ecb2a7288be1d",
+     "bytes": 186262
+    },
+    {
+     "id": "c106",
+     "name": "106-muon-customs.webp",
+     "sha256": "0860537a41bcd1cd7c05294f3ac5335a87669bfb95bad73f4a7b95e573922198",
+     "bytes": 198838
+    },
+    {
+     "id": "c107",
+     "name": "107-resonance-tailor.webp",
+     "sha256": "e6adb36228b3453cabc78032634e68c80e24dc549be8cbaab847f32e3930f12d",
+     "bytes": 173920
+    },
+    {
+     "id": "c108",
+     "name": "108-suture-loom.webp",
+     "sha256": "3b5f31b258f146dcd572fa1ca0736697f77dc3411006f9562eebfbce387bfeca",
+     "bytes": 189774
+    },
+    {
+     "id": "c110",
+     "name": "110-spin-table.webp",
+     "sha256": "157706c3dc7bd5ae360f8873bf078a1cc9ff32a11add6198aecfa803f564c760",
+     "bytes": 187872
+    }
+   ]
+  },
+  {
+   "id": "3x2-1920p",
+   "label": "3:2 \u00b7 2880 \u00d7 1920",
+   "aspect": "3:2",
+   "size": [
+    2880,
+    1920
+   ],
+   "layout": "triptych",
+   "floor_px": 11.0,
+   "min_text_px": 11.0,
+   "bundled": false,
+   "archive": {
+    "name": "p-bloom-3x2-1920p.tar",
+    "bytes": 11038720,
+    "sha256": "bfc84339384a2435a9745e0956d76facd39a88cc6d54ced496ed3354278a09a7"
+   },
+   "files": [
+    {
+     "id": "o03",
+     "name": "03-fusion-transport.webp",
+     "sha256": "f7ec9790c0e76fefe852254034a87b376002ce52df1c0c6e44a6525bf25021b2",
+     "bytes": 249910
+    },
+    {
+     "id": "o10",
+     "name": "10-truth-lamp.webp",
+     "sha256": "38c5dcf2e26c6118adbb01ecd0c36f1e1db98436088af81552d41ff08596580c",
+     "bytes": 253940
+    },
+    {
+     "id": "o02",
+     "name": "02-sky-racer.webp",
+     "sha256": "45e37c8a8e5130aa02c346aa71764502c9864b9d136fb093c14de9f5f5345a09",
+     "bytes": 250422
+    },
+    {
+     "id": "c087",
+     "name": "087-neutrino-bell.webp",
+     "sha256": "c48311a87a392e257f96ee7eee8f5726fabdc4a4920f0f68d87d08885de30aa8",
+     "bytes": 288518
+    },
+    {
+     "id": "o09",
+     "name": "09-tether-climber.webp",
+     "sha256": "d7fe0289bea1992927f266c04f30ffacd896e032885094a908df8c47094eede0",
+     "bytes": 249384
+    },
+    {
+     "id": "c001",
+     "name": "001-light-sail.webp",
+     "sha256": "12ba527590c872868278d91e69dc333152bfee46a43c62d81dc4258b214a656f",
+     "bytes": 280456
+    },
+    {
+     "id": "o01",
+     "name": "01-quantum-simulator.webp",
+     "sha256": "0a92ee35821bed4871807c5bda324b2baeb65c9f51dbb978becfa46a7fa29c22",
+     "bytes": 283512
+    },
+    {
+     "id": "c025",
+     "name": "025-fibre-braid.webp",
+     "sha256": "3e357440c7205faf0b08f2eda6e9a3b3f63869d3343798d5f48520db71580506",
+     "bytes": 288990
+    },
+    {
+     "id": "o13",
+     "name": "13-proxy.webp",
+     "sha256": "90bb1a914b71c7092e757699add4e79e7003dadc5e3aefcec4c095ec62406ec1",
+     "bytes": 248008
+    },
+    {
+     "id": "c100",
+     "name": "100-plant-alibi.webp",
+     "sha256": "3c69579cf498ef04dc210bed3e724863e3b2b8f7aad39618e4cae384339d4f4c",
+     "bytes": 258932
+    },
+    {
+     "id": "o11",
+     "name": "11-organ-foundry.webp",
+     "sha256": "ea6d5c90c85dbe15c383a511210e32cc4b49d70fbfd764ca5cc6d035015adc7b",
+     "bytes": 239064
+    },
+    {
+     "id": "o05",
+     "name": "05-cortical-mesh.webp",
+     "sha256": "70c1ef1afc7568b71bd9a87bdb8ef339ab12de7fcfdfb41aa497de59e760a444",
+     "bytes": 257024
+    },
+    {
+     "id": "c017",
+     "name": "017-memory-kiln.webp",
+     "sha256": "084397bc402c13913cbb05e0a27e1d107bd100faad90e3a0f3fd43f30a85b497",
+     "bytes": 268860
+    },
+    {
+     "id": "c056",
+     "name": "056-dune-skimmer.webp",
+     "sha256": "5dfe08a6525e746a8ce0efff843215173c409cdec8d19ba0e9744f6b8e5992b4",
+     "bytes": 274680
+    },
+    {
+     "id": "c010",
+     "name": "010-sock-oracle.webp",
+     "sha256": "46c7131b27e75e932dfb5c6acb016e0c87fed54deb49357b728bd6db01144949",
+     "bytes": 263114
+    },
+    {
+     "id": "c080",
+     "name": "080-compliment-mill.webp",
+     "sha256": "cce30a1e98cf1d27c67a0105d546a2b9d4b53ddc3d5252a2f0809be14430fc5f",
+     "bytes": 252908
+    },
+    {
+     "id": "c031",
+     "name": "031-petal-eye.webp",
+     "sha256": "031168986ac4c769417265ac14f4b8e0ff364311e51821dc13ce09c19cb46588",
+     "bytes": 274916
+    },
+    {
+     "id": "c018",
+     "name": "018-lunar-porch.webp",
+     "sha256": "c91c3c3ed47f0e3c598bcdb1b10c0fe205482db6b1bba4be433377dbcf47668c",
+     "bytes": 258692
+    },
+    {
+     "id": "o04",
+     "name": "04-greener.webp",
+     "sha256": "58b907ab79e23ae3151178d4b01b0f30e0b8df9f4dc531489a01b293a8bfd1bb",
+     "bytes": 262338
+    },
+    {
+     "id": "o07",
+     "name": "07-air-refinery.webp",
+     "sha256": "a926dea106969d377d57357fa23fbc67f1395586a0f41edf4681430fb0dfc960",
+     "bytes": 254744
+    },
+    {
+     "id": "o06",
+     "name": "06-bounder.webp",
+     "sha256": "7443623443ff07841330fb60da62fd429dd89f8ccdd8bfc5f18a1c60bab23764",
+     "bytes": 235972
+    },
+    {
+     "id": "c030",
+     "name": "030-advice-filter.webp",
+     "sha256": "4e57e4e1a7771b8d43dcf54f793f2fef1b4a8cc8ee39f3e1abf6cf899b0d1d3c",
+     "bytes": 242994
+    },
+    {
+     "id": "c070",
+     "name": "070-queue-garden.webp",
+     "sha256": "19114b2364533796310c4cc478a3a1dcae2e33b7b4d7a3cc40210881f720302c",
+     "bytes": 255314
+    },
+    {
+     "id": "c044",
+     "name": "044-coral-cradle.webp",
+     "sha256": "500285e0591102597693d5d100d9205bfc9293cdaacafdb82c557102dab68f48",
+     "bytes": 272022
+    },
+    {
+     "id": "c002",
+     "name": "002-tidal-loom.webp",
+     "sha256": "bc676cceddbfaa84700e5ea62eac513f458a2daf965db42f5b25b076a4725b05",
+     "bytes": 295010
+    },
+    {
+     "id": "o14",
+     "name": "14-presence-rig.webp",
+     "sha256": "149e5ee85fd36e541b3b33c96a927aa0d974637de118aba751c1efc4e6eb9fdb",
+     "bytes": 247858
+    },
+    {
+     "id": "c099",
+     "name": "099-sleep-cocoon.webp",
+     "sha256": "6500e6d5bf6f297378c779e5abe7a3b909b373420019785a004adf01d39b24c7",
+     "bytes": 253958
+    },
+    {
+     "id": "c042",
+     "name": "042-wind-kite.webp",
+     "sha256": "541412dfa9c53a9f139dc63d7563c4ffeb22fd6969b253331aaa7ea17e11a045",
+     "bytes": 258306
+    },
+    {
+     "id": "c060",
+     "name": "060-meeting-buoy.webp",
+     "sha256": "16e5f7d480f4ea9d38040bbde17718433e7068e37a8d8e1c97e5fab7357d870e",
+     "bytes": 252292
+    },
+    {
+     "id": "c006",
+     "name": "006-manta-foil.webp",
+     "sha256": "467319ef744d6bd2e9aa5f0bf0f9a73f48ed8eeba421d2ee4dd1e3d9bef5b923",
+     "bytes": 249044
+    },
+    {
+     "id": "c065",
+     "name": "065-seam-surgeon.webp",
+     "sha256": "61af16278e786ba08b456c1124fa0e7906397f20f21b67c0a2d8109b4a0ac607",
+     "bytes": 262008
+    },
+    {
+     "id": "o12",
+     "name": "12-volumetric-stage.webp",
+     "sha256": "2d02a9ee853c9941612c0024648897cb624d60f0e117227b3d781028f923c06b",
+     "bytes": 283450
+    },
+    {
+     "id": "o08",
+     "name": "08-aroma-organ.webp",
+     "sha256": "5bdafdd06ba45c7badeb94eb9e71b4dc858624be484cc85d34999ac1b559ed41",
+     "bytes": 249034
+    },
+    {
+     "id": "c038",
+     "name": "038-quiet-stair.webp",
+     "sha256": "77ce2c83ff819e52f6582345aa05cc9cb345c40626eba8ea74c0c75a38249ad5",
+     "bytes": 272176
+    },
+    {
+     "id": "c101",
+     "name": "101-velvet-hammer.webp",
+     "sha256": "8af80dd18508b196bf88241c08107b2045c5a83fcb71ac7dff2f9b8ac0f1271c",
+     "bytes": 255016
+    },
+    {
+     "id": "c103",
+     "name": "103-bubble-bailiff.webp",
+     "sha256": "65afe82f4c4e846f97bd6b47a82aeb9655e12b301d941c5c357ab4ec55fcacef",
+     "bytes": 258256
+    },
+    {
+     "id": "c104",
+     "name": "104-key-concord.webp",
+     "sha256": "4efd3f667270725deca9f09cb18c0ba88480ae5ecf37cc5bd9e2a2566755defe",
+     "bytes": 251588
+    },
+    {
+     "id": "c105",
+     "name": "105-metric-embassy.webp",
+     "sha256": "c97a841150e3256f96fdeadd45de5033f0f99d387527e771a4391ad1daf2a875",
+     "bytes": 269338
+    },
+    {
+     "id": "c106",
+     "name": "106-muon-customs.webp",
+     "sha256": "b7a893256f73bf2a320ffbe147aae99e63c50d78f3b304141b9e4a53c5246c5c",
+     "bytes": 283886
+    },
+    {
+     "id": "c107",
+     "name": "107-resonance-tailor.webp",
+     "sha256": "f5b40d94ec05b875eb3c1ebb7ed28d9f30c23114ac6ccaa4e69b7e36e6f18b56",
+     "bytes": 253514
+    },
+    {
+     "id": "c108",
+     "name": "108-suture-loom.webp",
+     "sha256": "f13f566b02f32a81510224d135597bb057f89a1957bb74ed4af0931ee8ab93fa",
+     "bytes": 275280
+    },
+    {
+     "id": "c110",
+     "name": "110-spin-table.webp",
+     "sha256": "3e080cf0c886dfe3692a9b5d91fcd0e675498ebb62f0ec341d7e3b8dd56af157",
+     "bytes": 268630
+    }
+   ]
+  },
+  {
+   "id": "4x3-1200p",
+   "label": "4:3 \u00b7 1600 \u00d7 1200",
+   "aspect": "4:3",
+   "size": [
+    1600,
+    1200
+   ],
+   "layout": "stacked",
+   "floor_px": 11.0,
+   "min_text_px": 11.0,
+   "bundled": false,
+   "archive": {
+    "name": "p-bloom-4x3-1200p.tar",
+    "bytes": 5406720,
+    "sha256": "d7a468b8264b669ccb8600fc7871e5dd427082d8c92563508cd84ad1ef2f9d63"
+   },
+   "files": [
+    {
+     "id": "o03",
+     "name": "03-fusion-transport.webp",
+     "sha256": "9182ac2842b63c7183d888bc95e1bf9ac99f2df70ab3c39c83dc2682536977c3",
+     "bytes": 146010
+    },
+    {
+     "id": "o10",
+     "name": "10-truth-lamp.webp",
+     "sha256": "3f37d86adfc7ea0a9b0c9ca325e58525ee04036639f32479e5a6e2529009d997",
+     "bytes": 130944
+    },
+    {
+     "id": "o02",
+     "name": "02-sky-racer.webp",
+     "sha256": "253f21e72b475553b7db46ff2b5a67034107f6f02cf9b2d0dc7b5cf556936045",
+     "bytes": 133966
+    },
+    {
+     "id": "c087",
+     "name": "087-neutrino-bell.webp",
+     "sha256": "fc120214f3b2b1bc92b09063b81f7c6269769725ab29ce3f535745dbcf393679",
+     "bytes": 145486
+    },
+    {
+     "id": "o09",
+     "name": "09-tether-climber.webp",
+     "sha256": "2e649c1f86b3dc184b8ec703b50b3536573f45b11a9f0df0b260cce3c749d9a4",
+     "bytes": 118250
+    },
+    {
+     "id": "c001",
+     "name": "001-light-sail.webp",
+     "sha256": "b9946540d95c71a8c94837f44552d428101c9bd4806ec19a4c68d53956ef0c46",
+     "bytes": 127000
+    },
+    {
+     "id": "o01",
+     "name": "01-quantum-simulator.webp",
+     "sha256": "374682f1f6f697326c66be273a261d2b985e1ed12a08584dd03e4e2071183066",
+     "bytes": 146228
+    },
+    {
+     "id": "c025",
+     "name": "025-fibre-braid.webp",
+     "sha256": "df642206851714c6d80dc9d116d7dcf3b9f7db4e5f0e6ec82c598f9f265ada9e",
+     "bytes": 143278
+    },
+    {
+     "id": "o13",
+     "name": "13-proxy.webp",
+     "sha256": "c044aa53780d95c19a89dd7c7238b87c04d0f5eba4d8af6fe9fc42a701c6c510",
+     "bytes": 124162
+    },
+    {
+     "id": "c100",
+     "name": "100-plant-alibi.webp",
+     "sha256": "755dd458d2a358753a986f4617b82de660d69b7b15b2906ebd1db27831d62bb6",
+     "bytes": 113840
+    },
+    {
+     "id": "o11",
+     "name": "11-organ-foundry.webp",
+     "sha256": "5549d887415d56098281dc812b0b1bff7b4b1f7a11974e575f4f6997a0ec653d",
+     "bytes": 112304
+    },
+    {
+     "id": "o05",
+     "name": "05-cortical-mesh.webp",
+     "sha256": "48772b680b0510bacb8f25d35d66a1c02b0007369de1cf290cf16cc6c398931d",
+     "bytes": 129086
+    },
+    {
+     "id": "c017",
+     "name": "017-memory-kiln.webp",
+     "sha256": "5a9a7e13954fe94053c8150e12a97e36a806faba480e55472f0902c952a511ed",
+     "bytes": 115550
+    },
+    {
+     "id": "c056",
+     "name": "056-dune-skimmer.webp",
+     "sha256": "74c1fdcee3e15eb3aac23cc7e983968a9e7cef0de9bfbfd3e3c69790adae17e2",
+     "bytes": 122918
+    },
+    {
+     "id": "c010",
+     "name": "010-sock-oracle.webp",
+     "sha256": "cd428cd079aa8e0d8434872df57feeb5cdbfaf30685515a19757f5a8bcc94ad7",
+     "bytes": 116568
+    },
+    {
+     "id": "c080",
+     "name": "080-compliment-mill.webp",
+     "sha256": "318acd2408c29f8868cf648da8e172937b34ca3624b08d18c78cb460d3711dcf",
+     "bytes": 120732
+    },
+    {
+     "id": "c031",
+     "name": "031-petal-eye.webp",
+     "sha256": "44464693a08fd02f91d72e8ddea208730c81cbf2e5e6a6061d63848924c14cdd",
+     "bytes": 123018
+    },
+    {
+     "id": "c018",
+     "name": "018-lunar-porch.webp",
+     "sha256": "584a089c017e05132945da5ffa8d34ee9662d2c330e5ba2294876dda8c56113e",
+     "bytes": 118180
+    },
+    {
+     "id": "o04",
+     "name": "04-greener.webp",
+     "sha256": "0aee0ab14d0b34b68c38dc6efb536758fae99ad29db50a6d6f7d033d569be7c3",
+     "bytes": 119960
+    },
+    {
+     "id": "o07",
+     "name": "07-air-refinery.webp",
+     "sha256": "60f2d056b8e68e64c45bf7d6758df38b5de643f994069d39503e246d56c276db",
+     "bytes": 131740
+    },
+    {
+     "id": "o06",
+     "name": "06-bounder.webp",
+     "sha256": "88cd1a1eb59d6de38328fe71be3925070ba49475d05536cf5052ddc05fb9babc",
+     "bytes": 124024
+    },
+    {
+     "id": "c030",
+     "name": "030-advice-filter.webp",
+     "sha256": "df937ef6a8e9e3e3c4d5980f9df6d6c9ba202d89e21e68dd9826ead3fd8d90c3",
+     "bytes": 114952
+    },
+    {
+     "id": "c070",
+     "name": "070-queue-garden.webp",
+     "sha256": "8eb4693a22dc6e3b9acfbe907516f1048a915d1e0391f4c22fa8b4a50438b04c",
+     "bytes": 133176
+    },
+    {
+     "id": "c044",
+     "name": "044-coral-cradle.webp",
+     "sha256": "156c8511d0a63a5a2c67553b74aae6abde408d5e738fbf3cb7a5c4d3d9f36db7",
+     "bytes": 128310
+    },
+    {
+     "id": "c002",
+     "name": "002-tidal-loom.webp",
+     "sha256": "ffd8767000609d319085b08dce6759ccb1abbe477442e61852dff175b4dc92bf",
+     "bytes": 135590
+    },
+    {
+     "id": "o14",
+     "name": "14-presence-rig.webp",
+     "sha256": "d86a56d6ba16f20b7b87cfe3116a740d0a2a4e9e9426798dd32b259b5ae5fa82",
+     "bytes": 130188
+    },
+    {
+     "id": "c099",
+     "name": "099-sleep-cocoon.webp",
+     "sha256": "4a6245ed7063f15e68610f5f0a6e6b412f79e625b8143fd3f186b98760545371",
+     "bytes": 136446
+    },
+    {
+     "id": "c042",
+     "name": "042-wind-kite.webp",
+     "sha256": "22cb752dd2e420c76e45f46ebd92ba9e287abc7198c86855c7f18fbfe5c4e0e6",
+     "bytes": 130370
+    },
+    {
+     "id": "c060",
+     "name": "060-meeting-buoy.webp",
+     "sha256": "74f19d55d3331165412f450c540353614490979d32c9f6840cbadba826ec1244",
+     "bytes": 134856
+    },
+    {
+     "id": "c006",
+     "name": "006-manta-foil.webp",
+     "sha256": "1e44e3f9e62fe747647641b6463493566218c676b3236437195fa362bb1a4f1a",
+     "bytes": 109006
+    },
+    {
+     "id": "c065",
+     "name": "065-seam-surgeon.webp",
+     "sha256": "d97e5d35e0d5e50806a2e32c9c64b3557987893f22db9ca5da7237b2af1f5667",
+     "bytes": 119644
+    },
+    {
+     "id": "o12",
+     "name": "12-volumetric-stage.webp",
+     "sha256": "5423adbf5b647e1be87f9fc3fb8b8f462ebaf186c85a0eda8cdeeb55b328929b",
+     "bytes": 160392
+    },
+    {
+     "id": "o08",
+     "name": "08-aroma-organ.webp",
+     "sha256": "15ca0e465e1c81cd18da4d2c9f8500f99320ca8ac4f7f152ee0b9d1b209c59e6",
+     "bytes": 127154
+    },
+    {
+     "id": "c038",
+     "name": "038-quiet-stair.webp",
+     "sha256": "7045973d993cc7b3213468485463d5b5d05bada994e295c440abf3a482f19e5e",
+     "bytes": 130058
+    },
+    {
+     "id": "c101",
+     "name": "101-velvet-hammer.webp",
+     "sha256": "29e75d1f794c2ad12de9a30b84e9598b0d0b827fa9b8f2b6d7addaca24747dd5",
+     "bytes": 117792
+    },
+    {
+     "id": "c103",
+     "name": "103-bubble-bailiff.webp",
+     "sha256": "3ca7fe5678800057742cb985581515600013a4fe32379ac37fd66cafa210d8f3",
+     "bytes": 123714
+    },
+    {
+     "id": "c104",
+     "name": "104-key-concord.webp",
+     "sha256": "5061ae531e32e8c8549d0094c862a52a0e0c06ab38ff6b0f572124e033c6ccf9",
+     "bytes": 121840
+    },
+    {
+     "id": "c105",
+     "name": "105-metric-embassy.webp",
+     "sha256": "d98396cbb7f74ca0821e64c45c43ced66a3d75a6912ea45e6da5a0b5a5b5ce16",
+     "bytes": 124310
+    },
+    {
+     "id": "c106",
+     "name": "106-muon-customs.webp",
+     "sha256": "41726accd09af73b8d2cf145d4a27133434ae142bf9ca04cd23dd2338a260771",
+     "bytes": 147844
+    },
+    {
+     "id": "c107",
+     "name": "107-resonance-tailor.webp",
+     "sha256": "40427e425fccc42888e04ff305f252a3eaf6b0d805cea4933beb69cefee3aef7",
+     "bytes": 119210
+    },
+    {
+     "id": "c108",
+     "name": "108-suture-loom.webp",
+     "sha256": "7f63d613865fd5d1faff351868911d6e3cefc9f93f3cb366cb8c370ebb2c9094",
+     "bytes": 128142
+    },
+    {
+     "id": "c110",
+     "name": "110-spin-table.webp",
+     "sha256": "fd5cc745955092e42045b8b32e381e6398fc44bfa8f12d7b3556c7e500c506e8",
+     "bytes": 130412
+    }
+   ]
+  },
+  {
+   "id": "4x3-1536p",
+   "label": "4:3 \u00b7 2048 \u00d7 1536",
+   "aspect": "4:3",
+   "size": [
+    2048,
+    1536
+   ],
+   "layout": "stacked",
+   "floor_px": 11.0,
+   "min_text_px": 11.0,
+   "bundled": false,
+   "archive": {
+    "name": "p-bloom-4x3-1536p.tar",
+    "bytes": 8161280,
+    "sha256": "74ae5d552f9e7db732cf1cc961088f60010dc2c22f94337a175985a5c782eeb0"
+   },
+   "files": [
+    {
+     "id": "o03",
+     "name": "03-fusion-transport.webp",
+     "sha256": "72ef884ff2bc6abe7e6144f54bf164b4a1ae2633a57b7c303ac16db3d5c6854a",
+     "bytes": 180210
+    },
+    {
+     "id": "o10",
+     "name": "10-truth-lamp.webp",
+     "sha256": "d1ab5585ceefaaf152e7750237e103cf2c48e9df08a076f7350e3c2073b33910",
+     "bytes": 190540
+    },
+    {
+     "id": "o02",
+     "name": "02-sky-racer.webp",
+     "sha256": "a9abc3bd4ecc6926e7ed49de73f05355c2ebf5e819d43d6ab249616410add841",
+     "bytes": 187220
+    },
+    {
+     "id": "c087",
+     "name": "087-neutrino-bell.webp",
+     "sha256": "289e614cecc2ca3035af5445c16ee3901caf11cab347d08a735e3cd27d6d9348",
+     "bytes": 210408
+    },
+    {
+     "id": "o09",
+     "name": "09-tether-climber.webp",
+     "sha256": "2f71cdf7a5a71290f4f07d946b44954da2b9138891a972610c1678b112f7395e",
+     "bytes": 186762
+    },
+    {
+     "id": "c001",
+     "name": "001-light-sail.webp",
+     "sha256": "f99cb5cd3bab362f8df28803ee6a76aa74b3a67ccccbeef7a54c3c65f8f60bb1",
+     "bytes": 216846
+    },
+    {
+     "id": "o01",
+     "name": "01-quantum-simulator.webp",
+     "sha256": "3f820326f7e22fb3fbb43b25154d050e3f1f2d2d3f624bed884ccb5fdfdd45a5",
+     "bytes": 223998
+    },
+    {
+     "id": "c025",
+     "name": "025-fibre-braid.webp",
+     "sha256": "3e4b87aae1e2c6f826e1e96a7563d5b2beacfb8323bc931e9e0272594f0d2538",
+     "bytes": 219444
+    },
+    {
+     "id": "o13",
+     "name": "13-proxy.webp",
+     "sha256": "683a369e73304213cb751daa0fd510b30eec99531eae928c07496e104ba7624d",
+     "bytes": 175568
+    },
+    {
+     "id": "c100",
+     "name": "100-plant-alibi.webp",
+     "sha256": "efd470d3d8bd613b51d0fc3e233731546fd8fa54ab77a482a949c883be82c4d9",
+     "bytes": 168258
+    },
+    {
+     "id": "o11",
+     "name": "11-organ-foundry.webp",
+     "sha256": "5513d4086b1f48605a234620a3d8b6219d758ee85cfa4ca04acabc7ed4646149",
+     "bytes": 167480
+    },
+    {
+     "id": "o05",
+     "name": "05-cortical-mesh.webp",
+     "sha256": "c908b392cbe7ee45292cd1882acfe36284fd96919e908742473f37f988579851",
+     "bytes": 187602
+    },
+    {
+     "id": "c017",
+     "name": "017-memory-kiln.webp",
+     "sha256": "90fc4ee30c5c7e57f66f28b402f14aa9f2822b01b392815a4875546d8e848bda",
+     "bytes": 188370
+    },
+    {
+     "id": "c056",
+     "name": "056-dune-skimmer.webp",
+     "sha256": "72427e412ad0264254c745f86d1a7cb286196bfa454c6fdeab6b79c169338df6",
+     "bytes": 203378
+    },
+    {
+     "id": "c010",
+     "name": "010-sock-oracle.webp",
+     "sha256": "38d3fb798220d91a746f200b9482ff4d352049ad8d39281cd5942ff2b9d41b47",
+     "bytes": 207072
+    },
+    {
+     "id": "c080",
+     "name": "080-compliment-mill.webp",
+     "sha256": "e0b37a793961c55601dff3f9973719a292b8baf69e225254ec58e425e1a765c7",
+     "bytes": 193972
+    },
+    {
+     "id": "c031",
+     "name": "031-petal-eye.webp",
+     "sha256": "4d8c11515d6aaceb32ef0af36da5c1c64b2dda18f29ab58d8a9df8d6f2aae8e4",
+     "bytes": 201326
+    },
+    {
+     "id": "c018",
+     "name": "018-lunar-porch.webp",
+     "sha256": "35d59190a99c0f3ae3347716b98d5742a0a4e595aca5577e9a23258398cbbabc",
+     "bytes": 185332
+    },
+    {
+     "id": "o04",
+     "name": "04-greener.webp",
+     "sha256": "32a49bca2e086ca74fcb6a37430ba5f566703bf567a5935ddfd342d1f0ed5cb4",
+     "bytes": 184740
+    },
+    {
+     "id": "o07",
+     "name": "07-air-refinery.webp",
+     "sha256": "f281ecec4f1f4bfac08e6b05b816d1d05e3af58b9eae4e9ed28564af6ac28992",
+     "bytes": 171838
+    },
+    {
+     "id": "o06",
+     "name": "06-bounder.webp",
+     "sha256": "6a3ef37f9bf670b471f61c194c9cdcc5947159d831d12a4d3a8f3b384954c2ce",
+     "bytes": 156276
+    },
+    {
+     "id": "c030",
+     "name": "030-advice-filter.webp",
+     "sha256": "3c9ba980e05118394bb646e49a90650370e728d5b877550a9dd95bef3d8d5444",
+     "bytes": 188616
+    },
+    {
+     "id": "c070",
+     "name": "070-queue-garden.webp",
+     "sha256": "c02b678bb396b9dbfbdee33ae0a07e179036b6622a851618e33effa799bd7ee8",
+     "bytes": 179522
+    },
+    {
+     "id": "c044",
+     "name": "044-coral-cradle.webp",
+     "sha256": "5d366766f1b9747ad17d1fa722be9789bca911fbbffc099b01138208abcf748c",
+     "bytes": 200798
+    },
+    {
+     "id": "c002",
+     "name": "002-tidal-loom.webp",
+     "sha256": "c0abdf243ee2f7dd328acded0d40c811f1d85cceebd1d591917587fb2ce9c60f",
+     "bytes": 214566
+    },
+    {
+     "id": "o14",
+     "name": "14-presence-rig.webp",
+     "sha256": "d3873e2542bacff94b0fe48d82bb6f07e43c26998420c474e33beca8b9a92f08",
+     "bytes": 195058
+    },
+    {
+     "id": "c099",
+     "name": "099-sleep-cocoon.webp",
+     "sha256": "9ffe6de331e334202227270e5a9e3cf6a90f2a119bad3028206eb2b5ed87342a",
+     "bytes": 186096
+    },
+    {
+     "id": "c042",
+     "name": "042-wind-kite.webp",
+     "sha256": "90cb764cd0f52ee296e1fa71c968c628d1069d568d68a171ed2eca9323b4e719",
+     "bytes": 202894
+    },
+    {
+     "id": "c060",
+     "name": "060-meeting-buoy.webp",
+     "sha256": "7807d43df5243c49cead043be5b9d00615582636287e3c024bd4c59cbecad8cd",
+     "bytes": 193700
+    },
+    {
+     "id": "c006",
+     "name": "006-manta-foil.webp",
+     "sha256": "efc9c179ff3f1a71d3f6f9eb58d75f98ffc4a4b2c016f349f49cd64990a6ba8d",
+     "bytes": 173742
+    },
+    {
+     "id": "c065",
+     "name": "065-seam-surgeon.webp",
+     "sha256": "4913df7c4059449056b76bc79504bbe7bf11ade5bb524af3511576441e26be59",
+     "bytes": 184348
+    },
+    {
+     "id": "o12",
+     "name": "12-volumetric-stage.webp",
+     "sha256": "33773288a50f4ac58225678e79695a604fb6814f6e49c5e314b2a84a3569e351",
+     "bytes": 225810
+    },
+    {
+     "id": "o08",
+     "name": "08-aroma-organ.webp",
+     "sha256": "e0dcf8c46f64780b1538155c1d6f05922d5ac80c3b9a9481357f4a1ab9cc71c4",
+     "bytes": 195800
+    },
+    {
+     "id": "c038",
+     "name": "038-quiet-stair.webp",
+     "sha256": "317db04c48ff9df76e4a999e38ecc890d8685a03e800c34a63b9c5ee3c1db35d",
+     "bytes": 207800
+    },
+    {
+     "id": "c101",
+     "name": "101-velvet-hammer.webp",
+     "sha256": "3f7babce7e44b1d32076405575ac23983399bac6ad5384ad606569c9d02d6220",
+     "bytes": 183956
+    },
+    {
+     "id": "c103",
+     "name": "103-bubble-bailiff.webp",
+     "sha256": "24e3af89000ac42a91ffeef58bcf07e996e12ff15a4bf880ee30a059f80ce0b1",
+     "bytes": 198234
+    },
+    {
+     "id": "c104",
+     "name": "104-key-concord.webp",
+     "sha256": "5c94f85d3645a71bae413260ed95fee3d1d098d71df0da33025be104e4bd2ec4",
+     "bytes": 180424
+    },
+    {
+     "id": "c105",
+     "name": "105-metric-embassy.webp",
+     "sha256": "ddeb926683ccf895f9b11653018a1ebb3f1ca30c22118795ec5b6eed871be9db",
+     "bytes": 191780
+    },
+    {
+     "id": "c106",
+     "name": "106-muon-customs.webp",
+     "sha256": "45bfe717e2ee779a97b5542ede31e94b6286097ca5fedffa2b4064754d788533",
+     "bytes": 220296
+    },
+    {
+     "id": "c107",
+     "name": "107-resonance-tailor.webp",
+     "sha256": "9cd4389899182fe910c1cf596060256a6db7aaf6d038e2a9603c92b85691de0a",
+     "bytes": 167778
+    },
+    {
+     "id": "c108",
+     "name": "108-suture-loom.webp",
+     "sha256": "1549bb92b5b29b61a88174a8e95fea80b442fd211d0f7c7ce7ffccfb1cc93c42",
+     "bytes": 213606
+    },
+    {
+     "id": "c110",
+     "name": "110-spin-table.webp",
+     "sha256": "de858936ab59f6bad0eb8e678f2e17534f1b599301b750045cb9f1af6cb1991a",
+     "bytes": 206404
+    }
+   ]
+  },
+  {
+   "id": "64x27-1080p",
+   "label": "21:9 \u00b7 2560 \u00d7 1080",
+   "aspect": "21:9",
+   "size": [
+    2560,
+    1080
+   ],
+   "layout": "triptych",
+   "floor_px": 11.0,
+   "min_text_px": 11.0,
+   "bundled": false,
+   "archive": {
+    "name": "p-bloom-64x27-1080p.tar",
+    "bytes": 7495680,
+    "sha256": "e0f46557cf62c5b1ce64383d278d43079054963836aeeb576e21d4a9fcc3f8fa"
+   },
+   "files": [
+    {
+     "id": "o03",
+     "name": "03-fusion-transport.webp",
+     "sha256": "0f1e6eb699bde532d685f35a37fcb4ecfc0e5f0325f361ddd6484c8c1fcc959e",
+     "bytes": 174886
+    },
+    {
+     "id": "o10",
+     "name": "10-truth-lamp.webp",
+     "sha256": "11c63f43bb72410addd40e08df872255cb79e289a5a4ec0bf865b11e09114f2a",
+     "bytes": 181118
+    },
+    {
+     "id": "o02",
+     "name": "02-sky-racer.webp",
+     "sha256": "f63a02ae5d63c80dd0e2200c912873c15bad02558cefe5dbf5c8905ca1632602",
+     "bytes": 185136
+    },
+    {
+     "id": "c087",
+     "name": "087-neutrino-bell.webp",
+     "sha256": "c616c4fd467223e70c7db266e085ae17ecf7fccb3419f39a90fe92b51f566c65",
+     "bytes": 189592
+    },
+    {
+     "id": "o09",
+     "name": "09-tether-climber.webp",
+     "sha256": "5651361d4277b3f80fcaa9fef0649670cbdfd0f5c4d78ee2c061935bd239a7a6",
+     "bytes": 178470
+    },
+    {
+     "id": "c001",
+     "name": "001-light-sail.webp",
+     "sha256": "95bba5b73cf2d0dc385bd16c1933dd80053fa165cf5e4c0e48169ec0704e9a25",
+     "bytes": 177956
+    },
+    {
+     "id": "o01",
+     "name": "01-quantum-simulator.webp",
+     "sha256": "2fa449de586132b1fa35cc4c520492553019be347e7795ebde9d958194b2edfb",
+     "bytes": 207502
+    },
+    {
+     "id": "c025",
+     "name": "025-fibre-braid.webp",
+     "sha256": "19e8e2e8f3e17503f9080e947e5876a5bf7be3e2c9d42944d68bd7e723bf1df7",
+     "bytes": 207004
+    },
+    {
+     "id": "o13",
+     "name": "13-proxy.webp",
+     "sha256": "3166982f709f4718e1f297dace07de3d677a6bc1c4c47f18f4bb844854cb2af0",
+     "bytes": 173976
+    },
+    {
+     "id": "c100",
+     "name": "100-plant-alibi.webp",
+     "sha256": "1ee08d1d90830ca1751a6b54da9ceaed3701771f434e2941c682a9bf57b57647",
+     "bytes": 158856
+    },
+    {
+     "id": "o11",
+     "name": "11-organ-foundry.webp",
+     "sha256": "38c3a396ead1672ed3fccbf8255c87580def469fdaebd747406f0a84e2f72326",
+     "bytes": 159920
+    },
+    {
+     "id": "o05",
+     "name": "05-cortical-mesh.webp",
+     "sha256": "0d695d46adc53073fe94e95a0dfbb08bb393c6812ba602c7793df32f9749c16a",
+     "bytes": 178894
+    },
+    {
+     "id": "c017",
+     "name": "017-memory-kiln.webp",
+     "sha256": "28fa3bf91b747c2fda21de5aebc2fa2ab040f8d538fdbeebe4cbeced42559b96",
+     "bytes": 179430
+    },
+    {
+     "id": "c056",
+     "name": "056-dune-skimmer.webp",
+     "sha256": "9c08e17087529b081cc2c0ceef58d37584715dc09848cabd827e2befcd0fc5e6",
+     "bytes": 177066
+    },
+    {
+     "id": "c010",
+     "name": "010-sock-oracle.webp",
+     "sha256": "ce4b3cf74246e03e493c6c23a99f1ef83e6d626df21bc7ba9fd143b2fd21a8de",
+     "bytes": 180102
+    },
+    {
+     "id": "c080",
+     "name": "080-compliment-mill.webp",
+     "sha256": "32544c237e1f4b7ca07ba46e7e1dd4a2421eb6a20ff2061daa721ec9f93bce7c",
+     "bytes": 168756
+    },
+    {
+     "id": "c031",
+     "name": "031-petal-eye.webp",
+     "sha256": "7c367539510fe00e5bf61c6e01bb5d6b06312cba7ada3cf426581b40a439a572",
+     "bytes": 175122
+    },
+    {
+     "id": "c018",
+     "name": "018-lunar-porch.webp",
+     "sha256": "9a7320ce8daf3ddab8633ce8942f135272c610b2f364284fd14e7b95f0c5f9e6",
+     "bytes": 173198
+    },
+    {
+     "id": "o04",
+     "name": "04-greener.webp",
+     "sha256": "b87c742e652bfb455cca6ec12e73ee7dc9f179bae4d36c9f1630250edc28126b",
+     "bytes": 174892
+    },
+    {
+     "id": "o07",
+     "name": "07-air-refinery.webp",
+     "sha256": "ea28a25c9c4a5ebda5a92b706ae7875af3eebb774b3b98c2656106106a392173",
+     "bytes": 174574
+    },
+    {
+     "id": "o06",
+     "name": "06-bounder.webp",
+     "sha256": "db128df418d3a75e88beb8a68cacb65ae97f9d73fb34ec61fc75a90a425c5e5a",
+     "bytes": 154002
+    },
+    {
+     "id": "c030",
+     "name": "030-advice-filter.webp",
+     "sha256": "ecc0696734b27413b1a050b6c9e973fd1ac29226c0c0ea1e0df46970c785682a",
+     "bytes": 170942
+    },
+    {
+     "id": "c070",
+     "name": "070-queue-garden.webp",
+     "sha256": "db426d0ce3bbd52d6aac9bfef09a1634f5fb4fdf736e8bd375151f51191691f8",
+     "bytes": 168380
+    },
+    {
+     "id": "c044",
+     "name": "044-coral-cradle.webp",
+     "sha256": "b0400202e7202608a18d6c1caca519d49941eb066a0356f15ae1a99d27f1b359",
+     "bytes": 185204
+    },
+    {
+     "id": "c002",
+     "name": "002-tidal-loom.webp",
+     "sha256": "a43fa772c278e0461124fd3bcfb1837c8dee9b612599dab29110731c6914bd3a",
+     "bytes": 198828
+    },
+    {
+     "id": "o14",
+     "name": "14-presence-rig.webp",
+     "sha256": "c45d015e88afd23c0b97d5a8afce43e60ae946b066be7c897dce4711427cd1db",
+     "bytes": 173472
+    },
+    {
+     "id": "c099",
+     "name": "099-sleep-cocoon.webp",
+     "sha256": "1d4e770efdf7d4030f9fe9767a54314a2f710b4baa11983675bc4e506a69036c",
+     "bytes": 169782
+    },
+    {
+     "id": "c042",
+     "name": "042-wind-kite.webp",
+     "sha256": "3a5c784eb978aaebcf2fd629b342881b41077bec7f390ff254c480dc01f35c68",
+     "bytes": 182786
+    },
+    {
+     "id": "c060",
+     "name": "060-meeting-buoy.webp",
+     "sha256": "b83ec1596a23918c86b49ae0b1ba21395ac0985df1e7c83c4a3ff8be204dd226",
+     "bytes": 168066
+    },
+    {
+     "id": "c006",
+     "name": "006-manta-foil.webp",
+     "sha256": "ed2de3ff57cf53c2379aa5b3fa80d818bb22bbc7ffa598674060e54b622b086f",
+     "bytes": 170410
+    },
+    {
+     "id": "c065",
+     "name": "065-seam-surgeon.webp",
+     "sha256": "c6e4f466cc060144abbb03131825a7444a655345bef4b39fe5231d942572e280",
+     "bytes": 179598
+    },
+    {
+     "id": "o12",
+     "name": "12-volumetric-stage.webp",
+     "sha256": "9a06d456efe20f4944ded6d32b33f7ab5929aeb4bdf63083491d39d43ab57e26",
+     "bytes": 200126
+    },
+    {
+     "id": "o08",
+     "name": "08-aroma-organ.webp",
+     "sha256": "4ac58ae5cd98b2cb86045ae04c4b5282d2ebffa2e5170970d4ff45c42fd3ffa2",
+     "bytes": 175414
+    },
+    {
+     "id": "c038",
+     "name": "038-quiet-stair.webp",
+     "sha256": "0fa5a3a359891252941c4ebb1c51633d39dbf14e0d914d3dfd1f3150a0ba9c25",
+     "bytes": 184742
+    },
+    {
+     "id": "c101",
+     "name": "101-velvet-hammer.webp",
+     "sha256": "256c6167175145aec08fffdc825df118af89eddda05d312e41e4fee28f5c36b9",
+     "bytes": 168008
+    },
+    {
+     "id": "c103",
+     "name": "103-bubble-bailiff.webp",
+     "sha256": "1d48473bed9a32ae050a8e1eb6620702c6a95827c2a3756bda767dff35f9b7a3",
+     "bytes": 173364
+    },
+    {
+     "id": "c104",
+     "name": "104-key-concord.webp",
+     "sha256": "ae49ca12d31c1c0b4f54b3de342b6447dd9a87720456e89ca709b725512e3099",
+     "bytes": 174982
+    },
+    {
+     "id": "c105",
+     "name": "105-metric-embassy.webp",
+     "sha256": "22599b3b7f02dfb13f30617d6fe8461dbc5050555304489e99819e91598a47f1",
+     "bytes": 168550
+    },
+    {
+     "id": "c106",
+     "name": "106-muon-customs.webp",
+     "sha256": "9b47e80a8d445dcdf163995bd60b74918e37237447f3c8351945a9f0ccd802d9",
+     "bytes": 190110
+    },
+    {
+     "id": "c107",
+     "name": "107-resonance-tailor.webp",
+     "sha256": "b0ac5c7ff4ecad4307aa30beedb0a302d4196fa6aaae3c2178902c0d9f06a1a6",
+     "bytes": 163046
+    },
+    {
+     "id": "c108",
+     "name": "108-suture-loom.webp",
+     "sha256": "e3efab1f5218c9125ddb05ff6e29430258db290e83b20c2c2d6b8b9cec143904",
+     "bytes": 186008
+    },
+    {
+     "id": "c110",
+     "name": "110-spin-table.webp",
+     "sha256": "8db31bf72aab641c52e20eb1206dda712148620ac67532ad62716b81d5870aad",
+     "bytes": 179562
+    }
+   ]
+  },
+  {
+   "id": "43x18-1440p",
+   "label": "21:9 \u00b7 3440 \u00d7 1440",
+   "aspect": "21:9",
+   "size": [
+    3440,
+    1440
+   ],
+   "layout": "triptych",
+   "floor_px": 11.0,
+   "min_text_px": 11.0,
+   "bundled": false,
+   "archive": {
+    "name": "p-bloom-43x18-1440p.tar",
+    "bytes": 11130880,
+    "sha256": "8c8239d70d48b543a2ed6f809681a4cab275e6a0be1e7e14f2ab1f0de33fc20a"
+   },
+   "files": [
+    {
+     "id": "o03",
+     "name": "03-fusion-transport.webp",
+     "sha256": "f8b29ff57c506450612847f179f83c1334d8dd6219c11018043a0cc0d1f6b794",
+     "bytes": 265214
+    },
+    {
+     "id": "o10",
+     "name": "10-truth-lamp.webp",
+     "sha256": "9ca89e553c2546a60c1c44ca1c22b02c36d154c78d7e3ec2da837d1f56f557f6",
+     "bytes": 250894
+    },
+    {
+     "id": "o02",
+     "name": "02-sky-racer.webp",
+     "sha256": "44c130404c7b48581398d46e267e2a0f217328cc63c8ebd4d94cce893d77eb6d",
+     "bytes": 257782
+    },
+    {
+     "id": "c087",
+     "name": "087-neutrino-bell.webp",
+     "sha256": "8e425573d66eed0f8de40565697177a26a0a7d1fa55c747a3aea35b7b564a2e1",
+     "bytes": 288494
+    },
+    {
+     "id": "o09",
+     "name": "09-tether-climber.webp",
+     "sha256": "8cc2eedf8921da1ab366e233134efa642cbda72b8bae5f95edff7154c0432bd3",
+     "bytes": 253756
+    },
+    {
+     "id": "c001",
+     "name": "001-light-sail.webp",
+     "sha256": "b832fa3451b7a1f153d21e4a531114c08e809b5364bd37545553613751e4cc95",
+     "bytes": 286294
+    },
+    {
+     "id": "o01",
+     "name": "01-quantum-simulator.webp",
+     "sha256": "6b7ecd6e37a73daab1a73b6be5b2c5b35c8a098b2c6efa2544167b130a430329",
+     "bytes": 303402
+    },
+    {
+     "id": "c025",
+     "name": "025-fibre-braid.webp",
+     "sha256": "5135ddba750864b865da94b84e9a0e32e8531880dbd7affdf058163c13aea751",
+     "bytes": 315760
+    },
+    {
+     "id": "o13",
+     "name": "13-proxy.webp",
+     "sha256": "c683f42a34766238bf376dfa4984df9ed63c5c80bf08b664999fd2cf36b13219",
+     "bytes": 244054
+    },
+    {
+     "id": "c100",
+     "name": "100-plant-alibi.webp",
+     "sha256": "1b7beb8f23531b2606b9ba7894da413c375d34df94697c5ca9546ef59e55a5bb",
+     "bytes": 243374
+    },
+    {
+     "id": "o11",
+     "name": "11-organ-foundry.webp",
+     "sha256": "fd5c4fe28bfd036d279d5d66f4cd0969e23d3658fafd38bcff9abdddad54a090",
+     "bytes": 245102
+    },
+    {
+     "id": "o05",
+     "name": "05-cortical-mesh.webp",
+     "sha256": "442a79f025f2d9cf2c5dfdadbf83ed4b6d680eefda7d2ab2ca87b8f3baa809ec",
+     "bytes": 261326
+    },
+    {
+     "id": "c017",
+     "name": "017-memory-kiln.webp",
+     "sha256": "7528d0f993f1cde8d14797e07d511a4e5a11e3d49a406a2361094e27551cf71b",
+     "bytes": 263392
+    },
+    {
+     "id": "c056",
+     "name": "056-dune-skimmer.webp",
+     "sha256": "f158fff5d6d8a54a72fb0142fb8727dc98d29e5ae8f92fa10253bda71ef21b03",
+     "bytes": 267714
+    },
+    {
+     "id": "c010",
+     "name": "010-sock-oracle.webp",
+     "sha256": "c973aa33ae5103451ec4f039c829af8ddb8c6b000e6a48077b70ffda34c78c15",
+     "bytes": 271782
+    },
+    {
+     "id": "c080",
+     "name": "080-compliment-mill.webp",
+     "sha256": "03c185e7d59f5fa048ec4819a85eb9f11a409d39a17873e6f3a587c7f90a9ba5",
+     "bytes": 260218
+    },
+    {
+     "id": "c031",
+     "name": "031-petal-eye.webp",
+     "sha256": "758c1472baf8ce3fd53d9a807da003b37151bcbc9a88fa90bf4a4da18b8932a3",
+     "bytes": 275668
+    },
+    {
+     "id": "c018",
+     "name": "018-lunar-porch.webp",
+     "sha256": "ff3a023dc07ac71f59c44eae03b2ba54b3a5f51f637fc126b24982a9fe5ea8b1",
+     "bytes": 259550
+    },
+    {
+     "id": "o04",
+     "name": "04-greener.webp",
+     "sha256": "5093bc26786cda1530cd7bbef6004b018f8f26571b1a863115546aeb70e133b2",
+     "bytes": 255670
+    },
+    {
+     "id": "o07",
+     "name": "07-air-refinery.webp",
+     "sha256": "6c57feb057b549054fe6cfc9250a037a47581dc9201dffafd74c1776e2fd7dad",
+     "bytes": 246334
+    },
+    {
+     "id": "o06",
+     "name": "06-bounder.webp",
+     "sha256": "cceac7532c2356158dc13befadacc7dc8e78c53a4c873a12b1948878efedeb9c",
+     "bytes": 224306
+    },
+    {
+     "id": "c030",
+     "name": "030-advice-filter.webp",
+     "sha256": "76e53b47353194839b44b8cd17fabf3cdd9774f9a714a04c095d442eff061103",
+     "bytes": 247614
+    },
+    {
+     "id": "c070",
+     "name": "070-queue-garden.webp",
+     "sha256": "39bc11846467542cd73de55770d7677ea52899364ff37f6f34ff102d52286abd",
+     "bytes": 253402
+    },
+    {
+     "id": "c044",
+     "name": "044-coral-cradle.webp",
+     "sha256": "898acd0c95a33f3984ebc7115a5626c6a1a5118fba28dd710f05a16adcef1b27",
+     "bytes": 275456
+    },
+    {
+     "id": "c002",
+     "name": "002-tidal-loom.webp",
+     "sha256": "d0d9c1396df3c0c3fba091ad1ea4c038d8ef59913626a0d4eef6caee589ffc14",
+     "bytes": 301040
+    },
+    {
+     "id": "o14",
+     "name": "14-presence-rig.webp",
+     "sha256": "7c6bd113256865dfa81e5d8eec00d333dd433059fa390442cdba5c229d243527",
+     "bytes": 258434
+    },
+    {
+     "id": "c099",
+     "name": "099-sleep-cocoon.webp",
+     "sha256": "84c8c0e07fc0356188ffb99c9507ff75dfc09288cc947ec0fb5e39ff6f044b07",
+     "bytes": 253724
+    },
+    {
+     "id": "c042",
+     "name": "042-wind-kite.webp",
+     "sha256": "33c54f7305ba61043f9dfe29063217086e05a9186d6b3d17030316709aa6bce8",
+     "bytes": 271958
+    },
+    {
+     "id": "c060",
+     "name": "060-meeting-buoy.webp",
+     "sha256": "d20043e1b2860891f80e1486c2b0587e6cf70d277f75062032c44a042d833771",
+     "bytes": 255090
+    },
+    {
+     "id": "c006",
+     "name": "006-manta-foil.webp",
+     "sha256": "c4181c2dd9b4aece8b0ece44ed09c5424191610ae556810a027a83a9053b1a40",
+     "bytes": 254666
+    },
+    {
+     "id": "c065",
+     "name": "065-seam-surgeon.webp",
+     "sha256": "67bd4b9664f3c7486fbb2981da82ad3470bba94c8b6aaad600d9f221f3cbb2bf",
+     "bytes": 263128
+    },
+    {
+     "id": "o12",
+     "name": "12-volumetric-stage.webp",
+     "sha256": "6ab635a90e6b255a8500e8dbb3f768cf36ba950d5c7df17c12cacc8c090bdcd7",
+     "bytes": 295060
+    },
+    {
+     "id": "o08",
+     "name": "08-aroma-organ.webp",
+     "sha256": "8ddfd78406c8ec12a16a1d80bde630c5f7bba826f46f9d43e388267d4e329706",
+     "bytes": 260762
+    },
+    {
+     "id": "c038",
+     "name": "038-quiet-stair.webp",
+     "sha256": "043945e24b8a829b51c1a6677f08f7c3b6b52e29eb517dc2ae443606029c38bc",
+     "bytes": 275220
+    },
+    {
+     "id": "c101",
+     "name": "101-velvet-hammer.webp",
+     "sha256": "0728a0c892ef24f9a34b002522aeb5ff0a90052a6cba812ad5e249c4359e622f",
+     "bytes": 252526
+    },
+    {
+     "id": "c103",
+     "name": "103-bubble-bailiff.webp",
+     "sha256": "afc21a8e82d62455c9b2d642bd4603834f713783e3c7960b0a7ec93bb348d6fc",
+     "bytes": 255498
+    },
+    {
+     "id": "c104",
+     "name": "104-key-concord.webp",
+     "sha256": "a8d4981d80529d00c6dd4f7dafede26ae974a428ebefeb224ed9f73801f7e27e",
+     "bytes": 258412
+    },
+    {
+     "id": "c105",
+     "name": "105-metric-embassy.webp",
+     "sha256": "cbfc7edcbc048aa94aeafbe377c27ab20441fc3fe222419be0be3f31e2958148",
+     "bytes": 254556
+    },
+    {
+     "id": "c106",
+     "name": "106-muon-customs.webp",
+     "sha256": "6f436ebfc397cd887b6688c3e0a9321cbe0569cb638462f3f47adc4fd93c3e83",
+     "bytes": 285760
+    },
+    {
+     "id": "c107",
+     "name": "107-resonance-tailor.webp",
+     "sha256": "cb78cd09ee7852979da71b4fd28088a909d7ac733a0e12be092b03b3d4755d47",
+     "bytes": 241340
+    },
+    {
+     "id": "c108",
+     "name": "108-suture-loom.webp",
+     "sha256": "4ef09665345208c8ea06b66aa226cb9c03f822b8dff2ed0a64d0cfb921a63370",
+     "bytes": 278222
+    },
+    {
+     "id": "c110",
+     "name": "110-spin-table.webp",
+     "sha256": "6417962f9d67a5273fd04fc98b164002a16d75d429f1accdf11aaca568f6ae7f",
+     "bytes": 264718
+    }
+   ]
+  },
+  {
+   "id": "12x5-1600p",
+   "label": "21:9 \u00b7 3840 \u00d7 1600",
+   "aspect": "21:9",
+   "size": [
+    3840,
+    1600
+   ],
+   "layout": "triptych",
+   "floor_px": 11.0,
+   "min_text_px": 11.0,
+   "bundled": false,
+   "archive": {
+    "name": "p-bloom-12x5-1600p.tar",
+    "bytes": 13076480,
+    "sha256": "7d50e04ba709a1ca98ab779ee5673c6b27239e35d32f6a0a3b05107c86d7d2de"
+   },
+   "files": [
+    {
+     "id": "o03",
+     "name": "03-fusion-transport.webp",
+     "sha256": "d632263c93158ad8f4d27c0a50e8a1ec78aa173caa187ddb148ffee18a9bc347",
+     "bytes": 302970
+    },
+    {
+     "id": "o10",
+     "name": "10-truth-lamp.webp",
+     "sha256": "7e161459d0ab2869848f4a4f52cf7cc7a6914561f68ab5ed23ada15c800c1a9b",
+     "bytes": 289378
+    },
+    {
+     "id": "o02",
+     "name": "02-sky-racer.webp",
+     "sha256": "14eb357fcf0418f2c9e844909b5644582fcdf45190c7e2d71267db4b5d98c4c0",
+     "bytes": 300404
+    },
+    {
+     "id": "c087",
+     "name": "087-neutrino-bell.webp",
+     "sha256": "c5dc4aaa305c7f911eb795beccc210abae94fffac64927b6ede44f6882f7d567",
+     "bytes": 341628
+    },
+    {
+     "id": "o09",
+     "name": "09-tether-climber.webp",
+     "sha256": "56ce47d7a7495841bc9aa29555486466b4d6421ac185853fff3112bf22ed5007",
+     "bytes": 290192
+    },
+    {
+     "id": "c001",
+     "name": "001-light-sail.webp",
+     "sha256": "3f509a589fd556c63be1acecc46bfb1df49c754c1a2b6ff94995a19e3a81ddd5",
+     "bytes": 332548
+    },
+    {
+     "id": "o01",
+     "name": "01-quantum-simulator.webp",
+     "sha256": "539cdefca90b77765968985d88d5de156ca2f6eafb5469c8595f29277ea268f1",
+     "bytes": 352328
+    },
+    {
+     "id": "c025",
+     "name": "025-fibre-braid.webp",
+     "sha256": "78dd9d651878122c62cb82cd83b3edb11a01683b580a6f28bf66b4fe2bcfe7c5",
+     "bytes": 376362
+    },
+    {
+     "id": "o13",
+     "name": "13-proxy.webp",
+     "sha256": "a0bd29494eb194149ed233f806f67be025bcd37f6fc37562b2b78d87f17bc305",
+     "bytes": 283712
+    },
+    {
+     "id": "c100",
+     "name": "100-plant-alibi.webp",
+     "sha256": "a191491f49829b7a1c68ac77052d497910661475aefe0ff78b3748ff883a3069",
+     "bytes": 290038
+    },
+    {
+     "id": "o11",
+     "name": "11-organ-foundry.webp",
+     "sha256": "ada7ae408835bcf13b063b68a5158f299f7560b462a9c714038d706eec881cd4",
+     "bytes": 283562
+    },
+    {
+     "id": "o05",
+     "name": "05-cortical-mesh.webp",
+     "sha256": "93d2a9e0e34b2dd8f8dc18eab183650b9dae9edd261d2ecdc3660cac3fdfff67",
+     "bytes": 298568
+    },
+    {
+     "id": "c017",
+     "name": "017-memory-kiln.webp",
+     "sha256": "6d8151358a3b8dd0d211c78f2d5dc70e3cc291b56bcc277e205ba18a46bba87f",
+     "bytes": 312438
+    },
+    {
+     "id": "c056",
+     "name": "056-dune-skimmer.webp",
+     "sha256": "8057f1dd3d51de5d8e0a0132c87cd33fd2aad0b824073ca27a5eec2aaf410e53",
+     "bytes": 318618
+    },
+    {
+     "id": "c010",
+     "name": "010-sock-oracle.webp",
+     "sha256": "e313e942d4d756ece3824b7d45425023130edc1c11408dc1fdabc5c5fb320800",
+     "bytes": 315888
+    },
+    {
+     "id": "c080",
+     "name": "080-compliment-mill.webp",
+     "sha256": "a82999fdeeee08ffa6e542a31372aab13e6386160681deb2cb2152950b3f5a36",
+     "bytes": 299646
+    },
+    {
+     "id": "c031",
+     "name": "031-petal-eye.webp",
+     "sha256": "c4e1708721425390aab61c463b2f1e6acfad0120a5b608b9c5842b963fabd15c",
+     "bytes": 331936
+    },
+    {
+     "id": "c018",
+     "name": "018-lunar-porch.webp",
+     "sha256": "2af44ba0473492ee758f53a0d2155473d4109be50b7de36517303edcd61f8e4b",
+     "bytes": 308752
+    },
+    {
+     "id": "o04",
+     "name": "04-greener.webp",
+     "sha256": "511cd34854cef248fba54867a8c1af8256986c3117aa0edf18b829f3259799e7",
+     "bytes": 305434
+    },
+    {
+     "id": "o07",
+     "name": "07-air-refinery.webp",
+     "sha256": "70d8f0f557b1bf5010bd86100483644f92c39bec2c1578c4d5dd560034b968c3",
+     "bytes": 290778
+    },
+    {
+     "id": "o06",
+     "name": "06-bounder.webp",
+     "sha256": "4edee246326f0388264b50152796f83048eaa6ea955d6d01d16aa21515543b01",
+     "bytes": 263432
+    },
+    {
+     "id": "c030",
+     "name": "030-advice-filter.webp",
+     "sha256": "1aec23761fb0ef38f45081e8fe19bf1f78d342ed10f13565475867858e8927cc",
+     "bytes": 292248
+    },
+    {
+     "id": "c070",
+     "name": "070-queue-garden.webp",
+     "sha256": "5cc29a24d2574fcd2d87611be27b0a434f057033d75c1acc088e36d84166287a",
+     "bytes": 302124
+    },
+    {
+     "id": "c044",
+     "name": "044-coral-cradle.webp",
+     "sha256": "c23f3e6fef6adeabfd493843ecf4926eb1428079ca85a9496798c0f08dff7f1d",
+     "bytes": 325926
+    },
+    {
+     "id": "c002",
+     "name": "002-tidal-loom.webp",
+     "sha256": "d248095d8a79f0b4e977610e4b1c68a7eadaa11d4b8ba2c41f5bec87ec3945e1",
+     "bytes": 358300
+    },
+    {
+     "id": "o14",
+     "name": "14-presence-rig.webp",
+     "sha256": "3739a9ef86e26f8eefdc270af0a50ab85a14df5803d6d8c13e22799c9338e27d",
+     "bytes": 299324
+    },
+    {
+     "id": "c099",
+     "name": "099-sleep-cocoon.webp",
+     "sha256": "e1147d19ca84ab9d7b4450ce84d2e16a4b4899dfa86cefead894f0923f81da5a",
+     "bytes": 300238
+    },
+    {
+     "id": "c042",
+     "name": "042-wind-kite.webp",
+     "sha256": "c31b06f0433e8bcb814d7b62320a3d32f31ddcae1885c08a7f59dc5f016f6dbf",
+     "bytes": 323114
+    },
+    {
+     "id": "c060",
+     "name": "060-meeting-buoy.webp",
+     "sha256": "7fe4a34c89ee10df29230c8189023c5a0665f8b4f83b0612b547e3ae7620ce3c",
+     "bytes": 297436
+    },
+    {
+     "id": "c006",
+     "name": "006-manta-foil.webp",
+     "sha256": "eee42e3da8aa229d7da31c54c4f723b103af2fad6bdc5b335208042f4a0b5c55",
+     "bytes": 301264
+    },
+    {
+     "id": "c065",
+     "name": "065-seam-surgeon.webp",
+     "sha256": "a5f81a76019f72b3b195d9ac2ed552a496857e2bc9e8a9c62c27426371fb2453",
+     "bytes": 312048
+    },
+    {
+     "id": "o12",
+     "name": "12-volumetric-stage.webp",
+     "sha256": "bf7ba6a8fdaa15ce528a0889f59b6d056671d5924fa22ab146ad73fa2fc19e0b",
+     "bytes": 346386
+    },
+    {
+     "id": "o08",
+     "name": "08-aroma-organ.webp",
+     "sha256": "ba75953445b0ec9cc8379a7f0df4f5185c22d0e3af11983df83a85265cd820fb",
+     "bytes": 301938
+    },
+    {
+     "id": "c038",
+     "name": "038-quiet-stair.webp",
+     "sha256": "fc0172b833ce19795654c6c15b0c47769a3a098d7b1395d0b07e11a1be15775c",
+     "bytes": 307708
+    },
+    {
+     "id": "c101",
+     "name": "101-velvet-hammer.webp",
+     "sha256": "404162de3b448dd2b1fdfbcff4e123aa406b27a9f357d7ccaa38b65ead6fd13b",
+     "bytes": 297842
+    },
+    {
+     "id": "c103",
+     "name": "103-bubble-bailiff.webp",
+     "sha256": "b7fca2ba272276f1f517f14ba0928d6d05f01ef852d340c0c895bf238af01a12",
+     "bytes": 303880
+    },
+    {
+     "id": "c104",
+     "name": "104-key-concord.webp",
+     "sha256": "3722b3224ded16c608b6462b5666d6818161084af49c432f225e4ef360b161f9",
+     "bytes": 307382
+    },
+    {
+     "id": "c105",
+     "name": "105-metric-embassy.webp",
+     "sha256": "2d3cc2af014473a95678e72fbff69ab66b259c231338fbe2bf46f555777c7da0",
+     "bytes": 302208
+    },
+    {
+     "id": "c106",
+     "name": "106-muon-customs.webp",
+     "sha256": "b91bd3950edbe811f9785ac225767cf31ab3c792a54e43adc0c61631e69790ab",
+     "bytes": 340606
+    },
+    {
+     "id": "c107",
+     "name": "107-resonance-tailor.webp",
+     "sha256": "a760beaf29e0e500b7c6c2bf400c32a02aa3cf3bb444463dd245c04b912ca2de",
+     "bytes": 285352
+    },
+    {
+     "id": "c108",
+     "name": "108-suture-loom.webp",
+     "sha256": "f54d99cc6e0a4ab43768bfa953b53690a32dc12feee09c9263ee4ec12576bd82",
+     "bytes": 332950
+    },
+    {
+     "id": "c110",
+     "name": "110-spin-table.webp",
+     "sha256": "0103fc82fe74119950f9e36c3372a6e25aa93d2311db06e243962e6c46e10de8",
+     "bytes": 314754
+    }
+   ]
+  },
+  {
+   "id": "64x27-2160p",
+   "label": "21:9 \u00b7 5120 \u00d7 2160",
+   "aspect": "21:9",
+   "size": [
+    5120,
+    2160
+   ],
+   "layout": "native-master",
+   "floor_px": 14.0,
+   "min_text_px": 14.0,
+   "bundled": false,
+   "archive": {
+    "name": "p-bloom-64x27-2160p.tar",
+    "bytes": 20531200,
+    "sha256": "dbc25062579251a18498db82acddfcac038eff91b2f0bdc425ef5a2d7b06c2fa"
+   },
+   "files": [
+    {
+     "id": "o03",
+     "name": "03-fusion-transport.webp",
+     "sha256": "84e5999459702aacc149315a97646077c968ad6488c58dcb24dd3026cfe33ae1",
+     "bytes": 480220
+    },
+    {
+     "id": "o10",
+     "name": "10-truth-lamp.webp",
+     "sha256": "faf0cd27ae65d49ce13713eb9fc8d12543fade5ce47e16a7b31653e09f925c93",
+     "bytes": 469888
+    },
+    {
+     "id": "o02",
+     "name": "02-sky-racer.webp",
+     "sha256": "592eb3525c2a3348c8c2886d2af93c6cb49f6363971a855db55f8c364459dc36",
+     "bytes": 470490
+    },
+    {
+     "id": "c087",
+     "name": "087-neutrino-bell.webp",
+     "sha256": "631d94b64e5e8b26e54cb48b498c51817cee0e3ebc4b00a1d48b5b61f0c1d9f6",
+     "bytes": 541894
+    },
+    {
+     "id": "o09",
+     "name": "09-tether-climber.webp",
+     "sha256": "7b876021078d7214839ce350b090fd804d06366f2b7a2855bd553293081d7a94",
+     "bytes": 450592
+    },
+    {
+     "id": "c001",
+     "name": "001-light-sail.webp",
+     "sha256": "9d9a2dbb5a7c7af35efa7a7a04086f715185ef5a82a4f3fdca392ea89cd4fa86",
+     "bytes": 536584
+    },
+    {
+     "id": "o01",
+     "name": "01-quantum-simulator.webp",
+     "sha256": "f5c65bb19a3f4414805ec9d8944a3cb232273d87ada560e49c1d73989cf4f6ea",
+     "bytes": 539664
+    },
+    {
+     "id": "c025",
+     "name": "025-fibre-braid.webp",
+     "sha256": "958d1467d805b74a0441a97211264e78e81ed9043bbad33c720e9bbdd969c0f9",
+     "bytes": 566222
+    },
+    {
+     "id": "o13",
+     "name": "13-proxy.webp",
+     "sha256": "001f0c63e7610e73db606e2c1577f302c6575d5b01986f9e2c6de21849afde33",
+     "bytes": 450468
+    },
+    {
+     "id": "c100",
+     "name": "100-plant-alibi.webp",
+     "sha256": "ef513458f598a9f19b6789c59ee297a8ab7f6ea21ec3029c6476b6b70ae482cc",
+     "bytes": 464810
+    },
+    {
+     "id": "o11",
+     "name": "11-organ-foundry.webp",
+     "sha256": "40a7b23ab5b6d28f7d31f88b85f6d60d1648e5f4205a852b488747c3e935fffe",
+     "bytes": 433616
+    },
+    {
+     "id": "o05",
+     "name": "05-cortical-mesh.webp",
+     "sha256": "3c4cf57ad7e243ee2e09d612418bb432effe7992cdd520608ea6d060d982cdc9",
+     "bytes": 475500
+    },
+    {
+     "id": "c017",
+     "name": "017-memory-kiln.webp",
+     "sha256": "c2cf7899226658530c0f5b9ae2f5ae257be813765b0937a271dccaf5d8dfea20",
+     "bytes": 498574
+    },
+    {
+     "id": "c056",
+     "name": "056-dune-skimmer.webp",
+     "sha256": "d35ee38313f1a61e9d2080e083bd1b361f0b2435c92f90ce3d3916e080c5c946",
+     "bytes": 508618
+    },
+    {
+     "id": "c010",
+     "name": "010-sock-oracle.webp",
+     "sha256": "b5d8554ce6558c34800d8f8418b858235c5ef4b0155618a7e5eb96c7c747c83a",
+     "bytes": 488950
+    },
+    {
+     "id": "c080",
+     "name": "080-compliment-mill.webp",
+     "sha256": "1ccc8e98619f721f945ebcf42fdd99be67c4898ee992e4c74b2fc724a43c2277",
+     "bytes": 471910
+    },
+    {
+     "id": "c031",
+     "name": "031-petal-eye.webp",
+     "sha256": "e1fc52dbdda30b93f0e7f1b5921267126e9c2ce792dfc42d1f8218cb60f57077",
+     "bytes": 519226
+    },
+    {
+     "id": "c018",
+     "name": "018-lunar-porch.webp",
+     "sha256": "48f7404d2e9e6e7ea28e91a9b2a4475bd04a8e44cea9adb119b888182eee5d34",
+     "bytes": 485054
+    },
+    {
+     "id": "o04",
+     "name": "04-greener.webp",
+     "sha256": "4a119a22c0be033d2f4316fd6091389bbcd3cc265356b5bac7bcdfcf3c36d73d",
+     "bytes": 466116
+    },
+    {
+     "id": "o07",
+     "name": "07-air-refinery.webp",
+     "sha256": "81d47ba142bf6610582532b65650767d783afb0940a1ab023588c1d3f6ba2465",
+     "bytes": 464596
+    },
+    {
+     "id": "o06",
+     "name": "06-bounder.webp",
+     "sha256": "cae5e9933ffd92aca7ccb1a8d64a9a58966f465cbbc3a18bcdd9ffda40758aae",
+     "bytes": 424888
+    },
+    {
+     "id": "c030",
+     "name": "030-advice-filter.webp",
+     "sha256": "92ad68efd5083a471fd8c4da1c674881cad374f2eaace046bb8f1c804afbdeda",
+     "bytes": 453062
+    },
+    {
+     "id": "c070",
+     "name": "070-queue-garden.webp",
+     "sha256": "7f6ede13fccffd6b5b5b5991880022a32b473b6c075cbf993cd26d03686bed54",
+     "bytes": 471894
+    },
+    {
+     "id": "c044",
+     "name": "044-coral-cradle.webp",
+     "sha256": "e364c697d2f7b5e305657fe46bc3ea53a237dc3694c1c71e90344fb2afca181e",
+     "bytes": 518438
+    },
+    {
+     "id": "c002",
+     "name": "002-tidal-loom.webp",
+     "sha256": "6d554dc64f28fb3ccf04853dccf955d12539606446bc5caf7fbb53c77aa5acb9",
+     "bytes": 548152
+    },
+    {
+     "id": "o14",
+     "name": "14-presence-rig.webp",
+     "sha256": "a27f79088838bdc9d90066e61911dd99f5582c7fc3c4dc63bd9ade3f2d7ca539",
+     "bytes": 454348
+    },
+    {
+     "id": "c099",
+     "name": "099-sleep-cocoon.webp",
+     "sha256": "0b923f7b0a70a9f383e8de40f3f300199909b5dae740033a7ddc2d270cd7e07d",
+     "bytes": 472518
+    },
+    {
+     "id": "c042",
+     "name": "042-wind-kite.webp",
+     "sha256": "15457902f0ea8ddcdc22564b4837e352710a02428d068de86517a57c607b6c98",
+     "bytes": 509218
+    },
+    {
+     "id": "c060",
+     "name": "060-meeting-buoy.webp",
+     "sha256": "5c614f123d4bd44313f68c8524db362286bb2f90e96a9d543eb782450518c9dd",
+     "bytes": 471906
+    },
+    {
+     "id": "c006",
+     "name": "006-manta-foil.webp",
+     "sha256": "1531090ecd965f708c6c5e97bc4bb31af54a9dec348becc370d6cd7766fc569a",
+     "bytes": 466840
+    },
+    {
+     "id": "c065",
+     "name": "065-seam-surgeon.webp",
+     "sha256": "0fe5cc5bdc1230df8fd1bc4fa824836e219a656187253806f6001066e9f2edd0",
+     "bytes": 488286
+    },
+    {
+     "id": "o12",
+     "name": "12-volumetric-stage.webp",
+     "sha256": "13ec787112f7df8723f3022b3f976a195d5a246b8dd985bb6faa4b3661786e21",
+     "bytes": 549064
+    },
+    {
+     "id": "o08",
+     "name": "08-aroma-organ.webp",
+     "sha256": "a209e43d0d7721b24de0d8a22ec18c19fa3b3f0c1cd634389a5b1ad5cec701b8",
+     "bytes": 459636
+    },
+    {
+     "id": "c038",
+     "name": "038-quiet-stair.webp",
+     "sha256": "78269e71469d97fa2ff8ab6392ef92ff4220761299f9b853adf69e2c2af052e4",
+     "bytes": 510186
+    },
+    {
+     "id": "c101",
+     "name": "101-velvet-hammer.webp",
+     "sha256": "1adb4d464fd545a5d22b1124c9625aad782a5bbb4425c7b71cdc2cadbf4c955c",
+     "bytes": 470850
+    },
+    {
+     "id": "c103",
+     "name": "103-bubble-bailiff.webp",
+     "sha256": "1fd8aa83335e3417d3c2e0a3015000afe100ce1b307f550ea466c120e3c3d008",
+     "bytes": 480278
+    },
+    {
+     "id": "c104",
+     "name": "104-key-concord.webp",
+     "sha256": "b7122a9fe5b5031270e707b77d88a1f316de75b8efb84da51f55011e912968f9",
+     "bytes": 473176
+    },
+    {
+     "id": "c105",
+     "name": "105-metric-embassy.webp",
+     "sha256": "f2e22185e594eb1ca890d8a6d0eeb82e88fc249c4a3b9ab494d3af9b525f9985",
+     "bytes": 485866
+    },
+    {
+     "id": "c106",
+     "name": "106-muon-customs.webp",
+     "sha256": "92ba7b8fdb7aee00a2b0c730e5a20315ab8a12c41d706a2a78d7ccf58614ea57",
+     "bytes": 534422
+    },
+    {
+     "id": "c107",
+     "name": "107-resonance-tailor.webp",
+     "sha256": "572b9fe7b8b951138fa26e5ac02aa4605924eb683346a7ab310ffc93a38ec073",
+     "bytes": 461436
+    },
+    {
+     "id": "c108",
+     "name": "108-suture-loom.webp",
+     "sha256": "60f5fd6c4278e3ae6e98101f60a1668319c2335982e4ccf7f05d90ac27b0b75c",
+     "bytes": 509376
+    },
+    {
+     "id": "c110",
+     "name": "110-spin-table.webp",
+     "sha256": "fb568200496fbebdf41c4cd61b23df59229f3c623532db3fe0df39fee05792de",
+     "bytes": 493582
+    }
+   ]
+  },
+  {
+   "id": "32x9-1080p",
+   "label": "32:9 \u00b7 3840 \u00d7 1080",
+   "aspect": "32:9",
+   "size": [
+    3840,
+    1080
+   ],
+   "layout": "panorama",
+   "floor_px": 11.0,
+   "min_text_px": 11.0,
+   "bundled": false,
+   "archive": {
+    "name": "p-bloom-32x9-1080p.tar",
+    "bytes": 9267200,
+    "sha256": "7f41f0b0b053645147afed1341fe5a91ec91459fccced62540a77d85311ef1ae"
+   },
+   "files": [
+    {
+     "id": "o03",
+     "name": "03-fusion-transport.webp",
+     "sha256": "8cfa23c2dee049c1420391331eabea95b92bd9d4e49184b9bc17ba1c6f52b02a",
+     "bytes": 211388
+    },
+    {
+     "id": "o10",
+     "name": "10-truth-lamp.webp",
+     "sha256": "8fe929eb6579db9b99ffb79414e501457617bcbab076b14447535721f15acd89",
+     "bytes": 220702
+    },
+    {
+     "id": "o02",
+     "name": "02-sky-racer.webp",
+     "sha256": "ece2c67d1cc0860dd8843313a7e9ff72f53936da57c5b7f616b6ca57c10525c3",
+     "bytes": 210622
+    },
+    {
+     "id": "c087",
+     "name": "087-neutrino-bell.webp",
+     "sha256": "866bf7a99b9dba2437bed3be2d51743491feb9192287160547635eafc99a7de0",
+     "bytes": 239452
+    },
+    {
+     "id": "o09",
+     "name": "09-tether-climber.webp",
+     "sha256": "51e2018a0e0fa8ce97de2eb0351a20a893d7ed111e83a99d4c314b41dd64335c",
+     "bytes": 215062
+    },
+    {
+     "id": "c001",
+     "name": "001-light-sail.webp",
+     "sha256": "92323466ccbf96fad292efab6629251a310a9826d32c8bc9ff99102d3bfa070e",
+     "bytes": 230534
+    },
+    {
+     "id": "o01",
+     "name": "01-quantum-simulator.webp",
+     "sha256": "e1f5ec185d7d28b9fcde437592643ff3a5d691c481f175676caff6f3cb8a785c",
+     "bytes": 241180
+    },
+    {
+     "id": "c025",
+     "name": "025-fibre-braid.webp",
+     "sha256": "5311271d9c6cb58c6a0c7f68e7eb5c229001959bb5091e07fb5e088778af37c3",
+     "bytes": 238728
+    },
+    {
+     "id": "o13",
+     "name": "13-proxy.webp",
+     "sha256": "79303c596963c2a44de4de8ea37612fcae1d53fe15ea03be99959be7dc4a383c",
+     "bytes": 215942
+    },
+    {
+     "id": "c100",
+     "name": "100-plant-alibi.webp",
+     "sha256": "b4a400131f743785955a444c151586ec4198fd797063b75d06d8e557195728d4",
+     "bytes": 213762
+    },
+    {
+     "id": "o11",
+     "name": "11-organ-foundry.webp",
+     "sha256": "045110888fb6a77f03705dedc69d1dd32dba287d4be87812dfc59a2f5a2b4727",
+     "bytes": 200572
+    },
+    {
+     "id": "o05",
+     "name": "05-cortical-mesh.webp",
+     "sha256": "c2fc5d17b64e3e4745abf8b68e52a586334714b5bd91a849f09ff7eddc53a39a",
+     "bytes": 217450
+    },
+    {
+     "id": "c017",
+     "name": "017-memory-kiln.webp",
+     "sha256": "a30870bcc7e1c0ebcb4e9d74b8d9bd25493555d6c72c9a9eb9d4da2036660dfa",
+     "bytes": 223740
+    },
+    {
+     "id": "c056",
+     "name": "056-dune-skimmer.webp",
+     "sha256": "f09749c6645e9b57f635919ad1f1b4e9bbfeac701fc79197ebe19e84bed8fa9c",
+     "bytes": 226018
+    },
+    {
+     "id": "c010",
+     "name": "010-sock-oracle.webp",
+     "sha256": "454a6414f817be5b893455c074f10905ebbfa380c6f88bd90b2d3c7057444c7f",
+     "bytes": 219270
+    },
+    {
+     "id": "c080",
+     "name": "080-compliment-mill.webp",
+     "sha256": "a6de04abfb48de0a6817041573a38cf43aedb73c7d6393135565e8657b2b7e4e",
+     "bytes": 210556
+    },
+    {
+     "id": "c031",
+     "name": "031-petal-eye.webp",
+     "sha256": "bb60134a028159afe614f789ca2df76c469a5831239592bccfa69b73487f00cf",
+     "bytes": 228040
+    },
+    {
+     "id": "c018",
+     "name": "018-lunar-porch.webp",
+     "sha256": "c1d1a1907ce337762125a0c9d640db0124647c339e30759916b37fe3f8a045e9",
+     "bytes": 216340
+    },
+    {
+     "id": "o04",
+     "name": "04-greener.webp",
+     "sha256": "bfe4d42aea842429678232bf3003d55116c228882aa6f5932a644e66355d5eb9",
+     "bytes": 221988
+    },
+    {
+     "id": "o07",
+     "name": "07-air-refinery.webp",
+     "sha256": "8dd85e799bc11d48e9ab1bf89bda8415a87b446aa74dfc725cf967dd21dc83e0",
+     "bytes": 219538
+    },
+    {
+     "id": "o06",
+     "name": "06-bounder.webp",
+     "sha256": "e312e183a46166e4d0522061a5ac2c3c19f51f05ab52c5e8096c222657b399ac",
+     "bytes": 198020
+    },
+    {
+     "id": "c030",
+     "name": "030-advice-filter.webp",
+     "sha256": "c97e8dea270d82b7d8bd88602288f14465a556db20a36a6a40c65d504a9abbdd",
+     "bytes": 203788
+    },
+    {
+     "id": "c070",
+     "name": "070-queue-garden.webp",
+     "sha256": "091cbc853f4c23aaceab6c611e2fc8e2a683020548156975900d6797ec1bb61c",
+     "bytes": 212890
+    },
+    {
+     "id": "c044",
+     "name": "044-coral-cradle.webp",
+     "sha256": "4899c1cc9bdcb8ab3ca2a3dab6cfdf6c13aa0a0c6b09795b8ce9896019621eb6",
+     "bytes": 226610
+    },
+    {
+     "id": "c002",
+     "name": "002-tidal-loom.webp",
+     "sha256": "c1dfd29451cec64baa47c2ce82cb43f77057d0f025b8b89f58cde515ea2ff7a4",
+     "bytes": 249024
+    },
+    {
+     "id": "o14",
+     "name": "14-presence-rig.webp",
+     "sha256": "cf941027980329b4784a4ff16fa4ecdef75f9aa375be2e6b2d77966960a560bd",
+     "bytes": 209322
+    },
+    {
+     "id": "c099",
+     "name": "099-sleep-cocoon.webp",
+     "sha256": "c50c1ba791d692d239c3f93c2779b64962b410bef4a7cc8b2b02204d0e0240fc",
+     "bytes": 210062
+    },
+    {
+     "id": "c042",
+     "name": "042-wind-kite.webp",
+     "sha256": "c33811749a05bdfee24a334c548314a8d361106e64dd078081b9e8617ad5787a",
+     "bytes": 214918
+    },
+    {
+     "id": "c060",
+     "name": "060-meeting-buoy.webp",
+     "sha256": "fdbb8ca17c81ab15b09305eb83a39afbf3c2e8bed21d1282022e87d0520a45fb",
+     "bytes": 207938
+    },
+    {
+     "id": "c006",
+     "name": "006-manta-foil.webp",
+     "sha256": "0365b57d0e9532970369a75b68aded9f337344ad56437ff54950c6c1b657e9af",
+     "bytes": 208100
+    },
+    {
+     "id": "c065",
+     "name": "065-seam-surgeon.webp",
+     "sha256": "8f76b4eae000c64b08ec791b5cbfc0680fdd65e729f4aa8b622c7307dce07e91",
+     "bytes": 219028
+    },
+    {
+     "id": "o12",
+     "name": "12-volumetric-stage.webp",
+     "sha256": "0d9f2adcdfdb950a150905f276e1820db9c54bdd413938f9b0b7908e3191ee39",
+     "bytes": 239892
+    },
+    {
+     "id": "o08",
+     "name": "08-aroma-organ.webp",
+     "sha256": "4515951e2409eb5756541fdc1ab5a390bf3c0f2fdbc828fa9a9f2a80c4dc05d4",
+     "bytes": 214342
+    },
+    {
+     "id": "c038",
+     "name": "038-quiet-stair.webp",
+     "sha256": "034eb55da3a5949f6eb164a0a9c79a0574843d04b344f39e6102e698d011b8f5",
+     "bytes": 226118
+    },
+    {
+     "id": "c101",
+     "name": "101-velvet-hammer.webp",
+     "sha256": "1aa5113249cd6cdc05d9f418c59eeee3f95bab466290c9447a57ae094321ac36",
+     "bytes": 212250
+    },
+    {
+     "id": "c103",
+     "name": "103-bubble-bailiff.webp",
+     "sha256": "3a6945fd077f151abb6ce06b6fefd8adb7060f53415ac50184c31fb30412a23a",
+     "bytes": 216434
+    },
+    {
+     "id": "c104",
+     "name": "104-key-concord.webp",
+     "sha256": "2ceceaab94dc0ab2c88699707bdc0d809fc55dd3596e532123d6c05fe7492294",
+     "bytes": 211200
+    },
+    {
+     "id": "c105",
+     "name": "105-metric-embassy.webp",
+     "sha256": "740a932a9c52dcef6880fd54c7f1ef3f3bf689e58d6c88e23bcb13eab2281ea0",
+     "bytes": 225850
+    },
+    {
+     "id": "c106",
+     "name": "106-muon-customs.webp",
+     "sha256": "ca79513586a87371b7cbcecaba1bb92fa82783ea02d9c5dfbafe11181ea176a7",
+     "bytes": 236950
+    },
+    {
+     "id": "c107",
+     "name": "107-resonance-tailor.webp",
+     "sha256": "aab5f98fdb247818e21bc6a46504f5fdb1037767a018f3dafbf533b20f363c9b",
+     "bytes": 210480
+    },
+    {
+     "id": "c108",
+     "name": "108-suture-loom.webp",
+     "sha256": "b0c3a8f0cf4ae5b60e0d1ef32c34417908feed3d3eebb2b2c3a55e0d29319109",
+     "bytes": 228966
+    },
+    {
+     "id": "c110",
+     "name": "110-spin-table.webp",
+     "sha256": "a74b23f0222f3d054ab70fc3a32c01f1ae8efd9a814ec2badc3ecaa2cb25da1d",
+     "bytes": 224136
+    }
+   ]
+  },
+  {
+   "id": "32x9-1440p",
+   "label": "32:9 \u00b7 5120 \u00d7 1440",
+   "aspect": "32:9",
+   "size": [
+    5120,
+    1440
+   ],
+   "layout": "panorama",
+   "floor_px": 11.0,
+   "min_text_px": 11.0,
+   "bundled": false,
+   "archive": {
+    "name": "p-bloom-32x9-1440p.tar",
+    "bytes": 13844480,
+    "sha256": "3bfbf924c9fdead8693177e9b0a2b46515e072ca3a86ab60dff489fd2f79b777"
+   },
+   "files": [
+    {
+     "id": "o03",
+     "name": "03-fusion-transport.webp",
+     "sha256": "49ba0341121b55f4083a43af3e4e55746d61e6aebd0c8b717e1b8e942b02c81e",
+     "bytes": 312146
+    },
+    {
+     "id": "o10",
+     "name": "10-truth-lamp.webp",
+     "sha256": "99b1c4917f4273b88df7c16fcdb086b9c637dbf90edd6153faf7871e2439df70",
+     "bytes": 310520
+    },
+    {
+     "id": "o02",
+     "name": "02-sky-racer.webp",
+     "sha256": "f96ad39fa05401267e3100b00886db75b48a072cca4b6741086f9227f148da0e",
+     "bytes": 308908
+    },
+    {
+     "id": "c087",
+     "name": "087-neutrino-bell.webp",
+     "sha256": "ce5eff0798c7b734d78127218858889818899e3f0d70b66f240e2f96d667dfc8",
+     "bytes": 364028
+    },
+    {
+     "id": "o09",
+     "name": "09-tether-climber.webp",
+     "sha256": "c2173781543f5a52b68b900d0fb8b8b1f947e8bb5f2ef2d7c1b96bd2d6850524",
+     "bytes": 311082
+    },
+    {
+     "id": "c001",
+     "name": "001-light-sail.webp",
+     "sha256": "0fccd2624682f0b522a3b9a52dc20bb38be2cb5a3f739b0df9c4a70a3936f224",
+     "bytes": 352896
+    },
+    {
+     "id": "o01",
+     "name": "01-quantum-simulator.webp",
+     "sha256": "b7478826be1d76082b88abcb7a049f44578c06a92280760edc9d9a26e5a3f448",
+     "bytes": 351154
+    },
+    {
+     "id": "c025",
+     "name": "025-fibre-braid.webp",
+     "sha256": "26ad98ea884f6d45802a93b67f0c32f0e539ff3deb5b55b987f250df5ea7c885",
+     "bytes": 370200
+    },
+    {
+     "id": "o13",
+     "name": "13-proxy.webp",
+     "sha256": "3f8db7df8ceac446ddf9d11c8273080ec694f36a5b98f0c1451e9075e2c1566a",
+     "bytes": 302434
+    },
+    {
+     "id": "c100",
+     "name": "100-plant-alibi.webp",
+     "sha256": "dc49cb05e6faf4ece0ab7d7a9032bf2b292c47bc60bcefba5b5466f9791fc1da",
+     "bytes": 325722
+    },
+    {
+     "id": "o11",
+     "name": "11-organ-foundry.webp",
+     "sha256": "ca48fda2d0ea6624dfa0263bd7087fd467bac8560bab21af56f85d2d9506692f",
+     "bytes": 296448
+    },
+    {
+     "id": "o05",
+     "name": "05-cortical-mesh.webp",
+     "sha256": "ad187377d6757030c230d63d5e02843c45b6cceba3f6028910f9d1c96cb6c678",
+     "bytes": 318148
+    },
+    {
+     "id": "c017",
+     "name": "017-memory-kiln.webp",
+     "sha256": "663b66dc274c75dcafc18364aa3d98028480b81c477de2ca70f437c735b2fcba",
+     "bytes": 340484
+    },
+    {
+     "id": "c056",
+     "name": "056-dune-skimmer.webp",
+     "sha256": "90aff4aa41b1da43b043a6d413f75c8f55f4b6ee311d187e531429a1a43ab140",
+     "bytes": 346540
+    },
+    {
+     "id": "c010",
+     "name": "010-sock-oracle.webp",
+     "sha256": "3c3c1349b55d3f2f24f50bbad078f7eca13e5c28610d94556aadc90eea47b77a",
+     "bytes": 333156
+    },
+    {
+     "id": "c080",
+     "name": "080-compliment-mill.webp",
+     "sha256": "3120ba780f2aba349dcc8c7bf35d0649d6ebdcb491818be12d2306fbde91bdad",
+     "bytes": 318564
+    },
+    {
+     "id": "c031",
+     "name": "031-petal-eye.webp",
+     "sha256": "a8727495e5fad6161231e5e4c68b8e36c64815dbf39043809ba62eacde006eca",
+     "bytes": 349238
+    },
+    {
+     "id": "c018",
+     "name": "018-lunar-porch.webp",
+     "sha256": "8f3476cdd85604914b15f2744e8c0511447b502a431fb4367024c5fdad1d52e3",
+     "bytes": 328056
+    },
+    {
+     "id": "o04",
+     "name": "04-greener.webp",
+     "sha256": "06daca24adb4c1fb7744ac57efc2dcdab885d6bf102bf0e20363bce7ed9a3d03",
+     "bytes": 325198
+    },
+    {
+     "id": "o07",
+     "name": "07-air-refinery.webp",
+     "sha256": "d183b4995d7cf7f4fd56ea207a942b24641f9a81c955963033c2fbf0e7834cb7",
+     "bytes": 311230
+    },
+    {
+     "id": "o06",
+     "name": "06-bounder.webp",
+     "sha256": "4afe8079662f194420a494badccbef1b10c7ff90fc13da9d2fd958ed85cc61f0",
+     "bytes": 293830
+    },
+    {
+     "id": "c030",
+     "name": "030-advice-filter.webp",
+     "sha256": "d7a896c1a92e698ae9ea5b4c10e8c07a78fbc8e1e0e930e63b6d03211c133ae2",
+     "bytes": 307654
+    },
+    {
+     "id": "c070",
+     "name": "070-queue-garden.webp",
+     "sha256": "58237ec96bbae6281d865538d94177e050086b3621ea0dfd8f5c213a49d03703",
+     "bytes": 322818
+    },
+    {
+     "id": "c044",
+     "name": "044-coral-cradle.webp",
+     "sha256": "9cad2c4347b327f8941462668c44bc6ff26e23769974cc9c4062eefb423cf80e",
+     "bytes": 345224
+    },
+    {
+     "id": "c002",
+     "name": "002-tidal-loom.webp",
+     "sha256": "15d808ce55b1ec06c1069a690c06865392497d9707f1b988403ae2bc81c3aca1",
+     "bytes": 371596
+    },
+    {
+     "id": "o14",
+     "name": "14-presence-rig.webp",
+     "sha256": "da699e523728b3fd43a9670ed87b762b0e2508eb6e886f0713cf409e6e678aff",
+     "bytes": 307086
+    },
+    {
+     "id": "c099",
+     "name": "099-sleep-cocoon.webp",
+     "sha256": "d89ec48da9ec9d5b477143622b4a148c72db6e859d962c3d4f749ce47f79f768",
+     "bytes": 321060
+    },
+    {
+     "id": "c042",
+     "name": "042-wind-kite.webp",
+     "sha256": "c3e67bdc44ccb47c23ec2dd142ba3218fa1c1dee5731f5dda06c5c83c749f699",
+     "bytes": 330368
+    },
+    {
+     "id": "c060",
+     "name": "060-meeting-buoy.webp",
+     "sha256": "ad4560672cb875c9364b9ec5ab0ea4ee183e0995820250f15871970bbfff37b7",
+     "bytes": 319428
+    },
+    {
+     "id": "c006",
+     "name": "006-manta-foil.webp",
+     "sha256": "a838a0281af67c745d535d2f5c03a19dcffaa1ae4f9bbce5e6122a5a4c6efe41",
+     "bytes": 315916
+    },
+    {
+     "id": "c065",
+     "name": "065-seam-surgeon.webp",
+     "sha256": "a8b4a99b688eabc468c01b885604e0db60031311b703211f5dbbfa2da9d074e9",
+     "bytes": 332218
+    },
+    {
+     "id": "o12",
+     "name": "12-volumetric-stage.webp",
+     "sha256": "9057e8db630d3289a2eef8e91c4ff7b97f1599e994ee6503e30fe38bbb91987d",
+     "bytes": 355438
+    },
+    {
+     "id": "o08",
+     "name": "08-aroma-organ.webp",
+     "sha256": "25d9b841f8573255ac3b2baa460e8a68c95bf7b8ad7f7e7fa3f01971f08d8641",
+     "bytes": 309584
+    },
+    {
+     "id": "c038",
+     "name": "038-quiet-stair.webp",
+     "sha256": "e24ac79ccd94cc2f9e057168ce42200c7d4724ca5752062d03ffcadb94dea476",
+     "bytes": 340174
+    },
+    {
+     "id": "c101",
+     "name": "101-velvet-hammer.webp",
+     "sha256": "f2767f5dad48e18f62622dbd29f368c7dfb21c7b8ea94f7c251e1fc65669a46b",
+     "bytes": 320508
+    },
+    {
+     "id": "c103",
+     "name": "103-bubble-bailiff.webp",
+     "sha256": "62c498c960c1f661e01753e0e5f592c5887520d8fcb68f01171c67d3a608ce23",
+     "bytes": 325232
+    },
+    {
+     "id": "c104",
+     "name": "104-key-concord.webp",
+     "sha256": "bca5d65ac345f9e9c4ce9cd7df7a83389a2363d26851a7c146ccaeb08b68f722",
+     "bytes": 318830
+    },
+    {
+     "id": "c105",
+     "name": "105-metric-embassy.webp",
+     "sha256": "7759ea3349c6a5cad38a080ac29d397e609578deec7eb698efa013676c193c09",
+     "bytes": 337972
+    },
+    {
+     "id": "c106",
+     "name": "106-muon-customs.webp",
+     "sha256": "bca21057e6936a2f6aec1df5cb13692f2ee4bf7953cc05ca4273d82aa9f0ca43",
+     "bytes": 355646
+    },
+    {
+     "id": "c107",
+     "name": "107-resonance-tailor.webp",
+     "sha256": "ebe0f10157b2713b12936b455212695567143842e47b386be48a1877655dcf43",
+     "bytes": 314888
+    },
+    {
+     "id": "c108",
+     "name": "108-suture-loom.webp",
+     "sha256": "7a2def387ccab75c08a561bf2c56a3695f472475ba0ee5589f225790d2ab49f8",
+     "bytes": 344968
+    },
+    {
+     "id": "c110",
+     "name": "110-spin-table.webp",
+     "sha256": "74f5a44063f6a095d52af7d9aedb30952314a17ef47cb1a42faf6b54d560a8cd",
+     "bytes": 339954
+    }
+   ]
+  },
+  {
+   "id": "32x9-2160p",
+   "label": "32:9 \u00b7 7680 \u00d7 2160",
+   "aspect": "32:9",
+   "size": [
+    7680,
+    2160
+   ],
+   "layout": "panorama",
+   "floor_px": 11.0,
+   "min_text_px": 11.0,
+   "bundled": false,
+   "archive": {
+    "name": "p-bloom-32x9-2160p.tar",
+    "bytes": 25886720,
+    "sha256": "81a30c431cc5383f9da5282222a6b948092ab0b4418b0493956cad88d9fb411e"
+   },
+   "files": [
+    {
+     "id": "o03",
+     "name": "03-fusion-transport.webp",
+     "sha256": "a8adf302047f907fea62ea633745216123a20352b79edc383eeadfc893b3be60",
+     "bytes": 592518
+    },
+    {
+     "id": "o10",
+     "name": "10-truth-lamp.webp",
+     "sha256": "ffc68f1c5473087b37537af1123957bbd1b30501c7a9b0fe1cb42b0b5fd8e3e5",
+     "bytes": 578630
+    },
+    {
+     "id": "o02",
+     "name": "02-sky-racer.webp",
+     "sha256": "90a47424461c2270711f37230661ba652708fa3db5430c1a7313fa8a974d44c5",
+     "bytes": 578150
+    },
+    {
+     "id": "c087",
+     "name": "087-neutrino-bell.webp",
+     "sha256": "d8934be0586c594e460b9267967c8f7f625e6f363cfdc85059aeee5d609dfab6",
+     "bytes": 673640
+    },
+    {
+     "id": "o09",
+     "name": "09-tether-climber.webp",
+     "sha256": "8a7eefe0c64e62889db27a6d29978c5acd60982e29e34b1a26bef6159443183a",
+     "bytes": 572740
+    },
+    {
+     "id": "c001",
+     "name": "001-light-sail.webp",
+     "sha256": "ae6675ea95ad75c344fe2c99f01bfe5532ffe8a5638d4679f61e6fc9de5833c4",
+     "bytes": 665872
+    },
+    {
+     "id": "o01",
+     "name": "01-quantum-simulator.webp",
+     "sha256": "db08c0d19b130a148e210a41f0916978d1ed4226a336e22ac1289e6c044b05cb",
+     "bytes": 649724
+    },
+    {
+     "id": "c025",
+     "name": "025-fibre-braid.webp",
+     "sha256": "167feb622f4ae21a4e0e552acb9cd79bbda25ea6a3020993954a721c290f4729",
+     "bytes": 707986
+    },
+    {
+     "id": "o13",
+     "name": "13-proxy.webp",
+     "sha256": "a545995e4365b2e1d5d9092eda329e814b61c86542b93372c0560ea6642890a6",
+     "bytes": 562524
+    },
+    {
+     "id": "c100",
+     "name": "100-plant-alibi.webp",
+     "sha256": "80c7a9182c240559d782ebb884ac7644493e3a3332321d701afc2b0ee4a489a0",
+     "bytes": 612974
+    },
+    {
+     "id": "o11",
+     "name": "11-organ-foundry.webp",
+     "sha256": "db71eefd7b409402af740b9859fc47a48e1ddd67efd35595109c65eeab40689b",
+     "bytes": 558172
+    },
+    {
+     "id": "o05",
+     "name": "05-cortical-mesh.webp",
+     "sha256": "5c3c5d20f0ce04c8bf46264754d17d83d1fd5502e346f0cd2b5eb1695e02f412",
+     "bytes": 590590
+    },
+    {
+     "id": "c017",
+     "name": "017-memory-kiln.webp",
+     "sha256": "6eab2efc3ffe89ce5be96573bf9aea0ea6beb99f548944569bded0539dd4c559",
+     "bytes": 634138
+    },
+    {
+     "id": "c056",
+     "name": "056-dune-skimmer.webp",
+     "sha256": "82630ba8e4ea87df723db47f9f026f420147386fa43b522207f486d9347b8b5b",
+     "bytes": 652082
+    },
+    {
+     "id": "c010",
+     "name": "010-sock-oracle.webp",
+     "sha256": "cd564e4ba197f0e72ad18ba3846c8d4c9b9b24b4ecdd0fc5f15f3c2508bd03ac",
+     "bytes": 618350
+    },
+    {
+     "id": "c080",
+     "name": "080-compliment-mill.webp",
+     "sha256": "351d19ae2e976271bfd53a3c715b97edb9eedb215fc2a01239b876c31452a52c",
+     "bytes": 597086
+    },
+    {
+     "id": "c031",
+     "name": "031-petal-eye.webp",
+     "sha256": "55683c3ef71b0636e58967233f69a5bb258037893eda6d86d2300394287b3af5",
+     "bytes": 654088
+    },
+    {
+     "id": "c018",
+     "name": "018-lunar-porch.webp",
+     "sha256": "542a946daf8fec3faca035296817ff179b7ca310196055f757632fa155bc3977",
+     "bytes": 613832
+    },
+    {
+     "id": "o04",
+     "name": "04-greener.webp",
+     "sha256": "89519297841d3f707ac193efe0a4b8d90808a4ae97de2d779a74e8b504d04260",
+     "bytes": 607768
+    },
+    {
+     "id": "o07",
+     "name": "07-air-refinery.webp",
+     "sha256": "12cf396740442bb8232f181d76310035e91bc904bacee4eabcc91c44aad42af1",
+     "bytes": 578710
+    },
+    {
+     "id": "o06",
+     "name": "06-bounder.webp",
+     "sha256": "ed8e4f2a3c8802aeafe46fd3f10a17519cd9cc2698e6960fd125a1c90ce76d88",
+     "bytes": 550620
+    },
+    {
+     "id": "c030",
+     "name": "030-advice-filter.webp",
+     "sha256": "c544b8ea1d4e1ac90ec53550ec3477aba59acf8866421d5df519d006b08857b1",
+     "bytes": 578054
+    },
+    {
+     "id": "c070",
+     "name": "070-queue-garden.webp",
+     "sha256": "4b9df20eb0683b1b26f82207ac3e32bf88de48db5fea689d947f30d98e19bb18",
+     "bytes": 604814
+    },
+    {
+     "id": "c044",
+     "name": "044-coral-cradle.webp",
+     "sha256": "dad9eca80182b120072168b47f3e49e38d7fc0e14d5f4ae144e77fe438aa2f2d",
+     "bytes": 645258
+    },
+    {
+     "id": "c002",
+     "name": "002-tidal-loom.webp",
+     "sha256": "0efe56a6206847fed9f8275223d7e5064ba3cc6abd3de2023f7b367f784cad51",
+     "bytes": 691194
+    },
+    {
+     "id": "o14",
+     "name": "14-presence-rig.webp",
+     "sha256": "eb225f963d73dbdd8ea1861c676927d086116e85165ce2d1456091e154122a35",
+     "bytes": 568130
+    },
+    {
+     "id": "c099",
+     "name": "099-sleep-cocoon.webp",
+     "sha256": "5270ea18b985e73672f6a163440b921542962099bb83266ba82e6ddf76ace0df",
+     "bytes": 600692
+    },
+    {
+     "id": "c042",
+     "name": "042-wind-kite.webp",
+     "sha256": "ae590fe84a8c3da1803cc2646cd627a72bedb25a0b379dde7f212d496f5bed62",
+     "bytes": 630022
+    },
+    {
+     "id": "c060",
+     "name": "060-meeting-buoy.webp",
+     "sha256": "187bb572baac681ffdc67fd997df53671fd5ca4ccf48eb34a757ddfb1db59dae",
+     "bytes": 599300
+    },
+    {
+     "id": "c006",
+     "name": "006-manta-foil.webp",
+     "sha256": "d849511319625d837d99682cada06103966157dc5b8a792e898bfacd8b75609f",
+     "bytes": 592990
+    },
+    {
+     "id": "c065",
+     "name": "065-seam-surgeon.webp",
+     "sha256": "15a24780ace3719537062926e957635cdf054ede0c89dc8fe1129262966ca9e6",
+     "bytes": 620514
+    },
+    {
+     "id": "o12",
+     "name": "12-volumetric-stage.webp",
+     "sha256": "d1253f610a855fdd5cbce41fc5e41284345d52e4e4b6a522bd589b864c17a15f",
+     "bytes": 661062
+    },
+    {
+     "id": "o08",
+     "name": "08-aroma-organ.webp",
+     "sha256": "03e311a63c566a8b393f1d78002aa5b844dff82753d0b0524cb7c94a43735609",
+     "bytes": 575662
+    },
+    {
+     "id": "c038",
+     "name": "038-quiet-stair.webp",
+     "sha256": "cb4e4288f999539f814e0cff4de93ef88dbfde6eac0e417a886b2ecf6ab766e2",
+     "bytes": 637942
+    },
+    {
+     "id": "c101",
+     "name": "101-velvet-hammer.webp",
+     "sha256": "fe17c95e76bd67ef7a10937d1f85bf55ddbe3ceb633a7ccd6e12e3faa414848e",
+     "bytes": 601982
+    },
+    {
+     "id": "c103",
+     "name": "103-bubble-bailiff.webp",
+     "sha256": "ab84432be8079ce0a750d48e974df418ff2a810d7c8e17a8154fb380d8cfa836",
+     "bytes": 612216
+    },
+    {
+     "id": "c104",
+     "name": "104-key-concord.webp",
+     "sha256": "25a7ecb56634935df52f161efbe035f39088223f1f95f56ad0a603431a96d81d",
+     "bytes": 598542
+    },
+    {
+     "id": "c105",
+     "name": "105-metric-embassy.webp",
+     "sha256": "0892644ed26b44230b629b956ca5aa73bc0e926dd1d6e5d226dd048676391bd9",
+     "bytes": 629344
+    },
+    {
+     "id": "c106",
+     "name": "106-muon-customs.webp",
+     "sha256": "7490b5ba3fe46ada0937ec0b9687e3d51b4d877f6f48ef38ed19b25e18708f5c",
+     "bytes": 667562
+    },
+    {
+     "id": "c107",
+     "name": "107-resonance-tailor.webp",
+     "sha256": "4ca74a371fc5737d6cddbc7ebe8ea2e4a2b32f0ac20dc1f364c257ef646541cf",
+     "bytes": 595594
+    },
+    {
+     "id": "c108",
+     "name": "108-suture-loom.webp",
+     "sha256": "da3a6345e8ac7f73358ce8d5209eecd64276fc8fca12d866b5e5b423445a3a58",
+     "bytes": 646728
+    },
+    {
+     "id": "c110",
+     "name": "110-spin-table.webp",
+     "sha256": "7392557972561fdda19ede54e03fe5bc1352ba766f2f6931afae6b1ae03025fd",
+     "bytes": 638566
+    }
+   ]
+  }
+ ]
+}
