@@ -1,0 +1,357 @@
+{
+ "note": "Accepted native 5K masters (lossless). tools/render_wallpaper_sets.py must reproduce these bytes exactly. History: composition verified byte-identical to the pre-reflow masters on 2026-09-27; hashes re-recorded the same day for the owner-approved palette (docs/collection/palettes.json) and permanent NCR numbers 126-139. 2026-09-27: collection swap (catalog retired_2026_09_27). 16x9-2880p re-recorded for the eight incoming p(bloom) sheets, Proxy (new story), Presence Rig and Spin Table (new grounds). 64x27-2160p re-recorded for the same 11 sheets. 2026-09-28: 16x9-2880p re-recorded for all 42 after the line-geometry cleanup (tools/path_cleanup.py: joined strokes, merged duplicates, snapped near-miss ends, dropped strays); compositions, text and grounds unchanged. 64x27-2160p not yet re-rendered. 2026-09-28: 16x9-2880p re-recorded for all 42 after the exact hidden-line exporter (tools/hardware3d/hidden_line.py: self-occlusion, welded seams, outward normals, exact cut points); every view re-exported, compositions, text and grounds unchanged. 64x27-2160p not yet re-rendered.",
+ "profiles": {
+  "16x9-2880p": {
+   "size": [
+    5120,
+    2880
+   ],
+   "files": {
+    "o03": {
+     "name": "03-fusion-transport.webp",
+     "sha256": "45d23642a9719026c15b4cfaa729c4770c9fa5acb686eb58182942044fae30da"
+    },
+    "b04": {
+     "name": "b04-first-light.webp",
+     "sha256": "044224709af4db6066398e551d50c757e1c064b9e18dca64876b1a82d7deaa4c"
+    },
+    "o02": {
+     "name": "02-sky-racer.webp",
+     "sha256": "7d80c3d9da5079aeeca810a18fa7d4f5eb17e0d55980f26b20d8d69d5ca67915"
+    },
+    "c087": {
+     "name": "087-neutrino-bell.webp",
+     "sha256": "918c9434de5aad372dfe28d20efa7c981fabcbf75e882bd40078fbf8fa0260f2"
+    },
+    "o09": {
+     "name": "09-tether-climber.webp",
+     "sha256": "6f54785967206651fa1aade7f3dfac7d78b82be956b005482f7cef998831618f"
+    },
+    "c001": {
+     "name": "001-light-sail.webp",
+     "sha256": "04df5b366dbd8089362534617e257387f2d688ade9b6cd509c648417e2c073eb"
+    },
+    "o01": {
+     "name": "01-quantum-simulator.webp",
+     "sha256": "62c563f902c0f62c5b7d1ae0e2cdc4466fc4086736872ad5f2c9cd39902a8bdc"
+    },
+    "c025": {
+     "name": "025-fibre-braid.webp",
+     "sha256": "b9dad931f31145c61e742b8bf4b8f904cc7842c01d0638f62045a4eca88f9b6b"
+    },
+    "o13": {
+     "name": "13-proxy.webp",
+     "sha256": "e4722f4435126f2ef932ab0f16d6a2961465b6b8348be942ae32b49675e6286b"
+    },
+    "b02": {
+     "name": "b02-reef-nursery.webp",
+     "sha256": "38ce7c9049bf0c508a3fbb0d3283d1b10dc3db7bddc1c871f75d79bbf1376d39"
+    },
+    "o11": {
+     "name": "11-organ-foundry.webp",
+     "sha256": "88db438b0a148bedf3abcab7bb9ba03faca4eec55ba505a08be854217c7fcf6c"
+    },
+    "o05": {
+     "name": "05-cortical-mesh.webp",
+     "sha256": "a660b00a6b5f405c3146a429c76777cb8e4538a05e5cff8160581b3bf23e3db1"
+    },
+    "c017": {
+     "name": "017-memory-kiln.webp",
+     "sha256": "9f5e907b81dda3c07398e7a86c85272c5ae30761522825aab921e108d600ccae"
+    },
+    "c056": {
+     "name": "056-dune-skimmer.webp",
+     "sha256": "8135c931f0db563e992be2ef867e9a1fd471b3ba85e63e79eaac8542cff70991"
+    },
+    "b13": {
+     "name": "b13-green-forge.webp",
+     "sha256": "e27ae3f09ad5beabc1bc4a26c84272003ffd792477c11c9214e53a293da21dec"
+    },
+    "b11": {
+     "name": "b11-clear-sight.webp",
+     "sha256": "abdeb5e5c7e00b78c7795f609245fe685bef4a15b1b51e19d60ab912af63d0e1"
+    },
+    "c031": {
+     "name": "031-petal-eye.webp",
+     "sha256": "19e0ab9e1eabe70887ea6cf777e989b0241e9247260f2839b129b00957cde32a"
+    },
+    "c018": {
+     "name": "018-lunar-porch.webp",
+     "sha256": "d8792cbaa3584d743142b78e1ade69a608aeb720661445c07c20333b18cd321f"
+    },
+    "b12": {
+     "name": "b12-wind-freighter.webp",
+     "sha256": "f90a04d40c8597c3856e1fe9034ee958f055a8c2fed19a04f798b4fdebf5a1c4"
+    },
+    "o07": {
+     "name": "07-air-refinery.webp",
+     "sha256": "d4e99ff8c54e8b903df803f23f77e2a63e80f6689faae4b453b49fe5b6d1a025"
+    },
+    "o06": {
+     "name": "06-bounder.webp",
+     "sha256": "5bea5ab8337d5f1ba9bbc78af1ff9876eded4f166da8b911b6f069ad8094dfeb"
+    },
+    "b03": {
+     "name": "b03-sun-still.webp",
+     "sha256": "017176c2d87ce713b26a44517e3de9c8fd2ffad31e0cb9c9d827ee033d70c52a"
+    },
+    "b18": {
+     "name": "b18-stellarator-hearth.webp",
+     "sha256": "c0725b4350dc15b4b23cf4bedadb583d6d3949848fad42e1f54c60c7988106bf"
+    },
+    "c044": {
+     "name": "044-coral-cradle.webp",
+     "sha256": "0fe9e0bafec1699fd59624f8c0392f71b60f4fe3959ad2a958e9e047a98f2a2c"
+    },
+    "c002": {
+     "name": "002-tidal-loom.webp",
+     "sha256": "0d8733768d6c3cb6525d657092d37dd6727360eb75a70af0988b8739f83a25c3"
+    },
+    "o14": {
+     "name": "14-presence-rig.webp",
+     "sha256": "95be617910513e2423cc2e978abe48c9c6b8b1dfca0581deff68e4ddd265d168"
+    },
+    "c099": {
+     "name": "099-sleep-cocoon.webp",
+     "sha256": "7890b62d5eba42d16992cb25cb4682d099a7124234dcf8dc7fea02ffda5537d5"
+    },
+    "c042": {
+     "name": "042-wind-kite.webp",
+     "sha256": "8845ed788003a842bad882dbc09d2b4a125edd467e0505ce2c3a21b75bbdf781"
+    },
+    "b21": {
+     "name": "b21-crater-ear.webp",
+     "sha256": "37c6dce8221edd1e3a6849c8595e0b8c87770eb933173f04a16fd2eb063c1ea2"
+    },
+    "c006": {
+     "name": "006-manta-foil.webp",
+     "sha256": "d14f2ee1957bcdcd4c405b051dc0f6980b373908b0d95279f57061892c904038"
+    },
+    "c065": {
+     "name": "065-seam-surgeon.webp",
+     "sha256": "35e7b7031655d76af53dbced6f37348a15453f19e6f30de04afc45abddec508e"
+    },
+    "o12": {
+     "name": "12-volumetric-stage.webp",
+     "sha256": "f6fb1e0a5b79d2c961e36a86faea3bc3d6acda90ca148e804b5a35306f029eb1"
+    },
+    "o08": {
+     "name": "08-aroma-organ.webp",
+     "sha256": "6e294c987be83caa8ae00c655664c583d397c8222fa132e3867f4aa213b94c1a"
+    },
+    "c038": {
+     "name": "038-quiet-stair.webp",
+     "sha256": "ec345893bde12832fba0ae4059746b28015258e93ddb08f7f00e073024f0a37c"
+    },
+    "c101": {
+     "name": "101-velvet-hammer.webp",
+     "sha256": "e6fa9326b221289a4ae7cf109e2a13c8fa81fa4061ca9a9ed8d4323efb6e6690"
+    },
+    "c103": {
+     "name": "103-bubble-bailiff.webp",
+     "sha256": "c28c7e7750066d68c7468d28dd4dff4865378162a6834f251196b85d9cf5b315"
+    },
+    "c104": {
+     "name": "104-key-concord.webp",
+     "sha256": "550c6013ad021680c76790f31419c23870d384113424853e0de390d5e2281e85"
+    },
+    "c105": {
+     "name": "105-metric-embassy.webp",
+     "sha256": "38877f70f96a8ec022971a5bb6348b45420ebde132bd2a8cb3a9a8c6402c83f0"
+    },
+    "c106": {
+     "name": "106-muon-customs.webp",
+     "sha256": "eab71887f0e0c62df16376751a5fcf645040926fd330bf37e0e2fe4e7ef937b2"
+    },
+    "c107": {
+     "name": "107-resonance-tailor.webp",
+     "sha256": "3f04e4db59cb2426e543b6218b17945cca30556e55f1538baa746f8ba13685d1"
+    },
+    "c108": {
+     "name": "108-suture-loom.webp",
+     "sha256": "7c763901703c57394d4362efe4e5bec1fcf9eaeb83145b924bb13a4159e7dbb7"
+    },
+    "c110": {
+     "name": "110-spin-table.webp",
+     "sha256": "6268e731db099dd91cf475be67896d39d7000db685953d53514de9276119f0b0"
+    }
+   }
+  },
+  "64x27-2160p": {
+   "size": [
+    5120,
+    2160
+   ],
+   "files": {
+    "o03": {
+     "name": "03-fusion-transport.webp",
+     "sha256": "95a722ff04bd000ae14cb611786cf8d7e01601486b5cd36d9acf22be06389bd6"
+    },
+    "b04": {
+     "name": "b04-first-light.webp",
+     "sha256": "06448a03cb8f2aaa2514d7da6790b4a78b6252de4240162ea5b41d2c4459e7dc"
+    },
+    "o02": {
+     "name": "02-sky-racer.webp",
+     "sha256": "03a7fde0424cd76280b2c39364a613b5ea520b9f9540dc3d701e9d1168d091e4"
+    },
+    "c087": {
+     "name": "087-neutrino-bell.webp",
+     "sha256": "be6558c5189055bd869688e5c9909ecdccf1e6d481e598e3740ca61a52f9b8dc"
+    },
+    "o09": {
+     "name": "09-tether-climber.webp",
+     "sha256": "0c23f8f27108b63f95d3c6e09569c9b1056119c1052178b846dcb7d7a5ea6b97"
+    },
+    "c001": {
+     "name": "001-light-sail.webp",
+     "sha256": "7a8af885f9aceb7176922a10aeb11b20154b9855040c0d1f1dc16a7f29ba9ac6"
+    },
+    "o01": {
+     "name": "01-quantum-simulator.webp",
+     "sha256": "7e8d235c78f4b1ca5976a7fb31cc212a59491b4d782ac15610f108aecbb70371"
+    },
+    "c025": {
+     "name": "025-fibre-braid.webp",
+     "sha256": "f3289afab18d2dae577470e2f4ab25da155a0a25744edc3c3cf6266c1a1432e8"
+    },
+    "o13": {
+     "name": "13-proxy.webp",
+     "sha256": "2f5cb2c30fc582d9ef640846b81c40357e306f5b214518a0ec555d20a0f81d49"
+    },
+    "b02": {
+     "name": "b02-reef-nursery.webp",
+     "sha256": "02392b75e347a71b52e5a5516c62fb303c988c6e25edf4ed60d5e0e3bd43bfd1"
+    },
+    "o11": {
+     "name": "11-organ-foundry.webp",
+     "sha256": "f4584a8df4b92398554fe080dd447e536859c50aeb24fe07eb134bfe2b61fa2b"
+    },
+    "o05": {
+     "name": "05-cortical-mesh.webp",
+     "sha256": "c92f2e34c22032d1885d790bed064817a2fb5f68c4968034cd283ffc1c268189"
+    },
+    "c017": {
+     "name": "017-memory-kiln.webp",
+     "sha256": "869c36cbd26ed0ad0cae77a96f7f68be93a45d34b3df3b5b58f7d7a25be84413"
+    },
+    "c056": {
+     "name": "056-dune-skimmer.webp",
+     "sha256": "2d9d865b4ca2cf7d1fdaff52ee5e279e63b22833445d2f7a15f5393b3d3e33f1"
+    },
+    "b13": {
+     "name": "b13-green-forge.webp",
+     "sha256": "540ad11fb5b7d3ce8d46142a7c2589251bc4fb33c4367abf2fff40729cc90af3"
+    },
+    "b11": {
+     "name": "b11-clear-sight.webp",
+     "sha256": "398e8ab49a675a21a2fd69195b13a94653413973f839ee495978381d39f4b012"
+    },
+    "c031": {
+     "name": "031-petal-eye.webp",
+     "sha256": "96e8d4536ebf4d46c3ae9b2a3e2a4afe491c3a00684cfd49a5c7659713f9b320"
+    },
+    "c018": {
+     "name": "018-lunar-porch.webp",
+     "sha256": "b95be0a3317ab9f73dd8e1bf34545b5c6c22bd07101ba1055a83431ad34fd498"
+    },
+    "b12": {
+     "name": "b12-wind-freighter.webp",
+     "sha256": "9cb4e3065cb0841d2484d2e7b53c28adcb2d9620d52f9196d543bdfd819a3bce"
+    },
+    "o07": {
+     "name": "07-air-refinery.webp",
+     "sha256": "4be638e0fb884a857c40ba95c9459db00177b0cba5c2fe56299cc25d037210bb"
+    },
+    "o06": {
+     "name": "06-bounder.webp",
+     "sha256": "05473de385da553f5233672f80a1220fd8306895d624ea78af8d1fa1a57b1690"
+    },
+    "b03": {
+     "name": "b03-sun-still.webp",
+     "sha256": "0b6d29771320d414781e88b5a8d188d4d45400afc2726392ca4d0e04ba5c537e"
+    },
+    "b18": {
+     "name": "b18-stellarator-hearth.webp",
+     "sha256": "356aa3498e9fcc5c2485e9c26c9ca68060e89ee630570e122fb761180b54eaa2"
+    },
+    "c044": {
+     "name": "044-coral-cradle.webp",
+     "sha256": "619f1419b3691e997a16d9a8206e84564166b9b9d354838af350e29de4c62031"
+    },
+    "c002": {
+     "name": "002-tidal-loom.webp",
+     "sha256": "e106d772767e06cbd815efee3f43fab2e21a8dd42995a06f0fbc91334be5c113"
+    },
+    "o14": {
+     "name": "14-presence-rig.webp",
+     "sha256": "57767d8f7906070d5bdc4bee4071b1e5bc4bfd93522014f0798009f8bd73c720"
+    },
+    "c099": {
+     "name": "099-sleep-cocoon.webp",
+     "sha256": "768ebed75d9e178be7be9326ed68b6bbe2a889ab924bbc1307b5bfbb110ab962"
+    },
+    "c042": {
+     "name": "042-wind-kite.webp",
+     "sha256": "886618e6dc1f2a6713a07dd65b4efd1563525d498fc134955cdd8d8e3b06289c"
+    },
+    "b21": {
+     "name": "b21-crater-ear.webp",
+     "sha256": "9cce0f5d4cb0743d171b2ecfd4d9b1517f76ded8214e17c02ec513c5dd49884a"
+    },
+    "c006": {
+     "name": "006-manta-foil.webp",
+     "sha256": "a28332867503574b34c9c16024bef7b98a681d28aef8d9941561cfd5dc858026"
+    },
+    "c065": {
+     "name": "065-seam-surgeon.webp",
+     "sha256": "60b5be31bb90dbcf328fcdba9908e9b468cd278b9ce2b5b5c10a342f39d2eb8c"
+    },
+    "o12": {
+     "name": "12-volumetric-stage.webp",
+     "sha256": "e725851f08429325a959be8899e05802163c107c48f0d80c878dfff006af6751"
+    },
+    "o08": {
+     "name": "08-aroma-organ.webp",
+     "sha256": "09a13139fb0a329aaf2662361ff6b0356ead2b41e399fb1e9c6cb342c116265f"
+    },
+    "c038": {
+     "name": "038-quiet-stair.webp",
+     "sha256": "0822b6f29ad08e7fbf033e560f9e3c66684cb56abaec4f286d91224cabcb29d7"
+    },
+    "c101": {
+     "name": "101-velvet-hammer.webp",
+     "sha256": "9842078fd13de4f51d3c25d55b023031d23ead659fcbd28c5dc0071f0a290e51"
+    },
+    "c103": {
+     "name": "103-bubble-bailiff.webp",
+     "sha256": "df52b4e9ff94c9e9c0e6343c66aad39aeb0901f687c3d20669cf4f58e95b6172"
+    },
+    "c104": {
+     "name": "104-key-concord.webp",
+     "sha256": "ff4f44cc0d9758821f98458bf465af4fa51fcc436acf78ba8f33475e8162de90"
+    },
+    "c105": {
+     "name": "105-metric-embassy.webp",
+     "sha256": "8eae4c9ffe0f352f456f4af3ed2f6a8191fdc9465cd3ed26a907cceee5d0c864"
+    },
+    "c106": {
+     "name": "106-muon-customs.webp",
+     "sha256": "756385e03cd654402dc4bb2524746c6a62943b0524a11ce60f61dd5197d56667"
+    },
+    "c107": {
+     "name": "107-resonance-tailor.webp",
+     "sha256": "86ee2a3db4f95de15b42a77bbca89e5c0a542819a22f5bf67fa0c7bebd851574"
+    },
+    "c108": {
+     "name": "108-suture-loom.webp",
+     "sha256": "7103fb9cbadeb81759ca5046813197b360a77c962bec4826ef5f09219eb7be40"
+    },
+    "c110": {
+     "name": "110-spin-table.webp",
+     "sha256": "dfb568c425201f25b7572aeda0954d19e1333ee5bf81c1d4319059cd1b39440a"
+    }
+   }
+  }
+ }
+}

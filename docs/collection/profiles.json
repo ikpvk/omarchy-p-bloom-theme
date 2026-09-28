@@ -1,0 +1,310 @@
+{
+ "version": 2,
+ "count": 42,
+ "default": "16x9-2880p",
+ "release": {
+  "note": "Archives are GitHub Release assets of the tag named in tools/wallpaper_profiles.py (RELEASE_TAG); the URL pattern is https://github.com/ncr/omarchy-p-bloom-theme/releases/download/<tag>/<archive>",
+  "pending": {
+   "note": "2026-09-27 collection swap: the release archives of the previous tag hold the previous 42 sheets, so the downloadable sets are withdrawn from this manifest until the matrix is re-rendered and packaged (tools/render_wallpaper_sets.py, tools/package_wallpaper_profiles.py). The companion uses the bundled 16:9 set meanwhile.",
+   "profiles": [
+    "16x9-1080p",
+    "16x9-1440p",
+    "16x9-2160p",
+    "16x10-1200p",
+    "16x10-1600p",
+    "16x10-2400p",
+    "3x2-1504p",
+    "3x2-1920p",
+    "4x3-1200p",
+    "4x3-1536p",
+    "64x27-1080p",
+    "43x18-1440p",
+    "12x5-1600p",
+    "64x27-2160p",
+    "32x9-1080p",
+    "32x9-1440p",
+    "32x9-2160p"
+   ]
+  }
+ },
+ "readability": {
+  "rule": "floor_px = max(11, 14 * height / 2880)",
+  "note": "Smallest type on the native file after every transform. Lower resolutions are composed more compactly and drop secondary blocks; type is never shrunk."
+ },
+ "encoding": {
+  "format": "webp",
+  "lossless": false,
+  "quality": 90,
+  "method": 6,
+  "note": "Lossless intermediates are audited; shipped files are re-encoded."
+ },
+ "profiles": [
+  {
+   "id": "16x9-2880p",
+   "label": "16:9 · 5120 × 2880",
+   "aspect": "16:9",
+   "size": [
+    5120,
+    2880
+   ],
+   "layout": "native-master",
+   "floor_px": 14.0,
+   "min_text_px": 14.0,
+   "bundled": true,
+   "files": [
+    {
+     "id": "o03",
+     "name": "03-fusion-transport.webp",
+     "sha256": "f4a314591f55055f883133a6edf83f568826c58f88398e581b0fb63481cac434",
+     "bytes": 569572
+    },
+    {
+     "id": "b04",
+     "name": "b04-first-light.webp",
+     "sha256": "7252e8f1f1f235349f616e198e6a96eda7024275979c50dbbe9498c0df0b3901",
+     "bytes": 636254
+    },
+    {
+     "id": "o02",
+     "name": "02-sky-racer.webp",
+     "sha256": "578205d3b18eec13c9ce4515a5763893e975fe9c0609296b353d02c513e834a4",
+     "bytes": 577860
+    },
+    {
+     "id": "c087",
+     "name": "087-neutrino-bell.webp",
+     "sha256": "afdddcbcfd1d6bb347bd99dfbb8991c4730f02650e5d87430072997ef5c74585",
+     "bytes": 643868
+    },
+    {
+     "id": "o09",
+     "name": "09-tether-climber.webp",
+     "sha256": "bdd3ef0198fe463c43eaff1990789c5fd6339cf6590c46d845d75ca90e686c1c",
+     "bytes": 545162
+    },
+    {
+     "id": "c001",
+     "name": "001-light-sail.webp",
+     "sha256": "d1649aa96bf3869e88cdf24fa9f4244224a3371d355e09e4fc521c3e0a9a48be",
+     "bytes": 634244
+    },
+    {
+     "id": "o01",
+     "name": "01-quantum-simulator.webp",
+     "sha256": "e4bb4ddbc239a65fe8b183fb5691dcc3413d17859dd9f5b80545ee7a248a0829",
+     "bytes": 585672
+    },
+    {
+     "id": "c025",
+     "name": "025-fibre-braid.webp",
+     "sha256": "f145700520437d2111c4e6af0454c2982efaf6c46bdfe0a527e9a2758334eedd",
+     "bytes": 661986
+    },
+    {
+     "id": "o13",
+     "name": "13-proxy.webp",
+     "sha256": "4543b6b0fd58e172e97c25411205f65a0b3d96e83a555539fa954daaa11930ba",
+     "bytes": 542038
+    },
+    {
+     "id": "b02",
+     "name": "b02-reef-nursery.webp",
+     "sha256": "128ca9de0e00c5e06bf81023f7b0cca22217739ede5d3930e067369402e738c4",
+     "bytes": 793892
+    },
+    {
+     "id": "o11",
+     "name": "11-organ-foundry.webp",
+     "sha256": "4556ec9a8e361d341a5d5aaeebc38c70f203a19b76231d279770e88869793cdc",
+     "bytes": 480912
+    },
+    {
+     "id": "o05",
+     "name": "05-cortical-mesh.webp",
+     "sha256": "baf002613a245cc5581cec3205ad9f35a84cbfdac0d26fedf06db1a77e5df6d1",
+     "bytes": 585528
+    },
+    {
+     "id": "c017",
+     "name": "017-memory-kiln.webp",
+     "sha256": "b92d1bf8a0997087a61770092c9583b09109a081ade16726266c6ce901a6d4c5",
+     "bytes": 598720
+    },
+    {
+     "id": "c056",
+     "name": "056-dune-skimmer.webp",
+     "sha256": "c9f59bc607c81c386fe8b839eaa53cb258dcdf593ebfcf808a0b0d409b97dc5e",
+     "bytes": 658366
+    },
+    {
+     "id": "b13",
+     "name": "b13-green-forge.webp",
+     "sha256": "87687772247c0e31726bef6030e6da4c1a8571495760d07aee015f34b13a25fc",
+     "bytes": 699024
+    },
+    {
+     "id": "b11",
+     "name": "b11-clear-sight.webp",
+     "sha256": "d49a365a7068fd5f3e380220039d2c7da19862698672156a4498808afc0be5d9",
+     "bytes": 720160
+    },
+    {
+     "id": "c031",
+     "name": "031-petal-eye.webp",
+     "sha256": "172f9b15647d6aadb98ce095f9977fecf5c3956979178f834e6497ddafac529c",
+     "bytes": 613428
+    },
+    {
+     "id": "c018",
+     "name": "018-lunar-porch.webp",
+     "sha256": "c8cfe59212c33a822fe36e39af7ba19c616f04349829456ca996d14174bf056a",
+     "bytes": 581492
+    },
+    {
+     "id": "b12",
+     "name": "b12-wind-freighter.webp",
+     "sha256": "c1dadb58ea24fbb6d32eda479108aaa0b899a07ec32510010c73c755614d3d63",
+     "bytes": 563860
+    },
+    {
+     "id": "o07",
+     "name": "07-air-refinery.webp",
+     "sha256": "955e4ca8f73331bfd681fa261312565d7d2a773a3eb2d28cae9df8dbda591515",
+     "bytes": 548166
+    },
+    {
+     "id": "o06",
+     "name": "06-bounder.webp",
+     "sha256": "65282a8c12520587464f45d017cef8cd8957271af06c55545e3eedfc52b1888a",
+     "bytes": 504504
+    },
+    {
+     "id": "b03",
+     "name": "b03-sun-still.webp",
+     "sha256": "8f5c963bec3423c9d9729aeada56cf418247ee5ebc9344679d3ecfae69c46563",
+     "bytes": 739350
+    },
+    {
+     "id": "b18",
+     "name": "b18-stellarator-hearth.webp",
+     "sha256": "f9003f055ea489e1d4bdd8e8a1c0ecfc0cd315a9e27a7c41688ef14e017b35d1",
+     "bytes": 708364
+    },
+    {
+     "id": "c044",
+     "name": "044-coral-cradle.webp",
+     "sha256": "b1f5d526da16df1792004308dba61580e1a3aee485c8e1380371459509de75c7",
+     "bytes": 596246
+    },
+    {
+     "id": "c002",
+     "name": "002-tidal-loom.webp",
+     "sha256": "f8efa3540c60072db2eff9145c72aedff99ebdfa57a096ef7a7f55c777ebbd2e",
+     "bytes": 618066
+    },
+    {
+     "id": "o14",
+     "name": "14-presence-rig.webp",
+     "sha256": "c320fac3eeb2b76ecf32db54b2ac9f4939998e283b5c17bc208024a8bca694c4",
+     "bytes": 584408
+    },
+    {
+     "id": "c099",
+     "name": "099-sleep-cocoon.webp",
+     "sha256": "3c21db21ec64b2ffd82e3d90c0225aa0cd14105b9c948e7230ed1ab8776aa047",
+     "bytes": 599420
+    },
+    {
+     "id": "c042",
+     "name": "042-wind-kite.webp",
+     "sha256": "6bc444865fdea461fbf5fd3e98c36942ec32ac6241654ab61b2fefccf63e30b2",
+     "bytes": 603584
+    },
+    {
+     "id": "b21",
+     "name": "b21-crater-ear.webp",
+     "sha256": "5c44e3e6d6f5ecba22ef2594b3bded91966d55c9fe7f3799097c0b27e691130d",
+     "bytes": 662818
+    },
+    {
+     "id": "c006",
+     "name": "006-manta-foil.webp",
+     "sha256": "ede157a206aa10b8194b14beb89e06c19d228ec0829ab4d47bb48abc3f144b4c",
+     "bytes": 565794
+    },
+    {
+     "id": "c065",
+     "name": "065-seam-surgeon.webp",
+     "sha256": "b4eda2074b09e97d48d8a8c1b1ee22f5141fbea93148bbbabafa9f752188dd90",
+     "bytes": 622598
+    },
+    {
+     "id": "o12",
+     "name": "12-volumetric-stage.webp",
+     "sha256": "fb03a546fec5e36af03236f91e4fcba580591fcfea91d5121416fa59907cef61",
+     "bytes": 688184
+    },
+    {
+     "id": "o08",
+     "name": "08-aroma-organ.webp",
+     "sha256": "b0deb3876b54fd51159478c7622684099c4b108b730db902427a8f18dfc15cab",
+     "bytes": 560058
+    },
+    {
+     "id": "c038",
+     "name": "038-quiet-stair.webp",
+     "sha256": "09f81dc9e00371be362d53d740bcd9adc64378316a4d64ce48af562673a1f51c",
+     "bytes": 606062
+    },
+    {
+     "id": "c101",
+     "name": "101-velvet-hammer.webp",
+     "sha256": "f79eb2067485ea0cd5e7708a75527e0b6d53a3f9464632b7e9c900ab8c2fc16e",
+     "bytes": 591810
+    },
+    {
+     "id": "c103",
+     "name": "103-bubble-bailiff.webp",
+     "sha256": "202e3a9acfa675219ee0b50f66917f15d07ae09caa65f70d88e62ddb606b25a3",
+     "bytes": 569508
+    },
+    {
+     "id": "c104",
+     "name": "104-key-concord.webp",
+     "sha256": "91fbb0a07340b4375a25dc85eef90a6c736692d2a3c047f597bdacc78f8479d9",
+     "bytes": 561840
+    },
+    {
+     "id": "c105",
+     "name": "105-metric-embassy.webp",
+     "sha256": "e34176ce5e37c42ed5df4024fce6c99e5872ccc73d4764ec96a5bc3645e93ce7",
+     "bytes": 567020
+    },
+    {
+     "id": "c106",
+     "name": "106-muon-customs.webp",
+     "sha256": "2209fdda8f6b51239dae5f8a61069f90dd6f6394bc1da900f4ee6e1565119037",
+     "bytes": 619670
+    },
+    {
+     "id": "c107",
+     "name": "107-resonance-tailor.webp",
+     "sha256": "574dc0b9388370498cbd221c4bedeae4058b8dcc0d6a78cb04ceff1ce5f67dc0",
+     "bytes": 528690
+    },
+    {
+     "id": "c108",
+     "name": "108-suture-loom.webp",
+     "sha256": "7434537f542f1f429e8ae7d70e1ce36a7041dbf74ad3d2683e856acf502744c2",
+     "bytes": 624496
+    },
+    {
+     "id": "c110",
+     "name": "110-spin-table.webp",
+     "sha256": "249cbb32ed06e00652885ba2c01b5025a24835ba606fb2731658e38d61771727",
+     "bytes": 596132
+    }
+   ]
+  }
+ ]
+}
