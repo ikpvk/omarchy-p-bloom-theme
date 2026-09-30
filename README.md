@@ -25,7 +25,7 @@ omarchy theme install https://github.com/ncr/omarchy-p-bloom-theme.git
 </p>
 
 <p align="center">
-  <img src="previews/wallpaper-collage.webp" alt="Step into the future: 42 blueprint wallpapers" width="100%">
+  <img src="previews/wallpaper-collage.webp" alt="42 blueprint wallpapers of machines from a hopeful future" width="100%">
 </p>
 
 <p align="center">
