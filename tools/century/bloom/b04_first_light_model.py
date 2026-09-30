@@ -36,7 +36,9 @@ def shell(side):
     with at(hinge, side * OPEN, 'Y'):
         dome('clamshell solar shell', c, SHELL, SHELL, 'structure', 48, 14, a0, a1)
         # Stiffening lip along the cut meridian, and the equator seat.
-        arc_tube('shell meridian lip', c + Vector((-side * 1.5, 0, 0)), (side, 0, 0), (0, 1, 0), SHELL + 1.5, 3, 3, 0, 180, 'structure')
+        # The lip runs over the top on both petals: ref turns with the side, so axis x ref is always +z
+        # (with a fixed +y ref the left petal's lip hung below the seat and its rim read as a full circle).
+        arc_tube('shell meridian lip', c + Vector((-side * 1.5, 0, 0)), (side, 0, 0), (0, side, 0), SHELL + 1.5, 3, 3, 0, 180, 'structure')
         arc_tube('shell seat ring', c, (0, 0, 1), (side, 0, 0), SHELL + 1.5, 3, 3, -90, 90, 'structure')
         # Thin-film solar tiles: meridian and latitude seams on the outer skin.
         for az in range(a0 + 18, a1, 18):
