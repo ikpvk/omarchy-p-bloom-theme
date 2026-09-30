@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="previews/hero.webp" alt="p(bloom), an Omarchy theme: the palette arrives as Signal, Bloom, Sunrise and Pollen bands, then one blueprint wallpaper per beat" width="100%">
+  <img src="previews/hero.webp" alt="p(bloom), an Omarchy theme: a blueprint lights up tile by tile, a machine is drafted line by line, then one wallpaper per beat" width="100%">
 </p>
 
 <p align="center">
