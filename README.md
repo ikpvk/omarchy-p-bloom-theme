@@ -4,7 +4,7 @@
 
 <p align="center">
   <b>p(bloom) is a theme for <a href="https://omarchy.org">Omarchy</a>.</b> Deep-space navy, ice-white text, Signal · Bloom · Sunrise.<br>
-  And 42 blueprint wallpapers of machines from a hopeful future.
+  And 42 blueprint wallpapers of machines from a future worth building.
 </p>
 
 ```bash
@@ -25,7 +25,7 @@ omarchy theme install https://github.com/ncr/omarchy-p-bloom-theme.git
 </p>
 
 <p align="center">
-  <img src="previews/wallpaper-collage.webp" alt="42 blueprint wallpapers of machines from a hopeful future" width="100%">
+  <img src="previews/wallpaper-collage.webp" alt="42 blueprint wallpapers of machines from a future worth building" width="100%">
 </p>
 
 <p align="center">
