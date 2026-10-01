@@ -372,6 +372,16 @@ def audit(item, comp, s=None):
         Sheet.draw_text = True
     arr = np.frombuffer(g.surface.get_data(), np.uint8).reshape(h, -1, 4)[:, :w, :3]
     mask = np.abs(arr.astype(np.int16)-g.base.astype(np.int16)).max(axis=2) > 5
+    # the top strip stays plain paper so Omarchy's see-through bar is readable over every set
+    # (visible ink only: faint construction lines a few levels above the ground do not hurt the bar)
+    strip = math.ceil(.03*h)
+    ink = np.abs(arr[:strip].astype(np.int16)-g.base[:strip].astype(np.int16)).max(axis=2) > 24
+    if ink.sum() > 20:
+        ys, xs = np.nonzero(ink)
+        issues.append(f'ink in the top bar strip ({len(xs)}px, x {xs.min()}-{xs.max()}, y {ys.min()}-{ys.max()})')
+    for t in texts:
+        if t['box'][1] < strip:
+            issues.append(f'text in the top bar strip: {t["text"]}')
     small = [t for t in texts if t['font_px'] < comp.floor_px-.01]
     for t in small:
         issues.append(f'type below floor: {t["text"]} {t["font_px"]:.1f}px')
@@ -436,6 +446,10 @@ class Placer:
         self.frame_occ = np.zeros(self.shape, bool)
         self.dropped = []
         self._masks = {}
+
+    def reserve_top(self, frac=.035):
+        """Keep the top strip plain paper: Omarchy's see-through bar sits there."""
+        self.reserve(0, 0, self.W, self.H*frac)
 
     def reserve_mask(self, alpha, gap=8):
         """Frame furniture (already drawn natively) that blocks must clear."""
@@ -568,6 +582,7 @@ def triptych_template(s, blocks, comp, frame_alpha):
     """The master's three columns, re-flowed for another width and height."""
     P = Placer(comp, blocks, comp.g)
     P.reserve_mask(frame_alpha)
+    P.reserve_top()
     W, H = P.W, P.H
     dx = (W-DESIGN_W)
     Hv = s.H if False else comp.virtual_h
@@ -591,6 +606,7 @@ def triptych_template(s, blocks, comp, frame_alpha):
 def _common(s, blocks, comp, frame_alpha):
     P = Placer(comp, blocks, comp.g)
     P.reserve_mask(frame_alpha)
+    P.reserve_top()
     dx, dy = P.W-DESIGN_W, P.H-comp.virtual_h
     def at(name, shift_x=0.0, shift_y=0.0):
         x, y = P.virtual(name)
