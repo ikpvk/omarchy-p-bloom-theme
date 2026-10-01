@@ -11,9 +11,9 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-TAG = 'render-assets-v2'
+TAG = 'render-assets-v3'
 NAME = 'p-bloom-render-assets.tar.xz'
-SHA256 = '87a2d86684f38b9ded5d67e0a061a4173f45643705ed5ecfbacdcaa70dd805cc'
+SHA256 = 'c6baa867bdbfc229de4f38dd0f40462ab0a3f010780685179bc01653f96ebd48'
 URL = f'https://github.com/ncr/omarchy-p-bloom-theme/releases/download/{TAG}/{NAME}'
 
 
