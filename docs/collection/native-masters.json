@@ -185,171 +185,171 @@
    "files": {
     "o03": {
      "name": "03-fusion-transport.webp",
-     "sha256": "95a722ff04bd000ae14cb611786cf8d7e01601486b5cd36d9acf22be06389bd6"
+     "sha256": "50782bff60f105c711e1fc05b4f6d29e6cdf8f8825292c8091adc1c1331a17e7"
     },
     "b04": {
      "name": "b04-first-light.webp",
-     "sha256": "06448a03cb8f2aaa2514d7da6790b4a78b6252de4240162ea5b41d2c4459e7dc"
+     "sha256": "6609dd3f32a08bb0da683e47151a3bac63e2f9bc6d2348d9b68d24c812568223"
     },
     "o02": {
      "name": "02-sky-racer.webp",
-     "sha256": "03a7fde0424cd76280b2c39364a613b5ea520b9f9540dc3d701e9d1168d091e4"
+     "sha256": "1babb1d0b8893ed11157aefeedb6a4f979be7786b6da2c84cd7b77c632c79cad"
     },
     "c087": {
      "name": "087-neutrino-bell.webp",
-     "sha256": "be6558c5189055bd869688e5c9909ecdccf1e6d481e598e3740ca61a52f9b8dc"
+     "sha256": "b9b33d108de099f62838313b4364985f8b853be203a60063d1c7f429d44ed4aa"
     },
     "o09": {
      "name": "09-tether-climber.webp",
-     "sha256": "0c23f8f27108b63f95d3c6e09569c9b1056119c1052178b846dcb7d7a5ea6b97"
+     "sha256": "1b4e0b28cb3176b72defc4af2fc18f17ed7e388ff95e1db2f8f9ed07aa1a5371"
     },
     "c001": {
      "name": "001-light-sail.webp",
-     "sha256": "7a8af885f9aceb7176922a10aeb11b20154b9855040c0d1f1dc16a7f29ba9ac6"
+     "sha256": "02b19e2dd4f87a3033c03855de974fd1061da6e84cb0627b7ef8f0aa4185ad14"
     },
     "o01": {
      "name": "01-quantum-simulator.webp",
-     "sha256": "7e8d235c78f4b1ca5976a7fb31cc212a59491b4d782ac15610f108aecbb70371"
+     "sha256": "c737109e303b75b5bca6d4625ac45c347ee7d1857caa69160c9f39c66465a278"
     },
     "c025": {
      "name": "025-fibre-braid.webp",
-     "sha256": "f3289afab18d2dae577470e2f4ab25da155a0a25744edc3c3cf6266c1a1432e8"
+     "sha256": "9615b69bad6054f4a5b5486cf9cd5f0e35a9a7b6001b19c9625a5e374a90ee48"
     },
     "o13": {
      "name": "13-proxy.webp",
-     "sha256": "2f5cb2c30fc582d9ef640846b81c40357e306f5b214518a0ec555d20a0f81d49"
+     "sha256": "f5b4d9127e74225349e41cda8e18e00f0f4c29ea95039a43bd644307caf98144"
     },
     "b02": {
      "name": "b02-reef-nursery.webp",
-     "sha256": "02392b75e347a71b52e5a5516c62fb303c988c6e25edf4ed60d5e0e3bd43bfd1"
+     "sha256": "f540b6e507c745caf120dfdfa0266fca943bd3cf296fa0a14919da928cc23579"
     },
     "o11": {
      "name": "11-organ-foundry.webp",
-     "sha256": "f4584a8df4b92398554fe080dd447e536859c50aeb24fe07eb134bfe2b61fa2b"
+     "sha256": "fcb0059401a42333b59c8e1927982d38c54671501137c2262b2d8d26930a2909"
     },
     "o05": {
      "name": "05-cortical-mesh.webp",
-     "sha256": "c92f2e34c22032d1885d790bed064817a2fb5f68c4968034cd283ffc1c268189"
+     "sha256": "add578b2e35540bcb469296e2e7fdd649bac7c50db78d26f4b65516ddf1748d8"
     },
     "c017": {
      "name": "017-memory-kiln.webp",
-     "sha256": "869c36cbd26ed0ad0cae77a96f7f68be93a45d34b3df3b5b58f7d7a25be84413"
+     "sha256": "0db36beef7eebb53b2b0e973b08b2b538550b148ca2d9903511ab797e0d5cd05"
     },
     "c056": {
      "name": "056-dune-skimmer.webp",
-     "sha256": "2d9d865b4ca2cf7d1fdaff52ee5e279e63b22833445d2f7a15f5393b3d3e33f1"
+     "sha256": "4bcba2552f94c39a1f7668a68e18083d6ec5158733626c5574fbe75d4e0f2265"
     },
     "b13": {
      "name": "b13-green-forge.webp",
-     "sha256": "540ad11fb5b7d3ce8d46142a7c2589251bc4fb33c4367abf2fff40729cc90af3"
+     "sha256": "56e3646d819b19e5ed27078d3c1fdf1bb5ca29930dce9858b26b85613b48a812"
     },
     "b11": {
      "name": "b11-clear-sight.webp",
-     "sha256": "398e8ab49a675a21a2fd69195b13a94653413973f839ee495978381d39f4b012"
+     "sha256": "96c41497b941cd4829ccfc6ef06c84570d5b92160e4ee743efcb1924e61ccbe0"
     },
     "c031": {
      "name": "031-petal-eye.webp",
-     "sha256": "96e8d4536ebf4d46c3ae9b2a3e2a4afe491c3a00684cfd49a5c7659713f9b320"
+     "sha256": "c369bc04d6da33a690c27127a61aa01125e9bf46789b682061ac2b494905c3cb"
     },
     "c018": {
      "name": "018-lunar-porch.webp",
-     "sha256": "b95be0a3317ab9f73dd8e1bf34545b5c6c22bd07101ba1055a83431ad34fd498"
+     "sha256": "7520b853868206b1c362d0ef1f493f62a218b4ab78c1af2cc2fc8939e5fb1322"
     },
     "b12": {
      "name": "b12-wind-freighter.webp",
-     "sha256": "9cb4e3065cb0841d2484d2e7b53c28adcb2d9620d52f9196d543bdfd819a3bce"
+     "sha256": "cd03e4c8c8d0d5c46ab8f663bc5c44e79a8a0e20486dfbafe5b4f6296ac4049d"
     },
     "o07": {
      "name": "07-air-refinery.webp",
-     "sha256": "4be638e0fb884a857c40ba95c9459db00177b0cba5c2fe56299cc25d037210bb"
+     "sha256": "6e394915ed4aba255be5f51b697a2a1526a7b53e75764a98902cc8a010055f68"
     },
     "o06": {
      "name": "06-bounder.webp",
-     "sha256": "05473de385da553f5233672f80a1220fd8306895d624ea78af8d1fa1a57b1690"
+     "sha256": "b9d4e84078c3e8857bfbf7af5ed6765d8fcf6568fdc8581e5f8d9306ba6e515b"
     },
     "b03": {
      "name": "b03-sun-still.webp",
-     "sha256": "0b6d29771320d414781e88b5a8d188d4d45400afc2726392ca4d0e04ba5c537e"
+     "sha256": "7014475ee791bcbde70b607e7a306e862cd5cd94517a901a9465a91de4bc2d31"
     },
     "b18": {
      "name": "b18-stellarator-hearth.webp",
-     "sha256": "356aa3498e9fcc5c2485e9c26c9ca68060e89ee630570e122fb761180b54eaa2"
+     "sha256": "6359a35012ae74a1e39eb59e180df116b8379bb6a960eb9d766cbdb138f03e99"
     },
     "c044": {
      "name": "044-coral-cradle.webp",
-     "sha256": "619f1419b3691e997a16d9a8206e84564166b9b9d354838af350e29de4c62031"
+     "sha256": "e0967637eb71ec7fb70b4d0a4f7cfcd88eede024bb61715678e53383aa85b960"
     },
     "c002": {
      "name": "002-tidal-loom.webp",
-     "sha256": "e106d772767e06cbd815efee3f43fab2e21a8dd42995a06f0fbc91334be5c113"
+     "sha256": "a66ac0bde8023affef86ed3035bb26d3b494e82f12852ece0c39a39681988abe"
     },
     "o14": {
      "name": "14-presence-rig.webp",
-     "sha256": "57767d8f7906070d5bdc4bee4071b1e5bc4bfd93522014f0798009f8bd73c720"
+     "sha256": "14339686807caae7393fe58623b34f13195ccdb1b2d4d40136c765b50a1125c8"
     },
     "c099": {
      "name": "099-sleep-cocoon.webp",
-     "sha256": "768ebed75d9e178be7be9326ed68b6bbe2a889ab924bbc1307b5bfbb110ab962"
+     "sha256": "3422c083e29ddc4772d4da5accfa7bea16e46383b7e560051dc3bf514051335b"
     },
     "c042": {
      "name": "042-wind-kite.webp",
-     "sha256": "886618e6dc1f2a6713a07dd65b4efd1563525d498fc134955cdd8d8e3b06289c"
+     "sha256": "9f4c8b9e89139e6acfeb207864382e4bfdb7a5720c788117fbef028b74056789"
     },
     "b21": {
      "name": "b21-crater-ear.webp",
-     "sha256": "9cce0f5d4cb0743d171b2ecfd4d9b1517f76ded8214e17c02ec513c5dd49884a"
+     "sha256": "a4c30583cea38f41b97ee74a4aa9662bd45c05e96998212c49f45a6dfd0951b4"
     },
     "c006": {
      "name": "006-manta-foil.webp",
-     "sha256": "a28332867503574b34c9c16024bef7b98a681d28aef8d9941561cfd5dc858026"
+     "sha256": "278b6c140d52aea34fad857909f280b044ddf24729021e027e3011f12ceca45f"
     },
     "c065": {
      "name": "065-seam-surgeon.webp",
-     "sha256": "60b5be31bb90dbcf328fcdba9908e9b468cd278b9ce2b5b5c10a342f39d2eb8c"
+     "sha256": "177746ab9de6a35001e1ef6abf29ea839bd469edfaa8d0db837fee675573301b"
     },
     "o12": {
      "name": "12-volumetric-stage.webp",
-     "sha256": "e725851f08429325a959be8899e05802163c107c48f0d80c878dfff006af6751"
+     "sha256": "932cc1e2edcb504a1f45cbbc9a0323f1564d65d43f2cc9517637ddca36e924be"
     },
     "o08": {
      "name": "08-aroma-organ.webp",
-     "sha256": "09a13139fb0a329aaf2662361ff6b0356ead2b41e399fb1e9c6cb342c116265f"
+     "sha256": "59eb01188e4dc1ec472f90c682457a943272ed72ec7d027a9732539b4a27ac9b"
     },
     "c038": {
      "name": "038-quiet-stair.webp",
-     "sha256": "0822b6f29ad08e7fbf033e560f9e3c66684cb56abaec4f286d91224cabcb29d7"
+     "sha256": "41aad738175e124c53904b17df4412da12feac8d591cbe90f7390ba5476f0328"
     },
     "c101": {
      "name": "101-velvet-hammer.webp",
-     "sha256": "9842078fd13de4f51d3c25d55b023031d23ead659fcbd28c5dc0071f0a290e51"
+     "sha256": "149815fc0a79c81d3c5a3d6a2c59fb0fd23935847d44d287e793a87e199e861e"
     },
     "c103": {
      "name": "103-bubble-bailiff.webp",
-     "sha256": "df52b4e9ff94c9e9c0e6343c66aad39aeb0901f687c3d20669cf4f58e95b6172"
+     "sha256": "6a0adaa588b97aed6f77a648efee2ea41fa06d8027c6201135215abd70365de4"
     },
     "c104": {
      "name": "104-key-concord.webp",
-     "sha256": "ff4f44cc0d9758821f98458bf465af4fa51fcc436acf78ba8f33475e8162de90"
+     "sha256": "f25fcd6ceabb14bc282a247c2d60b91442a5f7a065f8f54ec931b9a5477371fa"
     },
     "c105": {
      "name": "105-metric-embassy.webp",
-     "sha256": "8eae4c9ffe0f352f456f4af3ed2f6a8191fdc9465cd3ed26a907cceee5d0c864"
+     "sha256": "d092f02c6f1ab4331f50f8157e819700ab474ac8023069095a472ac64ec458d7"
     },
     "c106": {
      "name": "106-muon-customs.webp",
-     "sha256": "756385e03cd654402dc4bb2524746c6a62943b0524a11ce60f61dd5197d56667"
+     "sha256": "b038dc7baa455f9db2203a0242829cc2b8974b0759a4b1f023f7213972aa0caa"
     },
     "c107": {
      "name": "107-resonance-tailor.webp",
-     "sha256": "86ee2a3db4f95de15b42a77bbca89e5c0a542819a22f5bf67fa0c7bebd851574"
+     "sha256": "66ea96a2063aff82de9bf1f12839965523f0ce6dc34f9ac4e7aeef804dcecd5c"
     },
     "c108": {
      "name": "108-suture-loom.webp",
-     "sha256": "7103fb9cbadeb81759ca5046813197b360a77c962bec4826ef5f09219eb7be40"
+     "sha256": "c45e5e63b92ea0f6b902d2b15c73d9c66b5232ff99e093e9a9a07ed29bacd1dc"
     },
     "c110": {
      "name": "110-spin-table.webp",
-     "sha256": "dfb568c425201f25b7572aeda0954d19e1333ee5bf81c1d4319059cd1b39440a"
+     "sha256": "51654311b5ba67d5d8dd56e46e88620ccca36be2d53479717cf34a9ca0cbc506"
     }
    }
   }
