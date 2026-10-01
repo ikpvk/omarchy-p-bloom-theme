@@ -27,7 +27,7 @@ DATA={
  note='UNLIKE THE COMMITTEE, THE FIBRES HAVE DIRECTION.',process=('TENSION','CROSS','TAKE UP'),
  rows=[('ANGLE','TO MANDREL AXIS'),('MODEL','tan θ = vₜ / vₐ')],foot='Kinematic illustration; no composite strength prediction.'),
 38:dict(title='ACCESS IS NOT A SIDE QUEST',kind='access',scope='SCRIPTED INTERLOCK SEQUENCE / NOT CERTIFICATION',
- fact='The occupied deck moves only after both gates engage.',
+ fact='As a stair it is just a stair: nothing moves until someone asks for the platform.',
  note='CLAUDE CALLED THIS LABEL LOAD-BEARING. THE LATCH DISAGREES.',process=('LEVEL','LOCK','LIFT'),
  rows=[('LIFT SCREWS','8, ONE MOTOR EACH'),('HANDRAILS','FIXED, BOTH SIDES'),('EXIT','HIGH LANDING')],foot='All three states drawn at the same scale.'),
 42:dict(title='YOU ALSO HAVE TO REEL IT BACK',kind='kite',scope='ILLUSTRATIVE FORCE / PAID-OUT LENGTH CYCLE',
