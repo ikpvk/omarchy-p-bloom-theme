@@ -19,10 +19,19 @@ omarchy theme install https://github.com/ncr/omarchy-p-bloom-theme.git
 
 <p align="center">
   Each wallpaper is laid out again for 18 screens, from 1080p to 7680 × 2160, in 16:9, 16:10, 3:2, 4:3, 21:9 and 32:9.<br>
-  The companion picks the set for every monitor: nothing cropped, nothing upscaled, every caption readable.<br>
-  Backgrounds come in three strengths, Muted, Default and Vivid, with every caption kept readable in each.<br>
-  <code>python3 ~/.config/omarchy/themes/p-bloom/companion/install.py</code> (<a href="companion/README.md">what it does</a>)
+  Backgrounds come in three strengths, Muted, Default and Vivid, with every caption kept readable in each.
 </p>
+
+<p align="center">
+  <b>p(bloom) Wallpapers</b>, the companion app, is a full-screen browser for the 42 wallpapers.<br>
+  It also downloads the set made for your monitors, switches when you plug in another screen, and sets the background strength.
+</p>
+
+```bash
+python3 ~/.config/omarchy/themes/p-bloom/companion/install.py
+```
+
+<p align="center"><sub><a href="companion/README.md">What it installs and how it works</a></sub></p>
 
 <p align="center">
   <img src="previews/wallpaper-collage.webp" alt="42 blueprint wallpapers of machines from a future worth building" width="100%">

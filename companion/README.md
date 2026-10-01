@@ -1,6 +1,8 @@
 # p(bloom) Wallpapers — companion app
 
-Automatic desktop wallpaper resolution, with an optional fullscreen gallery.
+A full-screen browser for the 42 p(bloom) wallpapers that also keeps your desktop on the set made
+for your monitors.
+
 The theme installed through Omarchy's menu is data only: it cannot install or
 launch this app by itself. Explicitly run the companion installer once:
 
