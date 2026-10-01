@@ -69,8 +69,12 @@ MUTED_CHROMA = 0.5
 QUIET_STEP = 0.020
 STEP_TOLERANCE = 0.002
 RULE = {'muted': {}, 'vivid': {}}
-# The owner relaxed the white-text 4.5:1 cap for saffron only (its accents keep 3:1).
+# The owner relaxed the white-text 4.5:1 cap for saffron only. On 2026-10-01 he also kept saffron's full
+# Muted/Vivid step (Delta E ~3) over full accent protection (which would shrink it to ~1.4): accents on
+# saffron must keep ACCENT_FLOOR_RELAXED instead of 3:1 (the composed 4:3, 3:2 and 16:10 layouts move a few
+# faint diagram callouts of Proxy and Sun Still onto the brighter part of the Vivid ground).
 RELAX_TEXT = {'saffron'}
+ACCENT_FLOOR_RELAXED = 2.4
 KEEP_GROUND = set()  # grounds that stay at their Default tone at every level
 
 
@@ -187,9 +191,11 @@ def contrast_issues(contrast, ground=None):
     """Labels below what they must keep. On RELAX_TEXT grounds white type is
     reported (summary) but not failed; accents always count."""
     relaxed = {'text'} if ground in RELAX_TEXT else set()
+    def need(c):
+        return min(c['need'], ACCENT_FLOOR_RELAXED) if ground in RELAX_TEXT and c['role'] == 'accent' else c['need']
     # Rounded values; 0.01 absorbs the rounding of both numbers.
-    return [f"{c['role']} contrast {c['ratio']:.2f}:1 < {c['need']:.2f}:1: {c['text']}"
-            for c in contrast if c['ratio'] < c['need'] - 0.01 and c['role'] not in relaxed]
+    return [f"{c['role']} contrast {c['ratio']:.2f}:1 < {need(c):.2f}:1: {c['text']}"
+            for c in contrast if c['ratio'] < need(c) - 0.01 and c['role'] not in relaxed]
 
 
 # -- grounds ------------------------------------------------------------------
