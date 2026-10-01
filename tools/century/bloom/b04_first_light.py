@@ -18,9 +18,7 @@ ENTRY = dict(
     id='b04', series='B04', number=204, slug='first-light', title='FIRST LIGHT',
     domain='astronomy', category='serious', model='FL-5', palette='emerald', seed=260104,
     purpose='SCHOOL-OWNED ROBOTIC TELESCOPE',
-    narrative=('Lets any child book a slot on a real telescope under a dark sky. A nine-year-old '
-               'in Kisumu books Saturn for Tuesday night and finds her own picture of it waiting '
-               'before school.'),
+    narrative='Lets any child book a slot on a real telescope under a dark sky.',
     enabled_by=[
         ('ROBOTIC OBSERVATORIES', 'Mounts, domes and weather stations that open, point and close with nobody on site.'),
         ('REMOTE SCHEDULING', 'A booking queue that fits each request into a clear, dark ten-minute slot.'),
@@ -45,10 +43,10 @@ DOSSIER = dict(
           ('BOOKINGS', '50 A NIGHT / 14 000 A YEAR'),
           ('OWNERS', '120 SCHOOLS / FIVE CONTINENTS')],
     note='AMARA, 9, KISUMU. SATURN. TUESDAY, 21:10.',
-    left=('ONE NIGHT, MANY SCHOOLS', 'EXAMPLE SCHEDULE / SITE TIME / 5 OF 50 BOOKINGS',
-          'Illustrative night. The queue only books targets more than 30 degrees up.'),
+    left=('ONE NIGHT, MANY SCHOOLS', 'SITE TIME / 5 OF 50 BOOKINGS',
+          'The queue only books targets more than 30° above the horizon.'),
     right=('MORE FRAMES, STEADIER RINGS', 'IDEAL STACKING / SNR = SNR1 × ROOT N',
-           'Random noise only; seeing and focus set the real limit.'),
+           'Each doubling of the stack raises the signal-to-noise ratio by about 40 %.'),
 )
 
 BOOKINGS = [  # (school / target, site time in hours after 20:00, slot index)

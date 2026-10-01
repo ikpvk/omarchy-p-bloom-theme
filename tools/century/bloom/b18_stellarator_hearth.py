@@ -48,9 +48,9 @@ DOSSIER = dict(
           ('PER RESIDENT', '1.5 kW / HOMES, TRAMS, WORKPLACES'),
           ('FIELD ON AXIS', '5 T')],
     note="EVERY RESIDENT'S SHARE OF THE PLASMA IS ABOUT TWO LITRES.",
-    left=('WHERE THE 800 MW GO', 'DECLARED DESIGN BUDGET / MEGAWATTS',
-          '800 × 1.1 = 880 MW of heat; 40 % becomes 350 MW; 50 MW runs the plant.'),
-    right=('A TWIST INSTEAD OF A CURRENT', 'ROTATING ELLIPSE / ONE FIELD PERIOD / SIMPLIFIED',
+    left=('WHERE THE 800 MW GO', 'DESIGN BUDGET / MEGAWATTS',
+          'Fusion makes 800 MW of heat; reactions in the blanket add another 80 MW.'),
+    right=('A TWIST INSTEAD OF A CURRENT', 'ROTATING ELLIPSE / ONE FIELD PERIOD',
            'The section turns half a turn per period; a field line circles the plasma.'),
 )
 
@@ -65,7 +65,7 @@ def figure(s, side, x, y, w):
                 ('ELECTRIC', [(300, ARC, .9), (50, GOLD, .9)], '350'),
                 ('TO COOLING', [(530, WHITE, .35)], '530')]
         for i, (label, parts, total) in enumerate(rows):
-            yy = y + 10 + i * 36
+            yy = y + 10 + i * 44
             s.text_mid(label, x, yy + 1, 6.6, .08, .72)
             xx = bx
             for v, col, a in parts:
@@ -73,9 +73,8 @@ def figure(s, side, x, y, w):
                 xx += v * k
             s.text_mid(total + ' MW', xx + 8, yy + 1, 6.6, .08, .8)
         # Each share of the electric bar named just below its own segment.
-        tx(s, 'CITY 300', bx, y + 63, 6.2, .9, color=ARC)
-        tx(s, 'PLANT 50', bx + 300 * k, y + 63, 6.2, .8, color=GOLD)
-        tx(s, 'FUSION 800 MW + BLANKET GAIN 80 MW', bx, y + 118, 6.2, .6)
+        tx(s, 'CITY 300', bx, y + 71, 6.2, .9, color=ARC)
+        tx(s, 'PLANT 50', bx + 300 * k, y + 71, 6.2, .8, color=GOLD)
     else:
         # Five sections along one period: the ellipse turns by half a turn;
         # the dot is where one field line crosses each section (iota ~ 0.9).

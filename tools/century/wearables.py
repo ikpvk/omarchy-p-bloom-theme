@@ -269,5 +269,5 @@ def sleep_cocoon():
     for side in (-1,1):
         wrist=j[str(side)+'forearm']['b'];rod('armrest',(side*23,12,wrist.z-4),(side*23,-55,wrist.z-4),2,'detail')
     mark('FOOT PLATFORM',(20,an.y-6,0),'BOTH FEET SUPPORTED')
-    mark('HUMAN ON BREAK',p((0,-26,313)),'REST IS A SCHEDULED OPERATION')
+    mark('RESTING WORKER',p((0,-26,313)),'SITS UPRIGHT; THE SEAT DOES THE HOLDING')
     return 36,17

@@ -37,7 +37,7 @@ def presence():
             for x in (-12,12):box('roller bearing rail',(x,2,2),(3,29,7),1,'detail')
             motor((0,12,-1),4,10,(0,1,0))
             box('bay connector',(0,17,-5),(13,6,5),1,'accent')
-        mark('ROLLER CASSETTE',(-75,-85,17),'FIELD SHOWN SPARSELY')
+        mark('ROLLER CASSETTE',(-75,-85,17),'9 ROLLERS, ONE MOTOR')
     # Rear crescent backbone supports an actual bearing and captive tether reel.
     for side in (-1,1):
         x=side*87
@@ -75,8 +75,8 @@ def presence():
     for z in range(30,89,7):rod('cabinet cooling rib',(128,21,z),(128,47,z),.6,'detail')
     tube('cabinet loom',[(107,28,81),(78,48,127),tuple(shoulder)],1,'cable')
     optics((-52,64,141),7,16,(.35,-1,-.15))
-    mark('HUMAN PLAYER',point((0,-30,200)),'SHOWN AS DUMMY / EGO NOT TO SCALE')
-    mark('CAPTIVE TETHER',(0,15,224),'LOAD PATH')
+    mark('HUMAN PLAYER',point((0,-30,200)),'SUIT RESISTS OR ASSISTS EVERY JOINT')
+    mark('CAPTIVE TETHER',(0,15,224),'SAFETY LINE TO THE SHOULDERS')
     mark('SUIT INTERFACE',(116,14,61),'TACTILE AND MUSCLE BAND CONTROL')
     mark('SIGHT AND SOUND',point((0,-28,311)),'HEADSET / INNER-EAR INTERFACE')
     mark('POWERED FLOOR',(83,-61,20),'DRIVEN ROLLER FIELD')
@@ -133,11 +133,11 @@ def stage():
         for i in range(221):
             t=T*i/220;pts.append((39*(math.sin(t)+.65*math.sin(2*t)),-14+22*math.cos(t),105+37*math.cos(2*t)+k*.9))
         g.wire('illustrative luminous locus',pts,.06,'shell')
-    mark('OPTICAL HEAD',(-98,-29,119),'COARSE ALIGNMENT GIMBALS')
-    mark('SERVICE BRIDGE',(38,36,205),'TRIANGULATED SPAN / COOLING AND TIMING')
-    mark('IMAGE VOLUME',(45,-14,122),'40 × 22 × 18 m / FICTIONAL DESIGN TARGET')
-    mark('HAZE CIRCUIT',(-79,33,43),'METER / DISTRIBUTE / EXTRACT')
-    mark('CLOCK DISTRIBUTION',(85,29,40),'ONE VOLUME / SHARED TIMING REFERENCE')
+    mark('OPTICAL HEAD',(-98,-29,119),'INFRARED EMITTER')
+    mark('SERVICE BRIDGE',(38,36,205),'7 HEADS POINTING DOWN')
+    mark('IMAGE VOLUME',(45,-14,122),'40 × 22 × 18 m')
+    mark('HAZE CIRCUIT',(-79,33,43),'FEEDS 5 DECK EMITTERS')
+    mark('CLOCK DISTRIBUTION',(85,29,40),'KEEPS EVERY HEAD IN STEP')
     kit.GROUPS['B']={'parts':g.parts[:],'wires':g.wires[:]}
     return 24,22
 

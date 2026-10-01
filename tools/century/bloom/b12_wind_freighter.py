@@ -38,7 +38,7 @@ ENTRY = dict(
     required_breakthroughs='Wing sails that survive decades of storms with little maintenance.',
     view_A='WING-SAILED CONTAINER FEEDER',
     view_B='WING SAIL SECTION', view_B_note='RIBS / SPAR CAPS / MAST / FLAP HINGE ARMS',
-    view_C='TRIM ACTUATOR', view_C_note='ROOT PLATE OMITTED / GEAR RING / THREE DRIVES / FLAP RAM',
+    view_C='TRIM ACTUATOR', view_C_note='GEAR RING / THREE DRIVES / FLAP RAM',
     service_year='2034',
     sources=['https://www.imo.org/en/OurWork/Environment/Pages/Wind-propulsion.aspx',
              'https://www.wind-ship.org/en/grid-home/'],
@@ -56,7 +56,7 @@ DOSSIER = dict(
     note="SHE CROSSES THE ATLANTIC AT A CYCLIST'S PACE.",
     left=('A WING PULLS FORWARD', 'ONE WING, PLAN VIEW / APPARENT WIND 110° / L / D = 8 / NORMALISED',
           'Thrust = L sin 110° − D cos 110° = 0.98 L; the hull and keel take the small side force.'),
-    right=('ONE CROSSING, BY ENERGY SOURCE', 'ILLUSTRATIVE VOYAGE / 713 MWh OF PROPULSION',
+    right=('ONE CROSSING, BY ENERGY SOURCE', 'DESIGN VALUES / 713 MWh OF PROPULSION',
            'The generator runs on bio-methanol; the battery pack holds 24 MWh.'),
 )
 

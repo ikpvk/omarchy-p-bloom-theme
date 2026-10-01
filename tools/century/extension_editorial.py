@@ -7,13 +7,13 @@ from collection_layout import field_notes
 from triptych import diagram_y,register_section,punchline
 
 DATA={
-101:dict(kind='release',fact='Stored bolt strain still has to go somewhere; the cam decides where.',rows=[('PRELOAD','TRANSFER BEFORE RELEASE'),('PYROTECHNICS','NONE IN THIS CONCEPT'),('SHOCK','REQUIRES MEASUREMENT')],note='THE RECORDER CAN BE RESET. THE PAYLOAD CANNOT.',left=('HAND OVER THE LOAD FIRST','SCRIPTED RELEASE STATES / TIME NOT TO SCALE'),right=('THE RECORD IS NOT THE EVENT','FICTIONAL RECORDER STRIP / FOUR CONTACTS')),
+101:dict(kind='release',fact='Stored bolt strain still has to go somewhere; the cam decides where.',rows=[('PRELOAD','TRANSFER BEFORE RELEASE'),('RING GAP','70°'),('SHOCK','REQUIRES MEASUREMENT')],note='THE RECORDER CAN BE RESET. THE PAYLOAD CANNOT.',left=('HAND OVER THE LOAD FIRST','RELEASE STATES / TIME NOT TO SCALE'),right=('THE RECORD IS NOT THE EVENT','RECORDER STRIP / FOUR CONTACTS')),
 103:dict(kind='capillarity',fact='Coolant carries dissolved air, which comes out as bubbles wherever the loop warms up or its pressure drops.',rows=[('SURFACE','MATCHED TO COOLANT'),('GAS INVENTORY','BUFFERED BEFORE VENT'),('GRAVITY','NOT THE SEPARATOR')],note='ALL BUBBLES MUST DECLARE THEIR INTENTIONS.',left=('SMALL PORES, LARGE CONSEQUENCES','IDEAL CAPILLARY PRESSURE / FIXED WETTING'),right=('KEEP THE INTERFACE WET','MEMBRANE CROSS-SECTION / NOT TO SCALE')),
-104:dict(kind='consent',fact='A witness window shows where the bolt is. Mechanical logic, not a certified security lock.',rows=[('LOGIC','KEY ONE AND KEY TWO'),('SENIORITY','NO BYPASS'),('EMERGENCY','SEPARATE PROCEDURE')],note='WITHDRAWAL NEEDS A KNURLED CROWN, NOT A REASON.',left=('AUTHORITY DOES NOT ADD UP','BOOLEAN PERMISSION TABLE / NO MASTER INPUT'),right=('CONSENT HAS AN EXPIRY','SCRIPTED WITHDRAWAL / BEFORE BOLT RELEASE')),
-105:dict(kind='metrology',fact='Pitch and diameter can identify a thread. Neither establishes voltage, pressure rating or polarity.',rows=[('MECHANICAL','MEASURE BEFORE MATING'),('ELECTRICAL','SEPARATE VERIFICATION'),('ADAPTOR','DECLARED LIMITS ONLY')],note='THE GAUGES HAVE CERTIFICATES. THE VISITORS HAVE CONFIDENCE.',left=('SAME DIAMETER, WRONG CONVERSATION','TWO THREAD PROFILES / SYMBOLIC PITCH'),right=('PASS IS A SMALLER SET','FICTIONAL ACCEPTANCE REGISTER / 12 ARRIVALS')),
-106:dict(kind='scattering',fact='Heavy elements such as lead and uranium deflect muons the most, so dense shielding stands out instead of hiding.',rows=[('SOURCE','NATURAL COSMIC MUONS'),('MEASURED','INCOMING / OUTGOING TRACK'),('DENSITY MAP','RECONSTRUCTION REQUIRED')],note='TWO TRACKERS, THREE CLOCKS, NO DOG.',left=('A BEND LEAVES A CLUE','SINGLE ILLUSTRATIVE TRACK / NO EVENT DATA'),right=('THE SKY SETS THE SAMPLE SIZE','IDEAL POISSON COUNT UNCERTAINTY / 1 OVER ROOT N')),
-107:dict(kind='resonance',fact='A tuned absorber works near its chosen frequency. A changed host or load can detune it.',rows=[('TUNING','MEASURE, MOVE, LOCK'),('MODEL','f = √(k / m) / 2π'),('SILENCE','NOT A WARRANTY')],note='GOOD VIBRATIONS ARE STILL VIBRATIONS.',left=('MORE MASS, LOWER NOTE','IDEAL NATURAL FREQUENCY / FIXED STIFFNESS'),right=('THE HOST AND ITS UNINVITED GUEST','TWO COUPLED OSCILLATORS / LUMPED MODEL')),
-108:dict(kind='handoff',fact='A curved needle is driven by turning it along its own arc, so after each pass it has to change hands.',rows=[('SUBSTRATE','TEST MEMBRANE'),('HOLD','AT LEAST ONE GRIPPER'),('CLINICAL STATUS','NOT ESTABLISHED')],note='KNOTS SHOULD BE IN THE THREAD, NOT THE PLAN.',left=('DO NOT DROP THE NEEDLE','SCRIPTED GRIPPER STATES / NO CLINICAL DATA'),right=('SLACK NEEDS SOMEWHERE TO GO','DANCER GEOMETRY / SYMBOLIC THREAD RESERVE')),
+104:dict(kind='consent',fact='A witness window shows where the bolt is.',rows=[('SENIORITY','NO BYPASS'),('EMERGENCY','SEPARATE PROCEDURE')],note='THE SECOND KEY IS ON HOLIDAY UNTIL MONDAY.',left=('AUTHORITY DOES NOT ADD UP','BOOLEAN PERMISSION TABLE / NO MASTER INPUT'),right=('CONSENT HAS AN EXPIRY','SCRIPTED WITHDRAWAL / BEFORE BOLT RELEASE')),
+105:dict(kind='metrology',fact='Pitch and diameter can identify a thread. Neither establishes voltage, pressure rating or polarity.',rows=[('MECHANICAL','MEASURE BEFORE MATING'),('ELECTRICAL','SEPARATE VERIFICATION'),('ADAPTOR','AFTER A FULL MATCH')],note='THE GAUGES HAVE CERTIFICATES. THE VISITORS HAVE CONFIDENCE.',left=('SAME DIAMETER, WRONG CONVERSATION','TWO THREAD PROFILES / SIDE BY SIDE'),right=('PASS IS A SMALLER SET','ACCEPTANCE REGISTER / EXAMPLE COUNTS')),
+106:dict(kind='scattering',fact='Heavy elements such as lead and uranium deflect muons the most, so dense shielding stands out instead of hiding.',rows=[('SOURCE','NATURAL COSMIC MUONS'),('MEASURED','INCOMING / OUTGOING TRACK'),('DENSITY MAP','RECONSTRUCTION REQUIRED')],note='TWO TRACKERS, THREE CLOCKS, NO DOG.',left=('A BEND LEAVES A CLUE','ONE MUON THROUGH TWO TRACKER PAIRS'),right=('THE SKY SETS THE SAMPLE SIZE','POISSON COUNT UNCERTAINTY / 1 / √N')),
+107:dict(kind='resonance',fact='A tuned absorber works near its chosen frequency. A changed host or load can detune it.',rows=[('TUNING','MEASURE, MOVE, LOCK'),('MODEL','f = √(k / m) / 2π'),('BANDS','THREE, ONE PER BRANCH')],note='GOOD VIBRATIONS ARE STILL VIBRATIONS.',left=('MORE MASS, LOWER NOTE','IDEAL NATURAL FREQUENCY / FIXED STIFFNESS'),right=('THE HOST AND ITS UNINVITED GUEST','TWO COUPLED OSCILLATORS / LUMPED MODEL')),
+108:dict(kind='handoff',fact='A curved needle is driven by turning it along its own arc, so after each pass it has to change hands.',rows=[('SUBSTRATE','TEST MEMBRANE'),('HOLD','AT LEAST ONE GRIPPER'),('THREAD','SPOOL, DANCER, NEEDLE')],note='KNOTS SHOULD BE IN THE THREAD, NOT THE PLAN.',left=('DO NOT DROP THE NEEDLE','GRIPPER STATES / ONE HANDOFF'),right=('SLACK NEEDS SOMEWHERE TO GO','DANCER GEOMETRY / THREAD RESERVE')),
 110:dict(kind='rotation',fact='When the bowl stops, the soup floats again.',rows=[('MODEL','a = ω²r'),('LID','OPEN ONLY WHEN STOPPED'),('HUMANS','NOT AN INGREDIENT')],note='SPIN THE BOWL BY HAND AND THE COOK SPINS THE OTHER WAY.',left=('DOUBLE THE SPEED, FOUR TIMES THE MESS','IDEAL RADIAL ACCELERATION / FIXED RADIUS'),right=('BALANCE IS PART OF THE RECIPE','STATIC FIRST-MOMENT BALANCE / IDEAL PAIR')),
 }
 
@@ -54,7 +54,7 @@ def figure(s,n,side,x,y,w):
    col=trace_rows(s,x,body,('PRIMARY HOLD','TRANSFER CAM','JAW OPEN'),((1,1,0,0,0),(0,1,1,1,0),(0,0,0,1,1)))
    # Each phase is named under the states it spans.
    for label,a,b in (('HOLD',0,0),('HANDOFF',1,1),('RELEASE',3,4)):tx(s,label,col(a,b),body+113,align='c')
-   foot='Contact states only; no invented shock attenuation curve.'
+   foot='The cam takes the load before the jaw opens.'
   elif n==103:
    waveform(s,x,body,w,91,lambda t:1/(1+3*t),'PORE RADIUS / r₀','1',((0,'1'),(1/3,'2'),(1,'4')))
    foot='Pressure ratio = r₀ / r; surface tension and angle fixed.'
@@ -84,18 +84,20 @@ def figure(s,n,side,x,y,w):
   elif n==106:
    for yy in (body+6,body+24,body+92,body+110):capsule(s,x+47,yy,280,5,2,a=.5)
    capsule(s,x+144,body+40,88,40,9,a=.35)
-   s.poly([(x+146,body-2),(x+189,body+59),(x+232,body+125)],.85,.9,close=False,color=ARC)
-   s.poly([(x+189,body+59),(x+165,body+125)],.7,.8,close=False,color=GOLD)
+   # One muon: in straight, bent at the cargo, out on the bent line; the dashed line is where it would have gone.
+   s.ln(x+189,body+59,x+232,body+125,.38,.6,dash=[3,4])
+   s.poly([(x+146,body-2),(x+189,body+59),(x+165,body+125)],.85,.9,close=False,color=ARC)
+   tx(s,'MEASURED',x+157,body+128,6,.7,align='r');tx(s,'STRAIGHT ON',x+240,body+128,6,.5)
    # Each label centred on what it names: a detector pair, the cargo.
    mid(s,'IN',x+344,body+17.5);mid(s,'CARGO',x+344,body+60);mid(s,'OUT',x+344,body+103.5)
-   foot='One scattering example. Not a reconstructed density map.'
+   foot='Where the two tracks meet marks the scattering point.'
   elif n==107:
    waveform(s,x,body,w,91,lambda t:1/math.sqrt(1+3*t),'MOVING MASS / m₀','1',((0,'1'),(1/3,'2'),(1,'4')))
    foot='Frequency ratio = √(m₀ / m); one ideal branch.'
   elif n==108:
    col=trace_rows(s,x,body,('LEFT GRIP','RIGHT GRIP','NEEDLE HELD'),((1,1,0,0,1),(0,1,1,1,1),(1,1,1,1,1)))
    for label,a,b in (('HOLD',0,0),('OVERLAP',1,1),('TRANSFER',2,3)):tx(s,label,col(a,b),body+113,align='c')
-   foot='Overlap is intentional; this chart does not prove a safe grip.'
+   foot='Both grippers hold at once before either lets go.'
   elif n==110:
    waveform(s,x,body,w,91,lambda t:t*t,'ANGULAR SPEED / ω₀','4',((0,'0'),(.5,'1'),(1,'2')))
    foot='a / a₀ = (ω / ω₀)² at the same radius.'
@@ -105,7 +107,7 @@ def figure(s,n,side,x,y,w):
     yy=body+8+i*27;mid(s,label,x,yy-1);step=(w-95)/5
     for j in range(6):s.ln(x+95+j*step,yy-10,x+95+j*step,yy+9,.16,.5)
     capsule(s,x+95+start*step,yy-5,(end-start)*step,8,3,ARC)
-   foot='Order of contacts, not a calibrated time or vibration trace.'
+   foot='Each contact overlaps the next, so the load is never dropped.'
   elif n==103:
    capsule(s,x+30,body+28,320,62,15)
    for xx in range(70,320,25):
@@ -125,10 +127,10 @@ def figure(s,n,side,x,y,w):
     yy=body+13+i*38;mid(s,label,x,yy)
     for j in range(12):
      xx=x+145+j*22;capsule(s,xx,yy-8,12,16,4,ARC if j<count else WHITE,.8 if j<count else .18)
-   foot='Example register only: 12 arrivals, 8 fits, 3 authorised.'
+   foot='Five fit the thread and still fail the full match.'
   elif n==106:
    waveform(s,x,body,w,91,lambda t:1/math.sqrt(1+99*t),'DETECTED COUNT / N','1',((0,'1'),(.24,'25'),(1,'100')))
-   foot='Count uncertainty only; image resolution has other limits.'
+   foot='A hundred muons give a tenth of the noise of one.'
   elif n==107:
    s.ln(x+30,body+100,x+390,body+100,.5,.6)
    capsule(s,x+87,body+29,130,58,12)
@@ -136,10 +138,10 @@ def figure(s,n,side,x,y,w):
    for start,end,yy in ((x+28,x+87,body+58),(x+217,x+292,body+58)):
     pts=[(start,yy)]+[(start+(end-start)*i/80,yy+6*math.sin(i*math.tau/16)) for i in range(81)]
     curve(s,pts,WHITE)
-   # Names on one baseline above the bodies; each body carries its own M / K.
+   # Names on one baseline above the bodies; each body carries its own mass and stiffness.
    tx(s,'HOST MASS',x+152,body+19,align='c');tx(s,'ABSORBER',x+322.5,body+19,align='c')
-   mid(s,'M / K',x+152,body+58,align='c');mid(s,'m / k',x+322.5,body+58,align='c')
-   foot='Coupled motion, not broadband cancellation or silence.'
+   mid(s,'M, K',x+152,body+58,align='c');mid(s,'m, k',x+322.5,body+58,align='c')
+   foot='Tuned right, the absorber moves so the host does not have to.'
   elif n==108:
    b=body+8  # clear of the scope line, like the other figures
    for xx in (80,340):s.circ(x+xx,b+15,12,.7,.7)
@@ -150,14 +152,15 @@ def figure(s,n,side,x,y,w):
    tx(s,'MOVING DANCER / TWO THREAD LEGS',x+210,body+122,align='c')
    foot='For parallel legs, reserve change is twice dancer travel.'
   elif n==110:
-   s.ln(x+50,body+70,x+384,body+70,.65,1)
+   # The heavier mass sits nearer the pivot: r₁ / r₂ = m₂ / m₁ (block areas 43 × 42 and 29 × 28).
+   s.ln(x+136,body+70,x+384,body+70,.65,1)
    s.circ(x+224,body+70,10,.8,.8)
-   capsule(s,x+61,body+49,43,42,8,color=GOLD)
+   capsule(s,x+144.5,body+49,43,42,8,color=GOLD)
    capsule(s,x+338,body+56,29,28,6,color=ARC)
-   arrow(s,(x+215,body+100),(x+85,body+100));arrow(s,(x+233,body+100),(x+351,body+100))
+   arrow(s,(x+215,body+100),(x+168,body+100));arrow(s,(x+233,body+100),(x+351,body+100))
    # Paired labels share a baseline; each radius is named under its own arrow.
-   tx(s,'m₁',x+82.5,body+40,align='c');tx(s,'m₂',x+352.5,body+40,align='c')
-   tx(s,'r₁',x+150,body+116,align='c');tx(s,'r₂',x+292,body+116,align='c')
+   tx(s,'m₁',x+166,body+40,align='c');tx(s,'m₂',x+352.5,body+40,align='c')
+   tx(s,'r₁',x+191.5,body+116,align='c');tx(s,'r₂',x+292,body+116,align='c')
    foot='m₁ × r₁ = m₂ × r₂; real rotor also needs dynamic balance.'
  tx(s,foot,x,y+184,7,.67)
 

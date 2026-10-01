@@ -48,6 +48,7 @@ def framing(s, x, y, r, a0=150, thick=(200, 252), thin=(20, 64)):
             s.ln(xx-sx*13, yy, xx, yy, .20, .5)
             s.ln(xx, yy-sy*13, xx, yy, .20, .5)
     s.ln(x-r-20, y, x+r+20, y, .11, .4, dash=[20,4,2,4])
+    s.datum_y = y  # the horizontal datum runs under the callout columns; their text keeps off it
     # The drawing datum stops before the shared A-caption rail.
     s.ln(x, y-r-12, x, min(y+r+12, 884), .11, .4, dash=[20,4,2,4])
 
@@ -406,8 +407,16 @@ def tether_climber(size):
     framing(s, mx, my - 30, 470, a0=20, thick=(195, 240), thin=(300, 345))
     from hardware3d.family_drawing import enabled as hardware_enabled, draw as draw_hardware
     if hardware_enabled('tether-climber'):
-        draw_hardware(s, 'tether-climber', mx, my)
+        parts = draw_hardware(s, 'tether-climber', mx, my)
         c = s.c
+        # The power beam comes up from the ground station into the receiver's underside.
+        # (parts holds the dot on the beam, 80 units under the exported anchor on the receiver plate);
+        # each line starts at the plate's lower rim and fades towards the ground station
+        px, py = parts['POWER BEAM']
+        by = py - 80
+        for k in range(-4, 5):
+            top = by + 52 - 20 * (k / 4) ** 2
+            s.fade_ln(px + k * 30, top, px + k * 10, by + 230, 0.5 - abs(k) * 0.04, 0.0, 0.5, ARC)
     else:
 
         # power beam from below
@@ -720,7 +729,7 @@ def fusion_transport(size):
     s.end_main()
 
     s.legend("FUSION TRANSPORT", "CLASS FT-2   /   DIRECT FUSION DRIVE",
-             "Takes a crew to Mars in 75 days instead of eight months, which cuts their radiation dose and "
+             "Takes a crew to Mars in 75 days instead of eight and a half months, which cuts their radiation dose and "
              "bone loss by two thirds. One reactor both drives the ship and powers it.",
              [("PLASMA PHYSICS", "A stable, self-contained plasma ring hot enough to burn deuterium with helium-3, a reaction that releases few neutrons."),
               ("SUPERCONDUCTIVITY", "20-tesla magnet coils wound from high-temperature superconductor, light enough to launch."),
@@ -740,7 +749,7 @@ def fusion_transport(size):
         _,view_h=fitted_size('fusion-transport-front',520,355)
         s.ln(qx-195,qy,qx+195,qy,.2,.5,dash=[12,4,2,4])
         s.ln(qx,qy-view_h/2-8,qx,qy+view_h/2+8,.2,.5,dash=[12,4,2,4])
-        s.view_label(qx, qy - 225, "C", "CREW RING / AXIAL SECTION", "DUST SHIELD OMITTED FOR CLARITY")
+        s.view_label(qx, qy - 225, "C", "CREW RING / AXIAL SECTION", "DUST SHIELD OMITTED")
     original_diagrams(s)
     return s
 

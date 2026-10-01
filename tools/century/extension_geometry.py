@@ -25,6 +25,75 @@ def instrument(p,w=38,h=22):
  for i in range(5):box('case ventilation slot',(p[0]+w/2+.3,p[1]-3+i*1.5,p[2]),(1,.5,h*.35),.2,'detail')
 
 
+def strip_recorder(p,w=48,h=27):
+ # Housing behind the paper path; a stylus on a guide rod marks the strip at each contact.
+ box('recorder housing',p,(w,12,h),4)
+ rod('stylus guide',(p[0]-w*.42,p[1]-8,p[2]),(p[0]+w*.42,p[1]-8,p[2]),.6,'detail')
+ box('marking stylus carriage',(p[0]-w*.12,p[1]-9,p[2]),(6,4,5),1.2,'accent')
+ for x in (-w*.42,w*.42):
+  for z in (-h*.36,h*.36):cyl('housing screw',(p[0]+x,p[1]-6.5,p[2]+z),1,1.2,'detail',(0,-1,0),6)
+
+
+def sight_glass(p,h=36):
+ # Vertical glass between two bosses, a float on the gas/liquid line and an engraved scale.
+ for z in (0,h):box('sight glass boss',(p[0],p[1]+3,p[2]+z),(11,7,6),2)
+ cyl('sight glass',(p[0],p[1],p[2]+3),2.6,h-6,'shell')
+ for x in (-5,5):rod('glass guard',(p[0]+x,p[1]-1,p[2]+3),(p[0]+x,p[1]-1,p[2]+h-3),.6,'detail')
+ cyl('level float',(p[0],p[1],p[2]+h*.55),3.1,3,'accent')
+ box('level scale',(p[0]+8.5,p[1]+1,p[2]+h/2),(3,1.5,h-8),.5,'detail')
+ for i in range(7):
+  z=p[2]+6+i*(h-12)/6
+  rod('level graduation',(p[0]+7,p[1]-.2,z),(p[0]+(10 if i%3==0 else 8.6),p[1]-.2,z),.22,'detail')
+
+
+def dial_indicator(p,r=10):
+ # One round dial with its stem and lifting cap: the reference head reads a single travel.
+ cyl('dial indicator case',p,r,4,'structure',(0,-1,0))
+ ring('indicator bezel',(p[0],p[1]-4,p[2]),r+.5,1.6,1.2,(0,-1,0))
+ for i in range(20):
+  a=math.tau*i/20;l=2.2 if i%5==0 else 1.2
+  rod('dial graduation',(p[0]+(r-1.8)*math.cos(a),p[1]-4.4,p[2]+(r-1.8)*math.sin(a)),(p[0]+(r-1.8-l)*math.cos(a),p[1]-4.4,p[2]+(r-1.8-l)*math.sin(a)),.2,'detail')
+ rod('indicator needle',(p[0],p[1]-4.8,p[2]),(p[0]+r*.62,p[1]-4.8,p[2]+r*.36),.35,'accent')
+ cyl('needle hub',(p[0],p[1]-4.2,p[2]),1.2,.8,'detail',(0,-1,0),16)
+ ring('revolution counter',(p[0],p[1]-4.3,p[2]+r*.45),r*.22,.4,.5,(0,-1,0),'detail')
+ cyl('indicator stem',(p[0],p[1]-2,p[2]+r),1.7,6,'detail')
+ cyl('lifting cap',(p[0],p[1]-2,p[2]+r+6),2.4,2,'detail')
+
+
+def timing_unit(p,w=40,h=15):
+ # Rack-mounted clock module: pull handles, a time display, a lock lamp and bayonet inputs.
+ box('timing unit panel',p,(w,3,h),1.5)
+ for x in (-w/2+2.5,w/2-2.5):
+  box('pull handle',(p[0]+x,p[1]-4,p[2]),(2,1.6,h-3),.6,'detail')
+  for z in (-h/2+3,h/2-3):rod('handle standoff',(p[0]+x,p[1]-1.5,p[2]+z),(p[0]+x,p[1]-4,p[2]+z),.5,'detail')
+ box('time display window',(p[0]-4,p[1]-1.9,p[2]+3),(18,.8,5),.6,'accent')
+ cyl('lock lamp',(p[0]+9,p[1]-1.6,p[2]+3),1.2,1.2,'detail',(0,-1,0),12)
+ for x in (-11,0,11):
+  cyl('timing connector',(p[0]+x,p[1]-1.5,p[2]-3.5),1.6,3,'detail',(0,-1,0))
+  ring('bayonet collar',(p[0]+x,p[1]-4.5,p[2]-3.5),2.3,.6,1,(0,-1,0),'detail')
+
+
+def reed_gauge(p,w=26,h=14,reeds=7):
+ # Vibrating-reed frequency meter: graded reeds behind a window; the one in tune swings widest.
+ box('reed gauge case',p,(w,4,h),2)
+ box('reed window',(p[0],p[1]-2.2,p[2]-1),(w-6,.6,h-6),.8,'detail')
+ for i in range(reeds):
+  x=p[0]-(w-9)/2+i*(w-9)/(reeds-1);length=3+i*.55
+  rod('tuned reed',(x,p[1]-2.8,p[2]-4.5),(x,p[1]-2.8,p[2]-4.5+length),.35,'detail')
+  box('reed flag',(x,p[1]-3,p[2]-4.5+length),(1.3,.4,1),.2,'accent' if i==reeds//2 else 'detail')
+  rod('frequency mark',(x,p[1]-2.6,p[2]+h/2-2.4),(x,p[1]-2.6,p[2]+h/2-1.2),.2,'detail')
+
+
+def arc_scale(pivot,radius,a0,a1,y):
+ # Tension scale swept round the dancer pivot; the arm's own tip is the pointer.
+ pts=[(pivot[0]+radius*math.sin(math.radians(a0+(a1-a0)*i/24)),y,pivot[2]+radius*math.cos(math.radians(a0+(a1-a0)*i/24))) for i in range(25)]
+ tube('tension scale arc',pts,.6,'detail')
+ for i in range(7):
+  a=math.radians(a0+(a1-a0)*i/6);l=3 if i%3==0 else 1.8
+  rod('tension graduation',(pivot[0]+radius*math.sin(a),y,pivot[2]+radius*math.cos(a)),(pivot[0]+(radius+l)*math.sin(a),y,pivot[2]+(radius+l)*math.cos(a)),.25,'detail')
+ for a in (a0,a1):rod('scale spoke',(pivot[0],y,pivot[2]),(pivot[0]+radius*math.sin(math.radians(a)),y,pivot[2]+radius*math.cos(math.radians(a))),.5,'detail')
+
+
 def spring(a,b,r=5,turns=9):
  d=Vector(b)-Vector(a);axis=d.normalized();u=axis.cross(Vector((0,1,0)))
  if u.length<.1:u=axis.cross(Vector((1,0,0)))
@@ -52,10 +121,9 @@ def velvet_hammer():
     box('retaining jaw',(12,0,44),(22,16,9),3,'accent')
     cyl('release shaft',(0,-9,25),3,28,'detail',(0,1,0))
  with group('C'):
-  instrument((62,-12,57),48,27)
+  strip_recorder((62,-12,57),48,27)
   box('event strip magazine',(87,0,58),(20,29,32),4)
   for z in (48,57,66):box('record slot',(88,-16,z),(13,2,3),.5,'detail')
-  tube('time-tag loom',[(60,0,47),(45,18,35),(5,20,30)],1)
   cyl('reset crown',(63,-15,35),5,5,'detail',(0,-1,0))
   # Paper feed and indexed spool expose the recorder's purpose.
   for x in (49,76):
@@ -65,13 +133,16 @@ def velvet_hammer():
    rod('time strip graduation',(x,-20,61),(x,-20,65 if x%10==0 else 63),.25,'detail')
   for z in range(47,72,4):box('spool case rib',(99,0,z),(2,23,1.5),.5,'detail')
   box('paper outlet',(60,-20,44),(25,3,5),1,'detail')
+  box('event paper strip',(62.5,-18.7,57),(27,.5,17),.3,'shell')
+ # The loom runs on to the ring, so it stays out of the recorder's detail view.
+ tube('time-tag loom',[(60,0,47),(45,18,35),(5,20,30)],1)
  for a in (35,325):
   x=98*math.cos(math.radians(a));z=125+98*math.sin(math.radians(a))
   box('split end termination',(x,-8,z),(14,27,14),4)
   cyl('end witness',(x,-24,z),3,3,'detail',(0,-1,0),6)
- mark('TRANSFER CAM',(-51,-14,172),'THREE CASSETTES ROUND THE RING')
+ mark('TRANSFER CAM',(-90,-30,128),'THREE CASSETTES ROUND THE RING')
  mark('SPLIT RING',(-94,3,99),'TWIN CARRIERS, OPEN FOR INSPECTION')
- mark('RELEASE LOG',(68,-20,58),'TWO DIALS BESIDE THE MAGAZINE')
+ mark('RELEASE LOG',(68,-20,58),'PAPER STRIP, MARKED AT EACH CONTACT')
  mark('RETAINING JAW',(50,-18,210),'ONE JAW PER CASSETTE')
  return 27,22
 
@@ -96,7 +167,7 @@ def bubble_bailiff():
   cyl('isolation valve stem',(63,30,86),4,20,'detail')
   ring('manual vent wheel',(63,30,103),15,3,4)
   for a in (0,120,240):rod('wheel spoke',(63,30,105),(63+12*math.cos(math.radians(a)),30+12*math.sin(math.radians(a)),105),1,'detail')
-  instrument((63,9,54),22,16)
+  sight_glass((63,6,31),36)
  tube('gas-only riser',[(-18,29,99),(3,46,100),(51,49,95),(63,30,78)],1.2)
  for x,z in ((-74,49),(55,120)):
   box('isolated saddle foot',(x,8,15),(34,48,10),5)
@@ -186,11 +257,11 @@ def metric_embassy():
   for x in (-11,29):rod('probe slide',(x,8,126),(x,8,94),2,'detail')
   for x in (-11,29):box('three-wire jaw',(x,8,96),(13,20,7),2)
   for j in range(3):rod('reference wire',(-17+j*4,-1,99),(-17+j*4,17,99),.7,'accent')
-  instrument((9,-10,145),35,19)
+  dial_indicator((9,-8,143),10)
  tube('probe return loom',[(9,27,145),(-50,45,160),(-105,43,80),(-80,38,15)],1)
  mark('REFERENCE HEAD',(9,-6,144),'HANGS FROM AN ARCHED ARM')
  mark('ADAPTOR LIBRARY',(50,48,60),'EIGHT KEYED SHOES ON THE RIM')
- mark('GAUGE CAROUSEL',(-65,-34,37),'INTERRUPTED RIM / THREE PEDESTALS')
+ mark('GAUGE CAROUSEL',(-79,-29,41),'INTERRUPTED RIM / THREE PEDESTALS')
  mark('DRIVE INDEX',(0,-8,25),'GEARED SPINDLE / FOUR RADIAL WEBS')
  return 28,28
 
@@ -214,9 +285,7 @@ def muon_customs():
  for x in (-36,55):box('cargo strap',(x,0,122),(4,83,92),1,'detail')
  with group('C'):
   box('coincidence clock rack',(-137,-82,137),(47,36,72),8)
-  for z in (114,136,158):
-   instrument((-137,-102,z),36,15)
-   for x in (-148,-135,-122):cyl('timing connector',(x,-105,z-5),1.6,4,'detail',(0,-1,0))
+  for z in (114,136,158):timing_unit((-137,-101.5,z),40,15)
   ribs((-137,-63,140),(34,5,57),8)
   tube('rack service pigtail',[(-124,-78,170),(-118,-74,181),(-107,-64,181)],1)
  tube('clock loom',[(-107,-64,181),(-108,-60,210),(-104,-61,250)],1)
@@ -230,7 +299,7 @@ def muon_customs():
  mark('UPPER TRACKER',(30,-40,262),'TWO PLANES, TEN STRIPS EACH')
  mark('LOWER TRACKER',(35,-40,46),'SAME PAIR, BELOW THE PALLET')
  mark('CLOCK RACK',(-137,-104,139),'THREE TIMING UNITS ON THE FRAME')
- mark('PASSIVE BAY',(10,-41,132),'STRAPPED TEST CRATE / NO EMITTER')
+ mark('PASSIVE BAY',(-43,-40,95),'STRAPPED TEST CRATE / NO EMITTER')
  return 23,17
 
 
@@ -247,7 +316,7 @@ def resonance_tailor():
    for y in (-12,28):box('mass cheek',(x,y,h-24),(45,4,28),2,'detail')
    cyl('tuning leadscrew',(x,8,51),2,h-37,'detail')
    for z in range(64,h,10):ring('screw witness',(x,8,z),2.9,.6,1,role='detail')
-   instrument((x,-12,h-24),29,16)
+   reed_gauge((x,-16,h-24),26,14)
    spring((x,23,53),(x,23,h-45),4,9)
    box('end stop',(x,8,h+7),(31,19,8),3)
  with group('C'):
@@ -260,10 +329,10 @@ def resonance_tailor():
    for z in (30,67):
     rod('flexure anchorage',(x,-54,z),(x,-35,53),2,'detail')
     cyl('flexure clamp',(x,-56,z),2.5,3,'detail',(0,-1,0),6)
- mark('CENTRE MASS',(0,-10,181),'TALLEST BRANCH, OWN DIAL')
+ mark('CENTRE MASS',(0,-10,181),'TALLEST BRANCH, OWN REED GAUGE')
  mark('SHORT BRANCH',(57,8,109),'SHORTEST FLEXURES OF THE THREE')
- mark('LOCK BRIDGE',(0,-48,56),'TWO KNOBS ON THE CENTRE ROOT')
- mark('HOST CLAMP',(-35,-8,18),'SPLIT COLLAR, TWO SCREWS')
+ mark('LOCK BRIDGE',(-22,-44,81),'TWO KNOBS ON THE CENTRE ROOT')
+ mark('HOST CLAMP',(-24,-30,14),'SPLIT COLLAR, TWO SCREWS')
  return 27,21
 
 
@@ -287,7 +356,8 @@ def suture_loom():
   for y in range(60,85,4):ring('wound thread',(61,y,60),21.3,.4,.6,(0,1,0),'detail')
   joint((31,70,82),6,(0,1,0));rod('dancer arm',(31,70,82),(22,70,103),2)
   spring((32,72,83),(47,72,102),2,6)
-  instrument((64,42,81),29,17)
+  arc_scale((31,70,82),28,-55,5,66)
+  rod('dancer pointer',(22,69,103),(20.3,67,106.9),.4,'accent')
   box('spool bracket',(61,72,38),(52,38,8),4)
   rod('dancer pivot support',(31,70,40),(31,70,82),3)
   rod('spring return lug',(47,72,40),(47,72,102),1.5,'detail')
@@ -299,8 +369,8 @@ def suture_loom():
   box('membrane clamp',(x,24,89),(6,12,7),2,'detail')
  for x,y in ((-68,43),(60,54),(-28,-72)):box('bench shoe',(x,y,5),(29,34,11),5);rod('bench stand',(x,y,10),(x,y,34),4)
  mark('DUAL NEEDLE GRIP',(-10,-4,114),'TWO MOTORISED ARMS, MIRRORED')
- mark('THREAD DANCER',(25,70,101),'SPRUNG ARM WITH ITS OWN GAUGE')
- mark('TEST MEMBRANE',(0,5,89),'CLAMPED BETWEEN TWO SUPPORTS')
+ mark('THREAD DANCER',(25,70,101),'SPRUNG ARM OVER A TENSION SCALE')
+ mark('TEST MEMBRANE',(16,5,90),'CLAMPED BETWEEN TWO SUPPORTS')
  mark('OPEN SERVICE TRACK',(-78,0,49),'CLEANING ACCESS BUILT IN')
  return 28,32
 
@@ -348,9 +418,9 @@ def spin_table():
   rod('balance outrigger',(0,0,-34),(0,0,-102),5)
   for z in (-78,-87,-96):cyl('trim counterweight',(0,0,z),19,7,'detail')
  tube('cradle service cable',[(-106,8,121),(-99,26,73),(-66,20,28),(-66,-26,10)],1)
- mark('SEALED VESSEL',(0,-25,157),'SPUN BOWL, THREE ROLLED SEAMS')
+ mark('SEALED VESSEL',(15,-40,142),'SPUN BOWL, THREE ROLLED SEAMS')
  mark('DRIVE BEARING',(-100,-3,130),'MOTOR OUTBOARD OF THE HOOP')
- mark('BALANCE MASS',(0,-35,46),'THREE TRIM WEIGHTS ON AN OUTRIGGER')
+ mark('BALANCE MASS',(0,-35,46),'THREE TRIM WEIGHTS OPPOSITE THE LID')
  mark('LID INTERLOCK',(36,-14,162),'HALF-RING GRIP / PRESSED RIBS')
  return 24,22
 

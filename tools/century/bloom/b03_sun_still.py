@@ -21,7 +21,7 @@ ENTRY = dict(
                'sunlight, and bags the salts as table salt, magnesium and gypsum instead '
                'of returning a brine plume to the bay.'),
     enabled_by=[
-        ('DISTILLATION', 'Multi-effect stacks that reuse one input of heat a dozen times, as coastal plants do.'),
+        ('DISTILLATION', 'Multi-effect stacks, as in coastal plants: each effect boils at a lower pressure than the one above.'),
         ('SOLAR THERMAL', 'Heliostat fields and tower receivers from concentrating solar power.'),
         ('MINERAL RECOVERY', 'Staged crystallisation that separates sodium, magnesium and calcium salts.'),
     ],
@@ -29,7 +29,7 @@ ENTRY = dict(
     required_breakthroughs='Low-cost, scale-free evaporator surfaces that last many years in hot brine.',
     view_A='HELIOSTAT-FED DISTILLATION TOWER',
     view_B='EFFECT STACK', view_B_note='SHELL CUT AWAY / TUBE BUNDLES / SPRAY BARS / TRAYS',
-    view_C='MIRROR ROW', view_C_note='TWO-AXIS DRIVES / CLEANING ROBOT / ROTARY BRUSH',
+    view_C='MIRROR ROW', view_C_note='TWO-AXIS DRIVES / CLEANING ROBOT',
     service_year='2036',
     sources=['https://www.iea-shc.org/', 'https://www.nrel.gov/csp/'],
     source_scope='Real basis only: multi-effect distillation, central-receiver solar thermal, brine mineral recovery. The tower, its output and every figure are an original concept.',
@@ -44,9 +44,9 @@ DOSSIER = dict(
           ('DIRECT SUN', '6.5 kWh PER m² A DAY'),
           ('MIRROR FIELD', '6 100 m² / 25.6 MWh OF HEAT A DAY')],
     note='THE FIRST BAGS OF SALT WENT TO THE SCHOOL KITCHEN.',
-    left=('ONE HEAT, FOURTEEN USES', 'MULTI-EFFECT CASCADE / DECLARED TEMPERATURES',
-          'Vapour from each effect condenses in the tubes of the next: heat is used about 12 times.'),
-    right=('NOTHING GOES BACK AS BRINE', 'DAILY MASS BALANCE / t PER DAY / DECLARED DESIGN',
+    left=('ONE HEAT, FOURTEEN EFFECTS', 'MULTI-EFFECT CASCADE / DESIGN TEMPERATURES',
+          'Vapour from each effect condenses in the tubes of the next and boils the brine there.'),
+    right=('NOTHING GOES BACK AS BRINE', 'DAILY MASS BALANCE / t PER DAY / DESIGN VALUES',
            'Seawater 500 t = fresh water 480 t + salts 17.5 t + moisture in the bags 2.5 t.'),
 )
 

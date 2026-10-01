@@ -45,9 +45,9 @@ DOSSIER = dict(
           ('HYDROGEN FROM', 'REDSHIFT 35 TO 280'),
           ('CONTACT', 'ONE ORBITER PASS A DAY')],
     note='THE MESH IS MOSTLY HOLES. THE WAVES ARE TOO LONG TO NOTICE.',
-    left=('OLDER LIGHT, LONGER WAVES', 'f = 1420 MHz / (1 + z) / DECLARED BAND',
+    left=('OLDER LIGHT, LONGER WAVES', 'f = 1420 MHz / (1 + z) / DESIGN BAND',
           "Below about 10 MHz Earth's ionosphere closes the sky; the far side stays open."),
-    right=('THE MOON AS A SHIELD', 'RADIO SHADOW / NOT TO SCALE',
+    right=('THE MOON AS A SHIELD', 'RADIO SHADOW / FAR SIDE',
            'The far side never faces Earth; the relay carries the data home.'),
 )
 

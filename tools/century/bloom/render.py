@@ -66,11 +66,20 @@ def draw_view(s, entry, key, cx, cy, width, height):
     table = STYLES['A' if key == 'A' else 'side']
     # Secondary lines first so the outline is never overdrawn by detail.
     order = {'shell': 0, 'detail': 1, 'cable': 2, 'figure': 3, 'accent': 4, 'structure': 5}
+    drawn = []
     for path in sorted(d['paths'], key=lambda q: order.get(q['role'], 1)):
         a, w = table.get(path['role'], (.56, .45))
         pts, closed = points(path)
         s.poly([p(v) for v in pts], a, w, close=closed, color=colours.get(path['role'], WHITE))
-    return {name: p(v) for name, v in d.get('anchors', {}).items()}
+        drawn.append([p(v) for v in pts] + ([p(pts[0])] if closed else []))
+    if key == 'A':
+        # what century.render.callouts needs to keep labels off the drawing
+        s._view_A_paths, s._view_A_centre = drawn, cy
+    # per-sheet corrections where an exported anchor misses the part it names (century/anchor_shifts.py)
+    from century.anchor_shifts import SHIFTS
+    shift = SHIFTS.get((entry['slug'], key), {})
+    return {name: (lambda q, d=shift.get(name, (0, 0)): (q[0] + d[0] * k, q[1] + d[1] * k))(p(v))
+            for name, v in d.get('anchors', {}).items()}
 
 
 class BloomSheet(CenturySheet):

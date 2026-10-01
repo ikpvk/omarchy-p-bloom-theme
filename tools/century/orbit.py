@@ -23,7 +23,7 @@ def light_sail():
                 box('bearing cheek',(6,y,6),(20,4,19),2)
                 cyl('roller bearing',(6,y,8),5,3,'detail',(0,1,0));bolts((6,y+3,8),3.5,4,(0,1,0),.6)
             cyl('deployment roller',(6,-10,8),4,20,'detail',(0,1,0))
-            motor((-7,-18,0),6,13,(0,1,0))
+            motor((-7,-18,0),6,13,(0,1,0),fins=False)  # fins this small hatch the roller in C
             rod('retaining pin',(-6,-17,8),(-6,17,8),2,'detail')
             for x in (-7,7):cyl('plate fastener',(x,0,6),1.6,2,'detail',n=6)
         mark('SAIL ROOT',(49,7,8),'MEMBRANE EDGE TENSIONER')
@@ -45,7 +45,7 @@ def light_sail():
         for x in (-40,0,40):ring('payload cradle',(x,0,0),20,2,6,(1,0,0),'detail')
         for x in (-37,37):rod('cargo standoff',(x,0,13),(x*.35,0,48),3)
         optics((68,0,0),6,12,(1,0,0))
-    mark('CARGO SPINE',(-46,-12,-59),'THERMALLY ISOLATED FREIGHT')
+    # The cargo spindle hangs behind the membrane in A, so it carries no callout there.
     mark('MEMBRANE',(95,-90,3),'REPAIRABLE REFLECTIVE FILM')
     mark('TIP REEL',(185,0,0),'BOOM RETRACTION DRIVE')
     return 25,50

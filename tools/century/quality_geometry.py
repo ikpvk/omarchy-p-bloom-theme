@@ -3,6 +3,7 @@
 All component views are subsets of the same scene. Quiet Stair additionally
 exports two explicit states from one set of vertical carriage coordinates.
 """
+from contextlib import nullcontext
 from .kit import *
 from . import kit
 
@@ -91,7 +92,7 @@ def coral_cradle():
                             for side in (-1,1):organic_branch('coral offshoot',[(x+1,y,40),(x+side*6,y+2,45),(x+side*8,y+3,48)],.7,'detail')
                 for y in (-13,13):rod('cassette guide',(31,y,17),(72,y,17),1.5,'detail')
                 box('cassette ID tab',(73,0,24),(6,13,3),1,'accent')
-        mark('NURSERY CASSETTES',(53,-42,27),'FIVE CASSETTES / FOUR COLLETS EACH')
+        mark('NURSERY CASSETTES',(51,8,24),'FOUR COLLETS EACH / LIFT OUT WHOLE')
     with group('B'):
         with at((0,-32,70)):
             ring('compliant transfer collar',(0,0,0),16,4,9)
@@ -103,7 +104,7 @@ def coral_cradle():
             for x in (-18,18):rod('camera support',(x,0,5),(x,0,35),1.3)
             box('camera bridge',(0,0,34),(40,13,7),2)
             box('transfer slide',(0,7,38),(33,22,10),3)
-        mark('TRANSFER COLLAR',(12,-33,61),'THREE CONTACTS / RIDES THE GANTRY')
+        mark('TRANSFER COLLAR',(-14,-40,70),'THREE CONTACTS / RIDES THE GANTRY')
     for x in (-53,53):
         rod('service arch leg',(x,37,17),(x,37,114),3)
         rod('gantry rail',(x,37,113),(x,-45,113),2)
@@ -124,7 +125,8 @@ def tidal_loom():
     # Paired cartridges on a triangulated, swept support. Service spine is asymmetric.
     centres=[(-73,-5,73),(68,15,98)]
     for i,(x,y,z) in enumerate(centres):
-        with group('B' if i==0 else 'C'):
+        # B is one rotor cartridge; C is the wet-service saddle, not the second, matched cartridge.
+        with (group('B') if i==0 else nullcontext()):
             ring('flow shroud',(x,y-18,z),43,4,34,(0,1,0))
             for yy in (y-18,y+14):ring('shroud lip',(x,yy,z),45,2,3,(0,1,0),'detail')
             rotor((x,y-3,z),36,5,(0,1,0),19)
@@ -141,11 +143,19 @@ def tidal_loom():
         bolts(Vector(p)+Vector((0,0,12)),20,8,size=1)
     for p,q in [((-113,42,17),(-73,29,111)),((110,58,17),(68,48,135)),((15,-57,17),(-73,15,38)),((15,-57,17),(68,35,58))]:truss(p,q,10,5)
     truss((-75,36,118),(69,55,143),13,10)
-    box('wet service saddle',(33,58,148),(48,27,20),6)
-    for i in range(5):cyl('wet mate socket',(15+i*8,43,148),2.4,8,'accent',(0,-1,0))
+    with group('C'):
+        box('wet service saddle',(33,58,148),(48,27,20),6)
+        for i in range(5):cyl('wet mate socket',(15+i*8,43,148),2.4,8,'accent',(0,-1,0))
     tube('power collection',[(-73,44,73),(-83,51,113),(27,65,146),(68,57,98)],2,'cable')
-    rod('recovery mast',(47,62,149),(47,62,180),3)
-    ring('recovery eye',(47,57,180),9,3,6,(0,1,0))
+    with group('C'):
+        rod('recovery mast',(47,62,149),(47,62,180),3)
+        ring('recovery eye',(47,62,189),9,3,6,(0,1,0))
+        # Wet-mate face: a collar round every socket, two guide posts for the ROV and clamp bolts on the lid.
+        for i in range(5):ring('socket collar',(15+i*8,44,148),3.6,.9,2,(0,-1,0),'detail')
+        for x in (11,55):rod('rov guide post',(x,45,141),(x,36,141),1.2,'detail')
+        for x in (16,26,36):
+            for y in (49,67):cyl('lid clamp bolt',(x,y,158),1.1,1.6,'detail',n=6)
+        flange('mast flange',(47,62,158),6.5,depth=2.5)
     mark('REMOVABLE ROTOR',(-73,-23,73),'MATCHED GENERATOR CARTRIDGES')
     mark('WET SERVICE SPINE',(34,42,149),'ONE RECOVERY SIDE / DRY-DECK MAINTENANCE')
     mark('BALLAST SHOE',(15,-57,14),'RECOVERABLE SEABED CONNECTION')
@@ -237,7 +247,7 @@ def seam_surgeon():
             for z in (-9,9):rod('compliant probe link',(3,-45,z),(3,-34,z),1,'detail')
             optics((3,-55,0),6,15,(0,1,0))
             box('shoe junction',(23,-45,0),(9,12,18),2,'detail')
-        mark('INSPECTION ARRAY',(9,20,27),'SEGMENTED ARRAY ON CONTACT WHEELS')
+        mark('INSPECTION ARRAY',(-10,26,20),'SEGMENTED ARRAY ON CONTACT WHEELS')
     uncover('B','orbital tool saddle')
     uncover('C','inspection bogie')
     with at((0,0,68),215,'X'):
@@ -249,9 +259,10 @@ def seam_surgeon():
         for y in (-33,33):rod('collar shoe',(x,y,29),(x,y*1.7,1),2.5)
     box('gas power cassette',(51,32,37),(32,41,65),7)
     for z in range(14,64,6):rod('power cooling slot',(68,19,z),(68,44,z),.5,'detail')
-    tube('torch service',[(51,13,50),(36,-17,125),(11,-58,113),(-2,-70,85)],1.3,'cable')
+    # Over the top of the outer track, never across the bore.
+    tube('torch service',[(51,13,50),(55,40,110),(30,10,138),(5,-45,126),(-2,-70,85)],1.3,'cable')
     mark('PREPARATION HEAD',(3,34,103),'CLEAN FIRST / THEN CONTROLLED WELD PASS')
-    mark('SPLIT TRACK',(11,43,91),'CLAMP AROUND THE JOINT / NO PIPE REMOVAL')
+    mark('SPLIT TRACK',(14,52,64),'CLAMP AROUND THE JOINT / NO PIPE REMOVAL')
     return 48,24
 
 
@@ -299,7 +310,7 @@ def meeting_buoy():
 
 
 def wind_kite():
-    views(B=(32,26),C=(8,30))
+    views(B=(-28,58),C=(14,62))
     # Airfoil shell with an exposed starboard wing bay; short illustrated tether.
     with group('C'):
         for side in (-1,1):
@@ -351,7 +362,7 @@ def wind_kite():
     for z in range(7,33,5):rod('inverter fin',(60,25,z),(60,45,z),.6,'detail')
     optics((-47,-26,36),6,13,(0,-1,.25))
     mark('TRACKING HEAD',(-47,-38,40),'GROUND OPTICS / FOLLOWS THE WING')
-    mark('BRIDLE',(0,8,115),'SYSTEM STUDY / TETHER LENGTH COMPRESSED')
+    mark('BRIDLE',(0,8,115),'TWO LINES SHARE THE PULL')
     return 24,29
 
 

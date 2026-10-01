@@ -1,4 +1,4 @@
-"""Schematic transfer comparison; geometric paths are illustrative, not a solved mission."""
+"""Earth to Mars: the FT-2 arc (thrust, coast, brake in 75 days) against a chemical transfer ellipse (259 days)."""
 import math
 from sheet import WHITE,ARC,GOLD,SUN,polar
 
@@ -40,10 +40,10 @@ def draw(s,lx):
  s.c.restore()
  s.text('EARTH / DEPARTURE',lx-187,cy+18,5.8,a=.75,align='r')
  s.poly([e,(lx-179,cy+43),(lx-179,cy+25)],.38,.5,close=False)
- s.text('MARS / ARRIVAL',m[0]+10,m[1]+12,5.8,a=.75)
+ s.text('MARS / ARRIVAL',m[0]+10,m[1]+12+s.type_growth(5.8),5.8,a=.75)  # enlarged type grows away from the marker
  # Each leader runs from its label to the path it names.
- s.text('POWERED / 75 d',lx-138,477,6.5,a=.85,color=ARC)
+ s.text('FT-2 / 75 d',lx-138,477,6.5,a=.85,color=ARC)
  s.ln(lx-110,465,*trajectory(.3),.45,.5,color=ARC)
- s.text('COAST / 259 d',lx-203,153,6,a=.55)
+ s.text('CHEMICAL / 259 d',lx-203,153,6,a=.55)
  s.ln(lx-150,159,*coast[55],.3,.5)
- s.view_label(lx,520,'B','TRANSIT','POWERED ARC / COASTING ELLIPSE — SCHEMATIC')
+ s.view_label(lx,520,'B','TRANSIT','EARTH TO MARS / TWO TRANSFERS')

@@ -42,20 +42,34 @@ def draw(s,lx):
   for i in range(d):s.dot(*pos((i,j)),1.8,.91)
  s.text('Zₗ',gx+10*step+10,yy+3,7,a=.85,color=GOLD)
  # Enlarged weight-four X stabilizer, isolated from the full patch.
- cx,cy=lx+126,269
+ cx,cy=lx+126,269;lead=14
+ if s.layer_mode:
+  # Enlarged type: the inset moves right until its widest line clears the patch and Zₗ.
+  w=max(s.measure('4 DATA + 1 ANCILLA',5.4),s.measure('XXXX PARITY',5.8),s.measure('X CHECK',7))
+  cx=min(max(cx,gx+10*step+10+s.measure('Zₗ',7)+14+w/2),lx+316-w/2)
+  lead=max(14,s.readable_size(5.8)*1.3)
  s.text('X CHECK',cx,cy-49,7,a=.8,align='c',color=ARC)
  for dx,dy in [(-25,-25),(25,-25),(25,25),(-25,25)]:
   s.ln(cx,cy,cx+dx,cy+dy,.55,.65,color=ARC)
   s.dot(cx+dx,cy+dy,3,.9)
  marker(s,cx,cy,'X',4)
- s.text('4 DATA + 1 ANCILLA',cx,cy+45,5.4,a=.65,align='c')
- s.text('XXXX PARITY',cx,cy+59,5.8,a=.65,align='c',color=ARC)
+ s.text('4 DATA + 1 ANCILLA',cx,cy+45+s.type_growth(5.4),5.4,a=.65,align='c')
+ s.text('XXXX PARITY',cx,cy+45+s.type_growth(5.4)+lead,5.8,a=.65,align='c',color=ARC)
  hx,hy=pos((6,4))
  s.rect(hx-2,hy-2,step+4,step+4,.66,.75,color=GOLD)
  s.poly([(hx+step+3,hy+1),(lx+62,214),(cx-30,cy-32)],.42,.5,close=False,dash=[3,3])
  # Separate legend explains symbols without writing over the circuit.
- s.dot(lx-168,417,2,.9);s.text('DATA',lx-158,420,6,a=.75)
- marker(s,lx-82,417,'X',2.6);s.text('X CHECK',lx-71,420,6,a=.75,color=ARC)
- marker(s,lx+32,417,'Z',2.6);s.text('Z CHECK',lx+43,420,6,a=.75)
- s.text('Zₗ / LOGICAL Z OPERATOR',lx-174,442,6,a=.7,color=GOLD)
+ ky=420
+ if s.layer_mode:
+  # Enlarged type: each word keeps a fixed gap to its marker and to the next marker.
+  ky+=s.type_growth(6);x=lx-168;f=s.readable_size(6);near,far=3+.9*f,2.4*f
+  s.dot(x,ky-3,2,.9);x=x+near+s.text('DATA',x+near,ky,6,a=.75)+far
+  marker(s,x,ky-3,'X',2.6);x=x+near+s.text('X CHECK',x+near,ky,6,a=.75,color=ARC)+far
+  marker(s,x,ky-3,'Z',2.6);s.text('Z CHECK',x+near,ky,6,a=.75)
+  s.text('Zₗ / LOGICAL Z OPERATOR',lx-174,ky+22+s.type_growth(6),6,a=.7,color=GOLD)
+ else:
+  s.dot(lx-168,417,2,.9);s.text('DATA',lx-158,420,6,a=.75)
+  marker(s,lx-82,417,'X',2.6);s.text('X CHECK',lx-71,420,6,a=.75,color=ARC)
+  marker(s,lx+32,417,'Z',2.6);s.text('Z CHECK',lx+43,420,6,a=.75)
+  s.text('Zₗ / LOGICAL Z OPERATOR',lx-174,442,6,a=.7,color=GOLD)
  s.view_label(lx,474,'B','ONE LOGICAL QUBIT','121 DATA + 120 ANCILLAS / DISTANCE 11')

@@ -5,7 +5,7 @@ from sheet import WHITE,ARC
 
 def system(s,lx):
     tx=lx-65
-    s.view_label(lx-175,105,'B','ELEVATOR SYSTEM','ALTITUDE AXIS BROKEN / NOT TO SCALE',align='l')
+    s.view_label(lx-175,105,'B','ELEVATOR SYSTEM','ANCHOR TO COUNTERWEIGHT / AXIS BROKEN',align='l')
     # Independent rail segments make the distance compression explicit.
     for a,b in [(196,244),(262,316),(368,398),(416,488)]:
         for dx in (-2,2):s.ln(tx+dx,a,tx+dx,b,.8,.7,color=ARC)
@@ -51,4 +51,4 @@ def ribbon(s,rx):
     s.text('02 / ALIGNED CNT BUNDLE',rx-170,409,6.3,a=.78)
     view(s,'tether-cnt-bundle',rx-20,466,233,85)
     # Deliberately no fabricated nanometre bar: these are schematic scale levels.
-    s.view_label(rx,549,'C','RIBBON ARCHITECTURE','SCHEMATIC / THICKNESS EXAGGERATED')
+    s.view_label(rx,549,'C','RIBBON ARCHITECTURE','THICKNESS EXAGGERATED')

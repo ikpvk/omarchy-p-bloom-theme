@@ -97,7 +97,7 @@ def lunar_porch():
     for z in (42,57,72):
         ring('service quick coupling',(63,-45,z),4,1,3,(0,-1,0),'detail')
         box('coupling identity plate',(72,-45,z),(5,1,5),.3,'detail')
-    for x in (-44,44):
+    for x in (-42,42):
         for z in (55,75,95):ring('handrail grip',(x,-61,z),2.5,.5,4,role='detail')
 
 

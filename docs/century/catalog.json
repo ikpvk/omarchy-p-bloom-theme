@@ -65,20 +65,20 @@
     "status": "ready-for-review",
     "review_notes": [],
     "built": {
-      "at": "2026-09-25T07:52:09.126057+00:00",
-      "seconds": 0.59,
-      "parts": 374,
+      "at": "2026-10-01T21:49:12.524128+00:00",
+      "seconds": 1.82,
+      "parts": 372,
       "views": {
         "A": {
-          "paths": 4295,
+          "paths": 1096,
           "file": "tools/assets/century/light-sail-A.json"
         },
         "B": {
-          "paths": 4718,
+          "paths": 781,
           "file": "tools/assets/century/light-sail-B.json"
         },
         "C": {
-          "paths": 362,
+          "paths": 61,
           "file": "tools/assets/century/light-sail-C.json"
         }
       }
@@ -158,7 +158,7 @@
     ],
     "view_A": "TWIN-ROTOR SEABED FRAME",
     "view_B": "ROTOR CARTRIDGE",
-    "view_C": "SERVICE-SIDE CARTRIDGE",
+    "view_C": "WET-MATE SADDLE",
     "human_role": "none",
     "palette": "teal",
     "service_year": "2057",
@@ -194,20 +194,20 @@
     "status": "ready-for-review",
     "review_notes": [],
     "built": {
-      "at": "2026-09-25T09:24:15.633970+00:00",
-      "seconds": 0.42,
-      "parts": 409,
+      "at": "2026-10-01T21:44:47.945231+00:00",
+      "seconds": 1.75,
+      "parts": 429,
       "views": {
         "A": {
-          "paths": 5471,
+          "paths": 1401,
           "file": "tools/assets/century/tidal-loom-A.json"
         },
         "B": {
-          "paths": 1634,
+          "paths": 293,
           "file": "tools/assets/century/tidal-loom-B.json"
         },
         "C": {
-          "paths": 1314,
+          "paths": 213,
           "file": "tools/assets/century/tidal-loom-C.json"
         }
       }
@@ -268,7 +268,7 @@
       "review": "concepts/century/quality-redesign/index.html"
     },
     "view_B_note": "REVERSING VANES / SHROUDED BLADES",
-    "view_C_note": "EXTRACTION FLANGE / CAPTIVE LATCHES"
+    "view_C_note": "FIVE SOCKETS / ROV GUIDE POSTS / RECOVERY EYE"
   },
   {
     "number": 3,
@@ -1768,7 +1768,7 @@
     "recipe": "memory_kiln",
     "category": "serious",
     "purpose": "LONG-LIFE GLASS DATA WRITER",
-    "narrative": "Writes a family's archive into small glass plates and stores a readable decoding guide beside them. The password is not the only surviving artefact.",
+    "narrative": "Writes a family's archive into small glass plates and stores a readable decoding guide beside them.",
     "required_breakthroughs": "Fast error-checked volumetric writing and readers that remain reproducible centuries later.",
     "real_basis": "Ultrafast writing of nanostructures in glass and optical readout.",
     "enabled_by": [
@@ -1887,7 +1887,7 @@
       "status": "rendered and reviewed",
       "original_parts": 77,
       "refined_parts": 166,
-      "plot_title": "YOUR PASSWORD DID NOT FOSSILISE",
+      "plot_title": "TWO BITS IN EVERY MARK",
       "review_gallery": "concepts/century/refined-next-ten/index.html",
       "documentation": "docs/century/REFINED-NEXT-TEN.pl.md",
       "reviewed_at": "2026-09-25T08:43:56.089873+00:00",
@@ -1963,20 +1963,20 @@
     "status": "ready-for-review",
     "review_notes": [],
     "built": {
-      "at": "2026-09-25T08:28:27.605230+00:00",
-      "seconds": 0.17,
+      "at": "2026-10-01T21:50:13.002488+00:00",
+      "seconds": 0.6,
       "parts": 80,
       "views": {
         "A": {
-          "paths": 4556,
+          "paths": 497,
           "file": "tools/assets/century/lunar-porch-A.json"
         },
         "B": {
-          "paths": 1851,
+          "paths": 112,
           "file": "tools/assets/century/lunar-porch-B.json"
         },
         "C": {
-          "paths": 630,
+          "paths": 150,
           "file": "tools/assets/century/lunar-porch-C.json"
         }
       }
@@ -4536,7 +4536,7 @@
       "https://www.awesco.eu/publication/licitra-2019-a/licitra-2019-a.pdf"
     ],
     "view_A": "KITE ABOVE ITS WINCH",
-    "view_B": "TRACTION WINCH",
+    "view_B": "LEVEL WIND OVER THE DRUM",
     "view_C": "SWEPT WING LOAD PATH",
     "human_role": "none",
     "palette": "berry",
@@ -4573,20 +4573,20 @@
     "status": "ready-for-review",
     "review_notes": [],
     "built": {
-      "at": "2026-09-25T09:34:53.568024+00:00",
-      "seconds": 0.34,
+      "at": "2026-10-01T21:36:10.614038+00:00",
+      "seconds": 1.3,
       "parts": 179,
       "views": {
         "A": {
-          "paths": 5761,
+          "paths": 862,
           "file": "tools/assets/century/wind-kite-A.json"
         },
         "B": {
-          "paths": 3890,
+          "paths": 498,
           "file": "tools/assets/century/wind-kite-B.json"
         },
         "C": {
-          "paths": 637,
+          "paths": 152,
           "file": "tools/assets/century/wind-kite-C.json"
         }
       }
@@ -4646,8 +4646,8 @@
       "geometry_source": "tools/century/quality_geometry.py",
       "review": "concepts/century/quality-redesign/index.html"
     },
-    "view_B_note": "LEVEL WIND / OUTBOUND AND RETURN",
-    "view_C_note": "SKIN OMITTED / SPARS, RIBS AND BRIDLE"
+    "view_B_note": "TRAVERSING SCREW / FAIRLEAD / OUTBOUND AND RETURN",
+    "view_C_note": "SKIN OMITTED / SPARS, RIBS, BRIDLE HARDPOINTS"
   },
   {
     "number": 43,
@@ -4817,20 +4817,20 @@
     "status": "ready-for-review",
     "review_notes": [],
     "built": {
-      "at": "2026-09-25T09:24:17.553284+00:00",
-      "seconds": 0.45,
+      "at": "2026-10-01T21:36:11.773325+00:00",
+      "seconds": 1.16,
       "parts": 155,
       "views": {
         "A": {
-          "paths": 9363,
+          "paths": 734,
           "file": "tools/assets/century/coral-cradle-A.json"
         },
         "B": {
-          "paths": 982,
+          "paths": 68,
           "file": "tools/assets/century/coral-cradle-B.json"
         },
         "C": {
-          "paths": 8528,
+          "paths": 418,
           "file": "tools/assets/century/coral-cradle-C.json"
         }
       }
@@ -6049,8 +6049,8 @@
     ],
     "sources": [],
     "view_A": "ROVER WITH SHADE RAISED",
-    "view_B": "EXPANDING WHEEL",
-    "view_C": "SHADE HINGE",
+    "view_B": "SLIDING LAMELLAE",
+    "view_C": "TWIN HINGE ARMS",
     "human_role": "none",
     "palette": "cobalt",
     "service_year": "2045",
@@ -6146,8 +6146,8 @@
       "revisit": null,
       "decided_at": "2026-09-25T08:25:17.435159+00:00"
     },
-    "view_B_note": "SLIDING LAMELLAE / WIDER SAND CONTACT",
-    "view_C_note": "HINGE RAM / BELLOWS KEEP SAND OUT"
+    "view_B_note": "GROUSERS / HUB DUST SEAL / WIDER SAND CONTACT",
+    "view_C_note": "RAMS IN BELLOWS / PIVOTS IN THE CARGO BAY"
   },
   {
     "number": 57,
@@ -7058,20 +7058,20 @@
     "status": "ready-for-review",
     "review_notes": [],
     "built": {
-      "at": "2026-09-25T09:34:53.768705+00:00",
-      "seconds": 0.2,
+      "at": "2026-10-01T21:39:26.501553+00:00",
+      "seconds": 0.82,
       "parts": 128,
       "views": {
         "A": {
-          "paths": 2950,
+          "paths": 414,
           "file": "tools/assets/century/seam-surgeon-A.json"
         },
         "B": {
-          "paths": 1524,
+          "paths": 133,
           "file": "tools/assets/century/seam-surgeon-B.json"
         },
         "C": {
-          "paths": 798,
+          "paths": 61,
           "file": "tools/assets/century/seam-surgeon-C.json"
         }
       }
@@ -9366,8 +9366,8 @@
       "https://icecube.wisc.edu/news/research/2024/05/successful-testing-of-over-10000-photomultiplier-tubes-for-icecube-upgrade-digital-optical-modules/"
     ],
     "view_A": "NINE SENSORS, ONE CAGE",
-    "view_B": "PHOTON SENSOR",
-    "view_C": "CALIBRATION FEED",
+    "view_B": "ONE SENSOR WITH ITS BOARD",
+    "view_C": "EMITTER COLLAR",
     "human_role": "none",
     "palette": "berry",
     "service_year": "2067",
@@ -9464,7 +9464,7 @@
       "decided_at": "2026-09-25T08:25:17.435190+00:00"
     },
     "view_B_note": "OPTICS AND READOUT / RARE LIGHT COUNTS",
-    "view_C_note": "PULSED EMITTERS / CHECK THE CLOCKS"
+    "view_C_note": "PULSED LIGHT / CHECK THE CLOCKS"
   },
   {
     "number": 88,
@@ -10874,7 +10874,7 @@
     "view_B": "TRANSFER CAM CASSETTE",
     "view_C": "EVENT STRIP RECORDER",
     "view_B_note": "ROLLER / RETURN SPRING / RETAINING JAW",
-    "view_C_note": "TIME TAGS / PAPER ROLLERS / RESET CROWN",
+    "view_C_note": "MARKING STYLUS / PAPER ROLLERS / RESET CROWN",
     "palette": "copper",
     "model": "VH-3",
     "service_year": "2072",
@@ -10903,20 +10903,20 @@
       "reason": "Distinct mechanism, service geometry and editorial diagrams; no recycled rejected concept."
     },
     "built": {
-      "at": "2026-09-25T13:56:15.192397+00:00",
-      "seconds": 0.26,
-      "parts": 195,
+      "at": "2026-10-01T21:46:28.952184+00:00",
+      "seconds": 0.64,
+      "parts": 181,
       "views": {
         "A": {
-          "paths": 7209,
+          "paths": 1095,
           "file": "tools/assets/century/velvet-hammer-A.json"
         },
         "B": {
-          "paths": 725,
+          "paths": 108,
           "file": "tools/assets/century/velvet-hammer-B.json"
         },
         "C": {
-          "paths": 1995,
+          "paths": 231,
           "file": "tools/assets/century/velvet-hammer-C.json"
         }
       }
@@ -10977,7 +10977,7 @@
     "view_B": "WETTED MEMBRANE DRAWER",
     "view_C": "GAS CUSTODY BUFFER",
     "view_B_note": "WICK SUPPORT / FLOW CHANNELS / RETAINERS",
-    "view_C_note": "ISOLATION STEM / VENT WHEEL / INVENTORY",
+    "view_C_note": "ISOLATION STEM / VENT WHEEL / SIGHT GLASS",
     "palette": "ink",
     "model": "BB-2",
     "service_year": "2076",
@@ -11006,20 +11006,20 @@
       "reason": "Distinct mechanism, service geometry and editorial diagrams; no recycled rejected concept."
     },
     "built": {
-      "at": "2026-09-25T13:54:15.533863+00:00",
-      "seconds": 0.19,
-      "parts": 151,
+      "at": "2026-10-01T21:45:08.931871+00:00",
+      "seconds": 0.57,
+      "parts": 143,
       "views": {
         "A": {
-          "paths": 4476,
+          "paths": 881,
           "file": "tools/assets/century/bubble-bailiff-A.json"
         },
         "B": {
-          "paths": 558,
+          "paths": 154,
           "file": "tools/assets/century/bubble-bailiff-B.json"
         },
         "C": {
-          "paths": 1979,
+          "paths": 217,
           "file": "tools/assets/century/bubble-bailiff-C.json"
         }
       }
@@ -11210,20 +11210,20 @@
       "reason": "Distinct mechanism, service geometry and editorial diagrams; no recycled rejected concept."
     },
     "built": {
-      "at": "2026-09-25T13:54:16.064203+00:00",
-      "seconds": 0.31,
-      "parts": 205,
+      "at": "2026-10-01T21:45:09.787710+00:00",
+      "seconds": 0.85,
+      "parts": 210,
       "views": {
         "A": {
-          "paths": 8981,
+          "paths": 826,
           "file": "tools/assets/century/metric-embassy-A.json"
         },
         "B": {
-          "paths": 1181,
+          "paths": 124,
           "file": "tools/assets/century/metric-embassy-B.json"
         },
         "C": {
-          "paths": 858,
+          "paths": 49,
           "file": "tools/assets/century/metric-embassy-C.json"
         }
       }
@@ -11313,20 +11313,20 @@
       "reason": "Distinct mechanism, service geometry and editorial diagrams; no recycled rejected concept."
     },
     "built": {
-      "at": "2026-09-25T13:54:16.391404+00:00",
-      "seconds": 0.32,
-      "parts": 233,
+      "at": "2026-10-01T21:45:10.968451+00:00",
+      "seconds": 1.18,
+      "parts": 203,
       "views": {
         "A": {
-          "paths": 5987,
+          "paths": 789,
           "file": "tools/assets/century/muon-customs-A.json"
         },
         "B": {
-          "paths": 878,
+          "paths": 223,
           "file": "tools/assets/century/muon-customs-B.json"
         },
         "C": {
-          "paths": 3147,
+          "paths": 141,
           "file": "tools/assets/century/muon-customs-C.json"
         }
       }
@@ -11416,20 +11416,20 @@
       "reason": "Distinct mechanism, service geometry and editorial diagrams; no recycled rejected concept."
     },
     "built": {
-      "at": "2026-09-25T13:54:16.717517+00:00",
-      "seconds": 0.32,
-      "parts": 148,
+      "at": "2026-10-01T21:48:45.294672+00:00",
+      "seconds": 0.86,
+      "parts": 151,
       "views": {
         "A": {
-          "paths": 7812,
+          "paths": 594,
           "file": "tools/assets/century/resonance-tailor-A.json"
         },
         "B": {
-          "paths": 3011,
+          "paths": 216,
           "file": "tools/assets/century/resonance-tailor-B.json"
         },
         "C": {
-          "paths": 794,
+          "paths": 93,
           "file": "tools/assets/century/resonance-tailor-C.json"
         }
       }
@@ -11519,20 +11519,20 @@
       "reason": "Distinct mechanism, service geometry and editorial diagrams; no recycled rejected concept."
     },
     "built": {
-      "at": "2026-09-25T13:54:17.006083+00:00",
-      "seconds": 0.29,
-      "parts": 153,
+      "at": "2026-10-01T21:45:12.731716+00:00",
+      "seconds": 0.93,
+      "parts": 142,
       "views": {
         "A": {
-          "paths": 6184,
+          "paths": 617,
           "file": "tools/assets/century/suture-loom-A.json"
         },
         "B": {
-          "paths": 2935,
+          "paths": 355,
           "file": "tools/assets/century/suture-loom-B.json"
         },
         "C": {
-          "paths": 2319,
+          "paths": 116,
           "file": "tools/assets/century/suture-loom-C.json"
         }
       }
@@ -11622,20 +11622,20 @@
       "reason": "Distinct mechanism, service geometry and editorial diagrams; no recycled rejected concept."
     },
     "built": {
-      "at": "2026-09-25T13:56:15.518513+00:00",
-      "seconds": 0.32,
+      "at": "2026-10-01T21:49:26.525455+00:00",
+      "seconds": 1.11,
       "parts": 155,
       "views": {
         "A": {
-          "paths": 5123,
+          "paths": 579,
           "file": "tools/assets/century/spin-table-A.json"
         },
         "B": {
-          "paths": 3058,
+          "paths": 351,
           "file": "tools/assets/century/spin-table-B.json"
         },
         "C": {
-          "paths": 745,
+          "paths": 87,
           "file": "tools/assets/century/spin-table-C.json"
         }
       }

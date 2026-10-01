@@ -109,7 +109,6 @@ def sky_racer(size):
         s.leader(mx + 26, my - 100, 150, -250, 120, "CRASH CELL", "PILOT, SEAT AND HARNESS")
         s.leader(mx + 24, my + 100, 330, 130, 110, "LITHIUM-AIR PACK", "1 100 Wh PER kg")
         s.leader(mx, my - 196, -150, -150, -120, "SENSING ARRAY", "14 HEADS / SEES 200 m")
-        s.leader(*polar(mx, my, 440, 160), -70, -60, -90, "KEEP-CLEAR ENVELOPE", "NOTHING COMES CLOSER THAN 3 m")
         s.leader(mx - 150, my + 140, -190, 160, -110, "FOLDING ARM", None)
         s.dim(mx - 403, my + 440, mx + 403, my + 440, "SPAN 4.6 m", a=0.4, label_shift=80, label_offset=-16)
     s.end_main()
@@ -125,7 +124,10 @@ def sky_racer(size):
     from triptych import auxiliary_panel, original_diagrams
     with auxiliary_panel(s, 'B', lx, rx):
         anchors=hardware_view(s,'sky-racer-cutaway',lx,285,410,250)
-        for label,tx,ty in [('FLIGHT COMPUTER',lx-180,190),('CRASH SEAT',lx-15,170),('CELL BAY',lx+110,387)]:
+        # Enlarged type (composed profiles): the flight computer's label drops below the hull,
+        # clear of the crash cell's. The crash cell keeps the name it has in view A.
+        fc=(lx-170,387+s.type_growth(6)) if s.layer_mode else (lx-180,190)
+        for label,tx,ty in [('FLIGHT COMPUTER',*fc),('CRASH CELL',lx-15,170),('CELL BAY',lx+110,387+s.type_growth(6))]:
             ax,ay=anchors[label]
             s.poly([(ax,ay),(tx,ty-10 if ay<ty else ty+9)],.45,.5,close=False)
             s.dot(ax,ay,1.4,.7)

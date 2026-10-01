@@ -56,7 +56,8 @@ def lunar_porch():
     ring('habitat bulkhead',(0,12,81),78,10,19,(0,1,0))
     for a in range(0,360,30):
         q=math.radians(a);cyl('bulkhead bolt',(71*math.cos(q),10,81+71*math.sin(q)),2,4,'detail',(0,-1,0),6)
-    for x in (-45,45):rod('handrail',(x,-61,21),(x,-61,105),2);rod('handrail return',(x,-61,105),(x,-16,105),2)
+    # Both posts stand on the grate's edge, not beside it in the air.
+    for x in (-42,42):rod('handrail',(x,-61,16),(x,-61,105),2);rod('handrail return',(x,-61,105),(x,-16,105),2)
     box('exterior utility chest',(63,-25,53),(29,38,61),7)
     tube('service umbilical',[(64,-15,83),(49,-28,116),(22,-25,99)],1.2,'cable')
     mark('BULKHEAD',(-63,12,119),'PRESSURE BOUNDARY / 12 BOLTS')

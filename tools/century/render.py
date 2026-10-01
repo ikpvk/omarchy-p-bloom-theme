@@ -60,7 +60,10 @@ def draw_view(s,entry,key,cx,cy,width,height):
         s.poly([p(v) for v in pts],a,w,close=closed,color=col)
         drawn.append([p(v) for v in pts]+([p(pts[0])] if closed else []))
     if key=='A':s._view_A_paths,s._view_A_centre=drawn,cy
-    return {name:p(v) for name,v in d.get('anchors',{}).items()}
+    # per-sheet corrections where an exported anchor misses the part it names (century/anchor_shifts.py)
+    from century.anchor_shifts import SHIFTS
+    shift=SHIFTS.get((entry['slug'],key),{})
+    return {name:(lambda q,d=shift.get(name,(0,0)):(q[0]+d[0]*k,q[1]+d[1]*k))(p(v)) for name,v in d.get('anchors',{}).items()}
 
 
 def callouts(s,entry,anchors,mx,my):
@@ -87,6 +90,18 @@ def callouts(s,entry,anchors,mx,my):
                     n=max(1,int(math.hypot(cx_-ax,cy_-ay)/4))
                     if any(bx0<=ax+(cx_-ax)*t/n<=bx1 and by0<=ay+(cy_-ay)*t/n<=by1 for t in range(n+1)):return True
             return False
+        # a label that would sit on the drawing moves to the nearest clear height between its neighbours;
+        # only if none exists does this side fall back to the even slots
+        for i,key in enumerate(keys):
+            if not on_drawing(i,key):continue
+            lo=ys[i-1]+gap if i else top; hi=ys[i+1]-gap if i+1<len(ys) else bottom
+            here=ys[i]
+            for d in sorted(range(-240,241,8),key=abs):
+                if lo<=here+d<=hi:
+                    ys[i]=here+d
+                    if not on_drawing(i,key):break
+            else:
+                ys[i]=here
         if any(on_drawing(i,key) for i,key in enumerate(keys)):
             ys=[top+i*(bottom-top)/max(1,len(keys)-1) for i in range(len(keys))]
         slot=lambda i,key,side=side,ys=ys:(mx+side*374,ys[i])

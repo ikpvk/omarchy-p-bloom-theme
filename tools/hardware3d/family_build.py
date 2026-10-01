@@ -67,7 +67,6 @@ def air_refinery():
  for x in range(-126,135,10):g.wire('sorbent lamella',[(x,-66,493),(x,-66,526)],.8,'detail')
  for x in (-123,123):
   g.ball('fuel tank',(x,12,106),(41,65,69));g.flange(x,12,163,19)
-  g.wire('fuel outlet',[(x,-44,72),(x,-71,55),(x*.6,-82,45)],2,'cable')
  g.softbox('electrolyser',(106,-60,53),(68,52,38),11);g.vents(106,-87,42,5,41)
  g.softbox('solar receiver',(-89,42,318),(39,42,83),11,'accent')
  for k in range(5):

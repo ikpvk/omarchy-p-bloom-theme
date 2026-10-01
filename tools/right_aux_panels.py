@@ -3,17 +3,41 @@ from sheet import WHITE, ARC, GOLD
 from hardware3d.secondary_drawing import view
 
 
+def compact_key(s,x,y,rows,per_col,limit,size=6.3,track=.07,lead=18):
+    """Enlarged type (composed profiles): a numbered key with fixed gutters.
+
+    rows are (number, label, colour) down the columns, per_col to a column. The gap from a number
+    to its word and between the columns stays the same at every size; when two columns would
+    run past limit, the key stacks in one."""
+    off=s.measure('00',size,.06)+12
+    lead=max(lead,s.readable_size(size)*1.55)
+    cols=[rows[i:i+per_col] for i in range(0,len(rows),per_col)]
+    widths=[off+max(s.measure(label,size,track) for _,label,_ in col) for col in cols]
+    if x+sum(widths)+24*(len(cols)-1)>limit:
+        cols=[rows];widths=[max(widths)]
+    xx=x
+    for col,w in zip(cols,widths):
+        for i,(num,label,color) in enumerate(col):
+            s.text(num,xx,y+i*lead,size,track=.06,a=.6)
+            s.text(label,xx+off,y+i*lead,size,track=track,a=.86,color=color)
+        xx+=w+24
+
+
 def owner(s,rx):
     a=view(s,'proxy-sleeping-owner',rx,321,347,268)
     # Proxy's guide-runner story: the runner wakes; PX-1 has charged by the bed.
-    s.text('05:40',rx+169,166,18,track=.04,a=.9,align='r')
-    s.text('10.0 km / ROUTE LOADED',rx+169,184,7,track=.07,a=.85,align='r',color=ARC)
+    cy=166
+    if s.layer_mode:
+        # Enlarged type: when the route line would run into the runner's label, the clock group
+        # rises until the route sits clear above it.
+        if rx-174+s.measure('HUMAN RUNNER',7,.09)+14>rx+169-s.measure('10.0 km / ROUTE LOADED',7,.07):
+            cy=min(cy,170-.75*s.readable_size(7)-.5*s.readable_size(7)-18)
+    s.text('05:40',rx+169,cy,18,track=.04,a=.9,align='r')
+    s.text('10.0 km / ROUTE LOADED',rx+169,cy+18,7,track=.07,a=.85,align='r',color=ARC)
     s.text('HUMAN RUNNER',rx-174,170,7,track=.09,a=.85)
-    # Enlarged type (composed profiles): the clock already gives the time.
-    lead=.75*s.type_growth(5.6)  # enlarged type keeps its leading
-    s.text('STAND-IN' if s.type_growth(5.6) else 'STAND-IN; ALARM AT 05:40',rx-174,185+lead,5.6,track=.08,a=.58)
     x,y=a['HUMAN']
-    s.poly([(rx-145,194+lead),(rx-145,207+lead),(x,y)],.4,.5,close=False)
+    g=s.type_growth(7)
+    s.poly([(rx-145,179+g),(rx-145,192+g),(x,y)],.4,.5,close=False)
     s.dot(x,y,1.2,.65)
     s.text('PX-1 CHARGES BY THE BED; OUT AT 06:00',rx,480,6.4,a=.6,track=.11,align='c')
     s.view_label(rx,540,'C','THE RUNNER','AT HOME, BEFORE THE RUN')
@@ -26,12 +50,10 @@ def course(s,rx):
     for j in range(1,10):
         x,y=a[f'G{j}'];dx,dy=offsets[j]
         if dy>=24:dy+=.72*s.type_growth(7)  # enlarged numbers below a gate grow towards it
-        s.text(f'{j:02}',x+dx,y+dy,7,track=.04,a=.9,align='c',color=GOLD if j==1 else WHITE)
-    # START / FINISH reads on from the gold 01, beside the gate it names.
+        s.text(f'{j:02}',x+dx,y+dy,7,track=.04,a=.9,align='c',color=ARC if j==1 else WHITE)
+    # START / FINISH reads on from the accent 01, beside the gate it names.
     x,y=a['G1'];dx,dy=offsets[1]
-    s.text('START / FINISH',x+dx+s.measure('01',7,.04)/2+6,y+dy,6.1,track=.08,a=.8,color=GOLD)
-    s.text('ALTITUDE DATUM: GROUND',rx-176,493,6.1,track=.08,a=.65)
-    s.text('SCHEMATIC / HEIGHT EXAGGERATED',rx-176,510+.75*s.type_growth(5.6),5.6,track=.08,a=.45)
+    s.text('START / FINISH',x+dx+s.measure('01',7,.04)/2+6,y+dy,6.1,track=.08,a=.8,color=ARC)
     s.view_label(rx,548,'C','COURSE','9 GATES / 2.4 km / 30 – 180 m ABOVE GROUND')
 
 
@@ -44,13 +66,14 @@ def kidney(s,rx):
         s.poly([(x,y),(tx-side*17,ty-2),(tx-side*8,ty-2)],.48,.5,close=False)
         s.dot(x,y,1.3,.7)
         s.text(num,tx,ty,6.7,track=.05,a=.9,align='c')
-    x2=rx+8
-    if s.layer_mode:  # enlarged key: the second column starts after the first
-        x2=max(x2,rx-171+21+max(s.measure(t_,6.3,.07) for t_ in ('CORTEX','MEDULLARY PYRAMIDS'))+16)
-    for num,label,x,y,color in [('01','CORTEX',rx-171,490,WHITE),('02','MEDULLARY PYRAMIDS',rx-171,508,WHITE),('03','VASCULAR SUPPLY',x2,490,ARC),('04','COLLECTING SYSTEM',x2,508,GOLD)]:
-        s.text(num,x,y,6.3,track=.06,a=.6)
-        s.text(label,x+21,y,6.3,track=.07,a=.86,color=color)
-    s.view_label(rx,548,'C','RENAL SECTION','CORONAL CUTAWAY / PRINT CONCEPT')
+    rows=[('01','CORTEX',WHITE),('02','MEDULLARY PYRAMIDS',WHITE),('03','VASCULAR SUPPLY',ARC),('04','COLLECTING SYSTEM',GOLD)]
+    if s.layer_mode:
+        compact_key(s,rx-171,490+s.type_growth(6.3),rows,2,rx+280)
+    else:
+        for (num,label,color),(x,y) in zip(rows,[(rx-171,490),(rx-171,508),(rx+8,490),(rx+8,508)]):
+            s.text(num,x,y,6.3,track=.06,a=.6)
+            s.text(label,x+21,y,6.3,track=.07,a=.86,color=color)
+    s.view_label(rx,548,'C','RENAL SECTION','CORONAL CUTAWAY / AS PRINTED')
 
 
 def node(s,rx):
@@ -61,11 +84,14 @@ def node(s,rx):
         s.dot(x,y,1.2,.7)
         s.text(num,tx,ty,6.7,track=.05,a=.9,align='c')
     # Numbered down the columns, like every other key in the collection.
-    # (the second column starts after the longest label of the first, which enlarged type widens)
-    x2=max(rx+8,rx-171+21+s.measure('PASSIVATION WINDOW',6.3,.07)+14)
-    for num,label,x,y,color in [('01','POROUS CONTACT',rx-171,480,WHITE),('02','PASSIVATION WINDOW',rx-171,498,WHITE),('03','METAL ROUTING',x2,480,GOLD),('04','FLEXIBLE CARRIER',x2,498,WHITE)]:
-        s.text(num,x,y,6.3,track=.06,a=.6)
-        s.text(label,x+21,y,6.3,track=.07,a=.86,color=color)
+    rows=[('01','POROUS CONTACT',WHITE),('02','PASSIVATION WINDOW',WHITE),('03','METAL ROUTING',GOLD),('04','FLEXIBLE CARRIER',WHITE)]
+    if s.layer_mode:
+        compact_key(s,rx-171,480+s.type_growth(6.3),rows,2,rx+280)
+    else:
+        x2=max(rx+8,rx-171+21+s.measure('PASSIVATION WINDOW',6.3,.07)+14)
+        for (num,label,color),(x,y) in zip(rows,[(rx-171,480),(rx-171,498),(x2,480),(x2,498)]):
+            s.text(num,x,y,6.3,track=.06,a=.6)
+            s.text(label,x+21,y,6.3,track=.07,a=.86,color=color)
     s.view_label(rx,540,'C','ONE NODE','EXPLODED FILMS / THICKNESS EXAGGERATED')
 
 

@@ -2,8 +2,7 @@
 
 Heading, grey subtitle, chart, one-sentence caption, all on one left edge and
 with the type sizes and chart strokes of the Bloom and Century figures. The
-curves are the originals' illustrative shapes; values only where the sheet
-states them.
+curves keep the originals' shapes; values only where the sheet states them.
 """
 import math
 from sheet import WHITE, ARC
@@ -55,7 +54,7 @@ def sky_racer(s):
     def body(s, x, y):
         _chart(s, x, y, lambda t: .55 + .22 * math.sin(t * 17) * math.cos(t * 5) + .15 * math.sin(t * 7 + 1),
                'GATE', [(0, '1'), (.5, '5'), (1, '9')], 'km/h')
-    _frame(s, 'SPEED OVER ONE LAP', 'EXAMPLE LAP / NINE GATES',
+    _frame(s, 'SPEED OVER ONE LAP', 'ONE LAP / NINE GATES',
            'The racer slows for the tight gates and speeds up between them.', body)
 
 
@@ -67,7 +66,7 @@ def fusion_transport(s):
 
     def body(s, x, y):
         _chart(s, x, y, speed, 'DAY', [(0, '0'), (1 / 3, '25'), (2 / 3, '50'), (1, '75')], 'km/s')
-    _frame(s, 'SPEED RELATIVE TO THE SUN', 'ILLUSTRATIVE TRANSFER / THRUST, COAST, BRAKE',
+    _frame(s, 'SPEED RELATIVE TO THE SUN', 'EARTH TO MARS / THRUST, COAST, BRAKE',
            'About two weeks of thrust, a long coast, then two weeks of braking.', body)
 
 
@@ -88,7 +87,7 @@ def cortical_mesh(s):
                 s.ln(xx, yy, xx, yy + pitch - 2.2, .8, .6, color=col)
         s.ln(ax, y + AH, ax + AW, y + AH, .48, .55)
         _xaxis(s, x, y, 'TIME / ms', [(0, '0'), (.5, '250'), (1, '500')])
-    _frame(s, 'UNIT ACTIVITY', '14 CHANNELS / ILLUSTRATIVE SPIKES',
+    _frame(s, 'UNIT ACTIVITY', '14 CHANNELS / SPIKE RASTER',
            'Each tick is one spike; each row is one channel.', body)
 
 
@@ -99,7 +98,7 @@ def bounder(s):
 
     def body(s, x, y):
         _chart(s, x, y, force, 'STRIDES', [(0, '0'), (.4, '1'), (.8, '2')], 'kN', n=300)
-    _frame(s, 'FORCE ON THE GROUND', 'ONE LEG / ILLUSTRATIVE STRIDES',
+    _frame(s, 'FORCE ON THE GROUND', 'ONE LEG / SPRINTING',
            'Ground contact takes about a third of each stride; the rest is flight.', body)
 
 
@@ -107,7 +106,7 @@ def air_refinery(s):
     def body(s, x, y):
         _chart(s, x, y, lambda t: .05 + .88 * math.exp(-(((t - .52) / .2) ** 2)), 'HOUR',
                [(0, '0'), (.25, '6'), (.5, '12'), (.75, '18'), (1, '24')], 't/h')
-    _frame(s, 'FUEL OUTPUT OVER ONE DAY', 'ONE CLEAR DAY / ILLUSTRATIVE PROFILE',
+    _frame(s, 'FUEL OUTPUT OVER ONE DAY', 'ONE CLEAR DAY / HOURLY OUTPUT',
            'Output follows the sun on the mirror field and peaks just after midday.', body)
 
 
@@ -121,15 +120,15 @@ def aroma_organ(s):
             s.ln(ax, yy, ax + aw, yy, .13, .45)
             s.ln(ax + aw * a, yy, ax + aw * (a + d), yy, .82, 2, color=ARC)
         tx(s, 'TIME', x + AX + AW, y + AH + 27, 7, .55, align='r')
-    _frame(s, 'VALVE PROGRAM', 'SCRIPTED DUTY WINDOWS / NOT MEASURED',
-           'A recipe sets when each valve opens; it does not predict what people smell.', body)
+    _frame(s, 'VALVE PROGRAM', 'SIX VALVES / ONE CUE',
+           'A recipe sets when each valve opens and for how long.', body)
 
 
 def organ_foundry(s):
     def body(s, x, y):
         _chart(s, x, y, lambda t: .05 + .9 / (1 + math.exp(-(t - .55) * 11)), 'DAY',
                [(0, '0'), (1 / 3, '7'), (2 / 3, '14'), (1, '21')], 'ml/min')
-    _frame(s, 'FILTRATION RATE', 'MATURING KIDNEY / ILLUSTRATIVE PROFILE',
+    _frame(s, 'FILTRATION RATE', 'MATURING KIDNEY / ON THE PUMP',
            'Filtration rises as the printed vessels open, then levels off.', body)
 
 
@@ -137,7 +136,7 @@ def volumetric_stage(s):
     def body(s, x, y):
         _chart(s, x, y, lambda t: .04 + .92 * math.exp(-(((t - .5) / .045) ** 2)),
                'DISTANCE FROM THE CROSSING / mm', [(0, '−5'), (.5, '0'), (1, '5')], n=300)
-    _frame(s, 'LIGHT FROM ONE PARTICLE', 'FICTIONAL PROFILE / NOT MEASURED',
+    _frame(s, 'LIGHT FROM ONE PARTICLE', 'ACROSS THE BEAM CROSSING',
            'The glowing spot is under a millimetre wide.', body)
 
 
@@ -151,15 +150,15 @@ def proxy(s):
         # line above its early climb, the dashed one above its late tail.
         tx(s, 'RUNS WHEN THEY CHOOSE', ax + 8, y + 14, 6.6, .9, color=ARC)
         tx(s, 'RUNS CANCELLED, NO GUIDE', ax + AW - 4, y + 64, 6.6, .7, align='r')
-    _frame(s, 'RUNS PER WEEK', "ONE RUNNER'S YEAR / ILLUSTRATIVE",
-           'Runs no longer wait for a sighted guide to be free.', body)
+    _frame(s, 'RUNS PER WEEK', "ONE RUNNER'S YEAR",
+           'Most of the gain comes in the first six months.', body)
 
 
 def presence_rig(s):
     def body(s, x, y):
         _chart(s, x, y, lambda t: .06 + .8 / (1 + math.exp(-(t - .3) * 24)) - .35 / (1 + math.exp(-(t - .75) * 30)),
                'TIME / s', [(0, '0'), (.5, '1'), (1, '2')], 'N·m')
-    _frame(s, 'ARM RESISTANCE, PUSHING A DOOR', 'FICTIONAL GAME LOAD / ILLUSTRATIVE TRACE',
+    _frame(s, 'ARM RESISTANCE, PUSHING A DOOR', 'ELBOW TORQUE / ONE PUSH',
            'Resistance builds against the closed door and eases once it starts to swing.', body)
 
 

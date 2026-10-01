@@ -148,7 +148,9 @@ def divertor_cassette(phi_deg):
     box('divertor base plate', (0, 0, -1.2), (16, 26, 1.6), .5)
     for j in range(8):
         for i in range(3):
-            box('tungsten monoblock', (-5 + i * 5, -10.5 + j * 3, .6), (4.4, 2.6, 2.2), .25, 'structure')
+            # an open gap on every side and a hair above the plate, so each block keeps a closed
+            # outline and neighbouring rounded corners never merge into forks
+            box('tungsten monoblock', (-5 + i * 5, -10.5 + j * 3, .75), (4.2, 2.2, 2.2), .25, 'structure')
     for i in range(3):
         cyl('monoblock cooling tube', (-5 + i * 5, -14.6, .6), .7, 29.2, 'accent', (0, 1, 0), 16)
     for y in (-15.2, 15.2):

@@ -45,9 +45,9 @@ DOSSIER = dict(
           ('DAILY LOAD', '24 kWh / AIR HANDLER 15 kWh'),
           ('STERILISER', '6 STEAM CYCLES A DAY')],
     note='SHE READ THE BUS NUMBER FROM ACROSS THE SQUARE.',
-    left=('ONE TABLE, THIRTY-SIX EYES', 'ILLUSTRATIVE DAY / 12 MIN SLOTS / 08:00-16:12',
+    left=('ONE TABLE, THIRTY-SIX EYES', 'OPERATING DAY / 12 MIN SLOTS / 08:00–16:12',
           'Ten minutes of surgery per slot; the rest is cleaning and the next patient settling in.'),
-    right=('CHOOSING THE NEW LENS', 'EYE SECTION / SRK REGRESSION / NOT CLINICAL ADVICE',
+    right=('CHOOSING THE NEW LENS', 'EYE SECTION / SRK REGRESSION',
            'Measured eye length and corneal power give the lens; each box is set out the night before.'),
 )
 

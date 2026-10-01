@@ -13,7 +13,7 @@ RETRO_REFINED={
     'fusion-transport':'Radiused radiator cassettes, folded rims and a bent thermal circuit.',
     'greener':'Soft lawn boundaries and curved grass strokes.',
     'cortical-mesh':'Rounded sample-record cells; signal traces and sample positions retained.',
-    'bounder':'Projected helical spring turns instead of resistor zigzags.',
+    'bounder':'Spring blade in three states, drawn with its thickness and ankle socket.',
     'aroma-organ':'Capped dosing cartridges and swept capillary bends.',
     'tether-climber':'A rounded emitter housing; beam geometry retained.',
     'organ-foundry':'Radiused tissue section and gently branching perfusion channels.',
@@ -90,7 +90,7 @@ class Pen:
         self.p(pts)
         self.r([pts[-1],(x+w-lead*.4,y),(x+w,y)],r=2)
 
-@figure('quantum-simulator','ERRORS LEAVE A TRAIL','SYNDROME HISTORY / ILLUSTRATIVE EVENT PAIRING','A detection event is evidence to decode, not a readable qubit.')
+@figure('quantum-simulator','ERRORS LEAVE A TRAIL','SYNDROME HISTORY / FIVE CHECKS, EIGHT ROUNDS','Each error lights two detection events; the decoder pairs them up.')
 def quantum(p):
     for i in range(5):
         y=57+i*20;p.l(25,y,340,y,.22,.4);p.t('s'+'₀₁₂₃₄'[i],4,y+2,5.5)
@@ -100,10 +100,9 @@ def quantum(p):
     for x,y in [(81,77),(163,97),(245,117),(327,77)]:p.c(x,y,4,.9,.9,ARC)
     p.p([(81,77),(122,77),(122,97),(163,97)],col=ARC)
     p.p([(245,117),(286,117),(286,77),(327,77)],col=GOLD)
-    p.t('PAIR',371,76);p.t('DECODE',371,100);p.t('CHECK',371,124)
     p.a(40,152,328,152);p.t('SUCCESSIVE CHECK ROUNDS',184,166,5.5,align='c')
 
-@figure('sky-racer','BANKING SPENDS LIFT','THRUST DIRECTION / THREE SCRIPTED ATTITUDES','Vector construction only; no flight envelope or controller tuning.')
+@figure('sky-racer','BANKING SPENDS LIFT','THRUST DIRECTION / THREE ATTITUDES','Banked 25°, the fans keep 91 % of their thrust for lift.')
 def sky(p):
     for n,(a,label) in enumerate([(0,'HOLD'),(-25,'BANK'),(12,'RECOVER')]):
         x=65+n*155;y=112;ang=math.radians(a)
@@ -116,20 +115,21 @@ def sky(p):
         p.a(x,y,x+53*math.sin(ang),y-53*math.cos(ang))
         p.c(x,y,4);p.t(label,x,166,6,align='c')
 
-@figure('fusion-transport','THE OTHER EXHAUST','RADIATOR CIRCUIT / ILLUSTRATIVE THERMAL PATH','Heat leaves through radiator area as well as the magnetic nozzle.')
+@figure('fusion-transport','THE OTHER EXHAUST','RADIATOR CIRCUIT / ONE LOOP, FOUR BANKS','Heat leaves through radiator area as well as the magnetic nozzle.')
 def fusion(p):
     p.r([(24,115),(24,65),(90,65),(90,115),(24,115)],close=True)
     for x in range(35,86,10):p.l(x,70,x,109,.4)
     p.r([(18,74),(18,58),(96,58),(96,74)],.35,.5,r=7)
     p.r([(18,106),(18,123),(96,123),(96,106)],.35,.5,r=7)
+    # One closed circuit: out along the top of the banks, back along the bottom into the hot loop.
     p.t('HOT LOOP',55,153,6,align='c');p.a(90,76,135,76)
-    p.r([(135,76),(150,76),(150,134),(386,134),(386,61),(150,61)],col=ARC)
+    p.r([(135,76),(150,76),(150,61),(386,61),(386,134),(150,134),(150,111),(135,111)],col=ARC)
     for n in range(4):
         x=170+n*55;p.r([(x,72),(x+36,72),(x+36,120),(x,120)],close=True)
         for dy in range(79,118,8):p.l(x+3,dy,x+33,dy,.28,.5)
         for xx in (x+5,x+31):p.screw(xx,76,1.25);p.screw(xx,116,1.25)
         p.a(x+18,66,x+18,42,GOLD)
-    p.a(133,111,92,111,WHITE);p.t('RADIATION TO SPACE',275,153,6,align='c')
+    p.a(135,111,92,111);p.t('RADIATION TO SPACE',275,153,6,align='c')
 
 @figure('greener','THE PROPERTY LINE IS THE SENSOR','TWO GARDENS / FICTIONAL COMPARISON PATCHES','The neighbour can move the target without entering your garden.')
 def greener(p):
@@ -145,7 +145,7 @@ def greener(p):
     p.c(117,102,13);p.c(117,102,5);p.a(133,99,257,95)
     p.t('OWN LAWN',96,171,6,align='c');p.t('INCONVENIENT NEIGHBOUR',324,171,6,align='c')
 
-@figure('cortical-mesh','SAMPLES ARE NOT SENTENCES','CHANNEL SAMPLING / SYNTHETIC SIGNAL DEMONSTRATION','A packet preserves samples. Meaning still requires a decoder.')
+@figure('cortical-mesh','SAMPLES FIRST, SENTENCES LATER','CHANNEL SAMPLING / THREE CHANNELS, FIVE SAMPLES','The decoder chip reads speech and movement from the whole record.')
 def cortical(p):
     for row in range(3):
         y=61+row*31;p.t('CH '+str(row+1),0,y+3,5.5)
@@ -160,18 +160,43 @@ def cortical(p):
             p.l(x+3,y+4,x+8,y+12,.7,.7,col=ARC if (j+row)%3 else WHITE)
     p.t('TIME-SLICED RECORD',366,150,5.8,align='c')
 
-@figure('bounder','LOAD BEFORE LAUNCH','SPRING COMPRESSION / GEOMETRIC STATE STUDY','The mounting stays on the boot; compression changes spring length.')
+@figure('bounder','LOAD BEFORE LAUNCH','SPRING BLADE / THREE MOMENTS OF ONE STEP','Landing bends the blade; push-off straightens it and lifts the runner.')
 def bounder(p):
-    for i,(span,label) in enumerate([(105,'UNLOADED'),(58,'LOADED'),(87,'RELEASING')]):
-        x=10+i*150;p.l(x,64,x,137,.6,1);p.l(x+span,64,x+span,137,.6,1)
-        p.coil(x,98,span,26)
-        p.l(x,146,x+span,146,.36,.5);p.ticks(x,146,2,span)
-        p.t(label,x+span/2,166,5.8,align='c')
-        # Load pushes the free plate in; release lets it out. Same arrow, same gap.
-        if i==1:p.a(x+span+34,76,x+span+8,76)
-        if i==2:p.a(x+span+8,76,x+span+34,76)
+    # The B-4 spring blade (view A): a C-curve from the ankle socket down to a
+    # forward toe. Landing presses the socket down and tightens the curve;
+    # push-off rolls the blade onto its toe as it springs back.
+    def blade(x,top,bend,roll):
+        ground=140;toe=(x+44,ground)
+        def bez(a,b,c,d,n=24):
+            return [tuple((1-t)**3*a[j]+3*(1-t)**2*t*b[j]+3*(1-t)*t*t*c[j]+t**3*d[j] for j in (0,1)) for t in [i/n for i in range(n+1)]]
+        spine=bez((x,top+18),(x-bend,top+32),(x-bend-4,ground),(x+6,ground))+[(x+30,ground),toe]
+        def turn(q):  # roll about the toe tip
+            c,s_=math.cos(roll),math.sin(roll);dx,dy=q[0]-toe[0],q[1]-toe[1]
+            return (toe[0]+dx*c-dy*s_,toe[1]+dx*s_+dy*c)
+        spine=[turn(q) for q in spine]
+        # Blade thickness: a second edge offset along the normal, closed at both ends.
+        inner=[]
+        for i,q in enumerate(spine):
+            a_,b_=spine[max(0,i-1)],spine[min(len(spine)-1,i+1)]
+            dx,dy=b_[0]-a_[0],b_[1]-a_[1];n=math.hypot(dx,dy) or 1
+            inner.append((q[0]-dy/n*3.2,q[1]+dx/n*3.2))
+        p.p(spine+inner[::-1],.85,.8,close=True)
+        sx,sy=turn((x,top+14))
+        p.r([(sx-8,sy),(sx-8,sy-16),(sx+8,sy-16),(sx+8,sy)],.75,.75,close=True,r=3)
+        p.l(sx,sy,*turn((x,top+18)),.75,.75)
+        p.l(sx,sy-16,sx,sy-26,.6,.9)
+        return sx,sy-26
+    for i,(label,top,bend,roll) in enumerate([('UNLOADED',58,36,0),('LANDING',76,44,0),('PUSH-OFF',62,38,.16)]):
+        x=58+i*142
+        p.l(x-40,140,x+70,140,.36,.5)
+        tx,ty=blade(x,top,bend,roll)
+        p.t(label,x+10,166,5.8,align='c')
+        if i==1:p.a(tx+20,ty-18,tx+20,ty-2)
+        if i==2:p.a(tx+20,ty-2,tx+20,ty-18)
+    # The unloaded socket height carried across, so the drop on landing reads.
+    p.l(22,46,410,46,.22,.45,dash=[2,3])
 
-@figure('air-refinery','CARBON HAS TO COME FROM SOMEWHERE','ATOM INVENTORY / SYMBOLIC, NOT A REACTION BALANCE','Carbon feedstock and process energy are different requirements.')
+@figure('air-refinery','CARBON HAS TO COME FROM SOMEWHERE','ATOM INVENTORY / CO₂ IN, CARBON CHAIN OUT','The air supplies the carbon; sunlight supplies the energy to link it.')
 def air(p):
     for y in (71,119):
         p.c(36,y,8);p.c(66,y,7,.85,.7,ARC);p.c(96,y,8);p.l(44,y-2,59,y-2);p.l(44,y+2,59,y+2);p.l(73,y-2,88,y-2);p.l(73,y+2,88,y+2)
@@ -185,7 +210,7 @@ def air(p):
         for dy in (-18,18):p.l(x,y+(6 if dy>0 else -6),x,y+dy,.45,.6);p.c(x,y+dy*1.3,2,.5,.5)
     p.t('CARBON BACKBONE',331,157,6,align='c')
 
-@figure('aroma-organ','THE MIX HAS A MEMORY','CAPILLARY MANIFOLD / PURGE ROUTE CONCEPT','A previous recipe must leave before the next one arrives.')
+@figure('aroma-organ','THE MIX HAS A MEMORY','CAPILLARY MANIFOLD / FIVE DOSES AND A PURGE','A previous recipe must leave before the next one arrives.')
 def aroma(p):
     for i in range(5):
         x=28+i*57;p.r([(x,48),(x+18,48),(x+18,72),(x,72)],close=True)
@@ -198,7 +223,7 @@ def aroma(p):
     p.r([(214,132),(214,151),(296,151)],col=GOLD);p.a(296,151,335,151,GOLD)
     p.t('CARRIER + METERED DOSES',24,147+p.s.type_growth(5.8),5.8);p.t('PURGE',362,155,5.8)
 
-@figure('tether-climber','POWER HAS A FOOTPRINT','BEAM / RECEIVER ALIGNMENT STUDY','Receiver pointing and ribbon traction solve different problems.')
+@figure('tether-climber','POWER HAS A FOOTPRINT','BEAM, RECEIVER AND RIBBON','The receiver turns the beam into power; the rollers turn power into climb.')
 def tether(p):
     p.r([(23,132),(53,132),(45,115),(32,115)],close=True)
     p.p([(37,115),(163,55),(265,55),(42,115)],.45,.55,col=ARC)
@@ -210,7 +235,7 @@ def tether(p):
     p.a(350,136,350,59);p.t('UP',369,93,6)
     p.t('BEAM',118,107);p.t('RECEIVER',215.5,42,5.8,align='c');p.t('RIBBON CONTACT',302,166,5.8,align='c')
 
-@figure('tether-ribbon','ONE FIBRE IS NOT A RIBBON','STAGGERED FIBRE ENDS / CONCEPTUAL LOAD SHARING','Overlapping bundles distribute load; this is not a strength prediction.')
+@figure('tether-ribbon','MANY FIBRES MAKE A RIBBON','STAGGERED FIBRE ENDS / NINE BUNDLES','Each break is bridged by the unbroken bundles beside it.')
 def ribbon(p):
     for row in range(9):
         y=56+row*11;cut=124+(row*47)%182
@@ -235,7 +260,7 @@ def truth(p):
     p.l(219,78,351,78,.45,.55);p.ticks(219,78,2,132);p.t('3 s',285,72,6,align='c')
     p.t('THE RED LIGHT IS NOT A PROOF',263,173,5.7,align='c')
 
-@figure('organ-foundry','KEEP THE INTERIOR FED','PERFUSION SECTION / SCHEMATIC TISSUE, NOT ANATOMY','Channels feed the cells that lie too deep to be reached from the surface.')
+@figure('organ-foundry','KEEP THE INTERIOR FED','PERFUSION SECTION / TWO BRANCHING CHANNELS','Channels feed the cells that lie too deep to be reached from the surface.')
 def organ(p):
     p.r([(23,64),(331,49),(404,85),(404,137),(84,151),(23,123)],close=True)
     p.r([(26,65),(84,93),(401,85)],.4,.55,r=10);p.l(84,93,84,148,.4,.55)
@@ -248,7 +273,7 @@ def organ(p):
     p.a(3,114,29,114);p.a(405,111,435,111)
     p.t('SUPPLY',3,166,5.8);p.t('DISTRIBUTED CHANNELS',226,166,5.8,align='c');p.t('RETURN',435,166,5.8,align='r')
 
-@figure('volumetric-stage','A POINT NEEDS AN ADDRESS','THREE SELECTED PLANES / SYMBOLIC VOXEL ADDRESS','The intersection names a point; illumination still needs a medium.')
+@figure('volumetric-stage','A POINT NEEDS AN ADDRESS','THREE SELECTED PLANES / ONE VOXEL','Row, column and depth name one point in the haze.')
 def stage(p):
     # Addressing volume on an instrument cradle. The selected planes remain
     # straight: rounding optical coordinates would misrepresent the diagram.
@@ -275,7 +300,7 @@ def stage(p):
     p.t('ROW',36,95,7,align='r');p.t('DEPTH',102,47,7,align='r');p.t('COLUMN',272,43,7)
 
 
-@figure('proxy','A KERB, THREE SECONDS AHEAD','CUE PATH / ILLUSTRATIVE TIMING','Two pulses in the hand, one word in the ear. The runner takes the step.')
+@figure('proxy','A KERB, THREE SECONDS AHEAD','CUE PATH / SENSORS TO HAND','Two pulses in the hand, one word in the ear. The runner takes the step.')
 def proxy(p):
     p.r([(23,64),(113,64),(132,80),(132,135),(23,135)],close=True)
     p.p([(113,64),(113,80),(132,80)],.4,.5)
@@ -292,8 +317,14 @@ def proxy(p):
     p.t('KERB AHEAD',315,77,6);p.t('3 s / 8 m',315,101,10);p.t('STEP UP',315,125,6,col=ARC)
     p.t('CHEST SENSORS',73,166,6,align='c');p.t('CUE BAND',198,166,6,align='c');p.t("RUNNER'S HAND",356,166,6,align='c')
 
-@figure('presence-rig','WHERE THE FLOOR PUSHES BACK','CONTACT PATCH / SCRIPTED CENTRE-OF-PRESSURE STUDY','A force target is not a licence to pull the occupant off balance.')
+@figure('presence-rig','WHERE THE FLOOR PUSHES BACK','CONTACT PATCH / TWO SOLES, ONE STEP','The rollers push back where the foot lands and carry the step to the centre.')
 def presence(p):
+    # The contact grid is centred in the column.
+    p.s.c.save();p.s.c.translate(49,0)
+    try:presence_patch(p)
+    finally:p.s.c.restore()
+
+def presence_patch(p):
     for x in range(55,290,25):p.l(x,49,x,147,.2,.4)
     for y in range(49,149,20):p.l(55,y,287,y,.2,.4)
     for x,dy in [(116,0),(220,-10)]:
@@ -301,20 +332,21 @@ def presence(p):
         for y in range(88,130,10):p.l(x-11,y+dy,x+13,y+dy,.4,.5)
     p.p([(116,98),(142,111),(181,92),(220,87)],col=ARC);p.c(181,92,4,.9,.8,ARC)
     p.a(181,92,180,44);p.a(181,92,271,116)
-    p.t('CONTACT',330,72,6);p.t('FORCE',330,98,6);p.t('RELEASE',330,124,6)
-    p.t('BALANCE ENVELOPE / NOT A GAIT MEASUREMENT',171,166,5.5,align='c')
+    p.t('CENTRE-OF-PRESSURE PATH',171,166,5.5,align='c')
 
-@figure('light-sail','LIGHT TURNS, THE SAIL REACTS','REFLECTION GEOMETRY / LOCAL MEMBRANE SECTION','Force follows momentum transfer; the dashed line is the normal.')
+@figure('light-sail','LIGHT TURNS, THE SAIL REACTS','REFLECTION GEOMETRY / LOCAL MEMBRANE SECTION','Angle in equals angle out; the push follows the dashed normal.')
 def sail(p):
-    p.p([(155,148),(266,49),(273,57),(162,156)],close=True)
-    for i in range(6):p.l(168+i*16,143-i*14,177+i*16,148-i*14,.35,.5)
-    p.l(125,39,317,168,.3,.5,dash=[3,3])
+    # A 45° membrane (lit face x = y + 125): light from the left leaves straight down,
+    # angle in equals angle out, and the push acts along the normal (1, -1), away from the light.
+    p.p([(173,48),(269,144),(275,138),(179,42)],close=True)
+    for i in range(6):t=14+i*21.5;p.l(173+t*.7071+1,48+t*.7071-1,173+t*.7071+5,48+t*.7071-5,.35,.5)
+    p.l(151,166,221,96,.3,.5,dash=[3,3])
     for i in range(3):
-        y=67+i*21;x=249-i*23;p.a(26,y,x,y);p.a(x,y,x,151)
-    p.a(211,99,321,53,GOLD)
-    p.t('INCIDENT',44,49,6);p.t('REFLECTED',226,166,6,align='c');p.t('SAIL FORCE',327,52,6)
+        y=70+i*20;x=y+125;p.a(26,y,x,y);p.a(x,y,x,152)
+    p.a(227,90,281,36,GOLD)
+    p.t('INCIDENT',44,60,6);p.t('REFLECTED',215,167,6,align='c');p.t('SAIL FORCE',289,36,6)
 
-@figure('tidal-loom','THE FLOW COMES BACK','REVERSING CURRENT / TWO ILLUSTRATIVE ROTOR STATES','Same seabed mounting; the direction of the water changes.')
+@figure('tidal-loom','THE FLOW COMES BACK','REVERSING CURRENT / ONE ROTOR, TWO TIDES','Same seabed mounting; the direction of the water changes.')
 def tidal(p):
     for i in range(2):
         x=104+i*234;cy=93;p.c(x,cy,40,.4);p.c(x,cy,9,.8,.8)
@@ -330,7 +362,7 @@ def tidal(p):
         p.t('RETURN' if i else 'FLOOD',x,166,6,align='c')
     p.l(184,93,255,93,.3,.55,dash=[3,4]);p.t('SLACK',219.5,113,5.8,align='c')
 
-@figure('manta-foil','TRIM THE FOIL, KEEP THE HULL LEVEL','FOIL SECTION / CONTROL-SURFACE CONCEPT','Streamlines illustrate direction, not a computed fluid solution.')
+@figure('manta-foil','TRIM THE FOIL, KEEP THE HULL LEVEL','FOIL SECTION / ONE STRUT, ONE FLAP','Lowering the trim flap adds lift; raising it lets the hull settle.')
 def manta(p):
     p.r([(46,112),(73,98),(119,94),(180,99),(268,115),(243,121),(142,124),(75,122)],close=True,r=(24,24,24,24,0,24,24,24))
     p.c(268,115,4);p.r([(271,112),(348,128),(331,134),(272,120)],col=ARC,close=True,r=24)
@@ -400,7 +432,7 @@ def advice(p):
         p.t('RELEASED' if i else 'HELD CLOSED',x,165,5.8,align='c')
     p.a(172,104,241,104);p.t('ASK',207,88,6,align='c')
 
-@figure('petal-eye','ONE WAVEFRONT, MANY ADJUSTMENTS','SEGMENT PISTON / ILLUSTRATIVE ALIGNMENT','Segments share a target wavefront; this is not an optical tolerance map.')
+@figure('petal-eye','ONE WAVEFRONT, MANY ADJUSTMENTS','SEGMENT PISTON / SIDE SECTION','Segments share a target wavefront.')
 def petal(p):
     for i,off in enumerate((14,-7,5)):
         x=51+i*91;p.r([(x,98+off),(x+63,98+off),(x+63,104+off),(x,104+off)],close=True)
@@ -426,7 +458,8 @@ def quiet(p):
     p.r([(168,65),(251,45),(372,45),(397,62)],.7,.8,col=GOLD,r=15)
     p.r([(386,64),(399,58),(407,71),(394,77)],.8,.8,close=True,r=5)
     p.l(226,116,284,116,.4,.45);p.t('BEARING FACE',291,119,7)
-    p.t('PULL TO RELEASE',354,166,7,align='c');p.t('RETURN SPRING',69,166,7,align='c')
+    # Each name beside its part: the spring over its coil, the pull above its tab.
+    p.t('PULL TO RELEASE',392,36,7,align='c');p.t('RETURN SPRING',90,78,7,align='c')
 
 
 @figure('wind-kite','DEPOWER FOR THE RETURN','WING SECTION / TETHER LOAD DIRECTION','The return stroke changes wing attitude, not the sign of the wind.')
@@ -440,9 +473,9 @@ def wind(p):
         p.p([pickups[0],(x,y+60),pickups[1]],.45,.6)
         p.a(x,y+60,x+23,y+75)
         p.t('POWERED' if i==0 else 'DEPOWERED',x,43,6,align='c')
-    p.t('BRIDLE LOAD',224,163,5.8,align='c')
+    p.t('BRIDLE LOAD',142,164,5.8)  # beside the first section's tether arrow
 
-@figure('coral-cradle','HOLD THE BASE, LEAVE ROOM TO GROW','ATTACHMENT SECTION / ILLUSTRATIVE FRAGMENT','Hardware contacts the dead base; living tissue stays clear.')
+@figure('coral-cradle','HOLD THE BASE, LEAVE ROOM TO GROW','ATTACHMENT SECTION / ONE BRANCHING FRAGMENT','Hardware contacts the dead base; living tissue stays clear.')
 def coral(p):
     p.r([(91,134),(142,119),(272,119),(319,135),(266,151),(141,151)],close=True)
     p.p([(142,119),(142,141),(265,141),(272,119)],.5,.6)
@@ -453,7 +486,7 @@ def coral(p):
     p.l(231,124,354,110,.35,.5);p.t('BASE ONLY',365,109,5.8)
     p.t('FLOW-THROUGH SUPPORT',205,166,5.8,align='c')
 
-@figure('dune-skimmer','THE FOOTPRINT IS ADJUSTABLE','TREAD CONTACT / TWO GEOMETRIC WIDTHS','Same wheel load, different contact width; sinkage is not predicted.')
+@figure('dune-skimmer','THE FOOTPRINT IS ADJUSTABLE','TREAD CONTACT / TWO GEOMETRIC WIDTHS','The same wheel load spread over twice the tread width.')
 def dune(p):
     for i,w in enumerate((64,128)):
         x=104+i*224;p.r([(x-w/2,56),(x+w/2,56),(x+w/2,144),(x-w/2,144)],close=True,r=10)
@@ -477,7 +510,7 @@ def meeting(p):
     p.coil(263,114,51,10,6);p.l(252,126,324,126,.45,.7)
     p.t('ELAPSED AGENDA',104,175,5.8,align='c');p.t('RAISED OBJECTION',331,166,5.8,align='c')
 
-@figure('seam-surgeon','LOOK INSIDE THE JOINT','WELD SECTION / ILLUSTRATIVE PROBE PATHS','A completed seam can still contain a reason to hold the part.')
+@figure('seam-surgeon','LOOK INSIDE THE JOINT','WELD SECTION / ANGLED PROBE PATHS','A completed seam can still contain a reason to hold the part.')
 def seam(p):
     # Machined coupon ends, a true V-root and deposited bead; rays stay straight.
     p.r([(20,100),(174,100),(204,136),(212,136),(243,100),(420,100),(420,151),(20,151)],.85,.9,close=True,r=[7,0,0,0,0,7,7,7])
@@ -496,7 +529,10 @@ def seam(p):
     for dx in (0,8,16):p.p([(292+dx,98),(242+dx,146),(203+dx*.25,116)],.65,.6,col=ARC)
     p.r([(198,116),(204,112),(211,115)],.95,1,col=GOLD,r=1)
     p.a(339,59,402,59);p.t('SCAN',370,47,7,align='c')
-    p.t('BEAD / ROOT / FUSION FACES',208,167,7,align='c')
+    # Each part named beside it: the bead on the crown, a fusion face of the V, the root under it.
+    p.t('BEAD',208,84,7,align='c')
+    p.l(166,86,187,114,.35,.5);p.t('FUSION FACE',160,88,7,align='r')
+    p.l(208,139,208,156,.35,.5);p.t('ROOT',208,167,7,align='c')
 
 
 @figure('queue-garden','ONE CLICK, ONE COMPLETED TURN','RATCHET AND PAWL / LEAF RECORD MECHANISM','The leaf latches an event; it does not forecast the next one.')
@@ -526,7 +562,7 @@ def compliment(p):
     p.t('OBSERVED',314,73,6);p.t('3 HOLES',314,96,7);p.t('ALIGNED',314,117,7,col=ARC)
     p.t('RECEIPT WITH A REASON',218,174,5.8,align='c')
 
-@figure('neutrino-bell','DO THE CLOCKS AGREE?','SCRIPTED SENSOR HITS / NOT PARTICLE EVENT DATA','Coincidence is timing evidence; background can also coincide.')
+@figure('neutrino-bell','DO THE CLOCKS AGREE?','SENSOR HITS / THREE TUBES ON ONE CLOCK','Coincidence is timing evidence; background can also coincide.')
 def neutrino(p):
     for i,events in enumerate(((62,178,202,333),(104,183,288),(44,189,254,361))):
         y=61+i*35;p.s.text_mid('PMT '+str(i+1),0,y,5.5,track=.065,a=.68);p.l(53,y,426,y,.3,.5)
@@ -534,7 +570,7 @@ def neutrino(p):
     p.p([(224,39),(224,152),(264,152),(264,39)],.5,.55,col=GOLD)
     p.t('COINCIDENCE WINDOW',244,166,5.8,align='c')
 
-@figure('sleep-cocoon','SUPPORTS BEFORE SCORES','ARTICULATED SUPPORT SECTION / NO CLINICAL CLAIM','Three separate supports and one manual release.')
+@figure('sleep-cocoon','SUPPORTS BEFORE SCORES','ARTICULATED SUPPORT SECTION / RECLINED','Three separate supports and one manual release.')
 def sleep(p):
     p.r([(34,89),(94,78),(167,106),(236,105),(312,129),(395,109)],.8,1.4)
     for x,y in [(67,84),(201,106),(356,119)]:

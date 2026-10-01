@@ -43,10 +43,10 @@ DOSSIER = dict(
           ('PONTOON RING', '6.6 m ACROSS / 8 m OF WATER BELOW'),
           ('PARENT GENOTYPES', '30 OR MORE PER SPECIES')],
     note='EVERY TRAY CARRIES THE NAME OF THE REEF IT RETURNS TO.',
-    left=('FROM SURVIVOR TO REEF', 'ANNUAL CYCLE / DECLARED TARGETS, NOT FIELD DATA',
+    left=('FROM SURVIVOR TO REEF', 'ANNUAL CYCLE / DESIGN TARGETS',
           '3 840 growing × 3 outplanted cuts × 2 cycles = 23 040 fragments a year.'),
-    right=('KEEP THE ONES THAT KEPT THEIR COLOUR', 'HEAT SCREEN / DECLARED SCHEDULE, NOT A RESULT',
-           'Colonies still pigmented after 10 days at MMM + 3 °C become parents.'),
+    right=('KEEP THE ONES THAT KEPT THEIR COLOUR', 'HEAT SCREEN / DESIGN SCHEDULE',
+           'MMM is the home reef\'s maximum monthly mean temperature; the ramp takes three days.'),
 )
 
 
@@ -93,7 +93,7 @@ def figure(s, side, x, y, w):
         for xx, (a_, b_) in zip(xs, labels):
             tx(s, b_, xx, cy + 70, 6.4, .66, align='c')
     else:
-        # Declared temperature schedule: 3 days ramp, 10 days hold, 3 days return.
+        # Design temperature schedule: 3 days ramp, 10 days hold, 3 days return.
         legend = max(s.measure(t_, 6.4, .08) for t_ in ('COLOUR KEPT', 'BLEACHED', 'RECOVERS'))
         px = x + 58; top = y + 8; h = 92
         pw = min(300, x + w - legend - 16 - 22 - px)

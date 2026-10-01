@@ -172,11 +172,11 @@ def vessel(name,p,r,h):
         for side in (-1,1):rod('vessel saddle',(side*r*.7,0,-10),(side*r*.7,0,8),3,'detail')
 
 
-def motor(p,r=16,length=35,axis=(0,0,1)):
+def motor(p,r=16,length=35,axis=(0,0,1),fins=True):
     m=Matrix.Translation(p)@Vector(axis).to_track_quat('Z','Y').to_matrix().to_4x4()
     b=len(g.parts);w=len(g.wires)
     cyl('motor case',(0,0,0),r,length)
-    for z in range(3,int(length-3),4):ring('cooling fin',(0,0,z),r+2,1.2,1.2,role='detail')
+    for z in range(3,int(length-3),4) if fins else ():ring('cooling fin',(0,0,z),r+2,1.2,1.2,role='detail')
     flange('motor face',(0,0,length),r+2)
     cyl('output shaft',(0,0,length+3),r*.24,13,'detail')
     box('terminal housing',(r,0,length*.55),(9,13,16),2,'detail')

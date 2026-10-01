@@ -41,18 +41,19 @@ def proxy(s,mx,my):
     # (on the number it read as "1i4").
     bib=(p[0]+(u[0]-p[0])*6/62+(v[0]-p[0])*45/50,p[1]+(u[1]-p[1])*6/62+(v[1]-p[1])*45/50)
     # A guide for blind and low-vision runners (story of 2026-09-27).
-    info=[('HEAD',(hx,hy-57),1,-341,'NONE FITTED'),
-          ('RACE NUMBER',bib,-1,-285,'GUIDE BIB, SAME NUMBER AS ITS RUNNER'),
-          ('CUE BAND',a['WATCH'],-1,-180,'CLIPS THE TETHER'),
-          ('LEFT WRIST',a['WRIST'],-1,-74,"GRIP FOR THE RUNNER'S HAND"),
-          ('CHEST',a['CHEST'],1,-139,'CAMERAS AND LIDAR / READS 20 m AHEAD'),
-          ('HAND',a['HAND'],1,-20,'SIGNALS FASTER RUNNERS TO PASS'),
-          ('RIGHT KNEE',a['KNEE'],-1,171,"MATCHES THE RUNNER'S 172 STEPS A MINUTE"),
-          ('FOOT',a['FOOT'],1,280,'FEELS ICE AND LOOSE STONES FIRST')]
-    for title,p,side,dy,sub in info:callout(s,p,mx+side*321,my+dy,side,title,sub)
-    x,y=mx+320,my+82
-    s.poly([(x,y),(x+12,y),(x+18,y-8),(x+23,y+10),(x+30,y),(x+50,y)],.85,.7,close=False,color=GOLD)
-    s.text("RUNNER'S PULSE 142 bpm",x+58,y+3,7,track=.06,a=.85,color=GOLD)
+    info=[('HEAD',(hx,hy-57),'NONE FITTED'),
+          ('RACE NUMBER',bib,'GUIDE BIB, SAME NUMBER AS ITS RUNNER'),
+          ('CUE BAND',a['WATCH'],'CLIPS THE TETHER'),
+          ('LEFT WRIST',a['WRIST'],"GRIP FOR THE RUNNER'S HAND"),
+          ('CHEST',a['CHEST'],'CAMERAS AND LIDAR / READS 20 m AHEAD'),
+          ('HAND',a['HAND'],'SIGNALS FASTER RUNNERS TO PASS'),
+          ('RIGHT KNEE',a['KNEE'],"MATCHES THE RUNNER'S 172 STEPS A MINUTE"),
+          ('FOOT',a['FOOT'],'FEELS ICE AND LOOSE STONES FIRST')]
+    # The original sheets' callouts: each label at the height of its part.
+    from hardware3d.family_drawing import callouts
+    # The arm, hand and leg labels stay on the side of the limb they name, so no leader crosses the torso.
+    sides={'HEAD':1,'CHEST':1,'FOOT':1,'RACE NUMBER':-1,'CUE BAND':-1,'LEFT WRIST':-1,'HAND':-1,'RIGHT KNEE':-1}
+    callouts(s,{title:(p[0]-mx,p[1]-my) for title,p,_ in info},{title:sub for title,_,sub in info},mx,my,sides=sides)
 
 
 def truth(s,mx,my):

@@ -93,5 +93,5 @@ def build():
    g.ball('sensing aperture',(side*(w+.8),yy,(lo+hi)/2),(2,3.2,2.5),'accent')
  g.mark('RIM-DRIVEN FAN',(-154,7,77));g.mark('CRASH CELL',(0,-72,151))
  g.mark('LITHIUM-AIR PACK',(49,57,47));g.mark('SENSING ARRAY',(23,-194,70))
- g.mark('FOLDING ARM',(66,35,61));g.mark('KEEP-CLEAR ENVELOPE',(-206,7,77))
+ g.mark('FOLDING ARM',(66,35,61))
  return (31,34)

@@ -22,7 +22,7 @@ def light_sail():
     with group('C'):
         for y in (-12,12):
             ring('roller dust seal',(49,y,8),5.4,.7,1,(0,1,0),'accent')
-            tube('pin safety keeper',[(37,y,10),(34,y,14),(30,y,14),(30,y,9)],.3,'detail')
+            ring('pin safety keeper',(37,y*1.3,8),2.8,.6,1,(0,1,0),'detail')
         loom([(36,-19,1),(32,-22,1),(26,-21,7),(22,-15,14)])
 
 

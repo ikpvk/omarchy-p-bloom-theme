@@ -6,7 +6,7 @@ Ideal reduction  Fe2O3 + 3 H2 -> 2 Fe + 3 H2O, per tonne of iron:
   = 54 kg; H2O = 1.5 x 17 905 x 18.02 g = 484 kg; 1 430 + 54 = 1 000 + 484.
 Practical: ~57 kg H2 per tonne of iron (excess gas is recycled), 50 kWh per
 kg at the electrolyser -> 2.85 MWh; gas heater and compression ~0.15 MWh;
-arc furnace ~0.55 MWh per tonne of liquid steel; total ~3.6 MWh/t.
+arc furnace ~0.55 MWh per tonne of liquid steel; total 3.55 MWh/t.
 Mill: 1.0 Mt of steel a year ~ 1.0 Mt of iron at 8 000 h -> 125 t/h.
 Hydrogen: 125 t/h x 57 kg = 7.1 t/h x 50 kWh/kg = 356 MW -> 360 MW of
 electrolysers running on wind and hydropower, spheres buffer the lulls.
@@ -46,7 +46,7 @@ DOSSIER = dict(
     note='THE NIGHT SHIFT STILL CALLS IT THE COAL WORKS.',
     left=('THE OXYGEN LEAVES AS WATER', 'IDEAL MASS BALANCE / PER TONNE OF IRON / PURE OXIDE',
           'Fe₂O₃ + 3 H₂ → 2 Fe + 3 H₂O; the plant adds ~3 kg of excess hydrogen, recycled.'),
-    right=('FROM WIND TO STEEL', 'ELECTRICITY PER TONNE OF LIQUID STEEL / DECLARED ESTIMATES',
+    right=('FROM WIND TO STEEL', 'ELECTRICITY PER TONNE OF LIQUID STEEL / DESIGN VALUES',
            'Most of the energy goes into splitting water; melting is the smaller share.'),
 )
 
@@ -80,7 +80,7 @@ def figure(s, side, x, y, w):
         stages = [('ELECTROLYSIS', 2.85, ARC, '57 kg H2'), ('HEAT + GAS', .15, WHITE, ''), ('ARC FURNACE', .55, GOLD, '1 t STEEL')]
         total = sum(v for _, v, _, _ in stages)
         bx = x; bw = 400; yy = y + 30
-        tx(s, 'ELECTRICITY 3.6 MWh', bx, yy - 12, 6.8, .82)
+        tx(s, 'ELECTRICITY 3.55 MWh', bx, yy - 12, 6.8, .82)
         xx = bx
         for name, v, col, out in stages:
             ww = bw * v / total

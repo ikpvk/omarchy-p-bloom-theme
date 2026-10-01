@@ -62,7 +62,7 @@ def build_section():
  for yy in (-196,-189,-182,-175):g.wire('avionics fin',[(10,yy,61),(10,yy,73)],.6,'detail')
  g.wire('floor cable duct',[(8,-193,53),(8,-151,43),(8,-54,39),(8,27,43),(8,113,51)],1.3,'cable')
  g.anchors.clear()
- for label,p in [('FLIGHT COMPUTER',(12,-185,67)),('CRASH SEAT',(16,-34,78)),('CELL BAY',(13,78,73))]:g.mark(label,p)
+ for label,p in [('FLIGHT COMPUTER',(12,-185,67)),('CRASH CELL',(16,-34,78)),('CELL BAY',(13,78,73))]:g.mark(label,p)
  return (87,7)
 
 if __name__=='__main__':

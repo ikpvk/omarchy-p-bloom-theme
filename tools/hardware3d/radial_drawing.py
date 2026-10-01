@@ -20,14 +20,20 @@ def paths(s,d,tx,ty,scale):
 def main(s,mx,my):
  d=data('main');sc=1.03;dy=273
  paths(s,d,mx-22,my+dy,sc)
- labels=[('PULSE-TUBE COOLERS', 'CLOSED-CYCLE / NO LIQUID HELIUM',355,-400),('4 K CONTROLLERS','LOCAL CONTROL / SHORT COLD LINKS',365,-243),('OPTICAL INTERCONNECT',None,370,-78),('COMPUTE CASSETTES','6 × 1 700 LOGICAL QUBITS',370,85),('BASE-STAGE MANIFOLD','COMMON COLD CORE',-360,97),('NESTED THERMAL SHIELDS','50 K / 4 K / 100 mK',-360,-309),('VACUUM ENCLOSURE','UPPER SECTOR REMOVED FOR CLARITY',-360,-112),('SERVICE CARRIAGE','WITHDRAW COMPLETE COLD ASSEMBLY',-320,364)]
- from label_layout import LABEL_OFFSETS
+ labels={'PULSE-TUBE COOLERS':'CLOSED-CYCLE / NO LIQUID HELIUM','4 K CONTROLLERS':'LOCAL CONTROL / SHORT COLD LINKS','OPTICAL INTERCONNECT':None,'COMPUTE CASSETTES':'6 × 1 700 LOGICAL QUBITS','BASE-STAGE MANIFOLD':'COMMON COLD CORE','NESTED THERMAL SHIELDS':'50 K / 4 K / 100 mK','VACUUM ENCLOSURE':'ROOM-TEMPERATURE OUTER WALL','SERVICE CARRIAGE':'WITHDRAW COMPLETE COLD ASSEMBLY'}
  # The manifold's anchor keeps its exported key; the label leaves 8 mK to the field notes.
  anchor={'BASE-STAGE MANIFOLD':'8 mK MANIFOLD'}
- for name,sub,ex,ey in labels:
-  x,y=d['anchors'][anchor.get(name,name)];x=x*sc-22;y=y*sc+dy
-  ox,oy=LABEL_OFFSETS.get('quantum-simulator',{}).get(name,(0,0))
-  s.leader(mx+x,my+y,ex-x-ox,ey-y-oy,90 if ex>0 else -90,name,sub)
+ positions={}
+ for name in labels:
+  x,y=d['anchors'][anchor.get(name,name)];dx_,dy_=SHIFTS.get(name,(0,0))
+  positions[name]=(x*sc-22+dx_,y*sc+dy+dy_)
+ from hardware3d.family_drawing import callouts
+ callouts(s,positions,labels,mx,my)
+
+
+# Anchor dots that land on a neighbouring part (main-view units): the dot moves onto the part it names.
+SHIFTS={'VACUUM ENCLOSURE':(-79,15),   # off an inner shield ring, onto the bolted outer flange of the vessel
+        'COMPUTE CASSETTES':(-4,60)}   # off the arm the 4 K controller sits on, onto the lower right cassette
 
 def detail(s,qx,qy):
  d=data('detail');ps=[p for path in d['paths'] for p in path['points']];cx=(min(x for x,y in ps)+max(x for x,y in ps))/2;cy=(min(y for x,y in ps)+max(y for x,y in ps))/2

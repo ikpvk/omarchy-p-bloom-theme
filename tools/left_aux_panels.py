@@ -11,10 +11,14 @@ def tissue(s,lx):
         s.poly([(x0,y0),(x-side*20,y-2),(x-side*8,y-2)],.46,.5,close=False)
         s.dot(x0,y0,1.2,.7);s.text(num,x,y,6.7,track=.04,a=.9,align='c')
     items=[('01','SCALP',-191,458),('02','SKULL',-191,477),('03','MENINGEAL ENVELOPE',-191,496),('04','CORTEX / I–VI',24,458),('05','WHITE MATTER',24,477),('06','IMPLANT + MESH',24,496)]
-    for num,label,dx,y in items:
-        s.text(num,lx+dx,y,6.2,track=.06,a=.6)
-        s.text(label,lx+dx+22,y,6.2,track=.06,a=.86,color=ARC if num=='06' else WHITE)
-    s.view_label(lx,541,'B','IMPLANT SECTION','SCHEMATIC / TISSUE DETAIL ENLARGED')
+    if s.layer_mode:
+        from right_aux_panels import compact_key
+        compact_key(s,lx-191,458+s.type_growth(6.2),[(num,label,ARC if num=='06' else WHITE) for num,label,_,_ in items],3,lx+300,size=6.2,track=.06,lead=19)
+    else:
+        for num,label,dx,y in items:
+            s.text(num,lx+dx,y,6.2,track=.06,a=.6)
+            s.text(label,lx+dx+22,y,6.2,track=.06,a=.86,color=ARC if num=='06' else WHITE)
+    s.view_label(lx,541,'B','IMPLANT SECTION','TISSUE DETAIL ENLARGED')
 
 
 def dinner(s,lx):

@@ -182,13 +182,13 @@
     "diagrams": {
       "left": {
         "title": "FROM SURVIVOR TO REEF",
-        "scope": "ANNUAL CYCLE / DECLARED TARGETS, NOT FIELD DATA",
+        "scope": "ANNUAL CYCLE / DESIGN TARGETS",
         "foot": "3 840 growing × 3 outplanted cuts × 2 cycles = 23 040 fragments a year."
       },
       "right": {
         "title": "KEEP THE ONES THAT KEPT THEIR COLOUR",
-        "scope": "HEAT SCREEN / DECLARED SCHEDULE, NOT A RESULT",
-        "foot": "Colonies still pigmented after 10 days at MMM + 3 °C become parents."
+        "scope": "HEAT SCREEN / DESIGN SCHEDULE",
+        "foot": "MMM is the home reef's maximum monthly mean temperature; the ramp takes three days."
       }
     },
     "callouts": {
@@ -245,7 +245,7 @@
     "enabled_by": [
       [
         "DISTILLATION",
-        "Multi-effect stacks that reuse one input of heat a dozen times, as coastal plants do."
+        "Multi-effect stacks, as in coastal plants: each effect boils at a lower pressure than the one above."
       ],
       [
         "SOLAR THERMAL",
@@ -262,7 +262,7 @@
     "view_B": "EFFECT STACK",
     "view_B_note": "SHELL CUT AWAY / TUBE BUNDLES / SPRAY BARS / TRAYS",
     "view_C": "MIRROR ROW",
-    "view_C_note": "TWO-AXIS DRIVES / CLEANING ROBOT / ROTARY BRUSH",
+    "view_C_note": "TWO-AXIS DRIVES / CLEANING ROBOT",
     "service_year": "2036",
     "sources": [
       "https://www.iea-shc.org/",
@@ -296,13 +296,13 @@
     },
     "diagrams": {
       "left": {
-        "title": "ONE HEAT, FOURTEEN USES",
-        "scope": "MULTI-EFFECT CASCADE / DECLARED TEMPERATURES",
-        "foot": "Vapour from each effect condenses in the tubes of the next: heat is used about 12 times."
+        "title": "ONE HEAT, FOURTEEN EFFECTS",
+        "scope": "MULTI-EFFECT CASCADE / DESIGN TEMPERATURES",
+        "foot": "Vapour from each effect condenses in the tubes of the next and boils the brine there."
       },
       "right": {
         "title": "NOTHING GOES BACK AS BRINE",
-        "scope": "DAILY MASS BALANCE / t PER DAY / DECLARED DESIGN",
+        "scope": "DAILY MASS BALANCE / t PER DAY / DESIGN VALUES",
         "foot": "Seawater 500 t = fresh water 480 t + salts 17.5 t + moisture in the bags 2.5 t."
       }
     },
@@ -357,7 +357,7 @@
     "palette": "emerald",
     "seed": 260104,
     "purpose": "SCHOOL-OWNED ROBOTIC TELESCOPE",
-    "narrative": "Lets any child book a slot on a real telescope under a dark sky. A nine-year-old in Kisumu books Saturn for Tuesday night and finds her own picture of it waiting before school.",
+    "narrative": "Lets any child book a slot on a real telescope under a dark sky.",
     "enabled_by": [
       [
         "ROBOTIC OBSERVATORIES",
@@ -413,17 +413,17 @@
     "diagrams": {
       "left": {
         "title": "ONE NIGHT, MANY SCHOOLS",
-        "scope": "EXAMPLE SCHEDULE / SITE TIME / 5 OF 50 BOOKINGS",
-        "foot": "Illustrative night. The queue only books targets more than 30 degrees up."
+        "scope": "SITE TIME / 5 OF 50 BOOKINGS",
+        "foot": "The queue only books targets more than 30° above the horizon."
       },
       "right": {
         "title": "MORE FRAMES, STEADIER RINGS",
         "scope": "IDEAL STACKING / SNR = SNR1 × ROOT N",
-        "foot": "Random noise only; seeing and focus set the real limit."
+        "foot": "Each doubling of the stack raises the signal-to-noise ratio by about 40 %."
       }
     },
     "callouts": {
-      "CAMERA TRAIN": "NASMYTH PORT / RIGHT FORK ARM",
+      "CAMERA TRAIN": "NASMYTH PORT ON THE FORK ARM",
       "0.5 m TELESCOPE": "SERRURIER TRUSS / f/6.8 / 3.4 m FOCAL LENGTH",
       "WEATHER MAST": "WIND, CLOUD AND RAIN DECIDE EACH NIGHT",
       "SOLAR PETAL": "THIN-FILM SKIN / CHARGES WHILE CLOSED BY DAY",
@@ -1219,12 +1219,12 @@
     "diagrams": {
       "left": {
         "title": "ONE TABLE, THIRTY-SIX EYES",
-        "scope": "ILLUSTRATIVE DAY / 12 MIN SLOTS / 08:00-16:12",
+        "scope": "OPERATING DAY / 12 MIN SLOTS / 08:00–16:12",
         "foot": "Ten minutes of surgery per slot; the rest is cleaning and the next patient settling in."
       },
       "right": {
         "title": "CHOOSING THE NEW LENS",
-        "scope": "EYE SECTION / SRK REGRESSION / NOT CLINICAL ADVICE",
+        "scope": "EYE SECTION / SRK REGRESSION",
         "foot": "Measured eye length and corneal power give the lens; each box is set out the night before."
       }
     },
@@ -1299,7 +1299,7 @@
     "view_B": "WING SAIL SECTION",
     "view_B_note": "RIBS / SPAR CAPS / MAST / FLAP HINGE ARMS",
     "view_C": "TRIM ACTUATOR",
-    "view_C_note": "ROOT PLATE OMITTED / GEAR RING / THREE DRIVES / FLAP RAM",
+    "view_C_note": "GEAR RING / THREE DRIVES / FLAP RAM",
     "service_year": "2034",
     "sources": [
       "https://www.imo.org/en/OurWork/Environment/Pages/Wind-propulsion.aspx",
@@ -1339,7 +1339,7 @@
       },
       "right": {
         "title": "ONE CROSSING, BY ENERGY SOURCE",
-        "scope": "ILLUSTRATIVE VOYAGE / 713 MWh OF PROPULSION",
+        "scope": "DESIGN VALUES / 713 MWh OF PROPULSION",
         "foot": "The generator runs on bio-methanol; the battery pack holds 24 MWh."
       }
     },
@@ -1454,7 +1454,7 @@
       },
       "right": {
         "title": "FROM WIND TO STEEL",
-        "scope": "ELECTRICITY PER TONNE OF LIQUID STEEL / DECLARED ESTIMATES",
+        "scope": "ELECTRICITY PER TONNE OF LIQUID STEEL / DESIGN VALUES",
         "foot": "Most of the energy goes into splitting water; melting is the smaller share."
       }
     },
@@ -2030,12 +2030,12 @@
     "diagrams": {
       "left": {
         "title": "WHERE THE 800 MW GO",
-        "scope": "DECLARED DESIGN BUDGET / MEGAWATTS",
-        "foot": "800 × 1.1 = 880 MW of heat; 40 % becomes 350 MW; 50 MW runs the plant."
+        "scope": "DESIGN BUDGET / MEGAWATTS",
+        "foot": "Fusion makes 800 MW of heat; reactions in the blanket add another 80 MW."
       },
       "right": {
         "title": "A TWIST INSTEAD OF A CURRENT",
-        "scope": "ROTATING ELLIPSE / ONE FIELD PERIOD / SIMPLIFIED",
+        "scope": "ROTATING ELLIPSE / ONE FIELD PERIOD",
         "foot": "The section turns half a turn per period; a field line circles the plasma."
       }
     },
@@ -2059,7 +2059,7 @@
       "21x9": "concepts/bloom-ten/21x9/b18-stellarator-hearth.webp"
     },
     "built": {
-      "at": "2026-09-28T13:40:34.405501+00:00",
+      "at": "2026-10-01T21:47:51.474737+00:00",
       "parts": 320,
       "cameras": {
         "B": [
@@ -2375,12 +2375,12 @@
     "diagrams": {
       "left": {
         "title": "OLDER LIGHT, LONGER WAVES",
-        "scope": "f = 1420 MHz / (1 + z) / DECLARED BAND",
+        "scope": "f = 1420 MHz / (1 + z) / DESIGN BAND",
         "foot": "Below about 10 MHz Earth's ionosphere closes the sky; the far side stays open."
       },
       "right": {
         "title": "THE MOON AS A SHIELD",
-        "scope": "RADIO SHADOW / NOT TO SCALE",
+        "scope": "RADIO SHADOW / FAR SIDE",
         "foot": "The far side never faces Earth; the relay carries the data home."
       }
     },
