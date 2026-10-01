@@ -19,11 +19,15 @@ LEVEL_HINT = 'How strong the background colour is.'
 def settings(plan, level=None):
     """Resolution rows; sizes and download markers are those of `level`."""
     options=(plan.get('options_by_level') or {}).get(level) or plan['options']
-    rows=[('auto','Automatic · Optimal set')]
+    def size(o):return ' × '.join(map(str,o['size']))
+    best=next((o for o in options if o['profile']==plan.get('profile')),None)
+    # Automatic names the set it resolves to for these monitors
+    rows=[('auto','Automatic · '+(size(best) if best else 'Optimal set'))]
     for o in options:
-        size=' × '.join(map(str,o['size']))
         mb=f"{o['total_bytes']/1_000_000:.1f} MB" if o.get('total_bytes') is not None else 'Size unknown'
-        rows.append((o['profile'],size+' / '+mb+('' if o.get('local',True) else ' · download')))
+        # sizes right-aligned, so "download" lines up down the list
+        width=max(len(f"{x['total_bytes']/1_000_000:.1f} MB") if x.get('total_bytes') is not None else 12 for x in options)
+        rows.append((o['profile'],size(o)+' / '+mb.rjust(width)+('' if o.get('local',True) else ' · download')))
     return rows
 
 
@@ -50,7 +54,7 @@ def tui(screen,plan,apply):
         screen.erase()
         h,w=screen.getmaxyx()
         left=max(1,(w-66)//2)
-        top=max(0,(h-min(len(rows)*3+15,h))//2)
+        top=max(0,(h-min(len(rows)+12,h))//2)
         def put(y,text,style=0):
             if 0<=y<h-1:
                 try:screen.addstr(y,left,text[:max(0,w-left-1)],style)
@@ -60,12 +64,15 @@ def tui(screen,plan,apply):
         put(top+3,level_line(level),curses.A_BOLD)
         put(top+4,LEVEL_HINT)
         put(top+6,'RESOLUTION',curses.A_BOLD)
-        count=max(1,(h-top-10)//3)
-        start=selected//count*count
+        # one row per line; a list taller than the window scrolls with the selection and says what is hidden
+        count=max(1,h-top-12)
+        start=0 if len(rows)<=count else min(max(0,selected-count+1+(selected<len(rows)-1)),len(rows)-count)
+        if start:put(top+7,f'  ↑ {start} more')
         for j,(key,label) in enumerate(rows[start:start+count]):
             i=start+j
             style=curses.A_BOLD|(curses.A_REVERSE if i==selected else 0)
-            put(top+8+j*3,('▶ ' if i==selected else '  ')+label,style)
+            put(top+8+j,('▶ ' if i==selected else '  ')+label,style)
+        if start+count<len(rows):put(top+8+count,f'  ↓ {len(rows)-start-count} more')
         put(h-2,'←→ Background   ↑↓ Resolution   ENTER Save   ESC Cancel',curses.A_BOLD)
         screen.refresh()
         key=screen.get_wch()

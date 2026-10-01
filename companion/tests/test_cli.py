@@ -17,7 +17,10 @@ PLAN = dict(recommended='small', biggest='big', reason='Smallest set that fits b
 
 class CLI(unittest.TestCase):
     def test_settings_include_auto_and_real_profiles(self):
-        self.assertEqual(cli.settings(PLAN),[('auto','Automatic · Optimal set'),('small','1920 × 1080 / 80.0 MB'),('big','3840 × 2160 / 280.0 MB')])
+        self.assertEqual(cli.settings(PLAN),[('auto','Automatic · Optimal set'),('small','1920 × 1080 /  80.0 MB'),('big','3840 × 2160 / 280.0 MB')])
+
+    def test_automatic_names_the_set_it_picks(self):
+        self.assertEqual(cli.settings({**PLAN,'profile':'big'})[0],('auto','Automatic · 3840 × 2160'))
 
     def test_tui_navigation_and_cancel(self):
         class Screen:
@@ -62,7 +65,7 @@ class CLI(unittest.TestCase):
             'default':PLAN['options'],
             'vivid':[dict(profile='small',size=[1920,1080],total_bytes=90_000_000,local=False,displays=[]),
                      dict(profile='big',size=[3840,2160],total_bytes=300_000_000,displays=[])]}}
-        self.assertEqual(cli.settings(plan,'vivid')[1],('small','1920 × 1080 / 90.0 MB · download'))
+        self.assertEqual(cli.settings(plan,'vivid')[1],('small','1920 × 1080 /  90.0 MB · download'))
         self.assertEqual(cli.settings(plan,'muted'),cli.settings(PLAN))  # not listed: the plan's own options
         class Screen:
             def __init__(self, keys):
