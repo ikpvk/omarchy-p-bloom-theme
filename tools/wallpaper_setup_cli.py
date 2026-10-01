@@ -21,13 +21,13 @@ def settings(plan, level=None):
     options=(plan.get('options_by_level') or {}).get(level) or plan['options']
     def size(o):return ' × '.join(map(str,o['size']))
     best=next((o for o in options if o['profile']==plan.get('profile')),None)
-    # Automatic names the set it resolves to for these monitors
-    rows=[('auto','Automatic · '+(size(best) if best else 'Optimal set'))]
+    # Automatic says that it follows the optimal set and names it; the same set is marked in the list
+    rows=[('auto','Automatic · Optimal set'+(f' ({size(best)})' if best else ''))]
     for o in options:
         mb=f"{o['total_bytes']/1_000_000:.1f} MB" if o.get('total_bytes') is not None else 'Size unknown'
         # sizes right-aligned, so "download" lines up down the list
         width=max(len(f"{x['total_bytes']/1_000_000:.1f} MB") if x.get('total_bytes') is not None else 12 for x in options)
-        rows.append((o['profile'],size(o)+' / '+mb.rjust(width)+('' if o.get('local',True) else ' · download')))
+        rows.append((o['profile'],size(o)+' / '+mb.rjust(width)+(' · optimal' if o is best else '')+('' if o.get('local',True) else ' · download')))
     return rows
 
 

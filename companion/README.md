@@ -31,7 +31,7 @@ context menu, or `p-bloom-wallpapers --configure`. This optional TUI offers
 two choices: the **background** (Muted, Default or Vivid: how strong the
 background colour is; ← →) and the **resolution** (**Automatic · Optimal
 set** or a fixed set; ↑ ↓). Both are remembered; selecting Automatic restores
-monitor-based selection, and its row names the set it picks for your monitors. The list shows every
+monitor-based selection, and its row names the optimal set for your monitors, which is also marked in the list. The list shows every
 set, one per line; when the window is too short it scrolls and says how many rows are hidden.
 
 ```
@@ -43,8 +43,8 @@ How strong the background colour is.
 
 RESOLUTION
 
-▶ Automatic · 5120 × 2160
-  5120 × 2160 / 21.7 MB · download
+▶ Automatic · Optimal set (5120 × 2160)
+  5120 × 2160 / 21.7 MB · optimal · download
   5120 × 2880 / 25.4 MB
   …
   1600 × 1200 /  5.7 MB · download

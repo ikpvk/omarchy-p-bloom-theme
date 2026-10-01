@@ -20,7 +20,9 @@ class CLI(unittest.TestCase):
         self.assertEqual(cli.settings(PLAN),[('auto','Automatic · Optimal set'),('small','1920 × 1080 /  80.0 MB'),('big','3840 × 2160 / 280.0 MB')])
 
     def test_automatic_names_the_set_it_picks(self):
-        self.assertEqual(cli.settings({**PLAN,'profile':'big'})[0],('auto','Automatic · 3840 × 2160'))
+        rows=cli.settings({**PLAN,'profile':'big'})
+        self.assertEqual(rows[0],('auto','Automatic · Optimal set (3840 × 2160)'))
+        self.assertEqual(rows[2],('big','3840 × 2160 / 280.0 MB · optimal'))
 
     def test_tui_navigation_and_cancel(self):
         class Screen:
