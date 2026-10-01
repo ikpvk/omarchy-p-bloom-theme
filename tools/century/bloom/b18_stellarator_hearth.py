@@ -13,6 +13,7 @@ Fuel: 17.6 MeV per D-T reaction -> 800e6 / 2.82e-12 J = 2.84e20 /s
 tritium 2.45e25 x 5.01e-27 kg = 123 g: about 200 g of fuel a day
 (the tritium is bred from lithium in the blanket).
 Field on axis 5 T from fifty HTS coils at 20 K (-253 C).
+Punchline: 405 m3 of plasma / 200 000 residents = 2.0 litres each.
 """
 import math
 
@@ -46,7 +47,7 @@ DOSSIER = dict(
           ('TRITIUM SOURCE', 'BRED FROM LITHIUM IN THE BLANKET'),
           ('PER RESIDENT', '1.5 kW / HOMES, TRAMS, WORKPLACES'),
           ('FIELD ON AXIS', '5 T')],
-    note='ON WINTER EVENINGS THE CITY IS LIT AND THE AIR IS CLEAR.',
+    note="EVERY RESIDENT'S SHARE OF THE PLASMA IS ABOUT TWO LITRES.",
     left=('WHERE THE 800 MW GO', 'DECLARED DESIGN BUDGET / MEGAWATTS',
           '800 × 1.1 = 880 MW of heat; 40 % becomes 350 MW; 50 MW runs the plant.'),
     right=('A TWIST INSTEAD OF A CURRENT', 'ROTATING ELLIPSE / ONE FIELD PERIOD / SIMPLIFIED',

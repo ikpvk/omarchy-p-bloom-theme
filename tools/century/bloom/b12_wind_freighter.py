@@ -15,6 +15,7 @@ Hull at 11 knots (5.66 m/s) needs ~2.7 MW effective, 2.7e6 / 5.66 = 477 kN:
   in that wind the wings alone hold 11 knots; over a year of crossings
   (lighter and headwind days included) they supply ~80 % of the energy.
 Crossing Rotterdam - Halifax, 2 900 nm at 11 kn = 264 h = 11 days.
+11 kn = 20.4 km/h, a cyclist's pace (the punchline).
 Propulsion energy ~2.7 MW x 264 h = 713 MWh: wind 80 % (570 MWh),
   bio-methanol generator 17 % (121 MWh), battery 3 % (21 MWh, harbour and
   berthing, charged at the quay; pack 24 MWh).
@@ -52,7 +53,7 @@ DOSSIER = dict(
           ('DRAUGHT', '8.5 m / 14 000 t DEADWEIGHT'),
           ('WIND THRUST', '480 kN / 12 m/s APPARENT WIND'),
           ('CROSSING', '2 900 NAUTICAL MILES')],
-    note='FROM THE BRIDGE WING YOU CAN HEAR THE BOW WAVE.',
+    note="SHE CROSSES THE ATLANTIC AT A CYCLIST'S PACE.",
     left=('A WING PULLS FORWARD', 'ONE WING, PLAN VIEW / APPARENT WIND 110° / L / D = 8 / NORMALISED',
           'Thrust = L sin 110° − D cos 110° = 0.98 L; the hull and keel take the small side force.'),
     right=('ONE CROSSING, BY ENERGY SOURCE', 'ILLUSTRATIVE VOYAGE / 713 MWh OF PROPULSION',

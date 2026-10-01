@@ -4,6 +4,8 @@ Numbers (narrative, consistent with the model):
 Dish 1 km across (radius 500 m), paraboloid f = 250 m, in a 1.5 km crater.
 Band 5-40 MHz -> wavelengths 60-7.5 m. Mesh spacing 40 cm = lambda / 19 at
 40 MHz, fine enough to reflect.
+The mesh is almost all open space; to waves 19 to 150 times longer than its
+holes it is a solid mirror (the punchline).
 Hydrogen 21 cm line: f = 1420 MHz / (1 + z). 40 MHz -> z = 34.5;
 5 MHz -> z = 283: the cosmic dark ages, before and around the first stars.
 Earth's ionosphere reflects or absorbs most radio below ~10 MHz, and
@@ -42,7 +44,7 @@ DOSSIER = dict(
           ('WAVES', '60 TO 7.5 m LONG'),
           ('HYDROGEN FROM', 'REDSHIFT 35 TO 280'),
           ('CONTACT', 'ONE ORBITER PASS A DAY')],
-    note='ON EARTH, A TEN-YEAR-OLD LISTENS TO THE FIRST HYDROGEN, PLAYED AS SOUND.',
+    note='THE MESH IS MOSTLY HOLES. THE WAVES ARE TOO LONG TO NOTICE.',
     left=('OLDER LIGHT, LONGER WAVES', 'f = 1420 MHz / (1 + z) / DECLARED BAND',
           "Below about 10 MHz Earth's ionosphere closes the sky; the far side stays open."),
     right=('THE MOON AS A SHIELD', 'RADIO SHADOW / NOT TO SCALE',

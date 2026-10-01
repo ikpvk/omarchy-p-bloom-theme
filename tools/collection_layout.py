@@ -13,10 +13,12 @@ MAIN_CONTEXT = {
  'quantum-simulator': ('AXONOMETRIC CUTAWAY / SERVICE CONFIGURATION',),
 }
 
+# Punchline arithmetic: 900 N of thrust = the weight of 92 kg on Earth (o03);
+# a ~5 kg head at 6 g weighs about 30 kg (o02).
 ORIGINAL = {
  'quantum-simulator': ('ERRORS ALSO NEED MANAGEMENT', 'Logical qubits are encoded across physical qubits. The two counts are not interchangeable.', ('ENCODE', 'CHECK', 'CORRECT'), 'THE ERROR BUDGET HAS REQUESTED A LARGER BUDGET.'),
- 'sky-racer': ('PILOT STILL REQUIRED', 'Tilted thrust provides acceleration as well as lift. The pilot remains part of the payload.', ('LIFT', 'BANK', 'RECOVER'), 'AUTOPILOT DOES NOT ACCEPT DARES.'),
- 'fusion-transport': ('HEAT MUST LEAVE THE SHIP', 'Propulsion and waste heat share a reactor. Radiators are part of the vehicle, not optional luggage.', ('BURN', 'COAST', 'BRAKE'), 'CABIN BAGGAGE EXCLUDES ANOTHER REACTOR.'),
+ 'sky-racer': ('PILOT STILL REQUIRED', 'Tilted thrust provides acceleration as well as lift. The pilot remains part of the payload.', ('LIFT', 'BANK', 'RECOVER'), "IN A 6 g TURN, THE PILOT'S HEAD WEIGHS ABOUT 30 kg."),
+ 'fusion-transport': ('HEAT MUST LEAVE THE SHIP', 'Propulsion and waste heat share a reactor. Radiators are part of the vehicle, not optional luggage.', ('BURN', 'COAST', 'BRAKE'), 'ON EARTH, ITS FULL THRUST WOULD JUST LIFT ONE OF THE CREW.'),
  'greener': ('RELATIVE SUCCESS', 'The target follows the neighbour. A better lawn can therefore make this lawn temporarily worse.', ('SCAN', 'COMPARE', 'OUTGROW'), 'PEACE TREATY SOLD SEPARATELY.'),
  'cortical-mesh': ('CHANNELS ARE NOT THOUGHTS', 'Electrode activity is a signal to decode. A million channels do not make a million readable thoughts.', ('SENSE', 'ENCODE', 'DECODE'), 'INNER MONOLOGUE REMAINS POORLY DOCUMENTED.'),
  'bounder': ('THE HUMAN IS THE PAYLOAD', 'The spring follows the boot through the stride. A joint may rotate; its mounting does not change sides.', ('LOAD', 'RELEASE', 'RECOVER'), 'GRAVITY HAS NOT SIGNED THE WAIVER.'),
@@ -26,7 +28,7 @@ ORIGINAL = {
  'truth-lamp': ('ACCURACY IS NOT DIPLOMACY', 'The lamp claims to detect disbelief, not objective truth. The dinner still requires an off switch.', ('LISTEN', 'INFER', 'REGRET'), 'DESSERT IS AN UNSUPERVISED LEARNING EVENT.'),
  'organ-foundry': ('PRINTED IS NOT READY', 'Cell placement is followed by perfusion and maturation. A concept, not an implant clearance.', ('PRINT', 'PERFUSE', 'MATURE'), 'PLEASE DO NOT SELECT DRAFT QUALITY.'),
  'volumetric-stage': ('A VOLUME NEEDS A MEDIUM', 'Addressed particles provide the visible points. Timing, illumination and particle control must agree.', ('ADDRESS', 'EXCITE', 'REFRESH'), 'APPLAUSE IS NOT AN OPTICAL FEEDBACK LOOP.'),
- 'proxy': ('THE RUNNER LEADS', 'Volunteer guides have diaries of their own. PX-1 is ready every morning, and the volunteers still come, now for the company.', ('WAKE', 'RUN', 'RETURN'), 'THE RUNNER SETS THE PACE. PX-1 KEEPS THE PATH.'),
+ 'proxy': ('THE RUNNER LEADS', 'Volunteer guides have diaries of their own. PX-1 is ready every morning, and the volunteers still come, now for the company.', ('WAKE', 'RUN', 'RETURN'), 'IN DECEMBER THE RUN STARTS IN THE DARK. THE LIDAR DOES NOT MIND.'),
  'presence-rig': ('THE FLOOR IS PART OF THE GAME', 'The suit, roller deck and overhead tether share the motion envelope. The human remains inside it.', ('TRACK', 'RESIST', 'RELEASE'), 'REALITY WILL RESUME AFTER THE NEXT CHECKPOINT.'),
 }
 

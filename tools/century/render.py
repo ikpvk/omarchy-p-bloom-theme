@@ -126,7 +126,13 @@ def compose(entry,size=(5120,2160),audit_hook=None):
         with measured_illustration(s,'right'):
             draw_view(s,entry,'C',rx,241+ex*.225,370,290+ex*.25)
         s.view_label(rx,caption_y(s,'right'),'C',entry['view_C'],entry.get('view_C_note'))
-    enabled=[('FOUNDATION',entry['real_basis']),('STILL NEEDED',entry['required_breakthroughs'])]
+    # Three named disciplines, as on the b-sheets; real_basis stays in the catalog as their source record.
+    head=[tuple(x) for x in entry['enabled_by']] if 'enabled_by' in entry else [('FOUNDATION',entry['real_basis'])]
+    enabled=head+[('STILL NEEDED',entry['required_breakthroughs'])]
+    for tag,_ in enabled:
+        # Tags sit at +20 in the 160-unit label column; composed profiles widen that column themselves.
+        width=20+s.measure(tag,6.5)
+        assert s.layer_mode or width<152,(entry['number'],'legend tag too long for its column',tag,round(width,1))
     s.legend(entry['title'],entry['purpose'],entry['narrative'],enabled,entry['service_year'])
     from century.editorial import draw as draw_editorial
     draw_editorial(s,entry)

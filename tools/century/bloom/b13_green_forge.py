@@ -43,7 +43,7 @@ DOSSIER = dict(
           ('REDUCTION SHAFT', '7 m ACROSS / TOP AT 47 m'),
           ('HYDROGEN', '7.1 t AN HOUR'),
           ('ELECTROLYSERS', '360 MW / 50 kWh PER kg OF H₂')],
-    note='ON COLD MORNINGS THE PLUME OVER THE MILL IS ONLY CLOUD.',
+    note='THE NIGHT SHIFT STILL CALLS IT THE COAL WORKS.',
     left=('THE OXYGEN LEAVES AS WATER', 'IDEAL MASS BALANCE / PER TONNE OF IRON / PURE OXIDE',
           'Fe₂O₃ + 3 H₂ → 2 Fe + 3 H₂O; the plant adds ~3 kg of excess hydrogen, recycled.'),
     right=('FROM WIND TO STEEL', 'ELECTRICITY PER TONNE OF LIQUID STEEL / DECLARED ESTIMATES',

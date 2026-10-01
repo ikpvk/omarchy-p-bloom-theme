@@ -10,6 +10,20 @@
     "narrative": "Moves delicate freight between heliocentric depots on sunlight. The manifest arrives before the ship; neither is in a hurry.",
     "required_breakthroughs": "A sail that repairs micrometeoroid tears without losing its optical coating.",
     "real_basis": "Solar radiation pressure, deployable booms and attitude control.",
+    "enabled_by": [
+      [
+        "SOLAR SAILING",
+        "Sunjammer's sail was about 1,200 m² of film that folded to the size of a dishwasher."
+      ],
+      [
+        "DEPLOYABLE BOOMS",
+        "Rolled booms that unspool from a hub and hold a sail flat in tension."
+      ],
+      [
+        "ATTITUDE CONTROL",
+        "Momentum wheels that turn the sail edge-on or face-on, as on LightSail 2."
+      ]
+    ],
     "sources": [
       "https://www.nasa.gov/space-technology-mission-directorate/tdm/solar-sail-demonstrator-sunjammer/"
     ],
@@ -100,7 +114,7 @@
       "version": 1,
       "scope": "Mechanism details, authored explanatory panels and deadpan archive notes",
       "plot_scope": "IDEAL MIRROR / NORMAL FORCE / NORMALISED",
-      "aside": "DELIVERY WINDOW: ASTRONOMICAL.",
+      "aside": "REEFING: FOUR DRUMS, NO SHOUTING.",
       "status": "rendered and reviewed"
     },
     "curation": {
@@ -125,6 +139,20 @@
     "narrative": "Extracts power from a reversing tidal stream with paired shrouded rotors. Fish receive a much wider corridor than the technicians do.",
     "required_breakthroughs": "Low-loss marine bearings and reliable animal-aware control over decades underwater.",
     "real_basis": "Shrouded water turbines, reversing flow and sealed electrical generation.",
+    "enabled_by": [
+      [
+        "TIDAL STREAMS",
+        "Seabed rotors turned by tidal currents, much as wind turbines are turned by air."
+      ],
+      [
+        "SHROUDED ROTORS",
+        "Ducts around the blades that guide the stream through the rotor."
+      ],
+      [
+        "SEALED GENERATORS",
+        "Generators sealed in watertight pods, cabled to shore along the seabed."
+      ]
+    ],
     "sources": [
       "https://www.energy.gov/cmei/water/marine-energy-basics"
     ],
@@ -561,6 +589,20 @@
     "narrative": "Lifts a small passenger cabin above harbour chop on retractable foils and returns to a shallow draft at the dock.",
     "required_breakthroughs": "Fault-tolerant foil control and batteries suited to repeated fast marine charging.",
     "real_basis": "Hydrofoil lift, retractable struts and guarded marine propulsion.",
+    "enabled_by": [
+      [
+        "HYDROFOILS",
+        "Water is some 800 times denser than air, so a small foil can carry a hull."
+      ],
+      [
+        "RETRACTABLE STRUTS",
+        "Hinged struts that fold the foils up for shallow water and the berth."
+      ],
+      [
+        "GUARDED PROPULSION",
+        "Ducted propellers whose rings keep the blades away from swimmers and lines."
+      ]
+    ],
     "sources": [
       "https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/lift-equation/"
     ],
@@ -1729,6 +1771,20 @@
     "narrative": "Writes a family's archive into small glass plates and stores a readable decoding guide beside them. The password is not the only surviving artefact.",
     "required_breakthroughs": "Fast error-checked volumetric writing and readers that remain reproducible centuries later.",
     "real_basis": "Ultrafast writing of nanostructures in glass and optical readout.",
+    "enabled_by": [
+      [
+        "FEMTOSECOND LASERS",
+        "Ultrafast pulses, as in laser eye surgery, that mark points deep inside glass."
+      ],
+      [
+        "GLASS STORAGE",
+        "Project Silica: upwards of 7 TB in a quartz platter the size of a DVD."
+      ],
+      [
+        "OPTICAL READOUT",
+        "Readers that use ordinary light, so reading can never overwrite the glass."
+      ]
+    ],
     "sources": [
       "https://www.southampton.ac.uk/news/2019/11/superman-glass-crystal.page",
       "https://www.microsoft.com/en-us/research/project/project-silica/"
@@ -1851,6 +1907,20 @@
     "narrative": "Keeps abrasive lunar dust in an exterior suit dock while the occupant enters the clean habitat through the back of the suit.",
     "required_breakthroughs": "Reliable rear-entry pressure seals and dust removal without consumable wash water.",
     "real_basis": "Rear-entry suitports and separation of exterior dust from a clean cabin.",
+    "enabled_by": [
+      [
+        "SUITPORTS",
+        "NASA studies pair them with a 15-minute prebreathe in a lower-pressure cabin."
+      ],
+      [
+        "REAR-ENTRY SUITS",
+        "Suits entered through a hatch in the back, as Russian Orlan suits are."
+      ],
+      [
+        "DUST CONTROL",
+        "The dustiest layers stay outside, and less gas is lost than in an airlock."
+      ]
+    ],
     "sources": [
       "https://www.nasa.gov/wp-content/uploads/2017/02/2018-_eva_airlocks_and_alternate_ingressegress_methods_document.pdf",
       "https://techport.nasa.gov/projects/10728"
@@ -2590,6 +2660,20 @@
     "narrative": "Braids hollow structural members around a moving form, changing fibre direction where loads will change.",
     "required_breakthroughs": "Fast inspection of internal fibre placement before a defective part has been fully cured.",
     "real_basis": "Moving yarn carriers, a central mandrel and controlled braid angle.",
+    "enabled_by": [
+      [
+        "MAYPOLE BRAIDING",
+        "Carriers that weave round each other on serpentine tracks, as in hose braiders."
+      ],
+      [
+        "OVER-BRAIDING",
+        "Fibre braided onto a removable form, as for composite tubes and shafts."
+      ],
+      [
+        "BRAID ANGLE",
+        "Shallow angles stiffen a tube in bending; steep ones resist hoop pressure."
+      ]
+    ],
     "sources": [],
     "view_A": "TWELVE-CARRIER RING BRAIDER",
     "view_B": "CARRIER TRACK",
@@ -3233,6 +3317,20 @@
     "narrative": "Unfolds a segmented primary mirror behind a layered sunshade to study cold worlds beyond the familiar planets.",
     "required_breakthroughs": "Metrology that keeps a repaired mirror phased after years of thermal cycling.",
     "real_basis": "Segmented reflective optics, wavefront control and passive thermal shielding.",
+    "enabled_by": [
+      [
+        "SEGMENTED MIRRORS",
+        "Webb's 6.5 m primary is 18 beryllium hexagons, each 1.32 m across."
+      ],
+      [
+        "WAVEFRONT CONTROL",
+        "Wavefront sensing that aligns Webb's segments to within tens of nanometres."
+      ],
+      [
+        "THERMAL SHIELDING",
+        "Layered shades that keep Webb's mirrors near −220 °C, passively."
+      ]
+    ],
     "sources": [
       "https://science.nasa.gov/mission/webb/webbs-mirrors/"
     ],
@@ -3968,6 +4066,20 @@
     "narrative": "Converts a short public stair into a broad level platform and back again without asking its users to find a separate entrance.",
     "required_breakthroughs": "Robust interlocks and load sensing in a mechanism exposed to rain, dirt and public use.",
     "real_basis": "Vertical screw carriages, locked level platforms and obstruction sensing.",
+    "enabled_by": [
+      [
+        "SCREW LIFTS",
+        "Screw-driven platform lifts already carry wheelchairs up short rises."
+      ],
+      [
+        "LEVEL PLATFORMS",
+        "Stairs that turn into a platform lift at the press of a button are already sold."
+      ],
+      [
+        "SAFETY EDGES",
+        "Contact strips like those that stop powered gates and garage doors on touch."
+      ]
+    ],
     "sources": [],
     "view_A": "FOUR TREADS AS A STAIR",
     "view_B": "VERTICAL TREAD CARRIAGE",
@@ -4406,6 +4518,20 @@
     "narrative": "Flies repeating crosswind arcs while a ground winch converts tether tension into electricity. It lands before the storm rather than arguing with it.",
     "required_breakthroughs": "Predictable unattended launch, landing and tether inspection in variable weather.",
     "real_basis": "Crosswind flight, tether traction and a generating ground winch.",
+    "enabled_by": [
+      [
+        "CROSSWIND FLIGHT",
+        "Figure-of-eight loops across the wind, flown much faster than the wind."
+      ],
+      [
+        "TETHER TRACTION",
+        "A single tether that carries the whole pull of the wing to the ground."
+      ],
+      [
+        "GROUND GENERATION",
+        "A winch generator on the ground, as on Ampyx Power's rigid-wing prototypes."
+      ]
+    ],
     "sources": [
       "https://www.awesco.eu/publication/licitra-2019-a/licitra-2019-a.pdf"
     ],
@@ -4636,6 +4762,20 @@
     "narrative": "Holds nursery fragments in a gentle current and transfers them to mapped restoration sites with a compliant tool.",
     "required_breakthroughs": "Long-lived underwater handling that leaves living tissue unharmed in every move.",
     "real_basis": "Nursery fragments, low-shear circulation and compliant handling.",
+    "enabled_by": [
+      [
+        "CORAL NURSERIES",
+        "US nurseries in Florida and the Caribbean raise about 50,000 corals a year."
+      ],
+      [
+        "OPEN CIRCULATION",
+        "Fragments hung in open water, for circulation and away from predators."
+      ],
+      [
+        "HAND TRANSFER",
+        "Today divers move each fragment, about 10 cm long, by hand."
+      ]
+    ],
     "sources": [
       "https://response.restoration.noaa.gov/about/media/how-noaa-uses-coral-nurseries-restore-damaged-reefs.html"
     ],
@@ -5893,6 +6033,20 @@
     "narrative": "Changes wheel contact width as sand gets softer and parks behind its own folding shade when the day becomes too hot.",
     "required_breakthroughs": "Sand-resistant shape-changing wheels with low rolling losses on firm ground.",
     "real_basis": "Variable wheel contact area, low-pressure traction and passive shade.",
+    "enabled_by": [
+      [
+        "SAND DRIVING",
+        "Desert drivers let air out of their tyres so a longer footprint floats on sand."
+      ],
+      [
+        "TYRE INFLATION",
+        "Central inflation, as on military trucks, changes tyre pressure on the move."
+      ],
+      [
+        "PASSIVE SHADE",
+        "A raised shade with an air gap keeps the sun off a parked body, using no power."
+      ]
+    ],
     "sources": [],
     "view_A": "ROVER WITH SHADE RAISED",
     "view_B": "EXPANDING WHEEL",
@@ -6851,6 +7005,20 @@
     "narrative": "Travels around a pipe joint with synchronised preparation, welding and inspection tools. Its report includes the parts it refused to weld.",
     "required_breakthroughs": "Closed-loop defect detection fast enough to adjust a weld before the flaw is buried.",
     "real_basis": "Orbital tool motion, prepared pipe joints and nondestructive inspection.",
+    "enabled_by": [
+      [
+        "ORBITAL WELDING",
+        "Weld heads that circle a fixed pipe, standard on pipelines and process plants."
+      ],
+      [
+        "JOINT PREPARATION",
+        "Machined bevels on clean pipe ends, the first condition of a sound weld."
+      ],
+      [
+        "ULTRASONIC TESTING",
+        "Phased-array probes that check pipeline girth welds without cutting them."
+      ]
+    ],
     "sources": [],
     "view_A": "DOUBLE ORBITAL TRACK",
     "view_B": "ORBITAL WELD TRAIN",
@@ -9180,6 +9348,20 @@
     "narrative": "Packs a serviceable optical sensor cluster into a shielded underground detector, listening for rare flashes rather than ordinary noise.",
     "required_breakthroughs": "Affordable photosensors and calibration that stays stable for low-background runs.",
     "real_basis": "Photomultiplier sensing of rare light flashes in a detector medium.",
+    "enabled_by": [
+      [
+        "PHOTOMULTIPLIERS",
+        "Over 10,000 tubes tested for the IceCube Upgrade, about 1,000 a week."
+      ],
+      [
+        "MULTI-SENSOR MODULES",
+        "IceCube's mDOM holds 24 small tubes in one pressure housing."
+      ],
+      [
+        "ICE DETECTORS",
+        "5,160 IceCube sensors on 86 strings watch the ice under the South Pole."
+      ]
+    ],
     "sources": [
       "https://icecube.wisc.edu/news/research/2024/05/successful-testing-of-over-10000-photomultiplier-tubes-for-icecube-upgrade-digital-optical-modules/"
     ],
@@ -10426,6 +10608,20 @@
     "narrative": "Supports the head, pelvis and feet during long field shifts so a short planned rest does not become a new neck injury.",
     "required_breakthroughs": "A compact support system that checks posture and keeps a quick emergency exit.",
     "real_basis": "Supported posture, parallel seat links and adjustable head contact.",
+    "enabled_by": [
+      [
+        "RECLINING SEATS",
+        "Seats that hold the body through a range of angles, as in long-haul cabins."
+      ],
+      [
+        "FOUR-BAR LINKAGES",
+        "Paired links that move a seat on a fixed path, as in recliner mechanisms."
+      ],
+      [
+        "HEAD RESTRAINTS",
+        "Adjustable head supports set to the sitter's height, as in every car seat."
+      ]
+    ],
     "sources": [],
     "view_A": "SEATED OCCUPANT, RIBBED CANOPY",
     "view_B": "ADJUSTABLE HEAD CRADLE",
@@ -10659,6 +10855,20 @@
     "purpose": "NON-PYROTECHNIC PAYLOAD RELEASE",
     "narrative": "Releases an orbital payload by transferring preload before retracting the retaining jaws. The separation should make an event log, not an entrance.",
     "real_basis": "Non-pyrotechnic release mechanisms and controlled transfer of stored strain energy.",
+    "enabled_by": [
+      [
+        "PYROTECHNIC NUTS",
+        "Fast and simultaneous, but they send a sharp shock through the craft."
+      ],
+      [
+        "SHOCKLESS NUTS",
+        "Starsys's FASSN released over 44 kN in under 30 ms and reset in place."
+      ],
+      [
+        "SHAPE MEMORY",
+        "Nitinol actuators fired by the same electrical pulse as a pyro device."
+      ]
+    ],
     "required_breakthroughs": "Flight-qualified synchronised release that survives thermal cycling and contamination.",
     "view_A": "OPEN LOAD-TRANSFER COLLAR",
     "view_B": "TRANSFER CAM CASSETTE",
@@ -10748,6 +10958,20 @@
     "purpose": "MICROGRAVITY COOLANT GAS TRAP",
     "narrative": "Separates stray gas from a recirculating coolant loop when bubbles refuse to rise. The gas is held in custody until a controlled vent is available.",
     "real_basis": "Wetted capillary membranes can exclude gas below their bubble-point pressure.",
+    "enabled_by": [
+      [
+        "WETTED MEMBRANES",
+        "NASA tank designs cover the liquid port with a water-loving membrane."
+      ],
+      [
+        "GAS VENTS",
+        "A water-repelling membrane that lets trapped air out and keeps the water in."
+      ],
+      [
+        "CAPILLARY TANKS",
+        "Corner fillets and grooves that keep the liquid joined without gravity."
+      ]
+    ],
     "required_breakthroughs": "Coolant-compatible surface chemistry and a recoverable separator that resists fouling.",
     "view_A": "SINUOUS SEPARATION MANIFOLD",
     "view_B": "WETTED MEMBRANE DRAWER",
@@ -10837,6 +11061,20 @@
     "purpose": "TWO-PERSON CONSENT LATCH",
     "narrative": "Opens a shared compartment only while two independent key holders agree. Rank, urgency and a louder voice do not count as a second key.",
     "real_basis": "Mechanical interlocks can implement two independent permissive conditions.",
+    "enabled_by": [
+      [
+        "DUAL CONTROL",
+        "Two keys held by two people, as on a bank's safe-deposit boxes."
+      ],
+      [
+        "KEY INTERLOCKS",
+        "Trapped-key systems that open a guard only when every key is in place."
+      ],
+      [
+        "FAIL-SECURE LOCKS",
+        "Locks built to stay shut, not spring open, when power or a part fails."
+      ]
+    ],
     "required_breakthroughs": "A tamper-evident, fail-secure mechanism with a separately defined emergency procedure.",
     "view_A": "EQUAL-AUTHORITY LOCKBODY",
     "view_B": "COINCIDENCE YOKE",
@@ -10924,6 +11162,20 @@
     "purpose": "CONNECTOR COMPATIBILITY STATION",
     "narrative": "Identifies a visiting connector before authorising an adaptor. A thread that goes in is considered an introduction, not proof of compatibility.",
     "real_basis": "Dimensional metrology and thread pitch-diameter measurement using calibrated gauges.",
+    "enabled_by": [
+      [
+        "THREAD METROLOGY",
+        "The pitch diameter, not the outside diameter, is the datum of a thread."
+      ],
+      [
+        "THREE-WIRE METHOD",
+        "Three precise wires laid in the thread, measured across with a micrometer."
+      ],
+      [
+        "CMM PROBING",
+        "Coordinate machines probe threads too; NIST warns the uncertainty is easy to miss."
+      ]
+    ],
     "required_breakthroughs": "A verified interface library covering mechanical, electrical and fluid compatibility.",
     "view_A": "OPEN GAUGE CAROUSEL",
     "view_B": "THREE-WIRE PROBE HEAD",
@@ -11013,6 +11265,20 @@
     "purpose": "PASSIVE CARGO SCATTERING TOMOGRAPH",
     "narrative": "Images a sealed cargo bay with cosmic-ray muons. Suspicious density is reconstructed slowly; the sky does not accept priority boarding.",
     "real_basis": "Muon scattering tomography maps material from measured incoming and outgoing tracks.",
+    "enabled_by": [
+      [
+        "COSMIC RAYS",
+        "About one muon per square centimetre per minute reaches sea level."
+      ],
+      [
+        "MUON TOMOGRAPHY",
+        "Proposed at Los Alamos for borders: it scans occupied vehicles, which X-rays cannot."
+      ],
+      [
+        "PARTICLE TRACKING",
+        "Drift-tube planes from particle physics, above and below the load."
+      ]
+    ],
     "required_breakthroughs": "Robust reconstruction from sparse tracks and well-characterised detector backgrounds.",
     "view_A": "OPEN COSMIC INSPECTION GANTRY",
     "view_B": "TRACKING PLANE CASSETTE",
@@ -11102,6 +11368,20 @@
     "purpose": "CLAMP-ON TUNED MASS ABSORBER",
     "narrative": "Fits an awkward machine with three adjustable resonant branches. Each branch takes a narrow band of vibration personally.",
     "real_basis": "Tuned mass absorbers take vibration energy from a host near their tuned frequency.",
+    "enabled_by": [
+      [
+        "TUNED MASS DAMPERS",
+        "Skyscrapers, smokestacks and wind turbines already carry them."
+      ],
+      [
+        "COMPACT DAMPERS",
+        "NASA Langley's slider damper: 4 to 9 times as effective at the same size and weight."
+      ],
+      [
+        "MECHANICAL TUNING",
+        "Tuned by a mechanical adjustment instead of messy fluid changes."
+      ]
+    ],
     "required_breakthroughs": "Durable tuning locks, verified across changing host loads and temperatures.",
     "view_A": "THREE-BAND ABSORBER CROWN",
     "view_B": "MOVING MASS BRANCH",
@@ -11191,6 +11471,20 @@
     "purpose": "EXPERIMENTAL NEEDLE HANDOFF MODULE",
     "narrative": "Passes a curved needle between two grippers while a dancer manages the thread. The only patient here is the research schedule.",
     "real_basis": "Robotic needle handling and tension control are studied for automated suturing.",
+    "enabled_by": [
+      [
+        "ROBOTIC SUTURING",
+        "An OCT-guided robot placed planned entry and exit points to 0.27 mm."
+      ],
+      [
+        "NEEDLE POSE",
+        "Automatic calibration of where the needle sits in the robot gripper."
+      ],
+      [
+        "THREAD DANCERS",
+        "Sprung arms that keep thread tension even, as on textile winders."
+      ]
+    ],
     "required_breakthroughs": "Validated tissue interaction, sterilisation and fault recovery before any clinical application.",
     "view_A": "OPEN NEEDLE-HANDOFF TRACK",
     "view_B": "OPPOSED NEEDLE GRIPPERS",
@@ -11280,6 +11574,20 @@
     "purpose": "BOWL-SCALE ROTATING GALLEY",
     "narrative": "Keeps dinner inside a sealed rotating vessel with a balanced cradle and an interlocked lid. Artificial gravity is available in the serving size only.",
     "real_basis": "Centripetal acceleration is proportional to radius and angular speed squared.",
+    "enabled_by": [
+      [
+        "CIRCULAR MOTION",
+        "Anything on a curved path needs a pull toward the centre; the bowl wall supplies it."
+      ],
+      [
+        "CENTRIFUGES",
+        "Sealed rotors and buckets that keep samples contained at speed."
+      ],
+      [
+        "ROTOR BALANCING",
+        "Small weights that bring the mass back onto the spin axis, as on car wheels."
+      ]
+    ],
     "required_breakthroughs": "A safe balanced rotor with food-compatible seals and dependable stopped-rotor transfer.",
     "view_A": "BALANCED ROTATING VESSEL",
     "view_B": "DRIVE AND REACTION BEARING",
