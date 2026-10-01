@@ -61,7 +61,9 @@ def node(s,rx):
         s.dot(x,y,1.2,.7)
         s.text(num,tx,ty,6.7,track=.05,a=.9,align='c')
     # Numbered down the columns, like every other key in the collection.
-    for num,label,x,y,color in [('01','POROUS CONTACT',rx-171,480,WHITE),('02','PASSIVATION WINDOW',rx-171,498,WHITE),('03','METAL ROUTING',rx+8,480,GOLD),('04','FLEXIBLE CARRIER',rx+8,498,WHITE)]:
+    # (the second column starts after the longest label of the first, which enlarged type widens)
+    x2=max(rx+8,rx-171+21+s.measure('PASSIVATION WINDOW',6.3,.07)+14)
+    for num,label,x,y,color in [('01','POROUS CONTACT',rx-171,480,WHITE),('02','PASSIVATION WINDOW',rx-171,498,WHITE),('03','METAL ROUTING',x2,480,GOLD),('04','FLEXIBLE CARRIER',x2,498,WHITE)]:
         s.text(num,x,y,6.3,track=.06,a=.6)
         s.text(label,x+21,y,6.3,track=.07,a=.86,color=color)
     s.view_label(rx,540,'C','ONE NODE','EXPLODED FILMS / THICKNESS EXAGGERATED')
