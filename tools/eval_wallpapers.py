@@ -282,7 +282,7 @@ def run(ids=None, profile='16x9-2160p'):
 
 def score(found, ids=None):
     cases = json.loads(CASES.read_text())
-    cases['cases'] = [c for c in cases['cases'] if not ids or c['id'] in ids]
+    cases['cases'] = [c for c in cases['cases'] if c.get('layer', 'geometry') == 'geometry' and (not ids or c['id'] in ids)]
     hit = 0
     for c in cases['cases']:
         ok = any(f['id'] == c['id'] and f['zone'] == c['zone'] and f['code'] == c['code'] for f in found)
