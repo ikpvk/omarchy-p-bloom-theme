@@ -179,6 +179,7 @@ class Sheet:
         if self.layer_mode:
             self.text_floor = Sheet.composition.floor_px / self.s
             self.text_boxes = []
+            self.shape_boxes = []   # closed axis-aligned rectangles, for tools/eval_wallpapers.py
 
     # -- stroke and fill -------------------------------------------------
 
@@ -225,6 +226,13 @@ class Sheet:
         self._stroke(a, w, dash, color)
 
     def poly(self, pts, a=0.5, w=0.6, close=True, fill=0.0, dash=None, color=WHITE):
+        shapes = getattr(self, 'shape_boxes', None)
+        if shapes is not None and close and len(pts) == 4 and not getattr(self, '_dummy', False):
+            d = [self.c.user_to_device(*p) for p in pts]
+            xs, ys = [p[0] for p in d], [p[1] for p in d]
+            if len({round(v, 1) for v in xs}) == 2 and len({round(v, 1) for v in ys}) == 2:
+                layer = 'main' if hasattr(self, '_side_context') else 'side'
+                shapes.append(dict(box=[min(xs), min(ys), max(xs), max(ys)], layer=layer, a=a))
         self.c.move_to(*pts[0])
         for p in pts[1:]:
             self.c.line_to(*p)
@@ -422,7 +430,7 @@ class Sheet:
         c.translate(x, y)
         c.rotate(math.radians(rot))
         px = {"l": 0, "c": -total / 2, "r": -total}[align]
-        self._note_text(s, size, glyphs, adv, gap, px, (color, a))
+        self._note_text(s, size, glyphs, adv, gap, px, (color, a), align, rot)
         if not Sheet.draw_text:
             c.restore()
             return total
@@ -435,7 +443,7 @@ class Sheet:
         c.restore()
         return total
 
-    def _note_text(self, s, size, glyphs, adv, gap, px, ink=None):
+    def _note_text(self, s, size, glyphs, adv, gap, px, ink=None, align='l', rot=0):
         """Record the inked box and ink (colour, alpha) of a label.
 
         Composed profiles always record; other renders only when an audit
@@ -463,6 +471,8 @@ class Sheet:
                                    max(p[0] for p in pts), max(p[1] for p in pts)]))
             if ink:
                 boxes[-1]['ink'] = [*map(float, ink[0]), float(ink[1])]
+            # the anchor the code placed the label by (baseline origin), for tools/eval_wallpapers.py
+            boxes[-1].update(anchor=list(m.transform_point(0, 0)), align=align, rot=rot)
 
     def leader(self, x, y, dx, dy, run, label, sub=None, a=0.6, color=WHITE):
         """Dot on the part, a slanted line away from it, a horizontal run, a label."""
