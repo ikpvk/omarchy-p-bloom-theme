@@ -69,10 +69,10 @@ def velvet_hammer():
   x=98*math.cos(math.radians(a));z=125+98*math.sin(math.radians(a))
   box('split end termination',(x,-8,z),(14,27,14),4)
   cyl('end witness',(x,-24,z),3,3,'detail',(0,-1,0),6)
- mark('TRANSFER CAM',(-51,-14,172),'Takes the stored load before the jaw retracts.')
- mark('SPLIT RING',(-94,3,99),'Interrupted carrier; opening shown for inspection.')
- mark('RELEASE LOG',(68,-20,58),'Records the sequence, not a declaration of zero shock.')
- mark('RETAINING JAW',(50,-18,210),'A physical hold until the transfer path is engaged.')
+ mark('TRANSFER CAM',(-51,-14,172),'THREE CASSETTES ROUND THE RING')
+ mark('SPLIT RING',(-94,3,99),'TWIN CARRIERS, OPEN FOR INSPECTION')
+ mark('RELEASE LOG',(68,-20,58),'TWO DIALS BESIDE THE MAGAZINE')
+ mark('RETAINING JAW',(50,-18,210),'ONE JAW PER CASSETTE')
  return 27,22
 
 
@@ -108,10 +108,10 @@ def bubble_bailiff():
   for f in (.25,.5,.75):
    q=Vector(a).lerp(Vector(b),f)
    rod('channel retention strap',(q.x,-14,q.z),(q.x,14,q.z),.9,'detail')
- mark('LIQUID PATH',(-83,0,49),'Sinuous wetted channel; cover omitted in this study.')
- mark('WICK CASSETTE',(-20,-10,108),'Surface chemistry is selected for this coolant.')
- mark('GAS BUFFER',(63,25,58),'Temporary gas hold before an authorised vent cycle.')
- mark('RETURN UNION',(82,0,229),'Bubble-free delivery is a target, not a certification.')
+ mark('LIQUID PATH',(-83,0,49),'OPEN SERVICE SIDE / COVER OMITTED')
+ mark('WICK CASSETTE',(-20,-10,108),'GAS LEAVES BY THE VENT PLENUM')
+ mark('GAS BUFFER',(63,25,58),'END OF THE GAS-ONLY RISER')
+ mark('RETURN UNION',(82,0,229),'FLANGED OUTLET TO THE LOOP')
  return 27,18
 
 
@@ -151,10 +151,10 @@ def key_concord():
   for a in range(0,360,60):
    cyl('barrel mounting screw',(x+32*math.cos(math.radians(a)),32*math.sin(math.radians(a)),12),2,3,'detail',n=6)
   box('key identification inset',(x,-5,94),(17,1,11),3,'detail')
- mark('KEY ONE',(-64,0,89),'One input cannot manufacture the other person\'s consent.')
- mark('KEY TWO',(64,0,89),'Identical mechanical authority; no master cylinder.')
- mark('COINCIDENCE YOKE',(0,-10,50),'Both pawls must clear before the output can travel.')
- mark('WITHDRAWAL',(0,89,29),'Either input may withdraw before bolt release.')
+ mark('KEY ONE',(-64,0,89),'GEARED BARREL / ID INSET ON THE BOW')
+ mark('KEY TWO',(64,0,89),'SAME PARTS, MIRRORED')
+ mark('COINCIDENCE YOKE',(0,-10,50),'TWO SPRUNG PAWLS, ONE PIVOT')
+ mark('WITHDRAWAL',(0,89,29),'KNURLED CROWN RETURNS THE BOLT')
  return 22,35
 
 
@@ -188,10 +188,10 @@ def metric_embassy():
   for j in range(3):rod('reference wire',(-17+j*4,-1,99),(-17+j*4,17,99),.7,'accent')
   instrument((9,-10,145),35,19)
  tube('probe return loom',[(9,27,145),(-50,45,160),(-105,43,80),(-80,38,15)],1)
- mark('REFERENCE HEAD',(9,-6,144),'A fitted thread is not proof of electrical compatibility.')
- mark('ADAPTOR LIBRARY',(50,48,60),'Replaceable keyed cartridges, each with declared limits.')
- mark('GAUGE CAROUSEL',(-65,-34,37),'A physical sample precedes any software translation.')
- mark('DRIVE INDEX',(0,-8,25),'Indexing stops before the connector is presented.')
+ mark('REFERENCE HEAD',(9,-6,144),'HANGS FROM AN ARCHED ARM')
+ mark('ADAPTOR LIBRARY',(50,48,60),'EIGHT KEYED SHOES ON THE RIM')
+ mark('GAUGE CAROUSEL',(-65,-34,37),'INTERRUPTED RIM / THREE PEDESTALS')
+ mark('DRIVE INDEX',(0,-8,25),'GEARED SPINDLE / FOUR RADIAL WEBS')
  return 28,28
 
 
@@ -227,10 +227,10 @@ def muon_customs():
   for z in (86,159):box('cargo edge protector',(10,-41,z),(93,3,6),2,'detail')
  box('manifest plate',(10,-44,128),(40,2,23),3,'detail')
  for i in range(6):rod('manifest code',(-3+i*5,-46,121),(-3+i*5,-46,135),.6,'detail')
- mark('UPPER TRACKER',(30,-40,262),'Two separated planes establish an incoming direction.')
- mark('LOWER TRACKER',(35,-40,46),'Outgoing track constrains scattering through cargo.')
- mark('CLOCK RACK',(-137,-104,139),'Event coincidence; the sky sets the arrival schedule.')
- mark('PASSIVE BAY',(10,-41,132),'Illustrative sealed test object. No X-ray emitter.')
+ mark('UPPER TRACKER',(30,-40,262),'TWO PLANES, TEN STRIPS EACH')
+ mark('LOWER TRACKER',(35,-40,46),'SAME PAIR, BELOW THE PALLET')
+ mark('CLOCK RACK',(-137,-104,139),'THREE TIMING UNITS ON THE FRAME')
+ mark('PASSIVE BAY',(10,-41,132),'STRAPPED TEST CRATE / NO EMITTER')
  return 23,17
 
 
@@ -260,10 +260,10 @@ def resonance_tailor():
    for z in (30,67):
     rod('flexure anchorage',(x,-54,z),(x,-35,53),2,'detail')
     cyl('flexure clamp',(x,-56,z),2.5,3,'detail',(0,-1,0),6)
- mark('CENTRE MASS',(0,-10,181),'Mass position changes the tuning of this branch.')
- mark('SHORT BRANCH',(57,8,109),'Three unequal branches target different narrow bands.')
- mark('LOCK BRIDGE',(0,-48,56),'Locking follows measurement, never a guess by ear.')
- mark('HOST CLAMP',(-35,-8,18),'Energy enters from the vibrating host structure.')
+ mark('CENTRE MASS',(0,-10,181),'TALLEST BRANCH, OWN DIAL')
+ mark('SHORT BRANCH',(57,8,109),'SHORTEST FLEXURES OF THE THREE')
+ mark('LOCK BRIDGE',(0,-48,56),'TWO KNOBS ON THE CENTRE ROOT')
+ mark('HOST CLAMP',(-35,-8,18),'SPLIT COLLAR, TWO SCREWS')
  return 27,21
 
 
@@ -298,10 +298,10 @@ def suture_loom():
   rod('membrane support',(x,63,50),(x,25,89),2,'detail')
   box('membrane clamp',(x,24,89),(6,12,7),2,'detail')
  for x,y in ((-68,43),(60,54),(-28,-72)):box('bench shoe',(x,y,5),(29,34,11),5);rod('bench stand',(x,y,10),(x,y,34),4)
- mark('DUAL NEEDLE GRIP',(-10,-4,114),'One gripper holds while the other repositions.')
- mark('THREAD DANCER',(25,70,101),'Slack is managed before the next transfer.')
- mark('TEST MEMBRANE',(0,5,89),'Neutral test sheet, not a claim of clinical readiness.')
- mark('OPEN SERVICE TRACK',(-78,0,49),'Cleaning access is part of the mechanism.')
+ mark('DUAL NEEDLE GRIP',(-10,-4,114),'TWO MOTORISED ARMS, MIRRORED')
+ mark('THREAD DANCER',(25,70,101),'SPRUNG ARM WITH ITS OWN GAUGE')
+ mark('TEST MEMBRANE',(0,5,89),'CLAMPED BETWEEN TWO SUPPORTS')
+ mark('OPEN SERVICE TRACK',(-78,0,49),'CLEANING ACCESS BUILT IN')
  return 28,32
 
 
@@ -348,10 +348,10 @@ def spin_table():
   rod('balance outrigger',(0,0,-34),(0,0,-102),5)
   for z in (-78,-87,-96):cyl('trim counterweight',(0,0,z),19,7,'detail')
  tube('cradle service cable',[(-106,8,121),(-99,26,73),(-66,20,28),(-66,-26,10)],1)
- mark('SEALED VESSEL',(0,-25,157),'A bowl-scale radial acceleration, not room gravity.')
- mark('DRIVE BEARING',(-100,-3,130),'Motor and opposing reaction return to the fixed cradle.')
- mark('BALANCE MASS',(0,-35,46),'Balance is checked with the declared ingredient load.')
- mark('LID INTERLOCK',(36,-14,162),'Transfer only after the rotor is stopped and isolated.')
+ mark('SEALED VESSEL',(0,-25,157),'SPUN BOWL, THREE ROLLED SEAMS')
+ mark('DRIVE BEARING',(-100,-3,130),'MOTOR OUTBOARD OF THE HOOP')
+ mark('BALANCE MASS',(0,-35,46),'THREE TRIM WEIGHTS ON AN OUTRIGGER')
+ mark('LID INTERLOCK',(36,-14,162),'HALF-RING GRIP / PRESSED RIBS')
  return 24,22
 
 BUILDERS={101:velvet_hammer,103:bubble_bailiff,104:key_concord,105:metric_embassy,106:muon_customs,107:resonance_tailor,108:suture_loom,110:spin_table}

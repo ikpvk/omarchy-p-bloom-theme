@@ -241,8 +241,8 @@ def build():
         phi = math.radians(deg)
         rod('railing post', (pr * math.cos(phi), pr * math.sin(phi), PZ), (pr * math.cos(phi), pr * math.sin(phi), PZ + 38), .5, 'detail')
     # --- annotations ---------------------------------------------------------------
-    mark('PLASMA', section(math.radians(272), math.radians(60), 0), 'TWISTED WITH THE COILS / 1.9 m ACROSS')
-    mark('CRYOSTAT', Vector((math.cos(math.radians(30)), math.sin(math.radians(30)), 0)) * (R0 + RC * .75) + Vector((0, 0, RC * .66)), 'VACUUM JACKET / MAGNETS AT -253 °C')
+    mark('PLASMA', section(math.radians(272), math.radians(60), 0), '3.8 × 1.8 m SECTION / THREE FIELD LINES SHOWN')
+    mark('CRYOSTAT', Vector((math.cos(math.radians(30)), math.sin(math.radians(30)), 0)) * (R0 + RC * .75) + Vector((0, 0, RC * .66)), 'VACUUM JACKET / 30° SEGMENTS / RADIAL PORTS')
     mark('SERVICE WALKWAY', (40, -(R0 + 78), -104 + 36), 'PERSON FOR SCALE / 1.75 m')
     phc = math.radians(252); lowc = section(phc, theta_bottom(phc, GAP + 6), GAP + 6)
     mark('COIL CRADLE', Vector((lowc.x, lowc.y, (-104 + lowc.z) / 2)) + Vector((math.cos(phc), math.sin(phc), 0)) * 12, 'TEN CRADLES / 2 000 t OF COLD MAGNETS')

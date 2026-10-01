@@ -66,7 +66,7 @@ def fibre_braid():
             cyl('yarn carrier',(x,-19,z),6,20,'structure',(0,1,0))
             for yy in (-20,-2):ring('bobbin flange',(x,yy,z),8,1,2,(0,1,0),'detail')
             tube('yarn lead',[(x,-20,z),(x*.47,-45,70+(z-70)*.47),(x*.13,-75,70+(z-70)*.13)],.2,'accent')
-        mark('CARRIER TRACK',(41,-13,104),'INTERLACED BOBBIN PATHS')
+        mark('CARRIER TRACK',(41,-13,104),'TWIN TRACK RINGS ON PEDESTALS')
     with group('C'):
         cyl('mandrel chuck',(0,30,70),22,31,'structure',(0,1,0))
         flange('chuck face',(0,27,70),25,(0,-1,0))
@@ -85,7 +85,7 @@ def fibre_braid():
     for y in (-85,-48):
         for x in (-17,17):rod('output guide',(x,y,12),(x,y,65),3)
         rod('guide roller',(-17,y,65),(17,y,65),4,'detail')
-    mark('BRAIDED OUTPUT',(0,-99,70),'FIBRE ANGLE FOLLOWS LOAD PLAN')
+    mark('BRAIDED OUTPUT',(0,-99,70),'FOUR OUTPUT GUIDE POSTS')
     mark('CHUCK DRIVE',(0,82,71),'SYNCHRONISED FORM ADVANCE')
     return 34,25
 

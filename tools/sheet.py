@@ -27,7 +27,7 @@ ARC = [0.298, 0.788, 1.000]   # accent from colors.toml, #4cc9ff
 GOLD = [0.961, 0.788, 0.271]  # yellow from colors.toml, #f5c945
 RED = (1.000, 0.329, 0.408)   # red from colors.toml, #ff5468
 FONT = "Nimbus Sans"
-SUBS = dict(zip("₀₁₂₃₄₅₆₇₈₉", "0123456789"))
+SUBS = dict(zip("₀₁₂₃₄₅₆₇₈₉ₐₑₒₓₕₖₗₘₙₚₛₜ", "0123456789aeoxhklmnpst"))
 SUPS = dict(zip("⁰¹²³⁴⁵⁶⁷⁸⁹⁻", "0123456789-"))
 
 
@@ -697,9 +697,11 @@ class Sheet:
                     lines.append(part)
                 else:
                     lines[-1:] = [trial]
+            # leading from the enlarged sizes: the gap under the name keeps its proportion at every profile
             lead = self.readable_size(6.5) * 1.35
+            first = mid + 0.36 * self.readable_size(8) + 2.17 * self.readable_size(6.5)
             for i, line in enumerate(lines):
-                self.text(line, x0 + 24, y + 14 + i * lead, 6.5, a=0.4)
+                self.text(line, x0 + 24, first + i * lead, 6.5, a=0.4)
         elif scale:
             self.text(scale, x0 + 24, y + 14, 6.5, a=0.4)
 
@@ -708,9 +710,37 @@ class Sheet:
         glyphs = self._glyphs(s, size)
         return sum(self._advances(glyphs, bold)) + track * size * (len(glyphs) - 1)
 
-    def wrap(self, s, width, size, track):
+    # Words that never start a line after a number: units and the words used as units in the notes.
+    UNITS = frozenset("""mm cm m km m² m³ km² g kg t Mt kt mg µm nm µs ms s h min d l L ml W kW MW GW TW Wh kWh MWh
+        GWh TWh J kJ MJ GJ V kV mV A mA kA Hz kHz MHz GHz THz Pa kPa MPa GPa bar K °C °F % ‰ N kN MN Nm rpm dB lm lx
+        x × ° AU ly pc Gy Sv mSv ppm ppb kn t/h m/s km/h grams tonnes tons people years days hours minutes""".split())
+
+    def _wrap_tokens(self, s):
+        """Words to set, with the spaces that must not break joined in: a number and its unit (200 grams),
+        digit groups (100 000) and both sides of a multiplication sign (4 × 4 m)."""
+        out = []
+        for word in s.split(" "):
+            if not word:
+                continue
+            prev = out[-1] if out else ""
+            bare = word.rstrip(".,;:)")
+            glue = prev and (
+                (prev[-1].isdigit() and re.fullmatch(r"\d{3}([.,;:)]|$)", word) is not None)
+                or (re.search(r"\d[%²³]?$", prev) and bare in self.UNITS)
+                or prev.split(" ")[-1] in ("×", "x")
+                or bare in ("hundred", "thousand", "million", "billion", "trillion")
+                and prev.split(" ")[-1].lower() in ("one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
+                                                    "ten", "a", "half", "a hundred"))
+            if glue or prev in ("a", "A"):
+                # (a line never ends on the article "a")
+                out[-1] = prev + " " + word
+            else:
+                out.append(word)
+        return out
+
+    def _greedy(self, words, width, size, track):
         lines, cur = [], ""
-        for word in s.split():
+        for word in words:
             trial = (cur + " " + word).strip()
             if cur and self.measure(trial, size, track) > width:
                 lines.append(cur)
@@ -720,6 +750,53 @@ class Sheet:
         if cur:
             lines.append(cur)
         return lines
+
+    def wrap(self, s, width, size, track):
+        """Greedy lines, except that the paragraph never ends on one word or a stub: then the last two lines
+        are rebalanced (the narrowest width that still sets them as two lines), like CSS text-wrap: pretty."""
+        words = self._wrap_tokens(s)
+        lines = self._greedy(words, width, size, track)
+        if len(lines) < 2:
+            return lines
+        if " / " in s:
+            # "A / B" notes break at their slashes when that takes no more lines; the break replaces the slash
+            parts, by_part = s.split(" / "), []
+            for part in parts:
+                trial = f"{by_part[-1]} / {part}" if by_part else part
+                if by_part and self.measure(trial, size, track) > width:
+                    by_part.append(part)
+                else:
+                    by_part[-1:] = [trial]
+            if len(by_part) <= len(lines) and all(self.measure(l, size, track) <= width for l in by_part):
+                return by_part
+        # never start a line with a slash: it belongs to the line before
+        words = [w for w in words]
+        for i in range(len(words) - 1, 0, -1):
+            if words[i] == "/":
+                words[i - 1] += " /"
+                del words[i]
+        lines = self._greedy(words, width, size, track)
+        if len(lines) < 2:
+            return lines
+        last = lines[-1]
+        if " " in last and self.measure(last, size, track) >= 0.3 * width:
+            return lines
+        tail = self._wrap_tokens(lines[-2] + " " + last)
+        # carry the fewest words down from the line above that make the last line a real line
+        for k in range(2, len(tail)):
+            down = " ".join(tail[-k:])
+            if self.measure(down, size, track) > width:
+                break
+            if self.measure(down, size, track) >= 0.3 * width:
+                return lines[:-2] + [" ".join(tail[:-k]), down]
+        lo, hi = 0.5 * width, width
+        for _ in range(14):
+            mid = (lo + hi) / 2
+            if len(self._greedy(tail, mid, size, track)) <= 2:
+                hi = mid
+            else:
+                lo = mid
+        return lines[:-2] + self._greedy(tail, hi, size, track)
 
     def begin_main(self, x, y):
         """Start the main drawing, designed around (x, y).
@@ -749,23 +826,24 @@ class Sheet:
             self.c.translate(-x, -y)
 
     def end_main(self):
-        # Every device gets its A caption here, independently of its renderer.
+        # Every device gets its A caption here, independently of its renderer. It names what view A shows,
+        # never the title or the subtitle again.
         # Use the same boxed letter and typography as the auxiliary B/C views.
         names = {
             'quantum-simulator': 'RADIAL CRYOGENIC ENGINE',
-            'sky-racer': 'DUCTED-FAN RACER',
-            'fusion-transport': 'CREWED FUSION TRANSFER VEHICLE',
+            'sky-racer': 'SIX FANS, ARMS UNFOLDED',
+            'fusion-transport': 'SHIP WITH RADIATORS DEPLOYED',
             'greener': 'AUTONOMOUS TURF CULTIVATOR',
-            'cortical-mesh': 'CORTICAL SENSOR MESH',
-            'bounder': 'POWERED SPRINT EXOSKELETON',
-            'air-refinery': 'ATMOSPHERIC FUEL SYNTHESIZER',
-            'aroma-organ': 'OLFACTORY SYNTHESIZER',
-            'tether-climber': 'LASER-POWERED ORBITAL CLIMBER',
+            'cortical-mesh': 'IMPLANT WITH MESH UNFOLDED',
+            'bounder': 'ONE LEG, SHOWN UNWORN',
+            'air-refinery': 'TOWER IN ITS MIRROR FIELD',
+            'aroma-organ': 'CARTRIDGE BANK, COVER GHOSTED',
+            'tether-climber': 'CLIMBER ON THE RIBBON',
             'truth-lamp': 'DINNER-TABLE TRUTH DETECTOR',
-            'organ-foundry': 'AUTOLOGOUS KIDNEY PRINTER',
-            'volumetric-stage': 'FREE-AIR VOLUMETRIC PROJECTOR',
-            'proxy': 'GUIDED MORNING RUN',
-            'presence-rig': 'OMNIDIRECTIONAL HAPTIC ARENA',
+            'organ-foundry': 'PRINTER AT WORK',
+            'volumetric-stage': 'EMITTER GANTRY OVER THE DECK',
+            'proxy': 'PX-1, MID-STRIDE',
+            'presence-rig': 'PLAYER ON THE ROLLER FLOOR',
         }
         subject = getattr(self, 'subject', None)
         self.c.restore()

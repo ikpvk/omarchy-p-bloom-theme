@@ -16,9 +16,8 @@ ENTRY = dict(
     id='b21', series='B21', number=221, slug='crater-ear', title='CRATER EAR',
     domain='astronomy', category='serious', model='CE-1', palette='graphite', seed=260121,
     purpose='LUNAR CRATER RADIO TELESCOPE',
-    narrative=('A wire-mesh dish strung across a crater on the far side of the Moon listens to the '
-               "universe's first hydrogen, shielded from every radio on Earth. Robots hung and "
-               'tensioned the whole kilometre of mesh.'),
+    narrative=("A wire-mesh dish strung across a far-side lunar crater listens to the universe's "
+               'first hydrogen. Robots hung and tensioned the whole mesh.'),
     enabled_by=[
         ('FAR-SIDE QUIET', 'The Moon itself blocks every transmitter on Earth from the far side.'),
         ('CRATER DISHES', 'Studies such as LCRT: a wire dish hung in a natural crater instead of on towers.'),
@@ -39,10 +38,10 @@ DOSSIER = dict(
     kind='far side',
     fact=('Before the first stars, hydrogen gas filled the universe. Its faint 21 cm signal is '
           'now stretched into waves metres long, and only a sky without radios can hear it.'),
-    rows=[('DISH', '1 km / WIRES EVERY 40 cm'),
-          ('LISTENS AT', '5 TO 40 MHz / 60 TO 7.5 m WAVES'),
+    rows=[('SHIELD', '3 474 km OF MOON'),
+          ('WAVES', '60 TO 7.5 m LONG'),
           ('HYDROGEN FROM', 'REDSHIFT 35 TO 280'),
-          ('DATA HOME', 'RELAY ORBITER / ONE PASS A DAY')],
+          ('CONTACT', 'ONE ORBITER PASS A DAY')],
     note='ON EARTH, A TEN-YEAR-OLD LISTENS TO THE FIRST HYDROGEN, PLAYED AS SOUND.',
     left=('OLDER LIGHT, LONGER WAVES', 'f = 1420 MHz / (1 + z) / DECLARED BAND',
           "Below about 10 MHz Earth's ionosphere closes the sky; the far side stays open."),

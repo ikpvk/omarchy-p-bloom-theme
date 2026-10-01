@@ -110,14 +110,14 @@ def sky_racer(size):
         s.leader(mx + 24, my + 100, 330, 130, 110, "LITHIUM-AIR PACK", "1 100 Wh PER kg")
         s.leader(mx, my - 196, -150, -150, -120, "SENSING ARRAY", "14 HEADS / SEES 200 m")
         s.leader(*polar(mx, my, 440, 160), -70, -60, -90, "KEEP-CLEAR ENVELOPE", "NOTHING COMES CLOSER THAN 3 m")
-        s.leader(mx - 150, my + 140, -190, 160, -110, "FOLDING ARM", "WOVEN NANOTUBE FIBRE")
+        s.leader(mx - 150, my + 140, -190, 160, -110, "FOLDING ARM", None)
         s.dim(mx - 403, my + 440, mx + 403, my + 440, "SPAN 4.6 m", a=0.4, label_shift=80, label_offset=-16)
     s.end_main()
 
     s.legend("SKY RACER", "CLASS SR-1   /   ONE-SEAT ELECTRIC RACING COPTER",
-             "A racing aircraft for one pilot, flown through courses of gates in the air at up to 320 km/h. "
+             "A racing aircraft for one pilot, flown through courses of gates in the air. "
              "The pilot steers; the machine refuses to hit a gate, the ground or another racer.",
-             [("ELECTROCHEMISTRY", "Lithium-air cells that hold 1 100 Wh per kilogram, four times today's best, and survive a thousand fast charges."),
+             [("ELECTROCHEMISTRY", "Lithium-air cells that store four times today's best per kilogram and survive a thousand fast charges."),
               ("MOTOR DESIGN", "Fan motors built into the duct rim and wound with carbon nanotube wire, 25 kW for every kilogram."),
               ("AUTONOMY", "A flight computer that tracks every racer and gate a thousand times a second and overrides the pilot only in the last metre."),
               ("MATERIALS SCIENCE", "Airframes woven from nanotube fibre, half the mass of carbon composite, that fold around the cockpit instead of shattering.")],
@@ -226,8 +226,8 @@ def volumetric_stage(size):
     s.end_main()
 
     s.legend("VOLUMETRIC STAGE", "MODEL VS-40   /   MOVING 3D IMAGES IN OPEN AIR",
-             "Draws moving three-dimensional images in the air above a stage, forty metres wide, seen "
-             "correctly from every seat without glasses. For concerts, theatre and sport replays.",
+             "Fills the air above a stage with images that keep their depth from every seat, "
+             "for concerts, theatre and sport replays.",
              [("PHOTONICS", "Haze particles that turn infrared into visible light a thousand times better than today's, and only where two beams cross."),
               ("OPTICAL CHIPS", "Beam steering on a chip, with no moving parts, that aims at two billion points sixty times a second."),
               ("AEROSOL SCIENCE", "A haze proven harmless to breathe for hours and cleared from the hall air within a minute."),
@@ -241,7 +241,7 @@ def volumetric_stage(size):
             r = 96 + k * 20
             for a0, a1 in ((24, 68), (74, 106), (112, 156)):
                 s.arc(lx, 214, r, a0, a1, 0.75 - k * 0.05, 0.9 if k == 0 else 0.6)
-        s.view_label(lx, 520, "B", "HALL PLAN", "12 000 SEATS / EVERY ONE SEES DEPTH")
+        s.view_label(lx, 520, "B", "HALL PLAN", "STAGE AND SEATING ARCS")
     with auxiliary_panel(s, 'C', lx, rx):
         qx, qy = rx, 330
         s.detail_ring(qx, qy, 170)
@@ -251,7 +251,7 @@ def volumetric_stage(size):
         s.end_clip()
         s.ln(qx - 120, qy + 188, qx - 60, qy + 188, 0.9, 1.0)
         s.text("1 mm", qx - 90, qy + 180, 6.5, a=0.8, align="c")
-        s.view_label(qx, qy + 210, "C", "ONE VOXEL", "PARTICLES GLOW ONLY INSIDE THE CROSSING")
+        s.view_label(qx, qy + 210, "C", "ONE VOXEL", "TWO BEAMS, ONE CROSSING")
     from original_charts import draw as right_chart
     right_chart(s)
     original_diagrams(s)
@@ -307,8 +307,8 @@ def presence_rig(size):
              "skin, the lurch of a fall. The floor slides under the feet, so a living room is enough.",
              [("SOFT ROBOTICS", "Woven polymer muscle fibres, as strong as real muscle and silent, thin enough to wear as clothing."),
               ("NEUROSCIENCE", "Small currents behind the ear that make the balance organ feel acceleration, which ends motion sickness in virtual worlds."),
-              ("MICROSYSTEMS", "Printed tactile sheets with a million independently moving points that survive sweat and washing."),
-              ("COMPUTING", "Simulation of touch, cloth and impact that answers in under four milliseconds.")],
+              ("MICROSYSTEMS", "Printed tactile sheets of independently moving points that survive sweat and washing."),
+              ("COMPUTING", "Real-time simulation of touch, cloth and impact.")],
              "2057")
     from triptych import auxiliary_panel, original_diagrams
     with auxiliary_panel(s, 'B', lx, rx):
@@ -395,25 +395,24 @@ def aroma_organ(size):
 
         enrich(s, "aroma-organ", mx, my)
 
-        s.leader(*polar(mx, my, 338, 12 * 3.75), 120, 60, 110, "BASE ODORANT", "96 CARTRIDGES / 6 MONTHS EACH")
-        s.leader(*polar(mx, my, 250, 300), 260, -70, 110, "VALVE RING", "DOSES OF 5 pl")
+        s.leader(*polar(mx, my, 338, 12 * 3.75), 120, 60, 110, "BASE ODORANT", "6 MONTHS PER CARTRIDGE")
+        s.leader(*polar(mx, my, 250, 300), 260, -70, 110, "VALVE RING", None)
         s.leader(*polar(mx, my, 152, 330), 330, -40, 110, "MANIFOLD", None)
         s.leader(mx + 60, my + 60, 380, 130, 110, "MIXING CHIP", "NEW BLEND 12 TIMES A SECOND")
         s.leader(mx - 16, my - 16, -330, -300, -110, "HEATED OUTLET", "TO THE NOSE PIECE OR THE ROOM DUCT")
         s.leader(fx - 20, fy + 10, -190, 30, -110, "CLEARING FAN", None)
-        s.leader(mx + 100, my + 440, 170, 30, 110, "SCRUBBER", "DESTROYS THE LAST SMELL IN 0.4 s")
+        s.leader(mx + 100, my + 440, 170, 30, 110, "SCRUBBER", None)
         s.dim(mx - 388, my - 440, mx + 388, my - 440, "Ø 310 mm", a=0.4, label_shift=70)
     if not s.wide:
         s.text('METERED ODORANTS / NOT A VALIDATED PERCEPTION MODEL',mx+28,my+394,6.2,track=.08,a=.62)
     s.end_main()
 
     s.legend("AROMA ORGAN", "MODEL AO-96   /   SMELL AND FLAVOUR ON CUE",
-             "Plays smells the way a speaker plays sound. It blends 96 base odorants into any of two million "
-             "smells, switches in a tenth of a second and clears the air before the next. For cinema, games and kitchens.",
+             "Plays smells the way a speaker plays sound. For cinema, games and kitchens.",
              [("SENSORY BIOLOGY", "A full map from the 400 human smell receptors to what people say they smell, so any odour can be written down as a recipe."),
-              ("CHEMISTRY", "A palette of 96 safe base odorants that covers nearly the whole map, the way three colours cover sight."),
-              ("MICROFLUIDICS", "Valves that meter picolitre doses, and a mixer that changes the blend twelve times a second."),
-              ("CATALYSIS", "A room-temperature catalyst that destroys the last smell in under half a second, so scenes can change.")],
+              ("CHEMISTRY", "A palette of safe base odorants that covers nearly the whole map, the way three colours cover sight."),
+              ("MICROFLUIDICS", "Valves and a mixer small enough to meter picolitre doses."),
+              ("CATALYSIS", "A room-temperature catalyst that destroys the last smell before the next scene.")],
              "2050")
     from triptych import auxiliary_panel, original_diagrams
     with auxiliary_panel(s, 'B', lx, rx):
@@ -525,7 +524,7 @@ def bounder(size):
         s.leader(H[0] + 22, H[1] - 10, 230, -80, 110, "HIP DRIVE", None)
         s.leader(f1[0][0] * 0.5 + f1[1][0] * 0.5 - 12, f1[0][1] * 0.5 + f1[1][1] * 0.5 + 6, -230, 10, -110, "NERVE-SIGNAL CUFF",
                  "READS THE COMMAND 60 ms EARLY")
-        s.leader(f2[0][0] * 0.4 + f2[1][0] * 0.6, f2[0][1] * 0.4 + f2[1][1] * 0.6, 200, -30, 110, "MUSCLE BUNDLE", "NANOTUBE YARN / 3 PER LEG")
+        s.leader(f2[0][0] * 0.4 + f2[1][0] * 0.6, f2[0][1] * 0.4 + f2[1][1] * 0.6, 200, -30, 110, "MUSCLE BUNDLE", "3 PER LEG")
         s.leader(K[0] + 40, K[1] + 20, 150, 30, 100, "KNEE CAM", "VARIABLE LEVERAGE")
         s.leader(A[0] - 16, A[1] + 10, -220, -10, -110, "ANKLE PIVOT", None)
         s.leader(mx - 58, my + 262, -190, 20, -110, "SPRING BLADE", "RETURNS 96 % OF THE LANDING")
@@ -535,12 +534,12 @@ def bounder(size):
     s.end_main()
 
     s.legend("BOUNDER", "MODEL B-4   /   POWERED LEGS FOR AUGMENTED ATHLETICS",
-             "Powered legs for a new class of athletics. A runner reaches 62 km/h and clears a six-metre bar. "
+             "Lets a runner sprint and jump beyond any unaided athlete. "
              "The legs follow the athlete's own nerve signals, so the athlete still does the running.",
              [("MATERIALS SCIENCE", "Artificial muscle spun from carbon nanotube yarn: forty times the power of human muscle per kilogram, good for a hundred million strokes."),
-              ("NEURAL ENGINEERING", "Sensors on the skin that read the nerve command to a muscle 60 ms before it moves, with no implant."),
+              ("NEURAL ENGINEERING", "Sensors on the skin that read the nerve command to a muscle before it moves, with no implant."),
               ("BIOMECHANICS", "Control that keeps the load on knees and spine below what an unaided sprinter takes."),
-              ("COMPOSITES", "Spring blades that give back 96 % of each landing for a million cycles without cracking.")],
+              ("COMPOSITES", "Spring blades that give back almost all of each landing for a million cycles without cracking.")],
              "2064")
     from triptych import auxiliary_panel, original_diagrams
     with auxiliary_panel(s, 'B', lx, rx):

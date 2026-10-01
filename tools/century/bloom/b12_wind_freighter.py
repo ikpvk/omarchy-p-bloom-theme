@@ -31,7 +31,7 @@ ENTRY = dict(
     enabled_by=[
         ('RIGID WING SAILS', 'Two-element composite wings with slotted flaps, as proven on sailing cargo ships and racing yachts.'),
         ('WEATHER ROUTING', 'Forecast-driven routes that trade a few hours for a steady, useful wind.'),
-        ('HARBOUR PROPULSION', 'Battery-electric pods for berthing and calms, charged at the quay.'),
+        ('HARBOUR PROPULSION', 'Battery-electric pods for harbour and berthing, charged at the quay.'),
     ],
     real_basis='Rigid wing sails, rotor sails, weather routing and battery-electric harbour propulsion.',
     required_breakthroughs='Wing sails that survive decades of storms with little maintenance.',
@@ -46,17 +46,17 @@ ENTRY = dict(
 
 DOSSIER = dict(
     kind='crossing',
-    fact=('On a broad reach in a fresh breeze the three wings alone hold eleven knots. '
-          'Over a year of crossings they supply about four fifths of the energy.'),
+    fact=('At eleven knots the hull needs about 2.7 MW. On a broad reach in a fresh breeze '
+          'the wings alone supply it.'),
     rows=[('LENGTH / BEAM', '150 m / 26 m'),
-          ('CARGO', '1 100 TEU'),
-          ('WING AREA', '3 x 1 000 m²'),
-          ('CROSSING', 'ROTTERDAM - HALIFAX / 11 DAYS')],
+          ('DRAUGHT', '8.5 m / 14 000 t DEADWEIGHT'),
+          ('WIND THRUST', '480 kN / 12 m/s APPARENT WIND'),
+          ('CROSSING', '2 900 NAUTICAL MILES')],
     note='FROM THE BRIDGE WING YOU CAN HEAR THE BOW WAVE.',
     left=('A WING PULLS FORWARD', 'ONE WING, PLAN VIEW / APPARENT WIND 110° / L / D = 8 / NORMALISED',
-          'Thrust = L sin 110° - D cos 110° = 0.98 L; the hull and keel take the small side force.'),
-    right=('ONE CROSSING, BY ENERGY SOURCE', 'ILLUSTRATIVE VOYAGE / 713 MWh OF PROPULSION / 11 DAYS',
-           'The battery covers harbour and berthing; the generator covers calms.'),
+          'Thrust = L sin 110° − D cos 110° = 0.98 L; the hull and keel take the small side force.'),
+    right=('ONE CROSSING, BY ENERGY SOURCE', 'ILLUSTRATIVE VOYAGE / 713 MWh OF PROPULSION',
+           'The generator runs on bio-methanol; the battery pack holds 24 MWh.'),
 )
 
 

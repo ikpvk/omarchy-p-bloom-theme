@@ -9,12 +9,12 @@ from sheet import WHITE,ARC,GOLD
 from collection_layout import note_box
 
 DATA={
-1:dict(title='THE SUN DOES NOT DO EXPRESS',kind='sail',scope='IDEAL MIRROR / NORMAL FORCE / NORMALIZED',
+1:dict(title='THE SUN DOES NOT DO EXPRESS',kind='sail',scope='IDEAL MIRROR / NORMAL FORCE / NORMALISED',
     fact='Photons carry momentum. Solar wind is not the engine.',
     note='DELIVERY WINDOW: ASTRONOMICAL.',
     process=('PHOTONS','MEMBRANE','THRUST'),
     rows=[('PROPELLANT','NONE CARRIED'),('REFUELLING','STAR INCLUDED'),('PRIORITY MAIL','SAME SUN')],
-    foot='P / P0 = cos²(angle) / constant illumination'),
+    foot='P / P₀ = cos²(angle) / constant illumination'),
 10:dict(title='THE UNPAIRED CASE FILE',kind='sock',scope='FICTIONAL SORTING LOG / 100 SOCKS',
     fact='A visual match is not proof that the other sock exists.',
     note='WARRANTY EXCLUDES PARALLEL UNIVERSES.',
@@ -31,19 +31,19 @@ DATA={
     fact='Twice the aperture diameter gives four times the collecting area.',
     note='ALIEN NEIGHBOURS: STILL NOT CONFIRMED.',
     process=('ALIGN','PHASE','INTEGRATE'),
-    rows=[('GEOMETRY','A / A0 = (D / D0)²'),('SEGMENTS','COMMON WAVEFRONT'),('DIGITAL ZOOM','NOT A BIGGER MIRROR')],
+    rows=[('GEOMETRY','A / A₀ = (D / D₀)²'),('ACTUATORS','THREE PER SEGMENT'),('DIGITAL ZOOM','NOT A BIGGER MIRROR')],
     foot='Same obscuration fraction; throughput held constant.'),
 44:dict(title='A NURSERY, NOT AN UNDO BUTTON',kind='coral',scope='RESTORATION WORKFLOW / TIME NOT TO SCALE',
     fact='Nursery-grown coral can be outplanted. Habitat still matters.',
     note='DOES NOT PATCH THE OCEAN OPERATING SYSTEM.',
     process=('HOLD','NURSE','OUTPLANT'),
-    rows=[('CONTACT','DEAD BASE ONLY'),('IDENTITY','RETAINED PER FRAGMENT'),('SUCCESS','REQUIRES FOLLOW-UP')],
+    rows=[('FRAGMENTS','TWO PER CASSETTE'),('NURSERY TIME','MONTHS, NOT MINUTES'),('SUCCESS','REQUIRES FOLLOW-UP')],
     foot='NOAA restoration principle; this cradle is speculative.'),
 56:dict(title='WIDER FEET, SMALLER EGO',kind='sand',scope='MEAN CONTACT PRESSURE / FIXED WHEEL LOAD',
     fact='At fixed load, doubling contact area halves mean pressure.',
     note='FOUR-WHEEL DRIVE. ZERO-WHEEL JUDGEMENT.',
     process=('SENSE','WIDEN','RECHECK'),
-    rows=[('MODEL','p = LOAD / AREA'),('SINKAGE','NOT PREDICTED HERE'),('SHADE','DEPLOY WHEN PARKED')],
+    rows=[('MODEL','p = F / A'),('SINKAGE','NOT PREDICTED HERE'),('SHADE','DEPLOY WHEN PARKED')],
     foot='Area ratio is illustrative; sand is not a rigid floor.'),
 60:dict(title='THIS COULD HAVE BEEN A FLAG',kind='meeting',scope='FICTIONAL MEETING LOG / 60 MINUTES',
     fact='Elapsed time is measurable. Whether this helped is another question.',
@@ -55,13 +55,13 @@ DATA={
     fact='Sensors see light from charged secondaries, not the neutrino itself.',
     note='IF IT RINGS OFTEN, CHECK THE DARK CURRENT.',
     process=('LIGHT','PHOTOELECTRON','TIME TAG'),
-    rows=[('MEDIUM','WATER / ICE CONCEPT'),('CALIBRATION','KNOWN LIGHT PULSES'),('BACKGROUND','ALSO GETS A VOTE')],
+    rows=[('MEDIUM','WATER / ICE CONCEPT'),('SHIELDING','ROCK OVERBURDEN'),('BACKGROUND','ALSO GETS A VOTE')],
     foot='IceCube principle; module geometry is an original concept.'),
 99:dict(title='HUMAN MAINTENANCE WINDOW',kind='rest',scope='SCRIPTED REST CYCLE / NOT CLINICAL DATA',
-    fact='Head, pelvis and feet have separate physical supports.',
+    fact='Release works at any recline angle; the occupant never waits for the seat.',
     note='PRODUCTIVITY MODE: TEMPORARILY UNINSTALLED.',
     process=('SUPPORT','REST','RELEASE'),
-    rows=[('OCCUPANT','HUMAN / DO NOT REBOOT'),('OVERRIDE','ALWAYS AVAILABLE'),('SLEEP SCORE','NOT COLLECTED')],
+    rows=[('OCCUPANT','HUMAN / DO NOT REBOOT'),('WAKE-UP','OCCUPANT DECIDES'),('SLEEP SCORE','NOT COLLECTED')],
     foot='Illustrative operation sequence; no health outcome inferred.'),
 100:dict(title='THE OWNER SAID THEY WATERED IT',kind='plant',scope='FICTIONAL CASE LOG / SEVEN DAYS',
     fact='A watering claim and a flow-meter event are different records.',
@@ -102,7 +102,7 @@ def plot(s,d,x,y,w):
     if kind in ('sail','mirror','sand'):
         from .editorial_second import ticks_under
         px=x+26;pw=w-38  # the last tick value stays inside the column
-        xlabel={'sail':'INCIDENCE / DEGREES','mirror':'DIAMETER / D0','sand':'CONTACT AREA / A0'}[kind]
+        xlabel={'sail':'INCIDENCE / DEGREES','mirror':'DIAMETER / D₀','sand':'CONTACT AREA / A₀'}[kind]
         axes(s,px,y,pw,h,'','4.0' if kind=='mirror' else '1.0','0')
         if kind=='sail':
             points=[(px+pw*i/90,y+h*(1-math.cos(math.radians(i))**2)) for i in range(91)]

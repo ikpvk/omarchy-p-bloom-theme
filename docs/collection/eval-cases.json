@@ -1,5 +1,5 @@
 {
- "note": "Labelled typography cases for tools/eval_wallpapers.py. Each case is a real finding from an owner or agent review; the eval must report it on the version it was written for (baseline commit) and not after the fix. Add every new mistake found by eye here.",
+ "note": "Labelled typography cases for tools/eval_wallpapers.py. Each case is a real finding from an owner or agent review; the eval must report it on the version it was written for (baseline commit) and not after the fix. Add every new mistake found by eye here. Cases carry their own baseline when it differs from the file's.",
  "baseline": "ba3a11e (diagrams before the 2026-10-01 typography pass)",
  "cases": [
   {
@@ -85,6 +85,41 @@
    "zone": "right",
    "code": "caption-gap",
    "note": "DEPTH-SELECTED LAYER crowds the caption (found by the eval, confirmed by eye)"
+  },
+  {
+   "id": "o05",
+   "zone": "sheet",
+   "code": "widow",
+   "note": "legend paragraphs end on one word (\"skin.\", \"decades.\") (pass 2 review, 2026-10-01)",
+   "baseline": "e6dcff9 (before typography pass 2)"
+  },
+  {
+   "id": "c107",
+   "zone": "sheet",
+   "code": "glyph",
+   "note": "\"root(m0 / m)\" spelled out instead of √(m₀ / m) (pass 2 review)",
+   "baseline": "e6dcff9 (before typography pass 2)"
+  },
+  {
+   "id": "b03",
+   "zone": "sheet",
+   "code": "glyph",
+   "note": "\"380 x 16 m²\" with an x for × in the field notes (pass 2 review)",
+   "baseline": "e6dcff9 (before typography pass 2)"
+  },
+  {
+   "id": "b11",
+   "zone": "sheet",
+   "code": "repeat",
+   "note": "field notes repeat the CLEAN AIR callout, \"HEPA / 20 … CHANGES AN HOUR\" (pass 2 review)",
+   "baseline": "e6dcff9 (before typography pass 2)"
+  },
+  {
+   "id": "c044",
+   "zone": "sheet",
+   "code": "repeat",
+   "note": "\"THREE SOFT CONTACTS\" in a callout and again in the B caption (pass 2 review)",
+   "baseline": "e6dcff9 (before typography pass 2)"
   }
  ]
 }

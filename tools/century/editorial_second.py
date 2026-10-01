@@ -9,27 +9,27 @@ DATA={
 2:dict(title='THE TIDE DOES NOT TAKE REQUESTS',kind='current',scope='KINETIC FLUX / FIXED AREA AND DENSITY',
  fact='Available flow power scales with speed cubed. Output also depends on extraction efficiency.',
  note='THE MOON HAS DECLINED YOUR SLA.',process=('CURRENT','ROTOR','GRID'),
- rows=[('MODEL','P / P0 = |v / v0|³'),('SLACK WATER','NO FLOW POWER'),('FISH','NOT A FUEL SOURCE')],foot='Available flux only; not a turbine output curve.'),
+ rows=[('MODEL','P / P₀ = |v / v₀|³'),('SLACK WATER','NO FLOW POWER'),('FISH','NOT A FUEL SOURCE')],foot='Available flux only; not a turbine output curve.'),
 6:dict(title='THE HULL WOULD LIKE SOME SPACE',kind='foil',scope='IDEAL LIFT RATIO / FIXED AREA, DENSITY AND CL',
- fact='Lift depends on speed squared at fixed lift coefficient. Foil control must still hold ride height.',
+ fact='Lift depends on speed squared at fixed lift coefficient.',
  note='SEASICKNESS HAS NOT ACCEPTED THE PATCH.',process=('ACCELERATE','TRIM','RETRACT'),
- rows=[('MODEL','L / L0 = (v / v0)²'),('AT THE DOCK','FOILS RETRACTED'),('CAVITATION','NOT MODELLED')],foot='Fully submerged foil idealisation; not a ferry speed rating.'),
+ rows=[('MODEL','L / L₀ = (v / v₀)²'),('CAVITATION','NOT MODELLED')],foot='Fully submerged foil idealisation; not a ferry speed rating.'),
 17:dict(title='YOUR PASSWORD DID NOT FOSSILISE',kind='archive',scope='SYMBOLIC CELL MAP / NOT A STORAGE FORMAT',
- fact='Ultrafast pulses can write structures inside glass. Reading requires the right optical system.',
+ fact='Every plate is read back and verified before it is stored.',
  note='README INCLUDED. CIVILISATION NOT INCLUDED.',process=('WRITE','VERIFY','DECODE'),
- rows=[('MEDIUM','GLASS'),('DECODER','STORED BESIDE IT'),('FAMILY SECRETS','STILL BACKED UP')],foot='Orientation glyphs explain encoding; no capacity claim.'),
+ rows=[('READBACK','POLARISED LIGHT'),('FAMILY SECRETS','STILL BACKED UP')],foot='Orientation glyphs explain encoding; no capacity claim.'),
 18:dict(title='DUST HAS NO CABIN PRIVILEGES',kind='suitport',scope='CONTAMINATION BOUNDARY / SCHEMATIC',
- fact='A suitport keeps the suit outside. Seals and servicing still need dust control.',
+ fact='Seals and servicing still need dust control.',
  note='PLEASE WIPE YOUR PLANET BEFORE ENTERING.',process=('DOCK','CHECK','ENTER'),
- rows=[('SUIT','EXTERIOR'),('SEAL','TEST BEFORE ENTRY'),('EMERGENCY','SEPARATE EGRESS')],foot='NASA suitport principle; no claim of perfect isolation.'),
+ rows=[('QUICK COUPLINGS','THREE, EACH WITH AN ID PLATE'),('EMERGENCY','SEPARATE EGRESS')],foot='NASA suitport principle; no claim of perfect isolation.'),
 25:dict(title='DIRECTION IS A MATERIAL PROPERTY',kind='braid',scope='IDEAL HELIX / FIXED CARRIER TANGENTIAL SPEED',
  fact='Faster axial take-up reduces braid angle in this geometric model. Strength also depends on layup.',
  note='UNLIKE THE COMMITTEE, THE FIBRES HAVE DIRECTION.',process=('TENSION','CROSS','TAKE UP'),
- rows=[('ANGLE','TO MANDREL AXIS'),('MODEL','tan(angle) = vt / vz'),('FAMILIES','OPPOSITE HANDEDNESS')],foot='Kinematic illustration; no composite strength prediction.'),
+ rows=[('ANGLE','TO MANDREL AXIS'),('MODEL','tan θ = vₜ / vₐ')],foot='Kinematic illustration; no composite strength prediction.'),
 38:dict(title='ACCESS IS NOT A SIDE QUEST',kind='access',scope='SCRIPTED INTERLOCK SEQUENCE / NOT CERTIFICATION',
- fact='Treads level while empty. The locked level deck then lifts together after entry gates engage.',
+ fact='The occupied deck moves only after both gates engage.',
  note='CLAUDE CALLED THIS LABEL LOAD-BEARING. THE LATCH DISAGREES.',process=('LEVEL','LOCK','LIFT'),
- rows=[('ACCESS','SAME PUBLIC ROUTE'),('LEVELLING','EMPTY DECK'),('RELEASE','MANUAL OVERRIDE')],foot='Fixed tread positions; independent vertical screws. Concept, not certification.'),
+ rows=[('LIFT SCREWS','8, ONE MOTOR EACH'),('HANDRAILS','FIXED, BOTH SIDES'),('EXIT','HIGH LANDING')],foot='All three states drawn at the same scale.'),
 42:dict(title='YOU ALSO HAVE TO REEL IT BACK',kind='kite',scope='ILLUSTRATIVE FORCE / PAID-OUT LENGTH CYCLE',
  fact='Reeling out at higher tension than reeling in creates net mechanical work over a cycle.',
  note='STORM MODE: LAND. DO NOT NEGOTIATE.',process=('REEL OUT','DEPOWER','REEL IN'),
@@ -37,7 +37,7 @@ DATA={
 65:dict(title='A CIRCLE IS NOT A CERTIFICATE',kind='weld',scope='FICTIONAL INSPECTION LOG / TWELVE SECTORS',
  fact='Completing a weld path and accepting the joint are separate decisions. Inspection can stop release.',
  note='THE DEADLINE IS NOT A WELDING PARAMETER.',process=('PREPARE','WELD','INSPECT'),
- rows=[('ACCEPT','9 SECTORS'),('HOLD','2 SECTORS'),('REWORK','1 SECTOR')],foot='Illustrative disposition map; not defect or sensor data.'),
+ rows=[('TORCH PATH','ONE FULL ORBIT'),('RECORD','EVERY SECTOR'),('RELEASE','AFTER REVIEW')],foot='Illustrative disposition map; not defect or sensor data.'),
 70:dict(title='FIVE MINUTES, SINCE LAST TUESDAY',kind='queue',scope='FICTIONAL EVENT LOG / SIX COMPLETED POSITIONS',
  fact='Each leaf records a completed position. It does not predict when your turn will arrive.',
  note='PLEASE HOLD. YOUR PATIENCE IS IMPORTANT TO US.',process=('TICKET','EVENT','LEAF'),
@@ -92,7 +92,7 @@ def plot(s,d,x,y,w):
             points.append((px+pw*t,y+h*(1-value)))
         curve(s,points)
         ticks=[(0,'−1'),(.5,'0'),(1,'+1')] if k=='current' else [(0,'0'),(.5,'1'),(1,'2')] if k=='foil' else [(0,'0.25'),(.2,'1'),(.467,'2'),(1,'4')]
-        ticks_under(s,px,y+h,pw,ticks,{'current':'CURRENT / v0','foil':'SPEED / v0','braid':'AXIAL SPEED / vt'}[k])
+        ticks_under(s,px,y+h,pw,ticks,{'current':'CURRENT / v₀','foil':'SPEED / v₀','braid':'AXIAL SPEED / vₜ'}[k])
     elif k=='archive':
         # Four symbolic orientations, laid on four real-looking indexed rows.
         # The key draws the same glyphs as the plate, one per row, in its own column.

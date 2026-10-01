@@ -8,7 +8,7 @@ Każdy projekt ma własną historię, geometrię oraz podpis A. FOUNDATION opisu
 
 Moves delicate freight between heliocentric depots on sunlight. The manifest arrives before the ship; neither is in a hurry.
 
-- A: PHOTON CARGO CLIPPER
+- A: FOUR-BOOM SAIL, DEPLOYED
 - B: REEFING HUB
 - C: SAIL ROOT
 - Realna podstawa: Solar radiation pressure, deployable booms and attitude control.
@@ -25,7 +25,7 @@ Moves delicate freight between heliocentric depots on sunlight. The manifest arr
 
 Extracts power from a reversing tidal stream with paired shrouded rotors. Fish receive a much wider corridor than the technicians do.
 
-- A: BIDIRECTIONAL CURRENT HARVESTER
+- A: TWIN-ROTOR SEABED FRAME
 - B: ROTOR CARTRIDGE
 - C: SERVICE-SIDE CARTRIDGE
 - Realna podstawa: Shrouded water turbines, reversing flow and sealed electrical generation.
@@ -93,7 +93,7 @@ Draws recycled glass into repair panels through a controlled hot channel, keepin
 
 Lifts a small passenger cabin above harbour chop on retractable foils and returns to a shallow draft at the dock.
 
-- A: ELECTRIC HYDROFOIL FERRY
+- A: TWIN-HULL FERRY, FOILS LOWERED
 - B: RETRACTABLE FOIL ROOTS
 - C: AXIAL PROPULSORS
 - Realna podstawa: Hydrofoil lift, retractable struts and guarded marine propulsion.
@@ -278,9 +278,9 @@ Carries supplies across soft snow on wide articulated tracks, spreading its load
 
 **LONG-LIFE GLASS DATA WRITER**
 
-Writes a family's archive into small glass plates and stores a readable decoding guide beside them. The password is not the only surviving artifact.
+Writes a family's archive into small glass plates and stores a readable decoding guide beside them. The password is not the only surviving artefact.
 
-- A: LONG-LIFE GLASS DATA WRITER
+- A: SIX-PLATE BENCH WRITER
 - B: FOCUS OBJECTIVE
 - C: PLATE CAROUSEL
 - Realna podstawa: Ultrafast writing of nanostructures in glass and optical readout.
@@ -297,7 +297,7 @@ Writes a family's archive into small glass plates and stores a readable decoding
 
 Keeps abrasive lunar dust in an exterior suit dock while the occupant enters the clean habitat through the back of the suit.
 
-- A: DUST-SEPARATING AIRLOCK
+- A: EMPTY SUITPORT BULKHEAD
 - B: SUIT DOCK
 - C: DUST TRAP
 - Realna podstawa: Rear-entry suitports and separation of exterior dust from a clean cabin.
@@ -416,7 +416,7 @@ Places tiny measured doses beside a tree's active roots instead of treating the 
 
 Braids hollow structural members around a moving form, changing fibre direction where loads will change.
 
-- A: VARIABLE-ANGLE COMPOSITE LOOM
+- A: TWELVE-CARRIER RING BRAIDER
 - B: CARRIER TRACK
 - C: MANDREL CHUCK
 - Realna podstawa: Moving yarn carriers, a central mandrel and controlled braid angle.
@@ -518,8 +518,8 @@ Recognizes the phrase 'what you should do' and delays the room speaker until the
 
 Unfolds a segmented primary mirror behind a layered sunshade to study cold worlds beyond the familiar planets.
 
-- A: DEPLOYABLE INFRARED OBSERVATORY
-- B: SEGMENTED PRIMARY MIRROR
+- A: FULLY UNFOLDED TELESCOPE
+- B: PRIMARY MIRROR
 - C: SECONDARY SPIDER
 - Realna podstawa: Segmented reflective optics, wavefront control and passive thermal shielding.
 - Postulowany przełom: Metrology that keeps a repaired mirror phased after years of thermal cycling.
@@ -637,7 +637,7 @@ Places several contact shoes on old masonry and maps hidden voids before anyone 
 
 Converts a short public stair into a broad level platform and back again without asking its users to find a separate entrance.
 
-- A: ADAPTIVE ACCESS RAMP
+- A: FOUR TREADS AS A STAIR
 - B: VERTICAL TREAD CARRIAGE
 - C: LEADING SAFETY EDGE
 - Realna podstawa: Vertical screw carriages, locked level platforms and obstruction sensing.
@@ -705,7 +705,7 @@ Exchanges angular momentum with a station through independently driven rotors. I
 
 Flies repeating crosswind arcs while a ground winch converts tether tension into electricity. It lands before the storm rather than arguing with it.
 
-- A: TETHERED AIRBORNE GENERATOR
+- A: KITE ABOVE ITS WINCH
 - B: TRACTION WINCH
 - C: SWEPT WING LOAD PATH
 - Realna podstawa: Crosswind flight, tether traction and a generating ground winch.
@@ -739,7 +739,7 @@ Unrolls large flexible suction lines and raises a portable pump above rising wat
 
 Holds nursery fragments in a gentle current and transfers them to mapped restoration sites with a compliant tool.
 
-- A: REEF NURSERY TENDER
+- A: OPEN HORSESHOE NURSERY
 - B: COMPLIANT TRANSFER COLLAR
 - C: RADIAL NURSERY CASSETTES
 - Realna podstawa: Nursery fragments, low-shear circulation and compliant handling.
@@ -943,7 +943,7 @@ Builds interlocking refractory parts inside a heated cradle so unsupported walls
 
 Changes wheel contact width as sand gets softer and parks behind its own folding shade when the day becomes too hot.
 
-- A: VARIABLE-FOOTPRINT DESERT ROVER
+- A: ROVER WITH SHADE RAISED
 - B: EXPANDING WHEEL
 - C: SHADE HINGE
 - Realna podstawa: Variable wheel contact area, low-pressure traction and passive shade.
@@ -1096,7 +1096,7 @@ Moves between approved tree anchors to inspect stressed branches and place prote
 
 Travels around a pipe joint with synchronized preparation, welding and inspection tools. Its report includes the parts it refused to weld.
 
-- A: AUTONOMOUS PIPE-WELDING COLLAR
+- A: DOUBLE ORBITAL TRACK
 - B: ORBITAL WELD TRAIN
 - C: TRAILING INSPECTION ARRAY
 - Realna podstawa: Orbital tool motion, prepared pipe joints and nondestructive inspection.
@@ -1470,7 +1470,7 @@ Uses a broad low wing to move bulky supplies between islands while staying close
 
 Packs a serviceable optical sensor cluster into a shielded underground detector, listening for rare flashes rather than ordinary noise.
 
-- A: UNDERGROUND DETECTOR MODULE
+- A: NINE SENSORS, ONE CAGE
 - B: PHOTON SENSOR
 - C: CALIBRATION FEED
 - Realna podstawa: Photomultiplier sensing of rare light flashes in a detector medium.
@@ -1674,7 +1674,7 @@ Turns overhead louvers to shade pedestrians while preserving winter sunlight and
 
 Supports the head, pelvis and feet during long field shifts so a short planned rest does not become a new neck injury.
 
-- A: MOBILE REST SUPPORT SEAT
+- A: SEATED OCCUPANT, RIBBED CANOPY
 - B: ADJUSTABLE HEAD CRADLE
 - C: PELVIS SUPPORT LINKAGE
 - Realna podstawa: Supported posture, parallel seat links and adjustable head contact.

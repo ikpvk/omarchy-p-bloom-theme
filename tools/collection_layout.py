@@ -9,7 +9,7 @@ from sheet import ARC, GOLD
 MAIN_CONTEXT = {
  'truth-lamp': ('HUMAN FAMILY / SCHEMATIC STAND-INS',
                 'NO ROBOTS. JUST AWKWARD SILENCES.'),
- 'proxy': ('PX-1 / MORNING ROUTE', '10 km / 06:00 – 07:00 / THE RUNNER SETS THE PACE'),
+ 'proxy': ('PX-1 / MORNING ROUTE / 06:00 – 07:00',),
  'quantum-simulator': ('AXONOMETRIC CUTAWAY / SERVICE CONFIGURATION',),
 }
 
@@ -24,7 +24,7 @@ ORIGINAL = {
  'aroma-organ': ('A RECIPE IS NOT A RECEPTOR MAP', 'The valve program meters a blend. It does not establish what a human observer will perceive.', ('METER', 'MIX', 'CLEAR'), 'NOSTALGIA IS NOT A CALIBRATION STANDARD.'),
  'tether-climber': ('THE BEAM PAYS FOR THE CLIMB', 'Traction transfers force into the ribbon. Beamed power supplies energy; the ribbon supplies the route.', ('ACQUIRE', 'GRIP', 'CLIMB'), 'PLEASE KEEP ALL PLANETS INSIDE THE VEHICLE.'),
  'truth-lamp': ('ACCURACY IS NOT DIPLOMACY', 'The lamp claims to detect disbelief, not objective truth. The dinner still requires an off switch.', ('LISTEN', 'INFER', 'REGRET'), 'DESSERT IS AN UNSUPERVISED LEARNING EVENT.'),
- 'organ-foundry': ('PRINTED IS NOT READY', 'Cell placement is followed by perfusion and maturation. The diagram is a concept, not an implant clearance.', ('PRINT', 'PERFUSE', 'MATURE'), 'PLEASE DO NOT SELECT DRAFT QUALITY.'),
+ 'organ-foundry': ('PRINTED IS NOT READY', 'Cell placement is followed by perfusion and maturation. A concept, not an implant clearance.', ('PRINT', 'PERFUSE', 'MATURE'), 'PLEASE DO NOT SELECT DRAFT QUALITY.'),
  'volumetric-stage': ('A VOLUME NEEDS A MEDIUM', 'Addressed particles provide the visible points. Timing, illumination and particle control must agree.', ('ADDRESS', 'EXCITE', 'REFRESH'), 'APPLAUSE IS NOT AN OPTICAL FEEDBACK LOOP.'),
  'proxy': ('THE RUNNER LEADS', 'Volunteer guides have diaries of their own. PX-1 is ready every morning, and the volunteers still come, now for the company.', ('WAKE', 'RUN', 'RETURN'), 'THE RUNNER SETS THE PACE. PX-1 KEEPS THE PATH.'),
  'presence-rig': ('THE FLOOR IS PART OF THE GAME', 'The suit, roller deck and overhead tether share the motion envelope. The human remains inside it.', ('TRACK', 'RESIST', 'RELEASE'), 'REALITY WILL RESUME AFTER THE NEXT CHECKPOINT.'),

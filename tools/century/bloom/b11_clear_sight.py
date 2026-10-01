@@ -40,10 +40,10 @@ DOSSIER = dict(
     kind='district visit',
     fact=('Cataract is the most common cause of blindness and one of the most '
           'treatable. For most patients, the hard part is reaching a surgeon.'),
-    rows=[('EYES PER DAY', '36 / ONE TABLE, 12 MIN SLOTS'),
-          ('DISTRICT VISIT', '3 WEEKS / 648 EYES'),
+    rows=[('PER VISIT', '18 OPERATING DAYS / 648 EYES'),
           ('POWER', '5.3 kWp SOLAR / 30 kWh STORE'),
-          ('THEATRE AIR', 'HEPA / 20 CHANGES AN HOUR')],
+          ('DAILY LOAD', '24 kWh / AIR HANDLER 15 kWh'),
+          ('STERILISER', '6 STEAM CYCLES A DAY')],
     note='SHE READ THE BUS NUMBER FROM ACROSS THE SQUARE.',
     left=('ONE TABLE, THIRTY-SIX EYES', 'ILLUSTRATIVE DAY / 12 MIN SLOTS / 08:00-16:12',
           'Ten minutes of surgery per slot; the rest is cleaning and the next patient settling in.'),

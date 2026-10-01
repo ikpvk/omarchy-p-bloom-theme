@@ -41,8 +41,9 @@ def draw(s,lx):
  s.text('EARTH / DEPARTURE',lx-187,cy+18,5.8,a=.75,align='r')
  s.poly([e,(lx-179,cy+43),(lx-179,cy+25)],.38,.5,close=False)
  s.text('MARS / ARRIVAL',m[0]+10,m[1]+12,5.8,a=.75)
+ # Each leader runs from its label to the path it names.
  s.text('POWERED / 75 d',lx-138,477,6.5,a=.85,color=ARC)
- s.ln(lx-138,464,lx-109,452,.45,.5,color=ARC)
+ s.ln(lx-110,465,*trajectory(.3),.45,.5,color=ARC)
  s.text('COAST / 259 d',lx-203,153,6,a=.55)
- s.poly([(lx-112,185),(lx-137,221),(lx-155,243)],.3,.5,close=False)
+ s.ln(lx-150,159,*coast[55],.3,.5)
  s.view_label(lx,520,'B','TRANSIT','POWERED ARC / COASTING ELLIPSE — SCHEMATIC')

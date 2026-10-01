@@ -15,7 +15,7 @@ def light_sail():
             with at(angle=a):
                 joint((31,0,0),7,(0,1,0));motor((34,-11,-8),7,20,(0,1,0))
                 box('boom root latch',(46,0,0),(23,13,15),3)
-        mark('REEFING HUB',(0,-24,10),'FOUR INDEPENDENT DRUMS')
+        mark('REEFING HUB',(0,-24,10),'HUB FLANGE / FOUR BOOM LATCHES')
     with group('C'):
         with at((43,0,0)):
             box('root clevis',(0,0,0),(22,27,10),3)
@@ -26,7 +26,7 @@ def light_sail():
             motor((-7,-18,0),6,13,(0,1,0))
             rod('retaining pin',(-6,-17,8),(-6,17,8),2,'detail')
             for x in (-7,7):cyl('plate fastener',(x,0,6),1.6,2,'detail',n=6)
-        mark('SAIL ROOT',(49,7,8),'ROLLER AND EDGE TENSIONER')
+        mark('SAIL ROOT',(49,7,8),'MEMBRANE EDGE TENSIONER')
     truss((56,0,0),(185,0,0),8,10)
     box('end roller',(181,0,0),(16,21,11),3)
     for y in (-8,8):cyl('guide roller',(181,y,-8),4,16,'detail')
@@ -124,13 +124,13 @@ def petal_eye():
                 o.matrix_world=o.matrix_world@Matrix.Rotation(math.pi/6,4,'Z')
                 for a in (0,120,240):
                     q=math.radians(a);rod('mirror actuator',(x+8*math.cos(q),y+8*math.sin(q),4),(x+8*math.cos(q),y+8*math.sin(q),9),1,'detail')
-        mark('PRIMARY MIRROR',(0,0,13),'PHASED HEXAGONAL SEGMENTS')
+        mark('PRIMARY MIRROR',(0,0,13),'19 HEXAGONAL SEGMENTS')
     with group('C'):
         for a in (30,150,270):
             q=math.radians(a);rod('secondary spider',(60*math.cos(q),60*math.sin(q),6),(11*math.cos(q),11*math.sin(q),91),1.5)
         ring('secondary cell',(0,0,91),15,3,7);bolts((0,0,99),11,6,size=1)
         optics((0,0,95),9,15,(0,0,-1))
-        mark('SECONDARY',(0,0,99),'FOCUS STAGE AND STRAY LIGHT BAFFLE')
+        mark('SECONDARY',(0,0,99),'FOCUS STAGE AND STRAY-LIGHT BAFFLE')
     for a in range(0,360,60):
         with at(angle=a):
             leaf('deployable sun shade',(67,-19,-7),(132,0,-18),45,'shell');rod('shade hinge',(65,-16,-6),(65,16,-6),2)

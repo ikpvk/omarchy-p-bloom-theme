@@ -17,6 +17,13 @@ rectangle boxes the renderer records, and checks what the layout audit cannot se
   detached       a short value sits far across the block from the label on its line
   edge           a label is flush against the column boundary next to the main drawing
 
+and, across the whole sheet (zone "sheet"):
+
+  widow          a wrapped paragraph ends on one word
+  glyph          "4 x 4" for ×, a hyphen for a minus, H2 / P0 / OMEGA0 without sub/superscripts, US -ize spelling
+  repeat         the same three-word phrase in two different blocks (a note that repeats a callout, a caption
+                 that repeats the subtitle)
+
 Units are design units (1080 per sheet height). Findings are advice for a human eye, not a gate:
 the judge layer (a model with the owner's taste rubric) looks at what geometry alone cannot.
 The eval is scored on labelled cases from real reviews (docs/collection/eval-cases.json): every
@@ -43,17 +50,83 @@ def centre(b):
     return ((b[0]+b[2])/2, (b[1]+b[3])/2)
 
 
+STOP = set('A AN THE OF AND TO IN ON FOR IS ARE WITH PER AT BY FROM AS OR IT ITS INTO ONE TWO'.split())
+GLYPHS = [
+    (r'\d\s?x\s?\d', 'an x between numbers; use ×'),
+    (r'(^|[\s(=])-\d', 'a hyphen as a minus sign; use −'),
+    (r'\b(?:[A-Za-z]|OMEGA|omega)0\b', 'a zero written inline; use a subscript (P₀)'),
+    (r'\b(?:H2O?|O2|CO2|N2|CH4|NH3|Fe2O3|SO2)\b', 'a chemical formula without subscripts'),
+    (r'\b(?:OMEGA(?! CENTAURI)|omega|PI|SQUARED)\b|\b(?:ROOT|root)\(', 'a symbol spelled out (ω, π, ², √)'),
+    (r'(?i)\b(?!(?:size|sized|sizes|prize|seize|seized|capsize|resize|oversize|downsize)\b)[a-z]{3,}iz(?:e|ed|es|er|ers|ing|ation|ations)\b',
+     'US -ize spelling; the collection is British (-ise)'),
+]
+
+
+def whole_sheet(item, s, blocks, wraps):
+    """Checks across every block of one sheet: widows, glyph lint, phrases repeated between blocks."""
+    out = []
+    add = lambda code, msg, text=None: out.append(dict(id=item['id'], zone='sheet', code=code, msg=msg, text=text))
+    for lines in wraps:
+        if len(lines) > 1 and ' ' not in lines[-1].strip():
+            add('widow', f'paragraph ends on one word: "… {lines[-2][-30:]} / {lines[-1]}"', lines[-1])
+    texts = [t for t in (s.text_boxes or []) if t.get('text')]
+    seen = set()
+    for t in texts:
+        for pat, why in GLYPHS:
+            m = re.search(pat, t['text'])
+            if m and (t['text'], why) not in seen:
+                seen.add((t['text'], why))
+                add('glyph', f'{why}: "{t["text"]}"', t['text'])
+    # which block each line of text belongs to (the main view's callouts are on their own layer)
+    def block_of(t):
+        if t.get('layer') == 'main':
+            return 'main'
+        c = centre(t['box'])
+        for name, b in blocks.items():
+            z = getattr(b, 'zone', None) or b.rect
+            if name != 'main' and z[0] <= c[0] <= z[2] and z[1] <= c[1] <= z[3]:
+                return name
+        return None
+    phrases = {}
+    for t in texts:
+        name = block_of(t)
+        if not name or name == 'emblem':
+            continue
+        words = [w for w in re.findall(r"[A-Za-z0-9°²³₀-₉%.'’-]+", t['text'].upper()) if w not in STOP and w.strip('.-')]
+        for i in range(len(words)-2):
+            phrases.setdefault(' '.join(words[i:i+3]).rstrip('.'), set()).add(name)
+    reported = set()
+    for ph, names in sorted(phrases.items()):
+        if len(names) > 1:
+            key = tuple(sorted(names))
+            if (key, ph[:12]) in reported:
+                continue
+            reported.add((key, ph[:12]))
+            add('repeat', f'"{ph}" in {" and ".join(key)}', ph)
+    return out
+
+
 def sheet_findings(item, comp):
     import aspect_layout as A
     import numpy as np
-    s = A.render_virtual(item, comp)
+    from sheet import Sheet
+    wraps, wrap = [], Sheet.wrap
+    def logged(self, *a, **kw):
+        lines = wrap(self, *a, **kw)
+        wraps.append(lines)
+        return lines
+    Sheet.wrap = logged
+    try:
+        s = A.render_virtual(item, comp)
+    finally:
+        Sheet.wrap = wrap
     blocks = A.extract(s)
     k = s.s                                   # layer pixels per design unit
     u = lambda v: v/k
     alpha = A._alpha(s.surface)
     texts = [t for t in (s.text_boxes or []) if t.get('layer') == 'side']
     shapes = [r for r in (getattr(s, 'shape_boxes', None) or []) if r['layer'] == 'side']
-    out = []
+    out = whole_sheet(item, s, blocks, wraps)
     for zone_name in ZONES:
         if zone_name not in blocks:
             continue
@@ -153,6 +226,40 @@ def sheet_findings(item, comp):
     return out
 
 
+def crops(out, ids=None, profile='16x9-2160p'):
+    """Crops of every block for the judge layer: <out>/<id>-<block>.png on the sheet's ground, plus
+    <id>-sheet.png (the whole virtual sheet, side and main layers). See docs/collection/eval-judge.md."""
+    import aspect_layout as A
+    import numpy as np
+    from PIL import Image
+    out.mkdir(parents=True, exist_ok=True)
+    comp = A.composition(profile)
+    def rgba(surface):
+        h, w = surface.get_height(), surface.get_width()
+        a = np.frombuffer(surface.get_data(), np.uint8).reshape(h, -1, 4)[:, :w].astype(float)
+        return a[..., [2, 1, 0]], a[..., 3:4]/255
+    for item in A.collection():
+        if ids and item['id'] not in ids:
+            continue
+        s = A.render_virtual(item, comp)
+        blocks = A.extract(s)
+        ground = np.array([24, 30, 40.])
+        side_rgb, side_a = rgba(s.surface)
+        main_rgb, main_a = rgba(s.main_layer)
+        whole = ground*(1-side_a)+side_rgb
+        whole = whole*(1-main_a)+main_rgb
+        Image.fromarray(whole.clip(0, 255).astype(np.uint8)).save(out/f'{item["id"]}-sheet.png')
+        for name, b in blocks.items():
+            rgb, a = (main_rgb, main_a) if name == 'main' else (side_rgb, side_a)
+            x0, y0, x1, y1 = b.rect
+            # blocks are tight ink boxes; a margin shows what sits around them (and keeps one-line blocks legible)
+            x0, y0 = max(0, x0-32), max(0, y0-32)
+            x1, y1 = min(whole.shape[1], x1+32), min(whole.shape[0], y1+32)
+            img = (ground*(1-a[y0:y1, x0:x1])+rgb[y0:y1, x0:x1]).clip(0, 255).astype(np.uint8)
+            Image.fromarray(img).save(out/f'{item["id"]}-{name}.png')
+        print(item['id'], file=sys.stderr, flush=True)
+
+
 def run(ids=None, profile='16x9-2160p'):
     import aspect_layout as A
     comp = A.composition(profile)
@@ -173,8 +280,9 @@ def run(ids=None, profile='16x9-2160p'):
     return [f for f in found if not f['code'].startswith('_')]
 
 
-def score(found):
+def score(found, ids=None):
     cases = json.loads(CASES.read_text())
+    cases['cases'] = [c for c in cases['cases'] if not ids or c['id'] in ids]
     hit = 0
     for c in cases['cases']:
         ok = any(f['id'] == c['id'] and f['zone'] == c['zone'] and f['code'] == c['code'] for f in found)
@@ -190,8 +298,12 @@ def main():
     ap.add_argument('--profile', default='16x9-2160p')
     ap.add_argument('--json', type=Path)
     ap.add_argument('--cases', action='store_true', help='score recall on the labelled cases')
+    ap.add_argument('--crops', type=Path, help='write block crops for the judge layer to this folder and stop')
     args = ap.parse_args()
     ids = set(args.only.split(',')) if args.only else None
+    if args.crops:
+        crops(args.crops, ids, args.profile)
+        return
     found = run(ids, args.profile)
     for f in found:
         print(f"{f['id']}-{f['zone']:5s} {f['code']:12s} {f['msg']}")
@@ -202,7 +314,7 @@ def main():
     if args.json:
         args.json.write_text(json.dumps(found, indent=1, ensure_ascii=False)+'\n')
     if args.cases:
-        score(found)
+        score(found, ids)
 
 
 if __name__ == '__main__':

@@ -91,7 +91,7 @@ def coral_cradle():
                             for side in (-1,1):organic_branch('coral offshoot',[(x+1,y,40),(x+side*6,y+2,45),(x+side*8,y+3,48)],.7,'detail')
                 for y in (-13,13):rod('cassette guide',(31,y,17),(72,y,17),1.5,'detail')
                 box('cassette ID tab',(73,0,24),(6,13,3),1,'accent')
-        mark('NURSERY CASSETTES',(53,-42,27),'OPEN WATER / RETAINED FRAGMENT ID')
+        mark('NURSERY CASSETTES',(53,-42,27),'FIVE CASSETTES / FOUR COLLETS EACH')
     with group('B'):
         with at((0,-32,70)):
             ring('compliant transfer collar',(0,0,0),16,4,9)
@@ -103,7 +103,7 @@ def coral_cradle():
             for x in (-18,18):rod('camera support',(x,0,5),(x,0,35),1.3)
             box('camera bridge',(0,0,34),(40,13,7),2)
             box('transfer slide',(0,7,38),(33,22,10),3)
-        mark('TRANSFER COLLAR',(12,-33,61),'THREE SOFT CONTACTS / DEAD BASE ONLY')
+        mark('TRANSFER COLLAR',(12,-33,61),'THREE CONTACTS / RIDES THE GANTRY')
     for x in (-53,53):
         rod('service arch leg',(x,37,17),(x,37,114),3)
         rod('gantry rail',(x,37,113),(x,-45,113),2)
@@ -114,7 +114,7 @@ def coral_cradle():
         ring('low shear duct',(0,0,0),20,3,29);rotor((0,0,11),15,5);motor((0,0,27),6,16)
     for a in (40,160,280):
         q=math.radians(a);rod('cradle leg',(68*math.cos(q),68*math.sin(q),8),(88*math.cos(q),88*math.sin(q),-15),3);foot((88*math.cos(q),88*math.sin(q),-18),20)
-    mark('CIRCULATION',(0,66,27),'GENTLE THROUGH-FLOW / NO SEALED TANK')
+    mark('CIRCULATION',(0,66,27),'DUCTED ROTOR / NO SEALED TANK')
     mark('GANTRY',(-54,-25,114),'LIMITED FORCE TRANSFER / SHORT REACH')
     return 29,34
 
@@ -146,7 +146,7 @@ def tidal_loom():
     tube('power collection',[(-73,44,73),(-83,51,113),(27,65,146),(68,57,98)],2,'cable')
     rod('recovery mast',(47,62,149),(47,62,180),3)
     ring('recovery eye',(47,57,180),9,3,6,(0,1,0))
-    mark('REMOVABLE ROTOR',(-73,-23,73),'SHROUDED / MATCHED GENERATOR CARTRIDGES')
+    mark('REMOVABLE ROTOR',(-73,-23,73),'MATCHED GENERATOR CARTRIDGES')
     mark('WET SERVICE SPINE',(34,42,149),'ONE RECOVERY SIDE / DRY-DECK MAINTENANCE')
     mark('BALLAST SHOE',(15,-57,14),'RECOVERABLE SEABED CONNECTION')
     mark('TRANSIT CORRIDOR',(-2,20,72),'NO CROSS BRACE THROUGH CENTRAL GAP')
@@ -179,7 +179,7 @@ def manta_foil():
             flange('root lock',(-45,y-7,35),10,(0,-1,0),2)
         for side in (-1,1):leaf('main hydrofoil',(-32,0,-30),(-17,side*75,-28),24)
         rod('foil spar',(-25,-69,-29),(-25,69,-29),1.2,'detail')
-        mark('RETRACTABLE FOILS',(-43,-37,32),'PAIRED ROOT LOCKS / SHALLOW DOCK MODE')
+        mark('RETRACTABLE FOILS',(-43,-37,32),'TWO HINGED STRUTS / ONE SPANWISE FOIL')
     with group('C'):
         for side in (-1,1):
             y=side*28
@@ -237,7 +237,7 @@ def seam_surgeon():
             for z in (-9,9):rod('compliant probe link',(3,-45,z),(3,-34,z),1,'detail')
             optics((3,-55,0),6,15,(0,1,0))
             box('shoe junction',(23,-45,0),(9,12,18),2,'detail')
-        mark('INSPECTION ARRAY',(9,20,27),'TRAILING PASS / SEPARATE ACCEPTANCE')
+        mark('INSPECTION ARRAY',(9,20,27),'SEGMENTED ARRAY ON CONTACT WHEELS')
     uncover('B','orbital tool saddle')
     uncover('C','inspection bogie')
     with at((0,0,68),215,'X'):
@@ -314,7 +314,7 @@ def wind_kite():
             for u in (20,40,60,80,100):
                 rod('wing bay diagonal',(side*u,14+.20*u,157+.08*u),(side*(u+19),14+.20*(u+19)+12,157+.08*(u+19)),.65,'detail')
         for x in (-24,24):box('bridle hardpoint',(x,22,151),(16,12,9),2)
-        mark('SWEPT SPAR',(67,30,163),'LOAD PATH / RIGHT SKIN REMOVED')
+        mark('SWEPT SPAR',(67,30,163),'SWEEPS BACK TO CANTED TIPS')
     for side in (-1,1):
         # Same geometry on both sides; near/starboard inspection opening is physical.
         for band in range(6):
@@ -350,7 +350,7 @@ def wind_kite():
     box('power interface',(42,36,18),(33,28,35),6)
     for z in range(7,33,5):rod('inverter fin',(60,25,z),(60,45,z),.6,'detail')
     optics((-47,-26,36),6,13,(0,-1,.25))
-    mark('TRACKING HEAD',(-47,-38,40),'GROUND TRACKING / LAND BEFORE STORM')
+    mark('TRACKING HEAD',(-47,-38,40),'GROUND OPTICS / FOLLOWS THE WING')
     mark('BRIDLE',(0,8,115),'SYSTEM STUDY / TETHER LENGTH COMPRESSED')
     return 24,29
 
@@ -472,7 +472,7 @@ def quiet_stair():
     for y in (-53,53):
         for x in (-91,91):foot((x,y,-19),20)
     mark('VERTICAL CARRIAGES',(-22,-56,36),'FIXED TREAD X / INDEPENDENT Z AXES')
-    mark('LEVEL DECK',(22,-18,50),'EMPTY: LEVEL LOW / THEN LIFT TO LANDING')
+    mark('LEVEL DECK',(22,-18,50),'TREADS LEVEL INTO ONE DECK')
     mark('SAFETY EDGE',(-90,-20,17),'INHIBITS MOVEMENT WHEN OBSTRUCTED')
     mark('MANUAL RELEASE',(118,-9,46),'SERVICE OVERRIDE / MODE LOCK FIRST')
     # Numerical endpoints deliberately checked independently of the visible drawing.

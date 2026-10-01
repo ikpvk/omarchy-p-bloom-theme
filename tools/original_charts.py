@@ -88,8 +88,8 @@ def cortical_mesh(s):
                 s.ln(xx, yy, xx, yy + pitch - 2.2, .8, .6, color=col)
         s.ln(ax, y + AH, ax + AW, y + AH, .48, .55)
         _xaxis(s, x, y, 'TIME / ms', [(0, '0'), (.5, '250'), (1, '500')])
-    _frame(s, 'UNIT ACTIVITY', '14 OF 1 048 576 CHANNELS / ILLUSTRATIVE SPIKES',
-           'Each tick is one spike; every site is sampled 20 000 times a second.', body)
+    _frame(s, 'UNIT ACTIVITY', '14 CHANNELS / ILLUSTRATIVE SPIKES',
+           'Each tick is one spike; each row is one channel.', body)
 
 
 def bounder(s):
@@ -130,7 +130,7 @@ def organ_foundry(s):
         _chart(s, x, y, lambda t: .05 + .9 / (1 + math.exp(-(t - .55) * 11)), 'DAY',
                [(0, '0'), (1 / 3, '7'), (2 / 3, '14'), (1, '21')], 'ml/min')
     _frame(s, 'FILTRATION RATE', 'MATURING KIDNEY / ILLUSTRATIVE PROFILE',
-           'Filtration rises as the printed vessels open and levels off before day 21.', body)
+           'Filtration rises as the printed vessels open, then levels off.', body)
 
 
 def volumetric_stage(s):
@@ -138,7 +138,7 @@ def volumetric_stage(s):
         _chart(s, x, y, lambda t: .04 + .92 * math.exp(-(((t - .5) / .045) ** 2)),
                'DISTANCE FROM THE CROSSING / mm', [(0, '−5'), (.5, '0'), (1, '5')], n=300)
     _frame(s, 'LIGHT FROM ONE PARTICLE', 'FICTIONAL PROFILE / NOT MEASURED',
-           'A particle glows only inside the crossing, a spot under a millimetre wide.', body)
+           'The glowing spot is under a millimetre wide.', body)
 
 
 def proxy(s):

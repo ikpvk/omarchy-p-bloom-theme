@@ -276,10 +276,10 @@ def build():
         rod('relay mast', (0, 0, 9), (0, 0, 16), .4)
         loft('relay dish', [(0, 0, 15.5), (0, 0, 17.5)], lambda t: .6 + 3.4 * t, 32, 'accent', False)
         box('lander solar wing', (7, 0, 8), (8, 3, .3), .1, 'detail')
-    mark('LANDER AND RELAY', lp + Vector((0, 0, 14)), 'SENDS THE DATA VIA A LUNAR ORBITER')
+    mark('LANDER AND RELAY', lp + Vector((0, 0, 14)), 'PARKED ON THE CRATER RIM')
     mark('WIRE MESH DISH', Vector((300 * math.cos(math.radians(240)), 300 * math.sin(math.radians(240)), dish_z(300))),
          '1 km ACROSS / WIRES EVERY 40 cm')
     top = tops[0]
     mark('RIM MAST', top, 'THREE MASTS / 130 m / HOLD THE CABIN')
-    mark('CRATER RIM', Vector((RIM * math.cos(math.radians(30)), RIM * math.sin(math.radians(30)), height(RIM, math.radians(30)) + 1)), '1.4 km ACROSS / FAR SIDE, NEVER FACING EARTH')
+    mark('CRATER RIM', Vector((RIM * math.cos(math.radians(30)), RIM * math.sin(math.radians(30)), height(RIM, math.radians(30)) + 1)), '1.4 km ACROSS / 335 m DEEP')
     return 20, 50

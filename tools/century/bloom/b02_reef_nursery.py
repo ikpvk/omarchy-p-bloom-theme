@@ -19,8 +19,8 @@ ENTRY = dict(
                'platform, then lowers them in trays for divers to plant on bleached reefs. '
                'One platform returns about 23 000 fragments a year.'),
     enabled_by=[
-        ('CORAL GARDENING', 'Fragments hung on mid-water trees reach planting size in months, as nurseries already show.'),
-        ('ASSISTED EVOLUTION', 'Parents chosen from colonies that kept their colour through recent marine heatwaves.'),
+        ('CORAL GARDENING', 'Fragments on mid-water trees reach planting size in months, as in today\'s nurseries.'),
+        ('ASSISTED EVOLUTION', 'Research that selects and breeds corals for higher heat tolerance.'),
         ('MARINE SOLAR', 'Floating panels and batteries that run the winch, lights and sensors offshore.'),
     ],
     real_basis='Coral gardening on mid-water trees, assisted evolution of heat tolerance, solar marine platforms.',
@@ -36,15 +36,15 @@ ENTRY = dict(
 
 DOSSIER = dict(
     kind='nursery',
-    fact=('Fragments are cut from colonies that kept their colour through the last '
-          'heatwave. The nursery multiplies survivors; the divers choose where they go.'),
-    rows=[('TREES TENDED', '40 / 96 FRAGMENTS EACH'),
+    fact=('Fragments are cut from survivors of the last heatwave. The nursery multiplies '
+          'them; the divers choose where they go.'),
+    rows=[('TRAY LIFTS', '960 A YEAR / 4 ON A WORKING DAY'),
           ('GROW-OUT', '6 MONTHS / 4 CUTS PER COLONY'),
-          ('RETURNED TO THE REEF', '23 040 FRAGMENTS A YEAR'),
+          ('PONTOON RING', '6.6 m ACROSS / 8 m OF WATER BELOW'),
           ('PARENT GENOTYPES', '30 OR MORE PER SPECIES')],
     note='EVERY TRAY CARRIES THE NAME OF THE REEF IT RETURNS TO.',
     left=('FROM SURVIVOR TO REEF', 'ANNUAL CYCLE / DECLARED TARGETS, NOT FIELD DATA',
-          '3 840 growing x 3 outplanted cuts x 2 cycles = 23 040 fragments a year.'),
+          '3 840 growing × 3 outplanted cuts × 2 cycles = 23 040 fragments a year.'),
     right=('KEEP THE ONES THAT KEPT THEIR COLOUR', 'HEAT SCREEN / DECLARED SCHEDULE, NOT A RESULT',
            'Colonies still pigmented after 10 days at MMM + 3 °C become parents.'),
 )

@@ -93,7 +93,7 @@ class Pen:
 @figure('quantum-simulator','ERRORS LEAVE A TRAIL','SYNDROME HISTORY / ILLUSTRATIVE EVENT PAIRING','A detection event is evidence to decode, not a readable qubit.')
 def quantum(p):
     for i in range(5):
-        y=57+i*20;p.l(25,y,340,y,.22,.4);p.t('s'+str(i),4,y+2,5.5)
+        y=57+i*20;p.l(25,y,340,y,.22,.4);p.t('s'+'₀₁₂₃₄'[i],4,y+2,5.5)
     for j in range(8):
         x=40+j*41;p.l(x,49,x,143,.15,.4)
         for i in range(5):p.c(x,57+i*20,1.3,.35,.4)
@@ -233,7 +233,7 @@ def truth(p):
     p.l(219,78,351,78,.45,.55);p.ticks(219,78,2,132);p.t('3 s',285,72,6,align='c')
     p.t('THE RED LIGHT IS NOT A PROOF',263,173,5.7,align='c')
 
-@figure('organ-foundry','KEEP THE INTERIOR FED','PERFUSION SECTION / SCHEMATIC TISSUE, NOT ANATOMY','Printing a shape is followed by perfusion and maturation.')
+@figure('organ-foundry','KEEP THE INTERIOR FED','PERFUSION SECTION / SCHEMATIC TISSUE, NOT ANATOMY','Channels feed the cells that lie too deep to be reached from the surface.')
 def organ(p):
     p.r([(23,64),(331,49),(404,85),(404,137),(84,151),(23,123)],close=True)
     p.r([(26,65),(84,93),(401,85)],.4,.55,r=10);p.l(84,93,84,148,.4,.55)
@@ -532,7 +532,7 @@ def neutrino(p):
     p.p([(224,39),(224,152),(264,152),(264,39)],.5,.55,col=GOLD)
     p.t('COINCIDENCE WINDOW',244,166,5.8,align='c')
 
-@figure('sleep-cocoon','SUPPORTS BEFORE SCORES','ARTICULATED SUPPORT SECTION / NO CLINICAL CLAIM','Head, pelvis and feet have separate supports and a manual release.')
+@figure('sleep-cocoon','SUPPORTS BEFORE SCORES','ARTICULATED SUPPORT SECTION / NO CLINICAL CLAIM','Three separate supports and one manual release.')
 def sleep(p):
     p.r([(34,89),(94,78),(167,106),(236,105),(312,129),(395,109)],.8,1.4)
     for x,y in [(67,84),(201,106),(356,119)]:

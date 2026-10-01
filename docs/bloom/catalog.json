@@ -130,11 +130,11 @@
     "enabled_by": [
       [
         "CORAL GARDENING",
-        "Fragments hung on mid-water trees reach planting size in months, as nurseries already show."
+        "Fragments on mid-water trees reach planting size in months, as in today's nurseries."
       ],
       [
         "ASSISTED EVOLUTION",
-        "Parents chosen from colonies that kept their colour through recent marine heatwaves."
+        "Research that selects and breeds corals for higher heat tolerance."
       ],
       [
         "MARINE SOLAR",
@@ -158,19 +158,19 @@
     "stamp": "NCR-112",
     "field_notes": {
       "kind": "nursery",
-      "fact": "Fragments are cut from colonies that kept their colour through the last heatwave. The nursery multiplies survivors; the divers choose where they go.",
+      "fact": "Fragments are cut from survivors of the last heatwave. The nursery multiplies them; the divers choose where they go.",
       "rows": [
         [
-          "TREES TENDED",
-          "40 / 96 FRAGMENTS EACH"
+          "TRAY LIFTS",
+          "960 A YEAR / 4 ON A WORKING DAY"
         ],
         [
           "GROW-OUT",
           "6 MONTHS / 4 CUTS PER COLONY"
         ],
         [
-          "RETURNED TO THE REEF",
-          "23 040 FRAGMENTS A YEAR"
+          "PONTOON RING",
+          "6.6 m ACROSS / 8 m OF WATER BELOW"
         ],
         [
           "PARENT GENOTYPES",
@@ -183,7 +183,7 @@
       "left": {
         "title": "FROM SURVIVOR TO REEF",
         "scope": "ANNUAL CYCLE / DECLARED TARGETS, NOT FIELD DATA",
-        "foot": "3 840 growing x 3 outplanted cuts x 2 cycles = 23 040 fragments a year."
+        "foot": "3 840 growing × 3 outplanted cuts × 2 cycles = 23 040 fragments a year."
       },
       "right": {
         "title": "KEEP THE ONES THAT KEPT THEIR COLOUR",
@@ -211,7 +211,7 @@
       "21x9": "concepts/bloom-ten/21x9/b02-reef-nursery.webp"
     },
     "built": {
-      "at": "2026-09-26T23:38:48.470969+00:00",
+      "at": "2026-09-28T13:40:17.511897+00:00",
       "parts": 2406,
       "cameras": {
         "B": [
@@ -249,7 +249,7 @@
       ],
       [
         "SOLAR THERMAL",
-        "A heliostat field and tower receiver that heat water, with a store for the night."
+        "Heliostat fields and tower receivers from concentrating solar power."
       ],
       [
         "MINERAL RECOVERY",
@@ -273,23 +273,23 @@
     "stamp": "NCR-113",
     "field_notes": {
       "kind": "still",
-      "fact": "The stack is widest at the bottom: colder vapour is thinner and needs more room. Heat enters once, at the top, and is used again all the way down.",
+      "fact": "The stack is widest at the bottom: colder vapour is thinner and needs more room. The tower stands 36 m to the top of the receiver crown.",
       "rows": [
         [
           "FRESH WATER",
-          "480 m³ A DAY / 4 000 PEOPLE"
+          "480 m³ A DAY / 120 L PER PERSON"
         ],
         [
-          "EFFECTS",
-          "14 / 70 TO 36 °C"
+          "SEAWATER",
+          "35 g OF SALTS PER kg"
         ],
         [
-          "MIRRORS",
-          "380 x 16 m² / 16 h HEAT STORE"
+          "DIRECT SUN",
+          "6.5 kWh PER m² A DAY"
         ],
         [
-          "RECOVERED SALTS",
-          "17.5 t A DAY / NO BRINE"
+          "MIRROR FIELD",
+          "6 100 m² / 25.6 MWh OF HEAT A DAY"
         ]
       ],
       "note": "THE FIRST BAGS OF SALT WENT TO THE SCHOOL KITCHEN."
@@ -307,11 +307,11 @@
       }
     },
     "callouts": {
-      "HELIOSTAT": "4 x 4 m / 380 IN THE FIELD",
+      "HELIOSTAT": "4 × 4 m / 380 IN THE FIELD",
       "SOLAR RECEIVER": "HEATS WATER TO 75 °C FOR THE TOP EFFECT",
-      "EFFECT STACK": "14 EFFECTS / WIDER BELOW FOR COOLER VAPOUR",
+      "EFFECT STACK": "2 m PER EFFECT / 6 TO 9.6 m ACROSS",
       "SPIRAL STAIR": "INSPECTION ON FOOT, THREE TURNS",
-      "SALT RECOVERY": "CRYSTALLISERS / BAGGED SALT AND MAGNESIUM",
+      "SALT RECOVERY": "CRYSTALLISERS AND PRODUCT SHED",
       "HOT WATER STORE": "16 h OF HEAT FOR THE NIGHT",
       "PLANT OPERATOR": "ONE OF SIX PEOPLE FROM TOWN WHO RUN IT"
     },
@@ -327,7 +327,7 @@
       "21x9": "concepts/bloom-ten/21x9/b03-sun-still.webp"
     },
     "built": {
-      "at": "2026-09-26T23:39:32.383191+00:00",
+      "at": "2026-09-28T13:40:22.111890+00:00",
       "parts": 860,
       "cameras": {
         "B": [
@@ -392,8 +392,8 @@
       "fact": "Each planet picture is built from six thousand short frames. The sharpest tenth are aligned and stacked while the child who booked them sleeps.",
       "rows": [
         [
-          "MIRROR",
-          "0.5 m / f/6.8"
+          "NIGHT POWER",
+          "30 kWh / FOUR NIGHTS WITHOUT SUN"
         ],
         [
           "SATURN ON THE SENSOR",
@@ -405,7 +405,7 @@
         ],
         [
           "OWNERS",
-          "120 SCHOOLS / ONE VISIT A YEAR"
+          "120 SCHOOLS / FIVE CONTINENTS"
         ]
       ],
       "note": "AMARA, 9, KISUMU. SATURN. TUESDAY, 21:10."
@@ -418,12 +418,12 @@
       },
       "right": {
         "title": "MORE FRAMES, STEADIER RINGS",
-        "scope": "IDEAL STACKING / SNR = SNR1 x ROOT N",
+        "scope": "IDEAL STACKING / SNR = SNR1 × ROOT N",
         "foot": "Random noise only; seeing and focus set the real limit."
       }
     },
     "callouts": {
-      "CAMERA TRAIN": "COOLED CMOS / 100 FRAMES A SECOND ON A PLANET",
+      "CAMERA TRAIN": "NASMYTH PORT / RIGHT FORK ARM",
       "0.5 m TELESCOPE": "SERRURIER TRUSS / f/6.8 / 3.4 m FOCAL LENGTH",
       "WEATHER MAST": "WIND, CLOUD AND RAIN DECIDE EACH NIGHT",
       "SOLAR PETAL": "THIN-FILM SKIN / CHARGES WHILE CLOSED BY DAY",
@@ -441,7 +441,7 @@
       "21x9": "concepts/bloom-ten/21x9/b04-first-light.webp"
     },
     "built": {
-      "at": "2026-09-26T23:10:57.978344+00:00",
+      "at": "2026-09-30T13:25:38.191342+00:00",
       "parts": 238,
       "cameras": {
         "B": [
@@ -1198,20 +1198,20 @@
       "fact": "Cataract is the most common cause of blindness and one of the most treatable. For most patients, the hard part is reaching a surgeon.",
       "rows": [
         [
-          "EYES PER DAY",
-          "36 / ONE TABLE, 12 MIN SLOTS"
-        ],
-        [
-          "DISTRICT VISIT",
-          "3 WEEKS / 648 EYES"
+          "PER VISIT",
+          "18 OPERATING DAYS / 648 EYES"
         ],
         [
           "POWER",
           "5.3 kWp SOLAR / 30 kWh STORE"
         ],
         [
-          "THEATRE AIR",
-          "HEPA / 20 CHANGES AN HOUR"
+          "DAILY LOAD",
+          "24 kWh / AIR HANDLER 15 kWh"
+        ],
+        [
+          "STERILISER",
+          "6 STEAM CYCLES A DAY"
         ]
       ],
       "note": "SHE READ THE BUS NUMBER FROM ACROSS THE SQUARE."
@@ -1233,7 +1233,7 @@
       "CLEAN AIR": "HEPA / 20 AIR CHANGES AN HOUR",
       "WAITING DECK": "SHADED / STEPS AND RAILS FOR OLDER PATIENTS",
       "SEALED THEATRE": "GLAZED / FAMILIES WAIT WITHIN SIGHT",
-      "ISO 20 ft BODY": "MOVES BY TRUCK, TRAIN OR SHIP",
+      "ISO 20 ft BODY": "6.06 × 2.44 × 2.59 m",
       "LEVELLING JACK": "SET UP ON ROUGH GROUND IN AN HOUR"
     },
     "source_files": [
@@ -1248,7 +1248,7 @@
       "21x9": "concepts/bloom-ten/21x9/b11-clear-sight.webp"
     },
     "built": {
-      "at": "2026-09-26T23:38:32.797716+00:00",
+      "at": "2026-09-28T13:40:26.509004+00:00",
       "parts": 440,
       "cameras": {
         "B": [
@@ -1290,7 +1290,7 @@
       ],
       [
         "HARBOUR PROPULSION",
-        "Battery-electric pods for berthing and calms, charged at the quay."
+        "Battery-electric pods for harbour and berthing, charged at the quay."
       ]
     ],
     "real_basis": "Rigid wing sails, rotor sails, weather routing and battery-electric harbour propulsion.",
@@ -1310,23 +1310,23 @@
     "stamp": "NCR-122",
     "field_notes": {
       "kind": "crossing",
-      "fact": "On a broad reach in a fresh breeze the three wings alone hold eleven knots. Over a year of crossings they supply about four fifths of the energy.",
+      "fact": "At eleven knots the hull needs about 2.7 MW. On a broad reach in a fresh breeze the wings alone supply it.",
       "rows": [
         [
           "LENGTH / BEAM",
           "150 m / 26 m"
         ],
         [
-          "CARGO",
-          "1 100 TEU"
+          "DRAUGHT",
+          "8.5 m / 14 000 t DEADWEIGHT"
         ],
         [
-          "WING AREA",
-          "3 x 1 000 m²"
+          "WIND THRUST",
+          "480 kN / 12 m/s APPARENT WIND"
         ],
         [
           "CROSSING",
-          "ROTTERDAM - HALIFAX / 11 DAYS"
+          "2 900 NAUTICAL MILES"
         ]
       ],
       "note": "FROM THE BRIDGE WING YOU CAN HEAR THE BOW WAVE."
@@ -1335,21 +1335,21 @@
       "left": {
         "title": "A WING PULLS FORWARD",
         "scope": "ONE WING, PLAN VIEW / APPARENT WIND 110° / L / D = 8 / NORMALISED",
-        "foot": "Thrust = L sin 110° - D cos 110° = 0.98 L; the hull and keel take the small side force."
+        "foot": "Thrust = L sin 110° − D cos 110° = 0.98 L; the hull and keel take the small side force."
       },
       "right": {
         "title": "ONE CROSSING, BY ENERGY SOURCE",
-        "scope": "ILLUSTRATIVE VOYAGE / 713 MWh OF PROPULSION / 11 DAYS",
-        "foot": "The battery covers harbour and berthing; the generator covers calms."
+        "scope": "ILLUSTRATIVE VOYAGE / 713 MWh OF PROPULSION",
+        "foot": "The generator runs on bio-methanol; the battery pack holds 24 MWh."
       }
     },
     "callouts": {
       "SLOTTED FLAP": "ADDS CAMBER IN LIGHT AIR / FEATHERS FLAT IN A STORM",
       "TRIM DRIVE": "TURNS EACH WING 360 DEGREES ON ITS MAST",
-      "WING SAIL": "THREE WINGS / 1 000 m² EACH / SET BY THE SHIP",
-      "BRIDGE": "CREW OF 14 / WEATHER-ROUTED CROSSINGS",
+      "WING SAIL": "THREE WINGS / 1 000 m² EACH / 50 m SPAN",
+      "BRIDGE": "ON A FOUR-DECK HOUSE AFT",
       "ACCOMMODATION LADDER": "PILOT AND CREW BOARD HERE / STOWED AT SEA",
-      "DECK STACKS": "1 100 TEU / FOUR-HIGH BETWEEN THE TOWERS"
+      "DECK STACKS": "FOUR-HIGH / ABOUT 400 ON DECK"
     },
     "source_files": [
       "tools/century/bloom/b12_wind_freighter.py",
@@ -1363,7 +1363,7 @@
       "21x9": "concepts/bloom-ten/21x9/b12-wind-freighter.webp"
     },
     "built": {
-      "at": "2026-09-26T23:38:40.691905+00:00",
+      "at": "2026-09-28T13:40:27.860651+00:00",
       "parts": 512,
       "cameras": {
         "B": [
@@ -1414,7 +1414,7 @@
     "view_B": "SHAFT FURNACE",
     "view_B_note": "SHELL CUT AWAY / BURDEN / BUSTLE MAIN / TUYERES",
     "view_C": "ELECTROLYSER STACK",
-    "view_C_note": "CELLS / END PLATES / TIE RODS / H2 AND O2 MANIFOLDS",
+    "view_C_note": "CELLS / END PLATES / TIE RODS / H₂ AND O₂ MANIFOLDS",
     "service_year": "2031",
     "sources": [
       "https://www.midrex.com/technology/midrex-process/midrex-h2/",
@@ -1425,23 +1425,23 @@
     "stamp": "NCR-123",
     "field_notes": {
       "kind": "melt shop",
-      "fact": "Hydrogen takes the oxygen out of the ore as water. Coke never enters the shaft; the arc furnace still uses a little carbon for its electrodes and slag.",
+      "fact": "Coke never enters the shaft; the arc furnace still uses a little carbon for its electrodes and slag.",
       "rows": [
         [
           "STEEL",
-          "1 Mt A YEAR / 125 t OF IRON AN HOUR"
+          "1 Mt A YEAR / 8 000 h RUNNING"
+        ],
+        [
+          "REDUCTION SHAFT",
+          "7 m ACROSS / TOP AT 47 m"
         ],
         [
           "HYDROGEN",
-          "57 kg PER TONNE OF IRON"
+          "7.1 t AN HOUR"
         ],
         [
           "ELECTROLYSERS",
-          "360 MW / WIND AND HYDRO"
-        ],
-        [
-          "ELECTRICITY",
-          "3.6 MWh PER TONNE OF STEEL"
+          "360 MW / 50 kWh PER kg OF H₂"
         ]
       ],
       "note": "ON COLD MORNINGS THE PLUME OVER THE MILL IS ONLY CLOUD."
@@ -1450,7 +1450,7 @@
       "left": {
         "title": "THE OXYGEN LEAVES AS WATER",
         "scope": "IDEAL MASS BALANCE / PER TONNE OF IRON / PURE OXIDE",
-        "foot": "Fe2O3 + 3 H2 → 2 Fe + 3 H2O; the plant adds ~3 kg of excess hydrogen, recycled."
+        "foot": "Fe₂O₃ + 3 H₂ → 2 Fe + 3 H₂O; the plant adds ~3 kg of excess hydrogen, recycled."
       },
       "right": {
         "title": "FROM WIND TO STEEL",
@@ -1460,12 +1460,12 @@
     },
     "callouts": {
       "BUSTLE MAIN": "HOT HYDROGEN AT 900 °C / TWELVE TUYERES",
-      "ELECTROLYSER STACK": "24 CELLS SHOWN / WATER IN, H2 AND O2 OUT",
+      "ELECTROLYSER STACK": "24 CELLS SHOWN / 12 STACKS IN TWO ROWS",
       "SHAFT FURNACE": "PELLETS DOWN, HYDROGEN UP / 125 t OF IRON AN HOUR",
       "CHARGING GALLERY": "PELLETS RISE 50 m TO THE HOPPER",
-      "ARC FURNACE": "150 t HEATS / SPONGE IRON AND SCRAP",
+      "ARC FURNACE": "150 t HEATS / FED HOT BY A CLOSED CONVEYOR",
       "HYDROGEN SPHERES": "BUFFER FOR WINDLESS HOURS",
-      "VAPOUR STACK": "WATER VAPOUR / NO COKE, NO COAL"
+      "VAPOUR STACK": "TOP GAS, AFTER THE SCRUBBER"
     },
     "source_files": [
       "tools/century/bloom/b13_green_forge.py",
@@ -1479,7 +1479,7 @@
       "21x9": "concepts/bloom-ten/21x9/b13-green-forge.webp"
     },
     "built": {
-      "at": "2026-09-26T23:49:27.051516+00:00",
+      "at": "2026-09-28T13:40:31.167244+00:00",
       "parts": 1048,
       "cameras": {
         "B": [
@@ -2006,23 +2006,23 @@
     "stamp": "NCR-142",
     "field_notes": {
       "kind": "hearth",
-      "fact": "The coils are twisted so the magnetic field twists by itself. No current has to be driven through the plasma, so it can burn steadily for months.",
+      "fact": "The plasma ring is 24 m across and holds 405 m³. Each cubic metre of it makes about 2 MW of fusion power.",
       "rows": [
         [
-          "FUSION POWER",
-          "800 MW / DEUTERIUM + TRITIUM"
+          "FUEL A DAY",
+          "82 g DEUTERIUM / 123 g TRITIUM"
         ],
         [
-          "NET ELECTRICITY",
-          "300 MW / 200 000 PEOPLE"
+          "TRITIUM SOURCE",
+          "BRED FROM LITHIUM IN THE BLANKET"
         ],
         [
-          "FUEL",
-          "ABOUT 200 g A DAY"
+          "PER RESIDENT",
+          "1.5 kW / HOMES, TRAMS, WORKPLACES"
         ],
         [
           "FIELD ON AXIS",
-          "5 T / 50 COILS AT 20 K"
+          "5 T"
         ]
       ],
       "note": "ON WINTER EVENINGS THE CITY IS LIT AND THE AIR IS CLEAR."
@@ -2031,7 +2031,7 @@
       "left": {
         "title": "WHERE THE 800 MW GO",
         "scope": "DECLARED DESIGN BUDGET / MEGAWATTS",
-        "foot": "800 x 1.1 = 880 MW of heat; 40 % becomes 350 MW; 50 MW runs the plant."
+        "foot": "800 × 1.1 = 880 MW of heat; 40 % becomes 350 MW; 50 MW runs the plant."
       },
       "right": {
         "title": "A TWIST INSTEAD OF A CURRENT",
@@ -2041,8 +2041,8 @@
     },
     "callouts": {
       "TWISTED COILS": "FIFTY SHAPES / NO TWO NEIGHBOURS ALIKE",
-      "PLASMA": "TWISTED WITH THE COILS / 1.9 m ACROSS",
-      "CRYOSTAT": "VACUUM JACKET / MAGNETS AT -253 °C",
+      "PLASMA": "3.8 × 1.8 m SECTION / THREE FIELD LINES SHOWN",
+      "CRYOSTAT": "VACUUM JACKET / 30° SEGMENTS / RADIAL PORTS",
       "SERVICE WALKWAY": "PERSON FOR SCALE / 1.75 m",
       "COIL CRADLE": "TEN CRADLES / 2 000 t OF COLD MAGNETS",
       "PLASMA VESSEL": "TEN HALF-MODULES / BOLTED JOINTS"
@@ -2059,7 +2059,7 @@
       "21x9": "concepts/bloom-ten/21x9/b18-stellarator-hearth.webp"
     },
     "built": {
-      "at": "2026-09-27T00:22:29.832214+00:00",
+      "at": "2026-09-28T13:40:34.405501+00:00",
       "parts": 320,
       "cameras": {
         "B": [
@@ -2319,7 +2319,7 @@
     "palette": "graphite",
     "seed": 260121,
     "purpose": "LUNAR CRATER RADIO TELESCOPE",
-    "narrative": "A wire-mesh dish strung across a crater on the far side of the Moon listens to the universe's first hydrogen, shielded from every radio on Earth. Robots hung and tensioned the whole kilometre of mesh.",
+    "narrative": "A wire-mesh dish strung across a far-side lunar crater listens to the universe's first hydrogen. Robots hung and tensioned the whole mesh.",
     "enabled_by": [
       [
         "FAR-SIDE QUIET",
@@ -2354,20 +2354,20 @@
       "fact": "Before the first stars, hydrogen gas filled the universe. Its faint 21 cm signal is now stretched into waves metres long, and only a sky without radios can hear it.",
       "rows": [
         [
-          "DISH",
-          "1 km / WIRES EVERY 40 cm"
+          "SHIELD",
+          "3 474 km OF MOON"
         ],
         [
-          "LISTENS AT",
-          "5 TO 40 MHz / 60 TO 7.5 m WAVES"
+          "WAVES",
+          "60 TO 7.5 m LONG"
         ],
         [
           "HYDROGEN FROM",
           "REDSHIFT 35 TO 280"
         ],
         [
-          "DATA HOME",
-          "RELAY ORBITER / ONE PASS A DAY"
+          "CONTACT",
+          "ONE ORBITER PASS A DAY"
         ]
       ],
       "note": "ON EARTH, A TEN-YEAR-OLD LISTENS TO THE FIRST HYDROGEN, PLAYED AS SOUND."
@@ -2387,10 +2387,10 @@
     "callouts": {
       "RECEIVER CABIN": "HANGS AT THE FOCUS / 250 m ABOVE THE MESH",
       "ANCHOR CLIMBER": "WALKS THE CABLES / TRIMS THE MESH TO 1 cm",
-      "LANDER AND RELAY": "SENDS THE DATA VIA A LUNAR ORBITER",
+      "LANDER AND RELAY": "PARKED ON THE CRATER RIM",
       "WIRE MESH DISH": "1 km ACROSS / WIRES EVERY 40 cm",
       "RIM MAST": "THREE MASTS / 130 m / HOLD THE CABIN",
-      "CRATER RIM": "1.4 km ACROSS / FAR SIDE, NEVER FACING EARTH"
+      "CRATER RIM": "1.4 km ACROSS / 335 m DEEP"
     },
     "source_files": [
       "tools/century/bloom/b21_crater_ear.py",
@@ -2404,7 +2404,7 @@
       "21x9": "concepts/bloom-ten/21x9/b21-crater-ear.webp"
     },
     "built": {
-      "at": "2026-09-27T00:44:05.545220+00:00",
+      "at": "2026-09-28T13:40:42.560164+00:00",
       "parts": 1547,
       "cameras": {
         "B": [

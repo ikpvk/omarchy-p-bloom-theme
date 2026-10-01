@@ -7,14 +7,14 @@ from collection_layout import field_notes
 from triptych import diagram_y,register_section,punchline
 
 DATA={
-101:dict(kind='release',fact='Non-pyrotechnic does not mean zero shock. Stored bolt strain still has to go somewhere.',rows=[('PRELOAD','TRANSFER BEFORE RELEASE'),('PYROTECHNICS','NONE IN THIS CONCEPT'),('SHOCK','REQUIRES MEASUREMENT')],note='EXPLOSIVE PERSONALITY: NOT INSTALLED.',left=('HAND OVER THE LOAD FIRST','SCRIPTED RELEASE STATES / TIME NOT TO SCALE'),right=('THE RECORD IS NOT THE EVENT','FICTIONAL RECORDER STRIP / FOUR CONTACTS')),
-103:dict(kind='capillarity',fact='A wetted membrane can retain gas below its bubble point. The result depends on pore size and coolant chemistry.',rows=[('SURFACE','MATCHED TO COOLANT'),('GAS INVENTORY','BUFFERED BEFORE VENT'),('GRAVITY','NOT THE SEPARATOR')],note='ALL BUBBLES MUST DECLARE THEIR INTENTIONS.',left=('SMALL PORES, LARGE CONSEQUENCES','IDEAL CAPILLARY PRESSURE / FIXED WETTING'),right=('KEEP THE INTERFACE WET','MEMBRANE CROSS-SECTION / NOT TO SCALE')),
-104:dict(kind='consent',fact='Both independent inputs must be present. This is a mechanical logic concept, not a certified security lock.',rows=[('LOGIC','KEY ONE AND KEY TWO'),('SENIORITY','NO BYPASS'),('EMERGENCY','SEPARATE PROCEDURE')],note='ADMINISTRATOR IS NOT A THIRD PERSON.',left=('AUTHORITY DOES NOT ADD UP','BOOLEAN PERMISSION TABLE / NO MASTER INPUT'),right=('CONSENT HAS AN EXPIRY','SCRIPTED WITHDRAWAL / BEFORE BOLT RELEASE')),
-105:dict(kind='metrology',fact='Pitch and diameter can identify a thread. Neither establishes voltage, pressure rating or polarity.',rows=[('MECHANICAL','MEASURE BEFORE MATING'),('ELECTRICAL','SEPARATE VERIFICATION'),('ADAPTER','DECLARED LIMITS ONLY')],note='THE THREAD FITS. THAT IS NOT A TREATY.',left=('SAME DIAMETER, WRONG CONVERSATION','TWO THREAD PROFILES / SYMBOLIC PITCH'),right=('PASS IS A SMALLER SET','FICTIONAL ACCEPTANCE REGISTER / 12 ARRIVALS')),
-106:dict(kind='scattering',fact='Track deflection carries information about the cargo. Sparse cosmic arrivals limit how quickly an image forms.',rows=[('SOURCE','NATURAL COSMIC MUONS'),('MEASURED','INCOMING / OUTGOING TRACK'),('DENSITY MAP','RECONSTRUCTION REQUIRED')],note='EXPRESS LANE SUBJECT TO COSMIC AVAILABILITY.',left=('A BEND LEAVES A CLUE','SINGLE ILLUSTRATIVE TRACK / NO EVENT DATA'),right=('THE SKY SETS THE SAMPLE SIZE','IDEAL POISSON COUNT UNCERTAINTY / 1 OVER ROOT N')),
-107:dict(kind='resonance',fact='A tuned absorber acts near selected frequencies. Changing the host or load can move the resonance away.',rows=[('TUNING','MEASURE, MOVE, LOCK'),('MODEL','f = ROOT(k / m) / 2 PI'),('SILENCE','NOT A WARRANTY')],note='GOOD VIBRATIONS ARE STILL VIBRATIONS.',left=('MORE MASS, LOWER NOTE','IDEAL NATURAL FREQUENCY / FIXED STIFFNESS'),right=('THE HOST AND ITS UNINVITED GUEST','TWO COUPLED OSCILLATORS / LUMPED MODEL')),
-108:dict(kind='handoff',fact='The needle must remain controlled through each transfer. The drawing uses a neutral test sheet, not clinical tissue.',rows=[('SUBSTRATE','TEST MEMBRANE'),('HOLD','AT LEAST ONE GRIPPER'),('CLINICAL STATUS','NOT ESTABLISHED')],note='KNOTS SHOULD BE IN THE THREAD, NOT THE PLAN.',left=('DO NOT DROP THE NEEDLE','SCRIPTED GRIPPER STATES / NO CLINICAL DATA'),right=('SLACK NEEDS SOMEWHERE TO GO','DANCER GEOMETRY / SYMBOLIC THREAD RESERVE')),
-110:dict(kind='rotation',fact='Radial acceleration grows with speed squared. The bowl rotates; the rest of the galley remains weightless.',rows=[('MODEL','a = OMEGA SQUARED TIMES r'),('LID','OPEN ONLY WHEN STOPPED'),('HUMANS','NOT AN INGREDIENT')],note='ARTIFICIAL GRAVITY. AUTHENTIC LEFTOVERS.',left=('DOUBLE THE SPEED, FOUR TIMES THE MESS','IDEAL RADIAL ACCELERATION / FIXED RADIUS'),right=('BALANCE IS PART OF THE RECIPE','STATIC FIRST-MOMENT BALANCE / IDEAL PAIR')),
+101:dict(kind='release',fact='Stored bolt strain still has to go somewhere; the cam decides where.',rows=[('PRELOAD','TRANSFER BEFORE RELEASE'),('PYROTECHNICS','NONE IN THIS CONCEPT'),('SHOCK','REQUIRES MEASUREMENT')],note='EXPLOSIVE PERSONALITY: NOT INSTALLED.',left=('HAND OVER THE LOAD FIRST','SCRIPTED RELEASE STATES / TIME NOT TO SCALE'),right=('THE RECORD IS NOT THE EVENT','FICTIONAL RECORDER STRIP / FOUR CONTACTS')),
+103:dict(kind='capillarity',fact='Smaller pores hold gas back at higher pressure, as long as the membrane stays wet.',rows=[('SURFACE','MATCHED TO COOLANT'),('GAS INVENTORY','BUFFERED BEFORE VENT'),('GRAVITY','NOT THE SEPARATOR')],note='ALL BUBBLES MUST DECLARE THEIR INTENTIONS.',left=('SMALL PORES, LARGE CONSEQUENCES','IDEAL CAPILLARY PRESSURE / FIXED WETTING'),right=('KEEP THE INTERFACE WET','MEMBRANE CROSS-SECTION / NOT TO SCALE')),
+104:dict(kind='consent',fact='Both inputs must be present. Mechanical logic, not a certified security lock.',rows=[('LOGIC','KEY ONE AND KEY TWO'),('SENIORITY','NO BYPASS'),('EMERGENCY','SEPARATE PROCEDURE')],note='ADMINISTRATOR IS NOT A THIRD PERSON.',left=('AUTHORITY DOES NOT ADD UP','BOOLEAN PERMISSION TABLE / NO MASTER INPUT'),right=('CONSENT HAS AN EXPIRY','SCRIPTED WITHDRAWAL / BEFORE BOLT RELEASE')),
+105:dict(kind='metrology',fact='Pitch and diameter can identify a thread. Neither establishes voltage, pressure rating or polarity.',rows=[('MECHANICAL','MEASURE BEFORE MATING'),('ELECTRICAL','SEPARATE VERIFICATION'),('ADAPTOR','DECLARED LIMITS ONLY')],note='THE THREAD FITS. THAT IS NOT A TREATY.',left=('SAME DIAMETER, WRONG CONVERSATION','TWO THREAD PROFILES / SYMBOLIC PITCH'),right=('PASS IS A SMALLER SET','FICTIONAL ACCEPTANCE REGISTER / 12 ARRIVALS')),
+106:dict(kind='scattering',fact='Track deflection describes the cargo. Sparse cosmic arrivals limit how fast an image forms.',rows=[('SOURCE','NATURAL COSMIC MUONS'),('MEASURED','INCOMING / OUTGOING TRACK'),('DENSITY MAP','RECONSTRUCTION REQUIRED')],note='EXPRESS LANE SUBJECT TO COSMIC AVAILABILITY.',left=('A BEND LEAVES A CLUE','SINGLE ILLUSTRATIVE TRACK / NO EVENT DATA'),right=('THE SKY SETS THE SAMPLE SIZE','IDEAL POISSON COUNT UNCERTAINTY / 1 OVER ROOT N')),
+107:dict(kind='resonance',fact='A tuned absorber works near its chosen frequency. A changed host or load can detune it.',rows=[('TUNING','MEASURE, MOVE, LOCK'),('MODEL','f = √(k / m) / 2π'),('SILENCE','NOT A WARRANTY')],note='GOOD VIBRATIONS ARE STILL VIBRATIONS.',left=('MORE MASS, LOWER NOTE','IDEAL NATURAL FREQUENCY / FIXED STIFFNESS'),right=('THE HOST AND ITS UNINVITED GUEST','TWO COUPLED OSCILLATORS / LUMPED MODEL')),
+108:dict(kind='handoff',fact='The needle must remain controlled through each transfer.',rows=[('SUBSTRATE','TEST MEMBRANE'),('HOLD','AT LEAST ONE GRIPPER'),('CLINICAL STATUS','NOT ESTABLISHED')],note='KNOTS SHOULD BE IN THE THREAD, NOT THE PLAN.',left=('DO NOT DROP THE NEEDLE','SCRIPTED GRIPPER STATES / NO CLINICAL DATA'),right=('SLACK NEEDS SOMEWHERE TO GO','DANCER GEOMETRY / SYMBOLIC THREAD RESERVE')),
+110:dict(kind='rotation',fact='The bowl rotates; the rest of the galley remains weightless.',rows=[('MODEL','a = ω²r'),('LID','OPEN ONLY WHEN STOPPED'),('HUMANS','NOT AN INGREDIENT')],note='ARTIFICIAL GRAVITY. AUTHENTIC LEFTOVERS.',left=('DOUBLE THE SPEED, FOUR TIMES THE MESS','IDEAL RADIAL ACCELERATION / FIXED RADIUS'),right=('BALANCE IS PART OF THE RECIPE','STATIC FIRST-MOMENT BALANCE / IDEAL PAIR')),
 }
 
 def capsule(s,x,y,w,h,r=7,color=WHITE,a=.7):
@@ -56,8 +56,8 @@ def figure(s,n,side,x,y,w):
    for label,a,b in (('HOLD',0,0),('HANDOFF',1,1),('RELEASE',3,4)):tx(s,label,col(a,b),body+113,align='c')
    foot='Contact states only; no invented shock attenuation curve.'
   elif n==103:
-   waveform(s,x,body,w,91,lambda t:1/(1+3*t),'PORE RADIUS / r0','1',((0,'1'),(1/3,'2'),(1,'4')))
-   foot='Pressure ratio = r0 / r; surface tension and angle fixed.'
+   waveform(s,x,body,w,91,lambda t:1/(1+3*t),'PORE RADIUS / r₀','1',((0,'1'),(1/3,'2'),(1,'4')))
+   foot='Pressure ratio = r₀ / r; surface tension and angle fixed.'
   elif n==104:
    # Inputs centred under their headings; the result column hangs from its heading.
    heads=(('KEY ONE',x),('KEY TWO',x+150),('PERMISSION',x+300))
@@ -90,15 +90,15 @@ def figure(s,n,side,x,y,w):
    mid(s,'IN',x+344,body+17.5);mid(s,'CARGO',x+344,body+60);mid(s,'OUT',x+344,body+103.5)
    foot='One scattering example. Not a reconstructed density map.'
   elif n==107:
-   waveform(s,x,body,w,91,lambda t:1/math.sqrt(1+3*t),'MOVING MASS / m0','1',((0,'1'),(1/3,'2'),(1,'4')))
-   foot='Frequency ratio = root(m0 / m); one ideal branch.'
+   waveform(s,x,body,w,91,lambda t:1/math.sqrt(1+3*t),'MOVING MASS / m₀','1',((0,'1'),(1/3,'2'),(1,'4')))
+   foot='Frequency ratio = √(m₀ / m); one ideal branch.'
   elif n==108:
    col=trace_rows(s,x,body,('LEFT GRIP','RIGHT GRIP','NEEDLE HELD'),((1,1,0,0,1),(0,1,1,1,1),(1,1,1,1,1)))
    for label,a,b in (('HOLD',0,0),('OVERLAP',1,1),('TRANSFER',2,3)):tx(s,label,col(a,b),body+113,align='c')
    foot='Overlap is intentional; this chart does not prove a safe grip.'
   elif n==110:
-   waveform(s,x,body,w,91,lambda t:t*t,'ANGULAR SPEED / OMEGA0','4',((0,'0'),(.5,'1'),(1,'2')))
-   foot='a / a0 = (omega / omega0)² at the same radius.'
+   waveform(s,x,body,w,91,lambda t:t*t,'ANGULAR SPEED / ω₀','4',((0,'0'),(.5,'1'),(1,'2')))
+   foot='a / a₀ = (ω / ω₀)² at the same radius.'
  else:
   if n==101:
    for i,(label,start,end) in enumerate((('ARM',0,3),('CAM',1,4),('JAW',3,5),('CLEAR',4,5))):
@@ -156,9 +156,9 @@ def figure(s,n,side,x,y,w):
    capsule(s,x+338,body+56,29,28,6,color=ARC)
    arrow(s,(x+215,body+100),(x+85,body+100));arrow(s,(x+233,body+100),(x+351,body+100))
    # Paired labels share a baseline; each radius is named under its own arrow.
-   tx(s,'m1',x+82.5,body+40,align='c');tx(s,'m2',x+352.5,body+40,align='c')
-   tx(s,'r1',x+150,body+116,align='c');tx(s,'r2',x+292,body+116,align='c')
-   foot='m1 × r1 = m2 × r2; real rotor also needs dynamic balance.'
+   tx(s,'m₁',x+82.5,body+40,align='c');tx(s,'m₂',x+352.5,body+40,align='c')
+   tx(s,'r₁',x+150,body+116,align='c');tx(s,'r₂',x+292,body+116,align='c')
+   foot='m₁ × r₁ = m₂ × r₂; real rotor also needs dynamic balance.'
  tx(s,foot,x,y+184,7,.67)
 
 

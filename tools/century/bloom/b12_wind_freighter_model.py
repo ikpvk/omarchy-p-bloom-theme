@@ -305,8 +305,8 @@ def build():
     uncover('B', 'wing skin')
     uncover('C', 'bearing cover', 'wing root plate')
     xc = MASTS[2]
-    mark('WING SAIL', Vector((xc, 0, 0)) + Vector((math.cos(math.radians(TRIM)), math.sin(math.radians(TRIM)), 0)) * (-.3 * 28) + Vector((0, 0, ROOT_Z + SPAN_Z)), 'THREE WINGS / 1 000 m² EACH / SET BY THE SHIP')
-    mark('BRIDGE', (38.2, -26, at_x(30)[3] + 27.6), 'CREW OF 14 / WEATHER-ROUTED CROSSINGS')
+    mark('WING SAIL', Vector((xc, 0, 0)) + Vector((math.cos(math.radians(TRIM)), math.sin(math.radians(TRIM)), 0)) * (-.3 * 28) + Vector((0, 0, ROOT_Z + SPAN_Z)), 'THREE WINGS / 1 000 m² EACH / 50 m SPAN')
+    mark('BRIDGE', (38.2, -26, at_x(30)[3] + 27.6), 'ON A FOUR-DECK HOUSE AFT')
     mark('ACCOMMODATION LADDER', (46, -at_x(46)[0] - 1.1, at_x(46)[3] - 4.5), 'PILOT AND CREW BOARD HERE / STOWED AT SEA')
-    mark('DECK STACKS', (260, -22.4, at_x(260)[3] + 7), '1 100 TEU / FOUR-HIGH BETWEEN THE TOWERS')
+    mark('DECK STACKS', (260, -22.4, at_x(260)[3] + 7), 'FOUR-HIGH / ABOUT 400 ON DECK')
     return 50, 16

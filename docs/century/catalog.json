@@ -13,7 +13,7 @@
     "sources": [
       "https://www.nasa.gov/space-technology-mission-directorate/tdm/solar-sail-demonstrator-sunjammer/"
     ],
-    "view_A": "PHOTON CARGO CLIPPER",
+    "view_A": "FOUR-BOOM SAIL, DEPLOYED",
     "view_B": "REEFING HUB",
     "view_C": "SAIL ROOT",
     "human_role": "none",
@@ -99,7 +99,7 @@
     "editorial_revision": {
       "version": 1,
       "scope": "Mechanism details, authored explanatory panels and deadpan archive notes",
-      "plot_scope": "IDEAL MIRROR / NORMAL FORCE / NORMALIZED",
+      "plot_scope": "IDEAL MIRROR / NORMAL FORCE / NORMALISED",
       "aside": "DELIVERY WINDOW: ASTRONOMICAL.",
       "status": "rendered and reviewed"
     },
@@ -128,7 +128,7 @@
     "sources": [
       "https://www.energy.gov/cmei/water/marine-energy-basics"
     ],
-    "view_A": "BIDIRECTIONAL CURRENT HARVESTER",
+    "view_A": "TWIN-ROTOR SEABED FRAME",
     "view_B": "ROTOR CARTRIDGE",
     "view_C": "SERVICE-SIDE CARTRIDGE",
     "human_role": "none",
@@ -564,7 +564,7 @@
     "sources": [
       "https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/lift-equation/"
     ],
-    "view_A": "ELECTRIC HYDROFOIL FERRY",
+    "view_A": "TWIN-HULL FERRY, FOILS LOWERED",
     "view_B": "RETRACTABLE FOIL ROOTS",
     "view_C": "AXIAL PROPULSORS",
     "human_role": "none",
@@ -1726,14 +1726,14 @@
     "recipe": "memory_kiln",
     "category": "serious",
     "purpose": "LONG-LIFE GLASS DATA WRITER",
-    "narrative": "Writes a family's archive into small glass plates and stores a readable decoding guide beside them. The password is not the only surviving artifact.",
+    "narrative": "Writes a family's archive into small glass plates and stores a readable decoding guide beside them. The password is not the only surviving artefact.",
     "required_breakthroughs": "Fast error-checked volumetric writing and readers that remain reproducible centuries later.",
     "real_basis": "Ultrafast writing of nanostructures in glass and optical readout.",
     "sources": [
       "https://www.southampton.ac.uk/news/2019/11/superman-glass-crystal.page",
       "https://www.microsoft.com/en-us/research/project/project-silica/"
     ],
-    "view_A": "LONG-LIFE GLASS DATA WRITER",
+    "view_A": "SIX-PLATE BENCH WRITER",
     "view_B": "FOCUS OBJECTIVE",
     "view_C": "PLATE CAROUSEL",
     "human_role": "none",
@@ -1855,7 +1855,7 @@
       "https://www.nasa.gov/wp-content/uploads/2017/02/2018-_eva_airlocks_and_alternate_ingressegress_methods_document.pdf",
       "https://techport.nasa.gov/projects/10728"
     ],
-    "view_A": "DUST-SEPARATING AIRLOCK",
+    "view_A": "EMPTY SUITPORT BULKHEAD",
     "view_B": "SUIT DOCK",
     "view_C": "DUST TRAP",
     "human_role": "none",
@@ -1960,7 +1960,7 @@
       "user_approved_at": "2026-09-25T08:51:43.437269+00:00"
     },
     "view_B_note": "TWIN SEALS / INTERSEAL TEST PORT",
-    "view_C_note": "DRAWER AND GRATE / KEEP GRIT OUTSIDE"
+    "view_C_note": "CROSS BARS / CAPTIVE SCREWS / DRAWER GASKET"
   },
   {
     "number": 19,
@@ -2591,7 +2591,7 @@
     "required_breakthroughs": "Fast inspection of internal fibre placement before a defective part has been fully cured.",
     "real_basis": "Moving yarn carriers, a central mandrel and controlled braid angle.",
     "sources": [],
-    "view_A": "VARIABLE-ANGLE COMPOSITE LOOM",
+    "view_A": "TWELVE-CARRIER RING BRAIDER",
     "view_B": "CARRIER TRACK",
     "view_C": "MANDREL CHUCK",
     "human_role": "none",
@@ -2696,7 +2696,7 @@
       "user_approved_at": "2026-09-25T08:51:43.437269+00:00"
     },
     "view_B_note": "BOBBINS / TENSION ARMS / CERAMIC EYES",
-    "view_C_note": "REMOVABLE FORM / SYNCHRONISED ADVANCE"
+    "view_C_note": "BOLTED CHUCK FACE / BRAIDED FORM"
   },
   {
     "number": 26,
@@ -3236,8 +3236,8 @@
     "sources": [
       "https://science.nasa.gov/mission/webb/webbs-mirrors/"
     ],
-    "view_A": "DEPLOYABLE INFRARED OBSERVATORY",
-    "view_B": "SEGMENTED PRIMARY MIRROR",
+    "view_A": "FULLY UNFOLDED TELESCOPE",
+    "view_B": "PRIMARY MIRROR",
     "view_C": "SECONDARY SPIDER",
     "human_role": "none",
     "palette": "emerald",
@@ -3335,7 +3335,7 @@
       "decided_at": "2026-09-25T08:25:17.435135+00:00"
     },
     "view_B_note": "EDGE METROLOGY / SEGMENT ACTUATORS",
-    "view_C_note": "FOCUS ACTUATOR / STRAY-LIGHT BAFFLE"
+    "view_C_note": "THREE STRUTS / BOLTED MIRROR CELL"
   },
   {
     "number": 32,
@@ -3969,7 +3969,7 @@
     "required_breakthroughs": "Robust interlocks and load sensing in a mechanism exposed to rain, dirt and public use.",
     "real_basis": "Vertical screw carriages, locked level platforms and obstruction sensing.",
     "sources": [],
-    "view_A": "ADAPTIVE ACCESS RAMP",
+    "view_A": "FOUR TREADS AS A STAIR",
     "view_B": "VERTICAL TREAD CARRIAGE",
     "view_C": "LEADING SAFETY EDGE",
     "human_role": "none",
@@ -4409,7 +4409,7 @@
     "sources": [
       "https://www.awesco.eu/publication/licitra-2019-a/licitra-2019-a.pdf"
     ],
-    "view_A": "TETHERED AIRBORNE GENERATOR",
+    "view_A": "KITE ABOVE ITS WINCH",
     "view_B": "TRACTION WINCH",
     "view_C": "SWEPT WING LOAD PATH",
     "human_role": "none",
@@ -4634,12 +4634,12 @@
     "category": "serious",
     "purpose": "REEF NURSERY TENDER",
     "narrative": "Holds nursery fragments in a gentle current and transfers them to mapped restoration sites with a compliant tool.",
-    "required_breakthroughs": "Long-lived underwater handling that avoids damaging living tissue during repeated relocation.",
+    "required_breakthroughs": "Long-lived underwater handling that leaves living tissue unharmed in every move.",
     "real_basis": "Nursery fragments, low-shear circulation and compliant handling.",
     "sources": [
       "https://response.restoration.noaa.gov/about/media/how-noaa-uses-coral-nurseries-restore-damaged-reefs.html"
     ],
-    "view_A": "REEF NURSERY TENDER",
+    "view_A": "OPEN HORSESHOE NURSERY",
     "view_B": "COMPLIANT TRANSFER COLLAR",
     "view_C": "RADIAL NURSERY CASSETTES",
     "human_role": "none",
@@ -4744,8 +4744,8 @@
       "geometry_source": "tools/century/quality_geometry.py",
       "review": "concepts/century/quality-redesign/index.html"
     },
-    "view_B_note": "THREE SOFT CONTACTS / LEAVE TISSUE CLEAR",
-    "view_C_note": "OPEN WATER / EACH FRAGMENT KEEPS ITS ID"
+    "view_B_note": "FLEXURE FINGERS / SOFT PADS / CAMERA",
+    "view_C_note": "FRAGMENT COLLETS / SLIDE GUIDES / ID TABS"
   },
   {
     "number": 45,
@@ -5894,7 +5894,7 @@
     "required_breakthroughs": "Sand-resistant shape-changing wheels with low rolling losses on firm ground.",
     "real_basis": "Variable wheel contact area, low-pressure traction and passive shade.",
     "sources": [],
-    "view_A": "VARIABLE-FOOTPRINT DESERT ROVER",
+    "view_A": "ROVER WITH SHADE RAISED",
     "view_B": "EXPANDING WHEEL",
     "view_C": "SHADE HINGE",
     "human_role": "none",
@@ -6848,11 +6848,11 @@
     "recipe": "seam_surgeon",
     "category": "serious",
     "purpose": "AUTONOMOUS PIPE-WELDING COLLAR",
-    "narrative": "Travels around a pipe joint with synchronized preparation, welding and inspection tools. Its report includes the parts it refused to weld.",
+    "narrative": "Travels around a pipe joint with synchronised preparation, welding and inspection tools. Its report includes the parts it refused to weld.",
     "required_breakthroughs": "Closed-loop defect detection fast enough to adjust a weld before the flaw is buried.",
     "real_basis": "Orbital tool motion, prepared pipe joints and nondestructive inspection.",
     "sources": [],
-    "view_A": "AUTONOMOUS PIPE-WELDING COLLAR",
+    "view_A": "DOUBLE ORBITAL TRACK",
     "view_B": "ORBITAL WELD TRAIN",
     "view_C": "TRAILING INSPECTION ARRAY",
     "human_role": "none",
@@ -9178,12 +9178,12 @@
     "category": "serious",
     "purpose": "UNDERGROUND DETECTOR MODULE",
     "narrative": "Packs a serviceable optical sensor cluster into a shielded underground detector, listening for rare flashes rather than ordinary noise.",
-    "required_breakthroughs": "Affordable photosensors and long-lived calibration systems for extremely low-background measurements.",
+    "required_breakthroughs": "Affordable photosensors and calibration that stays stable for low-background runs.",
     "real_basis": "Photomultiplier sensing of rare light flashes in a detector medium.",
     "sources": [
       "https://icecube.wisc.edu/news/research/2024/05/successful-testing-of-over-10000-photomultiplier-tubes-for-icecube-upgrade-digital-optical-modules/"
     ],
-    "view_A": "UNDERGROUND DETECTOR MODULE",
+    "view_A": "NINE SENSORS, ONE CAGE",
     "view_B": "PHOTON SENSOR",
     "view_C": "CALIBRATION FEED",
     "human_role": "none",
@@ -10424,10 +10424,10 @@
     "category": "serious",
     "purpose": "MOBILE REST SUPPORT SEAT",
     "narrative": "Supports the head, pelvis and feet during long field shifts so a short planned rest does not become a new neck injury.",
-    "required_breakthroughs": "A compact adjustable support system that verifies posture while preserving quick emergency exit.",
+    "required_breakthroughs": "A compact support system that checks posture and keeps a quick emergency exit.",
     "real_basis": "Supported posture, parallel seat links and adjustable head contact.",
     "sources": [],
-    "view_A": "MOBILE REST SUPPORT SEAT",
+    "view_A": "SEATED OCCUPANT, RIBBED CANOPY",
     "view_B": "ADJUSTABLE HEAD CRADLE",
     "view_C": "PELVIS SUPPORT LINKAGE",
     "human_role": "wearer",
@@ -10534,7 +10534,7 @@
       "review": "concepts/century/quality-redesign/index.html"
     },
     "view_B_note": "SIDE PADS / HEIGHT LOCK / RELEASE",
-    "view_C_note": "PAIRED LINKAGES / DAMPED RECLINE"
+    "view_C_note": "TWIN PARALLEL ARMS / DAMPED TRAVEL"
   },
   {
     "number": 100,
@@ -10659,12 +10659,12 @@
     "purpose": "NON-PYROTECHNIC PAYLOAD RELEASE",
     "narrative": "Releases an orbital payload by transferring preload before retracting the retaining jaws. The separation should make an event log, not an entrance.",
     "real_basis": "Non-pyrotechnic release mechanisms and controlled transfer of stored strain energy.",
-    "required_breakthroughs": "A flight-qualified synchronised release that stays reliable through thermal cycling and contamination.",
+    "required_breakthroughs": "Flight-qualified synchronised release that survives thermal cycling and contamination.",
     "view_A": "OPEN LOAD-TRANSFER COLLAR",
     "view_B": "TRANSFER CAM CASSETTE",
     "view_C": "EVENT STRIP RECORDER",
     "view_B_note": "ROLLER / RETURN SPRING / RETAINING JAW",
-    "view_C_note": "TIME TAGS / RELEASE IS NOT ZERO SHOCK",
+    "view_C_note": "TIME TAGS / PAPER ROLLERS / RESET CROWN",
     "palette": "copper",
     "model": "VH-3",
     "service_year": "2072",
@@ -10922,7 +10922,7 @@
     "recipe": "metric_embassy",
     "category": "CONNECTOR COMPATIBILITY STATION",
     "purpose": "CONNECTOR COMPATIBILITY STATION",
-    "narrative": "Identifies a visiting connector before authorising an adapter. A thread that goes in is considered an introduction, not proof of compatibility.",
+    "narrative": "Identifies a visiting connector before authorising an adaptor. A thread that goes in is considered an introduction, not proof of compatibility.",
     "real_basis": "Dimensional metrology and thread pitch-diameter measurement using calibrated gauges.",
     "required_breakthroughs": "A verified interface library covering mechanical, electrical and fluid compatibility.",
     "view_A": "OPEN GAUGE CAROUSEL",
@@ -11011,9 +11011,9 @@
     "recipe": "muon_customs",
     "category": "PASSIVE CARGO SCATTERING TOMOGRAPH",
     "purpose": "PASSIVE CARGO SCATTERING TOMOGRAPH",
-    "narrative": "Studies a sealed cargo bay using naturally arriving cosmic-ray muons. Suspicious density is reconstructed slowly; the sky does not accept priority boarding.",
-    "real_basis": "Muon scattering tomography estimates material distribution from measured incoming and outgoing tracks.",
-    "required_breakthroughs": "Robust reconstruction with sparse tracks and carefully characterised detector backgrounds.",
+    "narrative": "Images a sealed cargo bay with cosmic-ray muons. Suspicious density is reconstructed slowly; the sky does not accept priority boarding.",
+    "real_basis": "Muon scattering tomography maps material from measured incoming and outgoing tracks.",
+    "required_breakthroughs": "Robust reconstruction from sparse tracks and well-characterised detector backgrounds.",
     "view_A": "OPEN COSMIC INSPECTION GANTRY",
     "view_B": "TRACKING PLANE CASSETTE",
     "view_C": "COINCIDENCE CLOCK RACK",
@@ -11101,8 +11101,8 @@
     "category": "CLAMP-ON TUNED MASS ABSORBER",
     "purpose": "CLAMP-ON TUNED MASS ABSORBER",
     "narrative": "Fits an awkward machine with three adjustable resonant branches. Each branch takes a narrow band of vibration personally.",
-    "real_basis": "Tuned mass absorbers exchange vibration energy with a host near their selected resonances.",
-    "required_breakthroughs": "Durable tuning locks and verified performance across changing host loads and temperatures.",
+    "real_basis": "Tuned mass absorbers take vibration energy from a host near their tuned frequency.",
+    "required_breakthroughs": "Durable tuning locks, verified across changing host loads and temperatures.",
     "view_A": "THREE-BAND ABSORBER CROWN",
     "view_B": "MOVING MASS BRANCH",
     "view_C": "CROSSED-FLEXURE LOCK",
@@ -11189,8 +11189,8 @@
     "recipe": "suture_loom",
     "category": "EXPERIMENTAL NEEDLE HANDOFF MODULE",
     "purpose": "EXPERIMENTAL NEEDLE HANDOFF MODULE",
-    "narrative": "Passes a curved needle between opposing grippers while a dancer manages thread slack. This bench study uses a test membrane; the patient is the research schedule.",
-    "real_basis": "Robotic needle manipulation and tension control have been studied for automated suturing.",
+    "narrative": "Passes a curved needle between two grippers while a dancer manages the thread. The only patient here is the research schedule.",
+    "real_basis": "Robotic needle handling and tension control are studied for automated suturing.",
     "required_breakthroughs": "Validated tissue interaction, sterilisation and fault recovery before any clinical application.",
     "view_A": "OPEN NEEDLE-HANDOFF TRACK",
     "view_B": "OPPOSED NEEDLE GRIPPERS",

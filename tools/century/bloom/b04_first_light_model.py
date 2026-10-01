@@ -225,7 +225,7 @@ def build():
     with group('C'):
         with local(frame_matrix(centre, (0, 0, 1), a_axis)):
             camera_train()
-        mark('CAMERA TRAIN', centre + a_axis * 110 + Vector((0, 0, 11.5)), 'COOLED CMOS / 100 FRAMES A SECOND ON A PLANET')
+        mark('CAMERA TRAIN', centre + a_axis * 110 + Vector((0, 0, 11.5)), 'NASMYTH PORT / RIGHT FORK ARM')
     with group('B'):
         # The trunnions and centre section belong to the mount study as well.
         with local(frame_matrix(centre, d, a_axis)):

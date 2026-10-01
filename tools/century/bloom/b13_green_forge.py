@@ -28,7 +28,7 @@ ENTRY = dict(
     required_breakthroughs='Cheap, abundant clean hydrogen at steel-mill scale.',
     view_A='HYDROGEN DIRECT-REDUCTION PLANT',
     view_B='SHAFT FURNACE', view_B_note='SHELL CUT AWAY / BURDEN / BUSTLE MAIN / TUYERES',
-    view_C='ELECTROLYSER STACK', view_C_note='CELLS / END PLATES / TIE RODS / H2 AND O2 MANIFOLDS',
+    view_C='ELECTROLYSER STACK', view_C_note='CELLS / END PLATES / TIE RODS / H₂ AND O₂ MANIFOLDS',
     service_year='2031',
     sources=['https://www.midrex.com/technology/midrex-process/midrex-h2/',
              'https://www.iea.org/reports/iron-and-steel-technology-roadmap'],
@@ -37,15 +37,15 @@ ENTRY = dict(
 
 DOSSIER = dict(
     kind='melt shop',
-    fact=('Hydrogen takes the oxygen out of the ore as water. Coke never enters the shaft; '
-          'the arc furnace still uses a little carbon for its electrodes and slag.'),
-    rows=[('STEEL', '1 Mt A YEAR / 125 t OF IRON AN HOUR'),
-          ('HYDROGEN', '57 kg PER TONNE OF IRON'),
-          ('ELECTROLYSERS', '360 MW / WIND AND HYDRO'),
-          ('ELECTRICITY', '3.6 MWh PER TONNE OF STEEL')],
+    fact=('Coke never enters the shaft; the arc furnace still uses a little carbon for its '
+          'electrodes and slag.'),
+    rows=[('STEEL', '1 Mt A YEAR / 8 000 h RUNNING'),
+          ('REDUCTION SHAFT', '7 m ACROSS / TOP AT 47 m'),
+          ('HYDROGEN', '7.1 t AN HOUR'),
+          ('ELECTROLYSERS', '360 MW / 50 kWh PER kg OF H₂')],
     note='ON COLD MORNINGS THE PLUME OVER THE MILL IS ONLY CLOUD.',
     left=('THE OXYGEN LEAVES AS WATER', 'IDEAL MASS BALANCE / PER TONNE OF IRON / PURE OXIDE',
-          'Fe2O3 + 3 H2 → 2 Fe + 3 H2O; the plant adds ~3 kg of excess hydrogen, recycled.'),
+          'Fe₂O₃ + 3 H₂ → 2 Fe + 3 H₂O; the plant adds ~3 kg of excess hydrogen, recycled.'),
     right=('FROM WIND TO STEEL', 'ELECTRICITY PER TONNE OF LIQUID STEEL / DECLARED ESTIMATES',
            'Most of the energy goes into splitting water; melting is the smaller share.'),
 )
@@ -62,13 +62,13 @@ def figure(s, side, x, y, w):
         s.text_mid(bottom, cx, cy + 7.5, 6.4, .08, .7, align='c')
     if side == 'left':
         cy = y + 44
-        cell(x + 50, cy, 'Fe2O3', '1 430 kg')
+        cell(x + 50, cy, 'Fe₂O₃', '1 430 kg')
         s.text_mid('+', x + 103, cy, 9, .08, .8, align='c')
-        cell(x + 156, cy, 'H2', '54 kg', ARC)
+        cell(x + 156, cy, 'H₂', '54 kg', ARC)
         arrow(s, (x + 204, cy), (x + 236, cy), WHITE)
         cell(x + 286, cy, 'Fe', '1 000 kg', GOLD)
         s.text_mid('+', x + 338, cy, 9, .08, .8, align='c')
-        cell(x + 390, cy, 'H2O', '484 kg', ARC)
+        cell(x + 390, cy, 'H₂O', '484 kg', ARC)
         # Balance bar: both sides 1 484 kg.
         yy = y + 102
         s.ln(x + 7, yy, x + 199, yy, .5, .6); s.ln(x + 243, yy, x + 433, yy, .5, .6)

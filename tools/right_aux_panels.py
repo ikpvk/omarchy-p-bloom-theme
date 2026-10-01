@@ -10,25 +10,28 @@ def owner(s,rx):
     s.text('10.0 km / ROUTE LOADED',rx+169,184,7,track=.07,a=.85,align='r',color=ARC)
     s.text('HUMAN RUNNER',rx-174,170,7,track=.09,a=.85)
     # Enlarged type (composed profiles): the clock already gives the time.
-    s.text('STAND-IN' if s.type_growth(5.6) else 'STAND-IN; ALARM AT 05:40',rx-174,185,5.6,track=.08,a=.58)
+    lead=.75*s.type_growth(5.6)  # enlarged type keeps its leading
+    s.text('STAND-IN' if s.type_growth(5.6) else 'STAND-IN; ALARM AT 05:40',rx-174,185+lead,5.6,track=.08,a=.58)
     x,y=a['HUMAN']
-    s.poly([(rx-145,194),(rx-145,207),(x,y)],.4,.5,close=False)
+    s.poly([(rx-145,194+lead),(rx-145,207+lead),(x,y)],.4,.5,close=False)
     s.dot(x,y,1.2,.65)
     s.text('PX-1 CHARGES BY THE BED; OUT AT 06:00',rx,480,6.4,a=.6,track=.11,align='c')
-    s.view_label(rx,540,'C','THE RUNNER','05:40, BEFORE THE RUN')
+    s.view_label(rx,540,'C','THE RUNNER','AT HOME, BEFORE THE RUN')
 
 
 def course(s,rx):
     a=view(s,'sky-racer-course',rx,318,348,314)
     # Number labels follow the projection but sit off each physical gate.
-    offsets={1:(24,-18),2:(-8,-26),3:(-9,-24),4:(-15,-22),5:(-24,-5),6:(-24,14),7:(-10,28),8:(14,24),9:(90,-18)}
+    offsets={1:(24,-18),2:(-8,-26),3:(-9,-24),4:(-15,-22),5:(-24,-5),6:(-24,14),7:(-10,28),8:(14,24),9:(34,2)}
     for j in range(1,10):
         x,y=a[f'G{j}'];dx,dy=offsets[j]
         if dy>=24:dy+=.72*s.type_growth(7)  # enlarged numbers below a gate grow towards it
         s.text(f'{j:02}',x+dx,y+dy,7,track=.04,a=.9,align='c',color=GOLD if j==1 else WHITE)
-    s.text('START / FINISH',rx-176,159,6.1,track=.08,a=.8,color=GOLD)
+    # START / FINISH reads on from the gold 01, beside the gate it names.
+    x,y=a['G1'];dx,dy=offsets[1]
+    s.text('START / FINISH',x+dx+s.measure('01',7,.04)/2+6,y+dy,6.1,track=.08,a=.8,color=GOLD)
     s.text('ALTITUDE DATUM: GROUND',rx-176,493,6.1,track=.08,a=.65)
-    s.text('SCHEMATIC / HEIGHT EXAGGERATED',rx-176,510,5.6,track=.08,a=.45)
+    s.text('SCHEMATIC / HEIGHT EXAGGERATED',rx-176,510+.75*s.type_growth(5.6),5.6,track=.08,a=.45)
     s.view_label(rx,548,'C','COURSE','9 GATES / 2.4 km / 30 – 180 m ABOVE GROUND')
 
 
@@ -57,7 +60,8 @@ def node(s,rx):
         s.poly([(x,y),(tx-22,ty-2),(tx-8,ty-2)],.48,.5,close=False)
         s.dot(x,y,1.2,.7)
         s.text(num,tx,ty,6.7,track=.05,a=.9,align='c')
-    for num,label,x,y,color in [('01','POROUS CONTACT',rx-171,480,WHITE),('02','PASSIVATION WINDOW',rx+8,480,WHITE),('03','METAL ROUTING',rx-171,498,GOLD),('04','FLEXIBLE CARRIER',rx+8,498,WHITE)]:
+    # Numbered down the columns, like every other key in the collection.
+    for num,label,x,y,color in [('01','POROUS CONTACT',rx-171,480,WHITE),('02','PASSIVATION WINDOW',rx-171,498,WHITE),('03','METAL ROUTING',rx+8,480,GOLD),('04','FLEXIBLE CARRIER',rx+8,498,WHITE)]:
         s.text(num,x,y,6.3,track=.06,a=.6)
         s.text(label,x+21,y,6.3,track=.07,a=.86,color=color)
     s.view_label(rx,540,'C','ONE NODE','EXPLODED FILMS / THICKNESS EXAGGERATED')

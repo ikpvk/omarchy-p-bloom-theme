@@ -65,14 +65,27 @@ def callouts(s,entry,anchors,mx,my):
     order=sorted(anchors,key=lambda key:anchors[key][0]);n=len(order)//2
     for side,keys in ((-1,order[:n]),(1,order[n:])):
         keys.sort(key=lambda key:anchors[key][1])
+        # labels stay in their column but sit as close to the height of what they name as the spacing allows,
+        # so leaders run short and nearly level instead of reaching across the drawing to fixed slots
+        top,bottom,gap=my-260,my+160,82
+        ys=[min(bottom,max(top,anchors[key][1])) for key in keys]
+        for i in range(1,len(ys)):ys[i]=max(ys[i],ys[i-1]+gap)
+        if ys and ys[-1]>bottom:
+            ys[-1]=bottom
+            for i in range(len(ys)-2,-1,-1):ys[i]=min(ys[i],ys[i+1]-gap)
+        slot=lambda i,key,side=side,ys=ys:(mx+side*374,ys[i])
+        from hardware3d.family_drawing import uncrossed
+        keys=uncrossed(keys,anchors,slot)
         for i,key in enumerate(keys):
-            x=mx+side*374;y=my-260+i*420/max(1,len(keys)-1)
+            x,y=slot(i,key)
             px,py=anchors[key]
-            s.dot(px,py,1.35,.85)
-            s.poly([(px,py),(x,y),(x+side*103,y)],.4,.43,close=False)
             align='r' if side<0 else 'l';tx=x+side*5
+            lines=s.wrap(notes[key],227,6,.035) if notes.get(key) else []
+            # the rule under the name runs as far as the longest of the name and its lines
+            rule=max(103,5+max([s.measure(key,7.3,.14)]+[s.measure(line,6,.035) for line in lines]))
+            s.dot(px,py,1.35,.85)
+            s.poly([(px,py),(x,y),(x+side*rule,y)],.4,.43,close=False)
             s.text(key,tx,y-8,7.3,track=.14,a=.85,align=align)
-            lines=s.wrap(notes[key],227,6,.035)
             # Enlarged type in composed profiles needs proportional leading.
             lead=max(10,s.readable_size(6)*1.32) if s.layer_mode else 10
             for j,line in enumerate(lines):s.text(line,tx,y+13+j*lead,6,track=.035,a=.62,align=align)

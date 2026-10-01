@@ -51,7 +51,7 @@ def memory_kiln():
         box('objective carriage',(0,17,120),(51,25,34),5)
         for x in (-19,19):rod('focus screw',(x,9,87),(x,9,148),1.5,'detail')
         ring('objective illumination',(0,0,80),24,3,3,role='accent')
-        mark('FOCUS OBJECTIVE',(0,-19,108),'ULTRAFAST WRITING / POLARISED READING')
+        mark('FOCUS OBJECTIVE',(0,-19,108),'ONE LENS WRITES AND READS')
     with group('C'):
         cyl('plate carousel',(0,0,33),48,6)
         for a in range(0,360,60):
@@ -59,7 +59,7 @@ def memory_kiln():
             box('glass archive plate',(x,y,40.2),(19,19,1.5),1,'accent')
             for dx in (-10,10):box('plate latch',(x+dx,y,42),(3,9,3),.7,'detail')
         flange('carousel bearing',(0,0,23),19);motor((0,0,3),12,19)
-        mark('PLATE CAROUSEL',(27,-16,41),'SEPARATE VERIFIED GLASS PLATES')
+        mark('PLATE CAROUSEL',(27,-16,41),'SIX PLATES ON ONE TURNTABLE')
     with at((0,0,-9)):g.base(75,58)
     for x in (-54,54):rod('optical bridge column',(x,31,15),(x,31,153),4)
     box('optical bridge',(0,31,153),(132,33,15),7)
@@ -67,8 +67,8 @@ def memory_kiln():
     tube('optical fibre',[(-54,0,123),(-37,18,162),(0,16,159),(1,16,139)],.7,'cable')
     box('decoding guide drawer',(52,-25,27),(41,34,12),4)
     for z in (24,27,30):box('archive guide leaf',(55,-35,z),(30,30,1),.2,'shell')
-    mark('PULSE SOURCE',(-56,-16,103),'NANOSTRUCTURED GLASS WRITING')
-    mark('DECODING GUIDE',(53,-39,30),'THE INSTRUCTIONS LIVE WITH THE ARCHIVE')
+    mark('PULSE SOURCE',(-56,-16,103),'FIBRE-FED TO THE OPTICAL BRIDGE')
+    mark('DECODING GUIDE',(53,-39,30),'THREE LEAVES IN A BASE DRAWER')
     return 26,26
 
 
@@ -250,7 +250,7 @@ def neutrino_bell():
             q=math.radians(a);cyl('calibration emitter',(13*math.cos(q),13*math.sin(q),127),3,4,'accent',(math.cos(q),math.sin(q),0),16)
         flange('cable penetrator',(0,0,138),17,depth=3)
         tube('calibration feed',[(0,0,143),(0,0,157),(15,0,161),(23,0,150)],1.4,'cable')
-        mark('CALIBRATION FEED',(0,-12,129),'KNOWN LIGHT PULSES / TIMING CHECK')
+        mark('CALIBRATION FEED',(0,-12,129),'FED THROUGH A TOP PENETRATOR')
     for a in (60,120,180,240,300):
         q=math.radians(a);p=Vector((27*math.sin(q),-27*math.cos(q),59));axis=Vector((math.sin(q)*.7,-math.cos(q)*.7,-.7))
         optics(p,14,25,axis);rod('sensor cage stay',(0,0,98),p,2,'detail')

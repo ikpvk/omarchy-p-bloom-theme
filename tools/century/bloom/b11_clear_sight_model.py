@@ -349,6 +349,6 @@ def build():
     mark('CLEAN AIR', (X0 + 40, -82, TOP + 40), 'HEPA / 20 AIR CHANGES AN HOUR')
     mark('WAITING DECK', (OPEN[0] + 20, yo + 40, FL + 47), 'SHADED / STEPS AND RAILS FOR OLDER PATIENTS')
     mark('SEALED THEATRE', (OPEN[0] + 165, YN + 6, FL + 150), 'GLAZED / FAMILIES WAIT WITHIN SIGHT')
-    mark('ISO 20 ft BODY', (X1 + 6, -30, Z0 + 180), 'MOVES BY TRUCK, TRAIN OR SHIP')
+    mark('ISO 20 ft BODY', (X1 + 6, -30, Z0 + 180), '6.06 × 2.44 × 2.59 m')
     mark('LEVELLING JACK', (X1 - 8, YN + 8, 12), 'SET UP ON ROUGH GROUND IN AN HOUR')
     return 36, 24

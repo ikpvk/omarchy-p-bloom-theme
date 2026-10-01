@@ -31,11 +31,11 @@ def proxy(size):
     # narrative and agree with each other: 10 km at 6 min/km is about an hour;
     # 3 s of warning at that pace is about 8 m, inside the 20 m the sensors read.
     s.legend("PROXY", "MODEL PX-1   /   GUIDE FOR BLIND RUNNERS",
-             "Runs beside a blind or low-vision runner, joined by a short tether. It calls the pace, warns of "
-             "kerbs, turns and puddles, and lets them run ten kilometres whenever they choose.",
-             [("ROBOTICS", "Legs that run on pavement, grass and stairs for two hours on a charge, matching the runner's stride and pace."),
-              ("PERCEPTION", "Chest cameras and lidar that read kerbs, cyclists, ice and wet leaves twenty metres ahead."),
-              ("HAPTICS", "A warm tether grip that pulses in the runner's hand three seconds before every turn, kerb or step."),
+             "Runs beside a blind or low-vision runner on a short tether, calling the pace and warning "
+             "of kerbs, turns and puddles.",
+             [("ROBOTICS", "Legs that run on pavement, grass and stairs without missing a step."),
+              ("PERCEPTION", "Sensing that tells kerbs, cyclists, ice and wet leaves apart in time to warn the runner."),
+              ("HAPTICS", "Pulses that the runner feels in the hand before every turn, kerb or step."),
               ("SPEECH", "One quiet earbud: pace, distance and the next kerb, in as few words as possible, then silence.")],
              "2047")
     from triptych import auxiliary_panel, original_diagrams

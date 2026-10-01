@@ -40,15 +40,15 @@ ENTRY = dict(
 
 DOSSIER = dict(
     kind='hearth',
-    fact=('The coils are twisted so the magnetic field twists by itself. No current has to be '
-          'driven through the plasma, so it can burn steadily for months.'),
-    rows=[('FUSION POWER', '800 MW / DEUTERIUM + TRITIUM'),
-          ('NET ELECTRICITY', '300 MW / 200 000 PEOPLE'),
-          ('FUEL', 'ABOUT 200 g A DAY'),
-          ('FIELD ON AXIS', '5 T / 50 COILS AT 20 K')],
+    fact=('The plasma ring is 24 m across and holds 405 m³. Each cubic metre of it makes '
+          'about 2 MW of fusion power.'),
+    rows=[('FUEL A DAY', '82 g DEUTERIUM / 123 g TRITIUM'),
+          ('TRITIUM SOURCE', 'BRED FROM LITHIUM IN THE BLANKET'),
+          ('PER RESIDENT', '1.5 kW / HOMES, TRAMS, WORKPLACES'),
+          ('FIELD ON AXIS', '5 T')],
     note='ON WINTER EVENINGS THE CITY IS LIT AND THE AIR IS CLEAR.',
     left=('WHERE THE 800 MW GO', 'DECLARED DESIGN BUDGET / MEGAWATTS',
-          '800 x 1.1 = 880 MW of heat; 40 % becomes 350 MW; 50 MW runs the plant.'),
+          '800 × 1.1 = 880 MW of heat; 40 % becomes 350 MW; 50 MW runs the plant.'),
     right=('A TWIST INSTEAD OF A CURRENT', 'ROTATING ELLIPSE / ONE FIELD PERIOD / SIMPLIFIED',
            'The section turns half a turn per period; a field line circles the plasma.'),
 )

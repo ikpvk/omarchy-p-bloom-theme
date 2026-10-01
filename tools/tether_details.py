@@ -29,7 +29,8 @@ def system(s,lx):
         label=lx+60
         s.ln(end,y,label-10,y,.35,.5)
         s.text(title,label,y-7,6.5,a=.85)
-        s.text(sub,label,y+10,5.7,a=.56)
+        # Type held at the readable floor grows inside this scaled view; the second line keeps its leading.
+        s.text(sub,label,y+10+.75*(s.readable_size(5.7)-5.7),5.7,a=.56)
 
     # Water datum and a few clipped surface wavelets ground the platform.
     s.ln(lx-180,613,lx+186,613,.4,.55)

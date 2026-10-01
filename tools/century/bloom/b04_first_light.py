@@ -40,14 +40,14 @@ DOSSIER = dict(
     kind='night',
     fact=('Each planet picture is built from six thousand short frames. The sharpest '
           'tenth are aligned and stacked while the child who booked them sleeps.'),
-    rows=[('MIRROR', '0.5 m / f/6.8'),
+    rows=[('NIGHT POWER', '30 kWh / FOUR NIGHTS WITHOUT SUN'),
           ('SATURN ON THE SENSOR', 'GLOBE 80 px / RINGS 175 px'),
           ('BOOKINGS', '50 A NIGHT / 14 000 A YEAR'),
-          ('OWNERS', '120 SCHOOLS / ONE VISIT A YEAR')],
+          ('OWNERS', '120 SCHOOLS / FIVE CONTINENTS')],
     note='AMARA, 9, KISUMU. SATURN. TUESDAY, 21:10.',
     left=('ONE NIGHT, MANY SCHOOLS', 'EXAMPLE SCHEDULE / SITE TIME / 5 OF 50 BOOKINGS',
           'Illustrative night. The queue only books targets more than 30 degrees up.'),
-    right=('MORE FRAMES, STEADIER RINGS', 'IDEAL STACKING / SNR = SNR1 x ROOT N',
+    right=('MORE FRAMES, STEADIER RINGS', 'IDEAL STACKING / SNR = SNR1 × ROOT N',
            'Random noise only; seeing and focus set the real limit.'),
 )
 
@@ -100,7 +100,7 @@ def figure(s, side, x, y, w):
         s.dot(kx, ky, 2.8, .95, color=ARC)
         if s.type_growth(6.6):
             # Enlarged type: below the curve, right of the kept point, between grid lines.
-            tx(s, '600 KEPT / x24', kx + 8, y + ah * 0.46, 6.6, .85, align='l', color=ARC)
+            tx(s, '600 KEPT / ×24', kx + 8, y + ah * 0.46, 6.6, .85, align='l', color=ARC)
         else:
-            tx(s, '600 KEPT / x24', kx - 8, ky - 9, 6.6, .85, align='r', color=ARC)
+            tx(s, '600 KEPT / ×24', kx - 8, ky - 9, 6.6, .85, align='r', color=ARC)
         tx(s, 'SNR / SNR1', ax - 9, y - 8, 6.2, .55, align='l')

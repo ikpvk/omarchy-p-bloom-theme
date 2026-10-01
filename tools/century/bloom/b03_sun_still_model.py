@@ -207,12 +207,12 @@ def build():
                 front_top = top
         q = math.radians(FIELD)
         cleaning_robot((156 * math.cos(q), 156 * math.sin(q), 0), q + math.pi / 2)
-        mark('HELIOSTAT', front_top + Vector((0, 0, -14)), '4 x 4 m / 380 IN THE FIELD')
+        mark('HELIOSTAT', front_top + Vector((0, 0, -14)), '4 × 4 m / 380 IN THE FIELD')
     # --- callouts ----------------------------------------------------------------
     mark('SOLAR RECEIVER', (28.7 * math.cos(math.radians(FIELD)), 28.7 * math.sin(math.radians(FIELD)), zc + 27), 'HEATS WATER TO 75 °C FOR THE TOP EFFECT')
-    mark('EFFECT STACK', (-r_at(160) * .98, -r_at(160) * .2, 160), '14 EFFECTS / WIDER BELOW FOR COOLER VAPOUR')
+    mark('EFFECT STACK', (-r_at(160) * .98, -r_at(160) * .2, 160), '2 m PER EFFECT / 6 TO 9.6 m ACROSS')
     mark('SPIRAL STAIR', (r_at(230) + 13, 0, 236), 'INSPECTION ON FOOT, THREE TURNS')
-    mark('SALT RECOVERY', (123, 38, 44), 'CRYSTALLISERS / BAGGED SALT AND MAGNESIUM')
+    mark('SALT RECOVERY', (123, 38, 44), 'CRYSTALLISERS AND PRODUCT SHED')
     mark('HOT WATER STORE', (-128 - 9, 2 - 13.4, 30), '16 h OF HEAT FOR THE NIGHT')
     mark('PLANT OPERATOR', (16, -70, 12), 'ONE OF SIX PEOPLE FROM TOWN WHO RUN IT')
     return 24, 26

@@ -22,7 +22,7 @@ ENTRY = dict(
                'of returning a brine plume to the bay.'),
     enabled_by=[
         ('DISTILLATION', 'Multi-effect stacks that reuse one input of heat a dozen times, as coastal plants do.'),
-        ('SOLAR THERMAL', 'A heliostat field and tower receiver that heat water, with a store for the night.'),
+        ('SOLAR THERMAL', 'Heliostat fields and tower receivers from concentrating solar power.'),
         ('MINERAL RECOVERY', 'Staged crystallisation that separates sodium, magnesium and calcium salts.'),
     ],
     real_basis='Multi-effect distillation, solar thermal collectors, mineral recovery from brine.',
@@ -38,11 +38,11 @@ ENTRY = dict(
 DOSSIER = dict(
     kind='still',
     fact=('The stack is widest at the bottom: colder vapour is thinner and needs more room. '
-          'Heat enters once, at the top, and is used again all the way down.'),
-    rows=[('FRESH WATER', '480 m³ A DAY / 4 000 PEOPLE'),
-          ('EFFECTS', '14 / 70 TO 36 °C'),
-          ('MIRRORS', '380 x 16 m² / 16 h HEAT STORE'),
-          ('RECOVERED SALTS', '17.5 t A DAY / NO BRINE')],
+          'The tower stands 36 m to the top of the receiver crown.'),
+    rows=[('FRESH WATER', '480 m³ A DAY / 120 L PER PERSON'),
+          ('SEAWATER', '35 g OF SALTS PER kg'),
+          ('DIRECT SUN', '6.5 kWh PER m² A DAY'),
+          ('MIRROR FIELD', '6 100 m² / 25.6 MWh OF HEAT A DAY')],
     note='THE FIRST BAGS OF SALT WENT TO THE SCHOOL KITCHEN.',
     left=('ONE HEAT, FOURTEEN USES', 'MULTI-EFFECT CASCADE / DECLARED TEMPERATURES',
           'Vapour from each effect condenses in the tubes of the next: heat is used about 12 times.'),

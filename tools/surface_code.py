@@ -40,7 +40,7 @@ def draw(s,lx):
  s.ln(gx,yy,gx+10*step,yy,.8,1.05,color=GOLD)
  for j in range(d):
   for i in range(d):s.dot(*pos((i,j)),1.8,.91)
- s.text('Z_L',gx+10*step+10,yy+3,7,a=.85,color=GOLD)
+ s.text('Zₗ',gx+10*step+10,yy+3,7,a=.85,color=GOLD)
  # Enlarged weight-four X stabilizer, isolated from the full patch.
  cx,cy=lx+126,269
  s.text('X CHECK',cx,cy-49,7,a=.8,align='c',color=ARC)
@@ -57,5 +57,5 @@ def draw(s,lx):
  s.dot(lx-168,417,2,.9);s.text('DATA',lx-158,420,6,a=.75)
  marker(s,lx-82,417,'X',2.6);s.text('X CHECK',lx-71,420,6,a=.75,color=ARC)
  marker(s,lx+32,417,'Z',2.6);s.text('Z CHECK',lx+43,420,6,a=.75)
- s.text('Z_L / LOGICAL Z OPERATOR',lx-174,442,6,a=.7,color=GOLD)
+ s.text('Zₗ / LOGICAL Z OPERATOR',lx-174,442,6,a=.7,color=GOLD)
  s.view_label(lx,474,'B','ONE LOGICAL QUBIT','121 DATA + 120 ANCILLAS / DISTANCE 11')

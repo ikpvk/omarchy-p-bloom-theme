@@ -206,16 +206,16 @@ def organ_foundry(size):
         s.leader(mx - 150, my - 372, -150, -36, -120, "CELL CARTRIDGES", "GROWN FROM THE PATIENT'S SKIN")
         s.leader(mx + 20 + R * 0.93, front + 6, 190, -50, 110, "PRINT FRONT", "LAYER 1 212 OF 2 900")
         s.leader(mx + 44, oy + 24, 250, 52, 120, "VASCULAR TREE", "ARTERY TO 10 µm CAPILLARY")
-        s.leader(mx - 190, my + 218, -150, 64, -110, "PERFUSION PUMP", "PULSATILE / 72 BPM")
+        s.leader(mx - 190, my + 218, -150, 64, -110, "PERFUSION PUMP", "PULSATILE / 72 bpm")
         s.leader(mx - 86, my + 246, -60, 112, -110, "OXYGENATOR", None)
         s.leader(mx + 196, my + 200, 120, 60, 100, "METABOLITE SENSORS", "4 ANALYTES / 1 Hz")
         s.dim(mx + 300, my - 322, mx + 300, my + 124, "620 mm", a=0.4)
     s.end_main()
 
     s.legend("ORGAN FOUNDRY", "MODEL OF-3   /   PERFUSION BIOPRINTER",
-             "Prints a kidney from the patient's own cells and matures it for 21 days until it filters blood. "
+             "Prints a kidney from the patient's own cells and matures it until it filters blood. "
              "No donor, no waiting list, no immune suppression.",
-             [("TISSUE ENGINEERING", "Printed capillary networks, 10 µm wide, that stay open under blood flow."),
+             [("TISSUE ENGINEERING", "Printed capillary networks that stay open under blood flow."),
               ("CELL BIOLOGY", "Skin cells reprogrammed reliably into all 26 cell types of a kidney."),
               ("DEVELOPMENTAL BIOLOGY", "Chemical gradients that make printed cells assemble themselves into working nephrons."),
               ("BIOSENSING", "In-line sensors that steer nutrients and oxygen hour by hour as the tissue grows.")],
@@ -354,12 +354,12 @@ def quantum_simulator(size):
         s.leader(mx - 80, my - 260, -290, -30, -90, "CONTROL LINES", None)
     s.end_main()
 
-    s.legend("QUANTUM SIMULATOR", "MODEL QS-10K   /   FAULT-TOLERANT, 10 200 LOGICAL QUBITS",
+    s.legend("QUANTUM SIMULATOR", "MODEL QS-10K   /   FAULT-TOLERANT SUPERCONDUCTING COMPUTER",
              "Computes exactly how molecules and materials behave. Used to design catalysts, drugs and "
              "battery chemistries that no classical computer can model.",
              [("QUANTUM PHYSICS", "Error-corrected qubits that hold their state for hours instead of milliseconds."),
               ("MATERIALS SCIENCE", "Superconducting circuits with a hundred times fewer atomic defects than today's."),
-              ("CRYOGENIC ELECTRONICS", "Control chips that work at 4 K next to the qubits and replace two million cables."),
+              ("CRYOGENIC ELECTRONICS", "Control chips that work inside the cryostat and replace two million cables."),
               ("PHOTONICS", "Optical links that entangle qubits in separate cryostats into one machine.")],
              "2058")
     from triptych import auxiliary_panel, original_diagrams
@@ -485,19 +485,19 @@ def tether_climber(size):
 
         s.leader(mx - 6, my - 440, -140, 30, -110, "RIBBON", "1 m WIDE / 12 µm THICK")
         s.leader(mx + 56, my - 340, 200, -50, 110, "DEBRIS SHIELD", None)
-        s.leader(mx + 110, my - 200, 170, -30, 110, "CARGO POD", "20 t / 6 CONTAINERS")
-        s.leader(mx + 46, my - 6, 250, 0, 110, "TRACTION DRIVE", "8 ROLLERS / 200 km/h")
+        s.leader(mx + 110, my - 200, 170, -30, 110, "CARGO POD", "6 CONTAINERS")
+        s.leader(mx + 46, my - 6, 250, 0, 110, "TRACTION DRIVE", "8 ROLLERS")
         s.leader(mx + 210, my + 100, 90, 60, 110, "RADIATOR", None)
         s.leader(mx - 300, my + 264, -60, 90, -110, "LASER RECEIVER", "TUNED TO ONE WAVELENGTH")
-        s.leader(mx - 22, my + 420, -170, 40, -110, "POWER BEAM", "4 MW FROM THE ANCHOR")
+        s.leader(mx - 22, my + 420, -170, 40, -110, "POWER BEAM", None)
     s.end_main()
 
     s.legend("TETHER CLIMBER", "MODEL TC-20   /   SPACE ELEVATOR CARGO CAR",
-             "Climbs a 100 000 km ribbon from an ocean platform to geostationary orbit on beamed laser "
+             "Climbs a ribbon from an ocean platform to geostationary orbit on beamed laser "
              "power. Puts cargo in orbit without rockets, at the price of air freight.",
              [("MATERIALS SCIENCE", "Carbon nanotube ribbon spun by the kilometre with no weak points, forty times stronger than steel cable."),
               ("PHOTONICS", "Megawatt lasers with adaptive optics that hold a beam on a moving receiver through the atmosphere."),
-              ("PHOTOVOLTAICS", "Cells tuned to one laser wavelength that turn more than half of the light into electricity."),
+              ("PHOTOVOLTAICS", "Cells that turn more than half of the laser light into electricity."),
               ("ORBIT CONTROL", "Tracking of every object above 1 cm, and a ribbon that can be steered out of its way.")],
              "2075")
     from triptych import auxiliary_panel, original_diagrams
@@ -584,19 +584,19 @@ def cortical_mesh(size):
         s.leader(x, y, -170, 90, -110, "MESH THREAD", "POLYMER AND GOLD / 1 µm THICK")
         x, y = node(3, rings[6])
         s.leader(x, y, 150, -60, 110, "RECORDING SITE", "ONE PER NEURON-SIZED NODE")
-        s.leader(mx + 18, my - 12, 330, -330, 110, "DECODER CHIP", "15 mW")
+        s.leader(mx + 18, my - 12, 330, -330, 110, "DECODER CHIP", None)
         s.leader(*polar(mx, my, 58, 200), -300, -250, -110, "POWER COIL", "DRIVEN BY ULTRASOUND")
         s.leader(px, py, -290, 170, -110, "INSERTION PORT", "Ø 2 mm")
         s.leader(mx - 60, my + 50, -260, 330, -110, "SEALED CAN", "TITANIUM / Ø 18 mm")
         s.dim(mx - 462, my + 400, mx - 462, my - 400, "Ø 64 mm UNFOLDED", a=0.4, label_shift=90)
     s.end_main()
 
-    s.legend("CORTICAL MESH", "MODEL CM-6   /   NEURAL INTERFACE, ONE MILLION CHANNELS",
+    s.legend("CORTICAL MESH", "MODEL CM-6   /   IMPLANTED NEURAL INTERFACE",
              "Reads and writes the activity of a million neurons. Gives back sight, speech and movement "
-             "after injury or stroke. Unfolds through a 2 mm opening in the skull.",
+             "after injury or stroke. Unfolds through a small opening in the skull.",
              [("BIOELECTRONICS", "Electrode mesh as soft as brain tissue, so no scar forms around it and signals last for decades."),
               ("NEUROSCIENCE", "A worked-out code for how groups of neurons represent images, words and intended movement."),
-              ("CHIP DESIGN", "Decoding a million channels inside the implant on 15 mW, too little to warm the tissue."),
+              ("CHIP DESIGN", "Decoding every channel inside the implant on too little power to warm the tissue."),
               ("ACOUSTICS", "Power and data sent through intact bone by focused ultrasound, with no wire through the skin.")],
              "2062")
     from triptych import auxiliary_panel, original_diagrams
@@ -706,20 +706,20 @@ def fusion_transport(size):
 
         enrich(s, "fusion-transport", mx, my)
 
-        s.leader(x0 + 205, my - 176, -40, -70, -100, "CREW RING", "6 CREW / 0.4 g AT 2 rpm")
+        s.leader(x0 + 205, my - 176, -40, -70, -100, "CREW RING", "0.4 g AT 2 rpm")
         s.leader(x0 + 5, my + 62, 40, 110, 100, "DUST SHIELD", None)
         s.leader(x0 + 414, my + 106, 30, 120, 110, "PROPELLANT TANKS", "DEUTERIUM AND HELIUM-3")
         s.leader(mx + 40, my - 190, -110, -90, -120, "DROPLET RADIATOR", "LIQUID TIN / 25 MW")
         s.leader(mx + 115, my + 345, 60, 40, 110, "DROPLET COLLECTOR", None)
         s.leader(mx + 338, my - 74, 40, -150, 110, "SHADOW SHIELD", None)
-        s.leader(mx + 505, my + 22, -30, 170, -110, "FUSION CORE", "FIELD-REVERSED PLASMA / 75 MW")
-        s.leader(mx + 690, my - 124, 50, -90, 110, "MAGNETIC NOZZLE", "EXHAUST 100 km/s")
+        s.leader(mx + 505, my + 22, -30, 170, -110, "FUSION CORE", "FIELD-REVERSED PLASMA")
+        s.leader(mx + 690, my - 124, 50, -90, 110, "MAGNETIC NOZZLE", None)
         s.dim(x0, my - 420, mx + 724, my - 420, "184 m", a=0.4)
         s.ln(x0, my - 62, x0, my - 426, 0.1, 0.4)
         s.ln(mx + 724, my - 140, mx + 724, my - 426, 0.1, 0.4)
     s.end_main()
 
-    s.legend("FUSION TRANSPORT", "CLASS FT-2   /   DIRECT FUSION DRIVE, CREW OF SIX",
+    s.legend("FUSION TRANSPORT", "CLASS FT-2   /   DIRECT FUSION DRIVE",
              "Takes a crew to Mars in 75 days instead of eight months, which cuts their radiation dose and "
              "bone loss by two thirds. One reactor both drives the ship and powers it.",
              [("PLASMA PHYSICS", "A stable, self-contained plasma ring hot enough to burn deuterium with helium-3, a reaction that releases few neutrons."),
@@ -839,20 +839,20 @@ def air_refinery(size):
 
         s.leader(mx + 160, my - 330, 150, -70, 120, "AIR CONTACTOR", "SORBENT PANELS / RELEASE AT 60 °C")
         s.leader(mx + 30, my - 120, 250, -40, 120, "ENZYME BEDS", "CO₂ TO FORMATE")
-        s.leader(mx + 30, my + 98, 250, -30, 120, "CATALYST BEDS", "FORMATE AND H₂ TO C8 – C16 CHAINS")
+        s.leader(mx + 30, my + 98, 250, -30, 120, "CATALYST BEDS", "FORMATE AND H₂ TO C₈ – C₁₆ CHAINS")
         s.leader(mx - 67, my - 178, -190, -60, -120, "SOLAR RECEIVER", "PROCESS HEAT AT 250 °C")
-        s.leader(mx - 330, g - 24, -30, -130, -80, "MIRROR FIELD", "40 ha")
+        s.leader(mx - 330, g - 24, -30, -130, -80, "MIRROR FIELD", None)
         s.leader(mx - 130, g - 70, -80, -90, -100, "ELECTROLYSER", "WATER TO H₂ AND O₂")
-        s.leader(mx + 280, g - 92, 70, -100, 110, "PRODUCT TANKS", "JET FUEL / 36 t PER DAY")
+        s.leader(mx + 280, g - 92, 70, -100, 110, "PRODUCT TANKS", None)
         s.dim(mx - 300, g, mx - 300, my - 394, "118 m", a=0.4, label_shift=40)
     s.end_main()
 
     s.legend("AIR REFINERY", "UNIT AR-1   /   CARBON DIOXIDE TO JET FUEL",
-             "Makes jet fuel from air, water and sunlight. One tower with 40 hectares of mirrors fixes "
-             "40 000 t of CO₂ a year, the work of two million trees, and turns it into 13 000 t of fuel.",
+             "Makes jet fuel from air, water and sunlight. One tower fixes as much CO₂ as two\u00a0million "
+             "trees and turns it into fuel.",
              [("SYNTHETIC BIOLOGY", "Designed carbon-fixing enzymes, twenty times faster than the one plants use, that keep working outside a cell."),
               ("CATALYSIS", "Catalysts that build long fuel molecules from CO₂ and hydrogen in one pass, without precious metals."),
-              ("MATERIALS SCIENCE", "Sorbents that pull CO₂ out of open air and let it go again at 60 °C, for a quarter of today's energy."),
+              ("MATERIALS SCIENCE", "Sorbents that pull CO₂ out of open air and let it go again with gentle heat, for a quarter of today's energy."),
               ("ELECTROCHEMISTRY", "Electrolysers that split water at 95 % efficiency with iron and nickel in place of iridium.")],
              "2055")
     from triptych import auxiliary_panel, original_diagrams

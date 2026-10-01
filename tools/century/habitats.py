@@ -45,21 +45,21 @@ def lunar_porch():
         for x in (-31,31):
             for z in (63,105):box('port latch',(x,-23,z),(9,11,18),3)
         ring('air connection',(-22,-25,77),6,2,4,(0,-1,0));ring('data connection',(22,-25,77),5,1,4,(0,-1,0),'detail')
-        mark('SUIT DOCK',(0,-22,99),'REAR ENTRY INTERFACE / SUIT OMITTED')
+        mark('SUIT DOCK',(0,-22,99),'FOUR LATCHES / AIR AND DATA LINES')
     with group('C'):
         box('dust grate',(0,-44,12),(87,67,8),5)
         for x in range(-34,35,7):rod('grate bar',(x,-71,17),(x,-17,17),.8,'detail')
         box('dust trap drawer',(0,-44,1),(81,59,13),5)
         rod('drawer handle',(-12,-77,4),(12,-77,4),1.5,'detail')
         for x in (-35,35):rod('drawer rail',(x,-69,3),(x,-19,3),1.2,'detail')
-        mark('DUST TRAP',(0,-72,13),'ABRASIVE PARTICLES STAY OUTSIDE')
+        mark('DUST TRAP',(0,-72,13),'GRATE UNDERFOOT / DRAWER BELOW')
     ring('habitat bulkhead',(0,12,81),78,10,19,(0,1,0))
     for a in range(0,360,30):
         q=math.radians(a);cyl('bulkhead bolt',(71*math.cos(q),10,81+71*math.sin(q)),2,4,'detail',(0,-1,0),6)
     for x in (-45,45):rod('handrail',(x,-61,21),(x,-61,105),2);rod('handrail return',(x,-61,105),(x,-16,105),2)
     box('exterior utility chest',(63,-25,53),(29,38,61),7)
     tube('service umbilical',[(64,-15,83),(49,-28,116),(22,-25,99)],1.2,'cable')
-    mark('BULKHEAD',(-63,12,119),'CLEAN HABITAT PRESSURE BOUNDARY')
+    mark('BULKHEAD',(-63,12,119),'PRESSURE BOUNDARY / 12 BOLTS')
     mark('UTILITY CHEST',(63,-45,61),'SUIT PURGE AND SERVICE')
     return 25,20
 

@@ -24,14 +24,51 @@ def draw(s,name,mx,my):
  c.restore()
  annotation={v[0]:v[1] if len(v)>1 else None for v in labels()[name]}
  positions={lab:(x*scale+dx,y*scale+dy) for lab,(x,y) in d['anchors'].items()}
+ for lab,(sx,sy) in ANCHOR_SHIFTS.get(name,{}).items():
+  x,y=positions[lab];positions[lab]=(x+sx,y+sy)
  ordered=sorted(positions,key=lambda lab:positions[lab][0]);split=len(ordered)//2
  from label_layout import LABEL_OFFSETS,COMPACT_OFFSETS
+ def elbow(side,i,n,lab):
+  ex=side*383;ey=-345+i*(550 if side<0 else 635)/max(1,n-1)
+  if name=='cortical-mesh' and lab=='MESH THREAD':ey-=22
+  ox,oy=LABEL_OFFSETS.get(name,{}).get(lab,(0,0))
+  if not s.wide:
+   cx,cy=COMPACT_OFFSETS.get(name,{}).get(lab,(0,0));ox+=cx;oy+=cy
+  return ex-ox,ey-oy
  for side,group in [(-1,ordered[:split]),(1,ordered[split:])]:
   group.sort(key=lambda lab:positions[lab][1])
-  for i,lab in enumerate(group):
-   x,y=positions[lab];ex=side*383;ey=-345+i*(550 if side<0 else 635)/max(1,len(group)-1)
-   if name=='cortical-mesh' and lab=='MESH THREAD':ey-=22
-   ox,oy=LABEL_OFFSETS.get(name,{}).get(lab,(0,0))
+  def drawn(i,lab):
+   # Where s.leader puts the elbow: it adds the sheet subject's offsets back.
+   ex,ey=elbow(side,i,len(group),lab);subject=getattr(s,'subject','')
+   ox,oy=LABEL_OFFSETS.get(subject,{}).get(lab,(0,0))
    if not s.wide:
-    cx,cy=COMPACT_OFFSETS.get(name,{}).get(lab,(0,0));ox+=cx;oy+=cy
-   s.leader(mx+x,my+y,ex-x-ox,ey-y-oy,side*95,lab,annotation.get(lab))
+    cx,cy=COMPACT_OFFSETS.get(subject,{}).get(lab,(0,0));ox+=cx;oy+=cy
+   return ex+ox,ey+oy
+  group=uncrossed(group,positions,drawn)
+  for i,lab in enumerate(group):
+   x,y=positions[lab];ex,ey=elbow(side,i,len(group),lab)
+   s.leader(mx+x,my+y,ex-x,ey-y,side*95,lab,annotation.get(lab))
+
+
+# Anchor dots that land on a neighbouring part in the projection (drawing units):
+# the dot moves onto the visible part it names.
+ANCHOR_SHIFTS={'sky-racer':{'FOLDING ARM':(-6,31)},          # off the pack, onto the arm
+               'aroma-organ':{'BASE ODORANT':(17,-41)},      # off the clearing fan, onto a cartridge
+               'air-refinery':{'MIRROR FIELD':(-73,58)}}     # off the base plate, onto a mirror
+
+
+def uncrossed(group,positions,elbow):
+ """Label order on one side, top to bottom. Sorting by anchor height can still
+ cross two leaders (an anchor far inside sits lower than its neighbour's);
+ then the order with no crossing and the least leader length wins."""
+ from itertools import permutations
+ def cross(a,b,c,d):
+  o=lambda p,q,r:(q[0]-p[0])*(r[1]-p[1])-(q[1]-p[1])*(r[0]-p[0])
+  return o(a,b,c)*o(a,b,d)<0 and o(c,d,a)*o(c,d,b)<0
+ def crossings(order):
+  seg=[(positions[lab],elbow(i,lab)) for i,lab in enumerate(order)]
+  return sum(cross(*seg[i],*seg[j]) for i in range(len(seg)) for j in range(i+1,len(seg)))
+ if not crossings(group) or len(group)>6:return group
+ def length(order):
+  return sum(((positions[lab][0]-elbow(i,lab)[0])**2+(positions[lab][1]-elbow(i,lab)[1])**2)**.5 for i,lab in enumerate(order))
+ return list(min(permutations(group),key=lambda o:(crossings(o),length(o))))

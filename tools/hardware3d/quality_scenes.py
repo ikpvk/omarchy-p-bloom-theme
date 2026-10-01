@@ -37,7 +37,7 @@ def presence():
             for x in (-12,12):box('roller bearing rail',(x,2,2),(3,29,7),1,'detail')
             motor((0,12,-1),4,10,(0,1,0))
             box('bay connector',(0,17,-5),(13,6,5),1,'accent')
-        mark('ROLLER CASSETTE',(-75,-85,17),'REPLACEABLE BAY / FIELD SHOWN SPARSELY')
+        mark('ROLLER CASSETTE',(-75,-85,17),'FIELD SHOWN SPARSELY')
     # Rear crescent backbone supports an actual bearing and captive tether reel.
     for side in (-1,1):
         x=side*87
@@ -76,10 +76,10 @@ def presence():
     tube('cabinet loom',[(107,28,81),(78,48,127),tuple(shoulder)],1,'cable')
     optics((-52,64,141),7,16,(.35,-1,-.15))
     mark('HUMAN PLAYER',point((0,-30,200)),'SHOWN AS DUMMY / EGO NOT TO SCALE')
-    mark('CAPTIVE TETHER',(0,15,224),'REEL / QUICK RELEASE / LOAD PATH')
+    mark('CAPTIVE TETHER',(0,15,224),'LOAD PATH')
     mark('SUIT INTERFACE',(116,14,61),'TACTILE AND MUSCLE BAND CONTROL')
     mark('SIGHT AND SOUND',point((0,-28,311)),'HEADSET / INNER-EAR INTERFACE')
-    mark('POWERED FLOOR',(83,-61,20),'3 m FIELD / OPPOSITE TO PLAYER MOTION')
+    mark('POWERED FLOOR',(83,-61,20),'DRIVEN ROLLER FIELD')
     return 22,18
 
 
@@ -133,9 +133,9 @@ def stage():
         for i in range(221):
             t=T*i/220;pts.append((39*(math.sin(t)+.65*math.sin(2*t)),-14+22*math.cos(t),105+37*math.cos(2*t)+k*.9))
         g.wire('illustrative luminous locus',pts,.06,'shell')
-    mark('OPTICAL HEAD',(-98,-29,119),'17 HEADS / COARSE ALIGNMENT GIMBALS')
+    mark('OPTICAL HEAD',(-98,-29,119),'COARSE ALIGNMENT GIMBALS')
     mark('SERVICE BRIDGE',(38,36,205),'TRIANGULATED SPAN / COOLING AND TIMING')
-    mark('IMAGE VOLUME',(45,-14,122),'40 x 22 x 18 m / FICTIONAL DESIGN TARGET')
+    mark('IMAGE VOLUME',(45,-14,122),'40 × 22 × 18 m / FICTIONAL DESIGN TARGET')
     mark('HAZE CIRCUIT',(-79,33,43),'METER / DISTRIBUTE / EXTRACT')
     mark('CLOCK DISTRIBUTION',(85,29,40),'ONE VOLUME / SHARED TIMING REFERENCE')
     kit.GROUPS['B']={'parts':g.parts[:],'wires':g.wires[:]}

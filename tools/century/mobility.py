@@ -188,7 +188,7 @@ def dune_skimmer():
         flange('wheel drive hub',(-56,-67,24),14,(0,-1,0),3)
         for a in range(0,360,45):
             q=math.radians(a);rod('expansion spoke',(-56+8*math.cos(q),-69,24+8*math.sin(q)),(-56+20*math.cos(q),-65,24+20*math.sin(q)),1.2,'detail')
-        mark('EXPANDING WHEEL',(-56,-68,24),'VARIABLE CONTACT WIDTH')
+        mark('EXPANDING WHEEL',(-56,-68,24),'TELESCOPING SLEEVE, ALL FOUR')
     for x,y in ((56,-37),(-56,37),(56,37)):
         cyl('wide sand wheel',(x,y,24),24,27,'structure',(0,-1 if y<0 else 1,0));flange('wheel hub',(x,y+(-30 if y<0 else 30),24),14,(0,-1 if y<0 else 1,0),3)
         for dy in (2,11,20,28):ring('wheel lamella',(x,y+(-dy if y<0 else dy),24),25,1,2,(0,1,0),'detail')
@@ -202,7 +202,7 @@ def dune_skimmer():
             rod('shade piston',(30,y,83),(42,y,121),1.5,'detail')
         rod('shade hinge',(44,-29,132),(44,29,132),3)
         for y in (-24,24):cyl('hinge pin',(44,y,132),4,5,'detail',(0,1,0))
-        mark('SHADE HINGE',(43,-25,128),'PARKED MODE / FOLDS OVER PAYLOAD')
+        mark('SHADE HINGE',(43,-25,128),'FOLDS FLAT OVER THE PAYLOAD')
     panel('folding shade',(31,0,136),(120,99),nx=10,ny=6,role='shell')
     for x in (-21,83):rod('shade edge',(x,-47,136),(x,47,136),1,'detail')
     box('rear cargo',(43,0,90),(43,48,35),7)

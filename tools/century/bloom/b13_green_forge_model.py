@@ -233,11 +233,11 @@ def build():
         for yy, role in ((-1.2, 'accent'), (0, 'cable'), (1.2, 'detail')):
             cyl('manifold flange', S + Vector((5.95, yy, 11)), .6, .3, role, (0, 0, 1), 16)
         box('stack nameplate', S + Vector((0, -2.25, 2.4 + 5.8 - 3.8)), (3, .1, 1.2), .1, 'detail')
-        mark('ELECTROLYSER STACK', S + Vector((-6.2, -2.6, 6)), '24 CELLS SHOWN / WATER IN, H2 AND O2 OUT')
+        mark('ELECTROLYSER STACK', S + Vector((-6.2, -2.6, 6)), '24 CELLS SHOWN / 12 STACKS IN TWO ROWS')
     uncover('B', 'furnace shell cut sector')
     mark('SHAFT FURNACE', (7.5 * math.cos(math.radians(318)), 7.5 * math.sin(math.radians(318)), 74), 'PELLETS DOWN, HYDROGEN UP / 125 t OF IRON AN HOUR')
     mark('CHARGING GALLERY', tuple(a.lerp(b, .38) + Vector((0, -2.5, 2.5))), 'PELLETS RISE 50 m TO THE HOPPER')
-    mark('ARC FURNACE', tuple(E + Vector((-5.3, -5.3, 11))), '150 t HEATS / SPONGE IRON AND SCRAP')
+    mark('ARC FURNACE', tuple(E + Vector((-5.3, -5.3, 11))), '150 t HEATS / FED HOT BY A CLOSED CONVEYOR')
     mark('HYDROGEN SPHERES', (-43, -32, 13), 'BUFFER FOR WINDLESS HOURS')
-    mark('VAPOUR STACK', (-36, 4.4, 110), 'WATER VAPOUR / NO COKE, NO COAL')
+    mark('VAPOUR STACK', (-36, 4.4, 110), 'TOP GAS, AFTER THE SCRUBBER')
     return 36, 20
