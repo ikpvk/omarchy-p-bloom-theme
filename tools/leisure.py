@@ -134,9 +134,8 @@ def sky_racer(size):
     with auxiliary_panel(s, 'C', lx, rx):
         from right_aux_panels import course as course_panel
         course_panel(s,rx)
-    with auxiliary_panel(s, 'plot', lx, rx):
-        s.chart(rx - 170, 600, 260, 150, "SPEED OVER ONE LAP",
-                lambda t: 0.55 + 0.22 * math.sin(t * 17) * math.cos(t * 5) + 0.15 * math.sin(t * 7 + 1), "GATE 1 – 9", "km/h")
+    from original_charts import draw as right_chart
+    right_chart(s)
     original_diagrams(s)
     return s
 
@@ -253,10 +252,8 @@ def volumetric_stage(size):
         s.ln(qx - 120, qy + 188, qx - 60, qy + 188, 0.9, 1.0)
         s.text("1 mm", qx - 90, qy + 180, 6.5, a=0.8, align="c")
         s.view_label(qx, qy + 210, "C", "ONE VOXEL", "PARTICLES GLOW ONLY INSIDE THE CROSSING")
-    with auxiliary_panel(s, 'plot', lx, rx):
-        s.text("FICTIONAL PROFILE / NOT MEASURED",rx-170,575,5.8,track=.1,a=.5)
-        s.chart(rx - 170, 600, 260, 150, "LIGHT FROM ONE PARTICLE",
-                lambda t: 0.04 + 0.92 * math.exp(-(((t - 0.5) / 0.045) ** 2)), "DISTANCE FROM THE CROSSING, ± 5 mm", "")
+    from original_charts import draw as right_chart
+    right_chart(s)
     original_diagrams(s)
     return s
 
@@ -321,10 +318,8 @@ def presence_rig(size):
     with auxiliary_panel(s, 'C', lx, rx):
         component(s,'presence-rig','C',rx,310,330,290)
         s.view_label(rx,510,'C','CAPTIVE TETHER REEL','AZIMUTH BEARING / MANUAL RELEASE')
-    with auxiliary_panel(s, 'plot', lx, rx):
-        s.text('FICTIONAL GAME LOAD / ILLUSTRATIVE TRACE',rx-170,575,5.8,track=.1,a=.5)
-        s.chart(rx - 170, 600, 260, 150, "ARM RESISTANCE, PUSHING A DOOR",
-                lambda t: 0.06 + 0.8 / (1 + math.exp(-(t - 0.3) * 24)) - 0.35 / (1 + math.exp(-(t - 0.75) * 30)), "0 – 2 s", "N·m")
+    from original_charts import draw as right_chart
+    right_chart(s)
     original_diagrams(s)
     return s
 
@@ -431,9 +426,8 @@ def aroma_organ(size):
     with auxiliary_panel(s, 'C', lx, rx):
         from quality_panels import aroma_detail
         aroma_detail(s,rx)
-    with auxiliary_panel(s, 'plot', lx, rx):
-        from quality_panels import aroma_program
-        aroma_program(s,rx)
+    from original_charts import draw as right_chart
+    right_chart(s)
     original_diagrams(s)
 
     return s
@@ -562,11 +556,8 @@ def bounder(size):
         s.ln(qx - 120, qy + 188, qx - 60, qy + 188, 0.9, 1.0)
         s.text("50 µm", qx - 90, qy + 180, 6.5, a=0.8, align="c")
         s.view_label(qx, qy + 210, "C", "MUSCLE YARN", "TWISTED, THEN COILED / SHORTENS WHEN CHARGED")
-    with auxiliary_panel(s, 'plot', lx, rx):
-        def force(t):
-            u = (t * 2.5) % 1.0
-            return 0.04 + (0.9 * math.sin(math.pi * u / 0.34) if u < 0.34 else 0.0)
-        s.chart(rx - 170, 600, 260, 150, "FORCE ON THE GROUND", force, "2.5 STRIDES", "kN")
+    from original_charts import draw as right_chart
+    right_chart(s)
     original_diagrams(s)
     return s
 

@@ -1,6 +1,7 @@
 """Second ten: individual plots, mechanism diagrams and fictional service records."""
 import math
-from sheet import WHITE,ARC,GOLD
+import cairo
+from sheet import WHITE,ARC,GOLD,FONT
 from collection_layout import note_box
 from .editorial import tx,arrow,header,axes,curve,dossier
 
@@ -48,10 +49,40 @@ DATA={
 }
 
 
+def cap(s,size):
+    """Cap height of a label as drawn, enlarged type of composed profiles included."""
+    c=s.c;c.save();c.select_font_face(FONT,cairo.FONT_SLANT_NORMAL,cairo.FONT_WEIGHT_NORMAL)
+    c.set_font_size(s.readable_size(size));h=-c.text_extents('H').y_bearing;c.restore()
+    return h
+
+
+def mid(s,t,x,y,size=7,a=.76,**kw):
+    """tx() centred on its capitals at y: optical centring beside a mark or inside a box."""
+    return s.text_mid(t,x,y,size,track=.08,a=a,**kw)
+
+
+def below(s,t,x,y,size=7,a=.76,gap=6,**kw):
+    """tx() whose capitals start gap units under y, however large the type grows."""
+    return mid(s,t,x,y+gap+cap(s,size)/2,size,a,**kw)
+
+
+def ticks_under(s,px,y,pw,ticks,xlabel=None):
+    """Tick marks and centred values under an x axis at y (the c001 convention).
+
+    The axis name hangs under the values, so enlarged type never stacks into them;
+    pass it here and an empty name to axes().
+    """
+    for t,label in ticks:
+        s.ln(px+pw*t,y,px+pw*t,y+4,.45,.5)
+        below(s,label,px+pw*t,y+4,7,.65,gap=5,align='c')
+    if xlabel:below(s,xlabel,px+pw,y+9+cap(s,7),7,.55,gap=6,align='r')
+
+
 def plot(s,d,x,y,w):
     header(s,d,x,y,w);y+=40;h=97;k=d['kind'];px=x+26;pw=w-28
     if k in ('current','foil','braid'):
-        axes(s,px,y,pw,h,{'current':'CURRENT / v0','foil':'SPEED / v0','braid':'AXIAL SPEED / vt'}[k], '90°' if k=='braid' else '1.0' if k=='current' else '4.0')
+        pw=w-38  # the last tick value stays inside the column
+        axes(s,px,y,pw,h,'','90°' if k=='braid' else '1.0' if k=='current' else '4.0')
         points=[]
         for i in range(121):
             t=i/120
@@ -60,32 +91,37 @@ def plot(s,d,x,y,w):
             else:value=math.atan2(1,.25+3.75*t)/(math.pi/2)
             points.append((px+pw*t,y+h*(1-value)))
         curve(s,points)
-        ticks=[(0,'-1'),(.5,'0'),(1,'+1')] if k=='current' else [(0,'0'),(.5,'1'),(1,'2')] if k=='foil' else [(0,'0.25'),(.2,'1'),(.467,'2'),(1,'4')]
-        for t,label in ticks:tx(s,label,px+pw*t,y+h+9+.72*s.type_growth(5.5),5.5,.65,align='c')
+        ticks=[(0,'−1'),(.5,'0'),(1,'+1')] if k=='current' else [(0,'0'),(.5,'1'),(1,'2')] if k=='foil' else [(0,'0.25'),(.2,'1'),(.467,'2'),(1,'4')]
+        ticks_under(s,px,y+h,pw,ticks,{'current':'CURRENT / v0','foil':'SPEED / v0','braid':'AXIAL SPEED / vt'}[k])
     elif k=='archive':
         # Four symbolic orientations, laid on four real-looking indexed rows.
+        # The key draws the same glyphs as the plate, one per row, in its own column.
+        def cell(xx,yy,code):
+            a=code*math.pi/4
+            s.circ(xx,yy,5,.22,.35)
+            s.ln(xx-4*math.cos(a),yy-4*math.sin(a),xx+4*math.cos(a),yy+4*math.sin(a),.8,.9,color=ARC)
+        top=y+8;key=x+300
         for row in range(4):
-            tx(s,str(row).zfill(2),x,y+13+row*22,6,.5)
-            for col in range(9):
-                xx=x+40+col*24;yy=y+10+row*22;a=((row*5+col*3)%4)*math.pi/4
-                s.circ(xx,yy,5,.22,.35)
-                s.ln(xx-4*math.cos(a),yy-4*math.sin(a),xx+4*math.cos(a),yy+4*math.sin(a),.8,.9,color=ARC)
-        tx(s,'ORIENTATION',x+w,y+10,6,.6,align='r')
-        for i,word in enumerate(('00 / —','01 / /','10 / |','11 / \\')):tx(s,word,x+w,y+29+i*18,7,.8,align='r')
+            yy=top+20+row*22
+            mid(s,str(row).zfill(2),x,yy,6,.5)
+            for col in range(9):cell(x+44+col*24,yy,(row*5+col*3)%4)
+            cell(key+5,yy,row);mid(s,format(row,'02b'),key+20,yy,7,.8)
+        tx(s,'ORIENTATION',key,top,6,.6)
         tx(s,'READING KEY TRAVELS WITH THE PLATE',x,y+119,6,.5)
     elif k=='suitport':
         boundary=x+238
         s.ln(boundary,y+4,boundary,y+102,.65,.7)
         s.ln(boundary+5,y+4,boundary+5,y+102,.32,.4)
-        tx(s,'EXTERIOR',x+40,y+8,6,.65);tx(s,'CABIN',x+w-25,y+8,6,.65,align='r')
+        # The two sides are named at the wall they share, on one baseline.
+        tx(s,'EXTERIOR',boundary-12,y+8,6,.65,align='r');tx(s,'CABIN',boundary+17,y+8,6,.65)
         # Dust samples stop before the pressure boundary; occupants pass a tested interface.
         for dx,dy in ((12,25),(51,47),(88,32),(136,68),(38,77),(111,85),(172,38)):
             s.diamond(x+dx,y+dy,2,.55,.5,color=GOLD)
-        tx(s,'DUSTY SUIT',x+35,y+109,6,.62)
         s.poly([(boundary-35,y+29),(boundary-14,y+29),(boundary-14,y+77),(boundary-35,y+77)],.7,.6,close=False)
+        below(s,'DUSTY SUIT',boundary-14,y+77,6,.62,gap=8,align='r')
         arrow(s,(boundary-8,y+53),(x+w-29,y+53),ARC)
-        tx(s,'REAR ENTRY',x+w-20,y+78,6,.6,align='r')
-        tx(s,'TESTED SEAL',boundary,y+122,6,.66,align='c')
+        tx(s,'REAR ENTRY',(boundary+5+x+w-29)/2,y+53-8,6,.6,align='c')
+        below(s,'TESTED SEAL',boundary+2.5,y+102,6,.66,gap=8,align='c')
     elif k=='access':
         # Elevation of the exact model's four fixed-x, independently driven treads.
         # Three states, common scale. No fictitious diagonal four-bar mechanism.
@@ -101,12 +137,13 @@ def plot(s,d,x,y,w):
         tx(s,'EMPTY TO LEVEL / LOCK TREADS / THEN PLATFORM LIFT',x,y+127,5.7,.55)
     elif k=='kite':
         axes(s,px,y,pw,h,'PAID-OUT LENGTH / NORMALISED')
-        a=(px+pw*.13,y+h*.17);b=(px+pw*.87,y+h*.17);c=(b[0],y+h*.79);d0=(a[0],c[1])
+        # Strokes on the .75 and .25 grid lines; each label centred in the free
+        # grid band beyond its stroke, clear of every line.
+        a=(px+pw*.13,y+h*.25);b=(px+pw*.87,y+h*.25);c=(b[0],y+h*.75);d0=(a[0],c[1])
         s.poly([a,b,c,d0],.7,.6,close=True,color=GOLD)
         arrow(s,a,b,ARC);arrow(s,c,d0,WHITE)
-        tx(s,'HIGH TENSION / REEL OUT',px+pw/2,y+6+1.5*s.type_growth(6),6,.72,align='c')
-        # Loop area is explained in the adjacent dossier; keep grid free of text.
-        tx(s,'LOW TENSION / RETURN',px+pw/2,y+92,6,.65,align='c')
+        mid(s,'HIGH TENSION / REEL OUT',px+pw/2,y+h*.125,6,.72,align='c')
+        mid(s,'LOW TENSION / RETURN',px+pw/2,y+h*.875,6,.65,align='c')
     elif k=='weld':
         cx=x+91;cy=y+54;r=43
         for j in range(12):
@@ -116,10 +153,19 @@ def plot(s,d,x,y,w):
             if j==11:
                 a=math.radians(-90+j*30+15);xx=cx+r*math.cos(a);yy=cy+r*math.sin(a)
                 s.ln(xx-3,yy-3,xx+3,yy+3,.8,.6);s.ln(xx+3,yy-3,xx-3,yy+3,.8,.6)
-        tx(s,'12',cx,cy+4,11,.8,align='c');tx(s,'SECTORS',cx,cy+18,5.5,.5,align='c')
-        for i,(label,count) in enumerate((('ACCEPT',9),('HOLD',2),('REWORK',1))):
-            yy=y+20+i*30;s.ln(x+170,yy-3,x+193,yy-3,.8,1,color=ARC if i==0 else GOLD)
-            tx(s,label,x+208,yy,6.5,.72);tx(s,str(count),x+w,yy,7,.8,align='r')
+        # Count and unit as one group, centred on the ring by their capitals.
+        c12,cu=cap(s,11),cap(s,5.5);top=cy-(c12+6+cu)/2
+        mid(s,'12',cx,top+c12/2,11,.8,align='c');mid(s,'SECTORS',cx,top+c12+6+cu/2,5.5,.5,align='c')
+        # Legend: stroke, label, count in a tabular column right beside the labels.
+        rows=(('ACCEPT',9),('HOLD',2),('REWORK',1))
+        lx=x+208;nx=lx+max(s.measure(label,6.5,.08) for label,_ in rows)+14+s.measure('0',7,.08)
+        for i,(label,count) in enumerate(rows):
+            yy=cy+(i-1)*30
+            if i==2:  # drawn as the rework sector: heavier stroke and a cross
+                s.ln(x+170,yy,x+193,yy,.8,2.1,color=GOLD)
+                s.ln(x+178.5,yy-3,x+184.5,yy+3,.8,.6);s.ln(x+184.5,yy-3,x+178.5,yy+3,.8,.6)
+            else:s.ln(x+170,yy,x+193,yy,.8,1,color=ARC if i==0 else GOLD)
+            mid(s,label,lx,yy,6.5,.72);mid(s,str(count),nx,yy,7,.8,align='r')
     elif k=='queue':
         axes(s,px,y,pw,h,'ELAPSED MINUTES','6','0');pts=[(px,y+h)]
         for i,t in enumerate((2,5,9,14,20,27)):

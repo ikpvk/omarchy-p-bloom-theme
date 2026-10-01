@@ -56,7 +56,9 @@ def figure(s, side, x, y, w):
     from century.editorial import tx, arrow, axes, curve
     if side == 'left':
         px, py, pw, ph = x + 30, y, 330, 100
-        axes(s, px, py, pw, ph, 'REDSHIFT z', '100 MHz', '0')
+        # Tick values stay inside the column; the unit goes above the axis (as SNR / SNR1).
+        axes(s, px, py, pw, ph, 'REDSHIFT z', '100', '0')
+        tx(s, 'f / MHz', px - 9, py - 8, 6.2, .55)
         f = lambda z: 1420 / (1 + z)
         X = lambda z: px + pw * z / 300
         Y = lambda mhz: py + ph * (1 - mhz / 100)
@@ -66,9 +68,9 @@ def figure(s, side, x, y, w):
         curve(s, band, ARC)
         for mhz in (40, 5):
             s.ln(px, Y(mhz), px + pw, Y(mhz), .3, .5, dash=[2, 3], color=ARC)
-        tx(s, '40', px - 9, Y(40) + 3, 6.2, .7, align='r', color=ARC)
+        s.text_mid('40', px - 9, Y(40), 6.2, .08, .7, align='r', color=ARC)
         s.ln(px, Y(10), px + pw, Y(10), .35, .5, dash=[1, 4], color=GOLD)
-        tx(s, 'IONOSPHERE', px + pw + 8, Y(10) + 3, 6.2, .75, color=GOLD)
+        s.text_mid('IONOSPHERE', px + pw + 8, Y(10), 6.2, .08, .75, color=GOLD)
         if s.type_growth(6.4):
             # Enlarged type (composed profiles): right-aligned between the
             # 50 and 75 MHz grid lines, clear of the curve.
@@ -82,7 +84,8 @@ def figure(s, side, x, y, w):
         ex, er = x + 40, 26
         mx, mr = x + 250, 34
         s.circ(ex, cy, er, .8, .7)
-        tx(s, 'EARTH', ex, cy + er + 16, 6.4, .7, align='c')
+        # EARTH, MOON and RADIO SHADOW share one baseline.
+        tx(s, 'EARTH', ex, cy + mr + 16, 6.4, .7, align='c')
         s.circ(mx, cy, mr, .8, .7)
         tx(s, 'MOON', mx, cy + mr + 16, 6.4, .7, align='c')
         # Radio from Earth stops at the near side.
@@ -91,15 +94,18 @@ def figure(s, side, x, y, w):
         # Shadow behind the Moon: tangent lines, hatched quiet zone.
         for sg in (-1, 1):
             s.ln(mx, cy + sg * mr, x + 430, cy + sg * (mr - 12), .45, .55, dash=[3, 3])
-        for k in range(6):
+        # THE DISH sits beside its dot inside the shadow; the hatching starts after it.
+        dish_end = mx + mr + 8 + s.measure('THE DISH', 6.4, .08)
+        k0 = max(0, math.ceil((dish_end + 8 - (mx + mr + 14)) / 22))
+        for k in range(k0, 6):
             xx = mx + mr + 14 + k * 22
             s.ln(xx, cy - mr + 8, xx + 10, cy + mr - 8, .15, .5)
         tx(s, 'RADIO SHADOW', x + 330, cy + mr + 16, 6.4, .8)
         s.dot(mx + mr, cy, 3.4, .95, color=ARC)
-        tx(s, 'THE DISH', mx + mr + 12, cy - mr - 2, 6.4, .9, color=ARC)
+        s.text_mid('THE DISH', mx + mr + 8, cy, 6.4, .08, .9, color=ARC)
         # Relay orbiter: a dashed link up to it and back toward Earth.
         rx, ry = mx + 20, y + 4
         s.rect(rx - 4, ry - 3, 8, 6, .8, .6)
-        tx(s, 'RELAY', rx + 10, ry + 3, 6.4, .75)
+        s.text_mid('RELAY', rx + 10, ry, 6.4, .08, .75)
         s.ln(mx + mr - 2, cy - 4, rx, ry + 4, .5, .55, dash=[2, 2], color=ARC)
         s.ln(rx - 5, ry, ex + er * .7, cy - er * .7, .4, .5, dash=[2, 3], color=ARC)

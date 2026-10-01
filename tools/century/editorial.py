@@ -100,9 +100,10 @@ def curve(s,points,color=GOLD):s.poly(points,.8,.8,close=False,color=color)
 def plot(s,d,x,y,w):
     header(s,d,x,y,w);y+=40;kind=d['kind'];h=97
     if kind in ('sail','mirror','sand'):
-        px=x+26;pw=w-28
+        from .editorial_second import ticks_under
+        px=x+26;pw=w-38  # the last tick value stays inside the column
         xlabel={'sail':'INCIDENCE / DEGREES','mirror':'DIAMETER / D0','sand':'CONTACT AREA / A0'}[kind]
-        axes(s,px,y,pw,h,xlabel,'4.0' if kind=='mirror' else '1.0','0')
+        axes(s,px,y,pw,h,'','4.0' if kind=='mirror' else '1.0','0')
         if kind=='sail':
             points=[(px+pw*i/90,y+h*(1-math.cos(math.radians(i))**2)) for i in range(91)]
             ticks=[(0,'0'),(1/3,'30'),(2/3,'60'),(1,'90')]
@@ -113,9 +114,8 @@ def plot(s,d,x,y,w):
             points=[(px+pw*i/100,y+h*(1-1/(1+3*i/100))) for i in range(101)]
             ticks=[(0,'1'),(1/3,'2'),(2/3,'3'),(1,'4')]
         curve(s,points)
-        for t,label in ticks:
-            s.ln(px+t*pw,y+h,px+t*pw,y+h+4,.45,.5)
-            tx(s,label,px+t*pw,y+h+13+.72*s.type_growth(7),7,.65,align='c')
+        # Axis name hangs under the values, so enlarged type never stacks into them.
+        ticks_under(s,px,y+h,pw,ticks,xlabel)
     elif kind in ('sock','meeting'):
         values=[('MATCHED',84),('SOLITARY',9),('WORN',5),('DISPUTED',2)] if kind=='sock' else [('DECISIONS',9),('FORMAT DEBATE',33),('NEXT MEETING',18)]
         maxv=100 if kind=='sock' else 60;barx=x+126;bw=w-173
@@ -135,7 +135,7 @@ def plot(s,d,x,y,w):
         ends=[.50,.53,.89] if kind=='advice' else [.94,.83,.94]
         px=x+123;pw=w-130
         for i,label in enumerate(labels):
-            yy=y+13+i*29;tx(s,label,x,yy+3,6.2,.68)
+            yy=y+13+i*29;s.text_mid(label,x,yy-6,6.2,track=.08,a=.68)  # centred on its trace
             s.ln(px,yy,px+pw,yy,.2,.4)
             points=[(px,yy),(px+pw*starts[i],yy),(px+pw*starts[i],yy-12),(px+pw*ends[i],yy-12),(px+pw*ends[i],yy),(px+pw,yy)]
             curve(s,points,ARC if i==0 else GOLD)
@@ -161,19 +161,21 @@ def plot(s,d,x,y,w):
                 s.poly([(bx-1,y+48),(bx-8,y+40),(bx-9,y+32)],.56,.55,close=False)
             tx(s,label,xx,y+99,6.3,.77,align='c')
             if i<2:arrow(s,(xx+35,y+52),(xx+(w-110)/2-34,y+52),ARC)
-        tx(s,'RECORD IDENTITY → FOLLOW SURVIVAL',x+w,y+117,5.8,.48,align='r')
+        tx(s,'RECORD IDENTITY → FOLLOW SURVIVAL',x,y+124,5.8,.48)
     elif kind=='neutrino':
         # Charged secondary emits light; neutrino travels to an interaction vertex.
-        yy=y+48;vertex=x+92
-        s.ln(x+5,yy,vertex,yy,.42,.6,dash=[3,4]);s.dot(vertex,yy,2,.85)
-        arrow(s,(vertex,yy),(x+w-32,yy),WHITE)
-        tx(s,'NEUTRINO',x+8,y+27,6,.62)
-        tx(s,'CHARGED SECONDARY',vertex+17,yy+19,6,.7)
+        yy=y+62;vertex=x+92;tip=x+w-32
+        s.ln(x,yy,vertex,yy,.42,.6,dash=[3,4]);s.dot(vertex,yy,2,.85)
+        arrow(s,(vertex,yy),(tip,yy),WHITE)
+        # Each name sits just beside what it names: the incoming line, the vertex,
+        # the outgoing track, and the three light paths with their sensors.
+        tx(s,'NEUTRINO',x,yy-7,6,.62)
+        tx(s,'INTERACTION',vertex,yy+13,6,.5,align='c')
+        tx(s,'CHARGED SECONDARY',tip,yy+13,6,.7,align='r')
         for dx in (30,76,122):
             end=(vertex+dx+32,yy-31);arrow(s,(vertex+dx,yy),end,ARC)
             s.circ(*end,5,.48,.55)
-        tx(s,'CHERENKOV LIGHT → SENSORS',x+w,y+3,6,.67,align='r')
-        tx(s,'INTERACTION',vertex,y+98,6,.5,align='c')
+        tx(s,'CHERENKOV LIGHT → SENSORS',vertex+(30+122+32+5)/2,yy-45,6,.67,align='c')
     tx(s,d['foot'],x,y+145,5.9,.6)
 
 

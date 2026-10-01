@@ -73,21 +73,21 @@ def figure(s, side, x, y, w):
             if h > hours:
                 break
             s.rect(px(h) + .6, y + 2, tw / 51 - 1.2, 8, .9 if k in chosen else .28, .5, color=ARC if k in chosen else WHITE)
-        tx(s, 'SLOTS', x, y + 10, 6.6, .6)
+        s.text_mid('SLOTS', x, y + 6, 6.6, .08, .6)
         for i, (label, h) in enumerate(BOOKINGS):
-            yy = y + 30 + i * 19
-            tx(s, label, x, yy + 3, 6.6, .78)
-            ly = yy + 1
+            ly = y + 28 + i * 18
+            s.text_mid(label, x, ly, 6.6, .08, .78)
             # Enlarged type (composed profiles): the guide line starts after the label.
             start = max(t0, x + s.measure(label, 6.6, .08) + 6) if s.type_growth(6.6) else t0
             s.ln(start, ly, t0 + tw, ly, .14, .4)
             s.dot(px(h) + tw / 102, ly, 2.6, .95, color=ARC)
             hh = (20 + int(h)) % 24; mm = round((h - int(h)) * 60)
             tx(s, f'{hh:02d}:{mm:02d}', px(h) + tw / 102 + (6 if h < 7 else -6), ly - 5, 6.4, .7, align='l' if h < 7 else 'r')
+        # Time axis kept clear of the caption below, also with enlarged type.
         for h, lab in ((0, '20:00'), (2, '22:00'), (4, '00:00'), (6, '02:00'), (8, '04:00')):
-            s.ln(px(h), y + 120, px(h), y + 124, .45, .5)
-            tx(s, lab, px(h), y + 135, 6.4, .6, align='c')
-        s.ln(t0, y + 120, t0 + tw, y + 120, .4, .5)
+            s.ln(px(h), y + 112, px(h), y + 116, .45, .5)
+            tx(s, lab, px(h), y + 127, 6.4, .6, align='c')
+        s.ln(t0, y + 112, t0 + tw, y + 112, .4, .5)
     else:
         ax = x + 26; aw = w - 60; ah = 92
         axes(s, ax, y, aw, ah, 'FRAMES STACKED / N', '30', '0')

@@ -57,16 +57,17 @@ def figure(s, side, x, y, w):
 
     def cell(cx, cy, top, bottom, col=WHITE, ww=86):
         s.rect(cx - ww / 2, cy - 18, ww, 36, .7, .65, color=col)
-        tx(s, top, cx, cy - 3, 7, .88, align='c', color=col)
-        tx(s, bottom, cx, cy + 12, 6.4, .7, align='c')
+        # Two lines, cap-centred about the middle of the box.
+        s.text_mid(top, cx, cy - 7.5, 7, .08, .88, align='c', color=col)
+        s.text_mid(bottom, cx, cy + 7.5, 6.4, .08, .7, align='c')
     if side == 'left':
         cy = y + 44
         cell(x + 50, cy, 'Fe2O3', '1 430 kg')
-        tx(s, '+', x + 104, cy + 4, 9, .8, align='c')
+        s.text_mid('+', x + 103, cy, 9, .08, .8, align='c')
         cell(x + 156, cy, 'H2', '54 kg', ARC)
         arrow(s, (x + 204, cy), (x + 236, cy), WHITE)
         cell(x + 286, cy, 'Fe', '1 000 kg', GOLD)
-        tx(s, '+', x + 339, cy + 4, 9, .8, align='c')
+        s.text_mid('+', x + 338, cy, 9, .08, .8, align='c')
         cell(x + 390, cy, 'H2O', '484 kg', ARC)
         # Balance bar: both sides 1 484 kg.
         yy = y + 102
@@ -78,7 +79,7 @@ def figure(s, side, x, y, w):
     else:
         stages = [('ELECTROLYSIS', 2.85, ARC, '57 kg H2'), ('HEAT + GAS', .15, WHITE, ''), ('ARC FURNACE', .55, GOLD, '1 t STEEL')]
         total = sum(v for _, v, _, _ in stages)
-        bx = x + 4; bw = 400; yy = y + 30
+        bx = x; bw = 400; yy = y + 30
         tx(s, 'ELECTRICITY 3.6 MWh', bx, yy - 12, 6.8, .82)
         xx = bx
         for name, v, col, out in stages:
@@ -86,8 +87,8 @@ def figure(s, side, x, y, w):
             s.rect(xx, yy, ww, 18, .8, .7, fill=.14, color=col)
             xx += ww
         e_w = bw * 2.85 / total; h_w = bw * .15 / total
-        tx(s, 'ELECTROLYSIS 2.85 MWh', bx + 6, yy + 36, 6.5, .82, color=ARC)
-        tx(s, '57 kg OF HYDROGEN', bx + 6, yy + 50, 6.2, .62)
+        tx(s, 'ELECTROLYSIS 2.85 MWh', bx, yy + 36, 6.5, .82, color=ARC)
+        tx(s, '57 kg OF HYDROGEN', bx, yy + 50, 6.2, .62)
         hx = bx + e_w + h_w / 2
         s.ln(hx, yy - 7, hx, yy - 1, .35, .5)
         tx(s, 'HEAT + GAS 0.15 MWh', hx, yy - 12, 6.4, .75, align='c')

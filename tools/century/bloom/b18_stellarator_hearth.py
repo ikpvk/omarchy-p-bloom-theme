@@ -58,29 +58,33 @@ def figure(s, side, x, y, w):
     from sheet import WHITE, ARC, GOLD
     from century.editorial import tx, arrow
     if side == 'left':
-        bx = x + 110; k = 290 / 880       # 880 MW spans 290 units
+        # 880 MW spans up to 290 units; the longest total still fits the column.
+        bx = x + 110; k = min(290, x + w - 8 - s.measure('880 MW', 6.6, .08) - bx) / 880
         rows = [('HEAT', [(880, WHITE, .75)], '880'),
                 ('ELECTRIC', [(300, ARC, .9), (50, GOLD, .9)], '350'),
                 ('TO COOLING', [(530, WHITE, .35)], '530')]
         for i, (label, parts, total) in enumerate(rows):
-            yy = y + 10 + i * 34
-            tx(s, label, x, yy + 5, 6.6, .72)
+            yy = y + 10 + i * 36
+            s.text_mid(label, x, yy + 1, 6.6, .08, .72)
             xx = bx
             for v, col, a in parts:
                 s.rect(xx, yy - 5, v * k, 12, a, .7, color=col)
                 xx += v * k
-            tx(s, total + ' MW', xx + 8, yy + 5, 6.6, .8)
-        tx(s, 'CITY 300', bx + 6, y + 49, 6.2, .9, color=ARC)
+            s.text_mid(total + ' MW', xx + 8, yy + 1, 6.6, .08, .8)
+        # Each share of the electric bar named just below its own segment.
+        tx(s, 'CITY 300', bx, y + 63, 6.2, .9, color=ARC)
+        tx(s, 'PLANT 50', bx + 300 * k, y + 63, 6.2, .8, color=GOLD)
         tx(s, 'FUSION 800 MW + BLANKET GAIN 80 MW', bx, y + 118, 6.2, .6)
-        # Short labels under the electric bar: city (accent) and the plant's own share (gold).
-        s.ln(bx + 300 * k + 1, y + 51, bx + 325 * k, y + 60, .4, .5, color=GOLD)
-        tx(s, 'PLANT 50', bx + 330 * k, y + 64, 6.2, .8, color=GOLD)
     else:
         # Five sections along one period: the ellipse turns by half a turn;
         # the dot is where one field line crosses each section (iota ~ 0.9).
+        # The labels share one left edge right of the last section, inside the column.
         cy = y + 55
+        lx = x + w - max(s.measure(t_, 6.4, .08) for t_ in ('ALONG THE RING', 'FIELD LINE'))
+        lx = min(lx, x + 394)
+        step = (lx - 34 - (x + 40)) / 4
         for i in range(5):
-            cx = x + 40 + i * 80
+            cx = x + 40 + i * step
             al = math.pi * i / 4
             pts = []
             for j in range(49):
@@ -90,9 +94,10 @@ def figure(s, side, x, y, w):
             s.poly(pts, .75, .7, close=True)
             t = .5 + math.tau * .9 * i / 5 / 2
             u = 20 * math.cos(t); v = 9 * math.sin(t)
-            s.dot(cx + u * math.cos(al) - v * math.sin(al), cy - (u * math.sin(al) + v * math.cos(al)), 2.2, .95, color=ARC)
+            dot = (cx + u * math.cos(al) - v * math.sin(al), cy - (u * math.sin(al) + v * math.cos(al)))
+            s.dot(*dot, 2.2, .95, color=ARC)
             s.ln(cx, cy - 34, cx, cy + 34, .15, .4)
             tx(s, ('0', '1/4', '1/2', '3/4', '1')[i], cx, cy + 50, 6.2, .6, align='c')
-        arrow(s, (x + 40, cy + 64), (x + 360, cy + 64), WHITE)
-        tx(s, 'ALONG THE RING', x + 370, cy + 67, 6.4, .65)
-        tx(s, 'FIELD LINE', x + 370, cy - 30, 6.4, .8, color=ARC)
+        arrow(s, (x + 40, cy + 64), (lx - 10, cy + 64), WHITE)
+        s.text_mid('ALONG THE RING', lx, cy + 64, 6.4, .08, .65)
+        s.text_mid('FIELD LINE', lx, dot[1], 6.4, .08, .8, color=ARC)

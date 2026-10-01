@@ -56,37 +56,41 @@ def figure(s, side, x, y, w):
     from century.editorial import tx, arrow
     if side == 'left':
         # Staircase of effects: 1, 2, 3 ... 14, each 2.6 C cooler than the last.
+        # Each box reads "index  temperature" on one cap-centred line: the dim
+        # effect number left, the temperature right, equal padding.
         shown = [1, 2, 3, None, 13, 14]
-        bw, bh = 46, 20
+        temps = {k: f'{70 - (k - 1) * 34 / 13:.0f} °C' for k in shown if k}
+        pad, gap = 5, 10
+        nw = max(s.measure(str(k), 6.4, .08) for k in temps)
+        bw = max(46, 2 * pad + nw + gap + max(s.measure(v, 6.4, .08) for v in temps.values()))
+        bh, step = 20, bw + 11
         for i, k in enumerate(shown):
-            bx = x + 8 + i * 58; by = y + 8 + i * 16
+            bx = x + i * step; by = y + 8 + i * 16
             if k is None:
-                for d in range(3):
-                    s.dot(bx + 14 + d * 9, by + bh / 2, 1.2, .7)
+                for d in (-1, 0, 1):
+                    s.dot(bx + bw / 2 + d * 9, by + bh / 2, 1.2, .7)
                 continue
             s.rect(bx, by, bw, bh, .75, .7)
-            t = 70 - (k - 1) * 34 / 13
-            # Enlarged type (composed profiles): the effect number sits above its box.
-            tx(s, f'{k}', bx + 5, by - 3 if s.type_growth(6.4) else by + 14, 6.4, .85)
-            tx(s, f'{t:.0f} °C', bx + bw - 4, by + 14, 6.4, .7, align='r', color=GOLD if k == 1 else WHITE)
-            nxt = shown[i + 1] if i + 1 < len(shown) else None
-            if nxt:
-                arrow(s, (bx + bw, by + bh / 2), (bx + 58, by + 16 + bh / 2 - 4), ARC)
-        arrow(s, (x + 31, y - 12), (x + 31, y + 7), GOLD)
-        tx(s, 'SUN HEAT', x + 38, y - 3, 6.4, .8, color=GOLD)
-        vx = max(x + 92, x + 46 + s.measure('SUN HEAT', 6.4, .08)) if s.type_growth(6.4) else x + 92
-        tx(s, 'VAPOUR', vx, y + 3, 6.2, .7, color=ARC)
-        tx(s, 'DISTILLATE', x + 8, y + 122, 6.4, .7)
-        s.ln(x + 8, y + 110, x + 348, y + 110, .5, .6)
+            s.text_mid(str(k), bx + pad, by + bh / 2, 6.4, .08, .45)
+            s.text_mid(temps[k], bx + bw - pad, by + bh / 2, 6.4, .08, .8, align='r', color=GOLD if k == 1 else WHITE)
+            if i + 1 < len(shown) and shown[i + 1]:
+                arrow(s, (bx + bw, by + bh / 2), (bx + step, by + 16 + bh / 2 - 4), ARC)
+        end = x + 5 * step + bw
+        sx = x + bw / 2
+        arrow(s, (sx, y - 12), (sx, y + 7), GOLD)
+        s.text_mid('SUN HEAT', sx + 7, y - 3, 6.4, .08, .8, color=GOLD)
+        s.text_mid('VAPOUR', x + step, y + 13, 6.2, .08, .7, color=ARC)
+        tx(s, 'DISTILLATE', x, y + 122, 6.4, .7)
+        s.ln(x, y + 110, end, y + 110, .5, .6)
         for i in range(6):
             if shown[i] is None:
                 continue
-            bx = x + 8 + i * 58 + 23
+            bx = x + i * step + bw / 2
             s.ln(bx, y + 8 + i * 16 + bh, bx, y + 110, .35, .5, dash=[2, 2])
-        tx(s, 'GAINED OUTPUT RATIO 12', x + 348, y + 122, 6.4, .8, align='r')
+        tx(s, 'GAINED OUTPUT RATIO 12', end, y + 122, 6.4, .8, align='r')
     else:
         # Stacked bar: 500 t seawater -> fresh water / salts / moisture, salts expanded.
-        bx = x + 8; bw = 400; scale = bw / 500.0
+        bx = x; bw = 400; scale = bw / 500.0
         by = y + 16
         s.rect(bx, by, bw, 14, .7, .7)
         tx(s, 'SEAWATER 500 t', bx, by - 6, 6.6, .85)
@@ -115,4 +119,4 @@ def figure(s, side, x, y, w):
         else:
             tx(s, 'NaCl 13.6', ex0, y + 122, 6.4, .8)
             tx(s, 'Mg 2.7 / GYPSUM 0.6 / K 0.4 / OTHER 0.2', ex0 + ew, y + 122, 6.2, .7, align='r')
-        tx(s, 'SALTS 17.5 t', ex0 - 8, y + 106, 6.6, .85, align='r', color=GOLD)
+        s.text_mid('SALTS 17.5 t', ex0 - 8, y + 102, 6.6, .08, .85, align='r', color=GOLD)

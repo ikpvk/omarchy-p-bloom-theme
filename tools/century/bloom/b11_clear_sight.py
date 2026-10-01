@@ -61,9 +61,10 @@ def figure(s, side, x, y, w):
         t0, t1 = 7.0, 16.5
         X = lambda h: x0 + (x1 - x0) * (h - t0) / (t1 - t0)
         slots = [8 + i * .2 for i in range(20)] + [13 + i * .2 for i in range(16)]
-        tx(s, 'MEASURE', x, y + 13, 6.6)
-        tx(s, 'SURGERY', x, y + 45, 6.6)
-        tx(s, 'RESTING', x, y + 86, 6.6)
+        # Row names cap-centred on their tracks (resting: the middle of its band).
+        s.text_mid('MEASURE', x, y + 10, 6.6, .08, .76)
+        s.text_mid('SURGERY', x, y + 42, 6.6, .08, .76)
+        s.text_mid('RESTING', x, y + 79, 6.6, .08, .76)
         for yy in (y + 10, y + 42, y + 92):
             s.ln(x0, yy, x1, yy, .14, .4)
         for h in slots:
@@ -78,16 +79,18 @@ def figure(s, side, x, y, w):
             n = sum(1 for h in slots if h + .25 <= t < h + 1.25)
             pts.append((X(t), y + 92 - n * unit))
         s.poly(pts, .85, .75, close=False, color=GOLD)
-        tx(s, '5', X(9.6), y + 92 - 5 * unit - 4, 6.2, .7, align='c')
+        # The peak, named just under its plateau (clear of the surgery row above).
+        s.text_mid('5 AT ONCE', X(10.7), y + 92 - 5 * unit + 9, 6.2, .08, .7, align='c')
         for h in (8, 10, 12, 14, 16):
             s.ln(X(h), y + 96, X(h), y + 101, .45, .5)
             tx(s, f'{h:02d}:00', X(h), y + 114, 6.4, .66, align='c')
-        tx(s, 'LUNCH', X(12.5), y + 29, 6.2, .6, align='c')
+        # LUNCH centred over the surgery row's gap, on the 36 EYES baseline.
+        tx(s, 'LUNCH', (X(slots[19] + 10 / 60) + X(slots[20])) / 2, y + 29, 6.2, .6, align='c')
         tx(s, '36 EYES', x1, y + 29, 6.6, .85, align='r', color=ARC)
     else:
         # Eye section: cornea, anterior chamber, lens in its capsule, globe, retina.
         import math
-        cx = x + 130; cy = y + 52; R = 46
+        cx = x + 112; cy = y + 52; R = 46
         pts = [(cx + R * math.cos(math.radians(a)), cy + R * math.sin(math.radians(a))) for a in range(28, 333, 4)]
         s.poly(pts, .7, .7, close=False)
         cor = [(cx + R * math.cos(math.radians(a)), cy + R * math.sin(math.radians(a))) for a in (28, 332)]
@@ -103,11 +106,11 @@ def figure(s, side, x, y, w):
         s.ln(cx - R, cy + 58, cx + 64, cy + 58, .5, .55)
         for xx in (cx - R, cx + 64):
             s.ln(xx, cy + 53, xx, cy + 63, .5, .55)
-        tx(s, 'L = 23.5 mm', cx + 7, cy + 76, 6.4, .75, align='c')
-        tx(s, 'K = 43.5 D', cx + 68, cy - 30, 6.4, .75)
-        tx(s, 'RETINA', cx - R - 8, cy + 3, 6.2, .6, align='r')
+        tx(s, 'L = 23.5 mm', cx + 9, cy + 76, 6.4, .75, align='c')
+        tx(s, 'K = 43.5 D', cx + 64, cy - 36, 6.4, .75)
+        s.text_mid('RETINA', cx - R - 8, cy, 6.2, .08, .6, align='r')
         # Formula block.
-        fx = x + 250
+        fx = x + 262
         tx(s, 'P = A - 2.5 L - 0.9 K', fx, y + 30, 7, .85)
         tx(s, 'A = 118.4 (LENS CONSTANT)', fx, y + 52, 6.4, .66)
         tx(s, 'P = 118.4 - 58.75 - 39.15', fx, y + 74, 6.4, .66)

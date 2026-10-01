@@ -69,7 +69,7 @@ def figure(s, side, x, y, w):
         hull = [(cx, cy - 44 * q), (cx + 7 * q, cy - 27 * q), (cx + 8 * q, cy + 30 * q), (cx + 5 * q, cy + 40 * q),
                 (cx - 5 * q, cy + 40 * q), (cx - 8 * q, cy + 30 * q), (cx - 7 * q, cy - 27 * q)]
         s.poly(hull, .5, .6, close=True)
-        tx(s, 'HEADING', cx + 10, cy + 34, 6.4, .6)
+        s.text_mid('HEADING', cx + 14, cy + 30, 6.4, .08, .6)
         awa = math.radians(110)
         frm = (-math.sin(awa), -math.cos(awa))           # from the port side, slightly aft
         to = (-frm[0], -frm[1])
@@ -77,7 +77,7 @@ def figure(s, side, x, y, w):
             ox, oy = -to[1] * k * 10, to[0] * k * 10
             sx, sy = cx + frm[0] * 128 + ox, cy + frm[1] * 128 + oy
             arrow(s, (sx, sy), (sx + to[0] * 46, sy + to[1] * 46), WHITE)
-        tx(s, 'APPARENT WIND', cx + frm[0] * 128 - 14, cy + frm[1] * 128 + 4, 6.4, .66, align='r')
+        s.text_mid('APPARENT WIND', cx + frm[0] * 128 - 14, cy + frm[1] * 128, 6.4, .08, .66, align='r')
         lift = (to[1], -to[0])
         if lift[1] > 0:
             lift = (-lift[0], -lift[1])
@@ -85,27 +85,30 @@ def figure(s, side, x, y, w):
         k = 70
         tip = (cx + k * lift[0], cy + k * lift[1])
         arrow(s, (cx, cy), tip, ARC)
-        tx(s, 'LIFT', tip[0] - 8, tip[1] + 4, 6.6, .85, align='r', color=ARC)
+        s.text_mid('LIFT', tip[0] - 8, tip[1], 6.6, .08, .85, align='r', color=ARC)
         dt = (cx + k * drag[0], cy + k * drag[1])
         arrow(s, (cx, cy), dt, WHITE)
-        tx(s, 'DRAG', cx + 14, cy + 16, 6.4, .66)
+        # Just below its short arrow, on HEADING's left edge.
+        s.text_mid('DRAG', cx + 14, cy + 9, 6.4, .08, .66)
         res = (cx + k * (lift[0] + drag[0]), cy + k * (lift[1] + drag[1]))
         s.ln(tip[0], tip[1], res[0], res[1], .35, .5, dash=[2, 3])
         thrust = -(lift[1] + drag[1]); sideforce = lift[0] + drag[0]
         arrow(s, (cx + 34, cy), (cx + 34, res[1]), GOLD)
         s.ln(res[0], res[1], cx + 34, res[1], .35, .5, dash=[2, 3])
-        tx(s, f'THRUST {thrust:.2f}', cx + 44, res[1] + 8, 6.6, .85, color=GOLD)
-        tx(s, f'SIDE FORCE {abs(sideforce):.2f}', cx + 44, res[1] + 23, 6.2, .62)
-        tx(s, 'TO WINDWARD', cx + 44, res[1] + 36, 6.2, .62)
+        # on one line with LIFT (centred on the lift tip), so the two force labels read as a pair
+        s.text_mid(f'THRUST {thrust:.2f}', cx + 44, tip[1], 6.6, .08, .85, color=GOLD)
+        tx(s, f'SIDE FORCE {abs(sideforce):.2f}', cx + 44, tip[1] + 17, 6.2, .62)
+        tx(s, 'TO WINDWARD', cx + 44, tip[1] + 30, 6.2, .62)
     else:
-        bx = x + 4; bw = 400
+        bx = x; bw = 400
         tx(s, 'THIS SHIP', bx, y + 8, 6.6, .75)
         yy = y + 16; xx = bx
         for frac, col, fill in ((.80, ARC, .16), (.17, GOLD, .16), (.03, WHITE, .10)):
             s.rect(xx, yy, bw * frac, 16, .8, .7, fill=fill, color=col); xx += bw * frac
-        tx(s, 'WIND / 570 MWh / 80 %', bx + 6, yy + 32, 6.6, .85, color=ARC)
+        tx(s, 'WIND 570 MWh / 80 %', bx, yy + 32, 6.6, .85, color=ARC)
         tx(s, 'GENERATOR 121 MWh', bx + bw * .97, yy + 32, 6.4, .8, align='r', color=GOLD)
         tx(s, 'BATTERY 21 MWh', bx + bw, yy + 47, 6.4, .7, align='r')
-        tx(s, 'SAME HULL, ENGINE ONLY', bx, y + 88, 6.6, .75)
-        s.rect(bx, y + 96, bw, 16, .5, .7, fill=.05)
-        tx(s, 'FUEL / 713 MWh', bx + 6, y + 128, 6.6, .75)
+        # Lifted a little so FUEL keeps clear of the caption with enlarged type.
+        tx(s, 'SAME HULL, ENGINE ONLY', bx, y + 84, 6.6, .75)
+        s.rect(bx, y + 92, bw, 16, .5, .7, fill=.05)
+        tx(s, 'FUEL 713 MWh', bx, y + 124, 6.6, .75)

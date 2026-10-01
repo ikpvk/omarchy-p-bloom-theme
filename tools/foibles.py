@@ -91,13 +91,8 @@ def proxy(size):
     with auxiliary_panel(s, 'C', lx, rx):
         from right_aux_panels import owner as owner_panel
         owner_panel(s,rx)
-    with auxiliary_panel(s, 'plot', lx, rx):
-        x0, y0, w_, h_ = rx - 170, 600, 260, 150
-        s.chart(x0, y0, w_, h_, "RUNS PER WEEK, ILLUSTRATIVE", lambda t: 0.30 + 0.62 * (1 - math.exp(-3.2 * t)), "MONTHS WITH PX-1, 0 – 12", "")
-        s.poly([(x0 + w_ * i / 60, y0 + h_ * (1 - (0.30 - 0.22 * (i / 60.0) ** 0.8))) for i in range(61)], 0.8, 0.9, close=False, dash=[4, 3])
-        s.text("RUNS WHEN THEY CHOOSE", x0 + w_ - 4, y0 + 8, 6, a=0.9, align="r", color=ARC)
-        # Enlarged type (composed profiles) would reach the dashed curve: higher.
-        s.text("RUNS CANCELLED, NO GUIDE", x0 + w_ - 4, y0 + h_ - (52 if s.type_growth(6) else 34), 6, a=0.7, align="r")
+    from original_charts import draw as right_chart
+    right_chart(s)
     original_diagrams(s)
     return s
 

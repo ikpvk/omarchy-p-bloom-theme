@@ -56,7 +56,9 @@ def figure(s, side, x, y, w):
     if side == 'left':
         # Four stations: parent colony, tree, cut, tray -> reef. Icons are drawn.
         cy = y + 46
-        xs = [x + 30, x + 140, x + 250, x + 360]
+        # The first station's name is the widest: keep it inside the column.
+        x0 = x + max(30, s.measure('SURVIVOR', 6.6, .08) / 2 + 2)
+        xs = [x0 + (x + 360 - x0) * k / 3 for k in range(4)]
 
         def bush(cx, by, k=1.0, col=WHITE, a=.8):
             s.poly([(cx, by), (cx, by - 18 * k)], a, .8, close=False, color=col)
@@ -89,22 +91,20 @@ def figure(s, side, x, y, w):
         for xx, (a_, b_) in zip(xs, labels):
             tx(s, a_, xx, y + 4, 6.6, .85, align='c')
         for xx, (a_, b_) in zip(xs, labels):
-            if a_ != 'CUT':
-                tx(s, b_, xx, cy + 70, 6.4, .66, align='c')
-        # Enlarged type (composed profiles) would reach the TRAY note: one line lower.
-        grow = s.readable_size(6.4) * 1.3 if s.type_growth(6.4) else 0
-        tx(s, labels[2][1], xs[2] + 36, cy + 70 + grow, 6.4, .66, align='c')
+            tx(s, b_, xx, cy + 70, 6.4, .66, align='c')
     else:
         # Declared temperature schedule: 3 days ramp, 10 days hold, 3 days return.
-        px = x + 58; pw = 300; top = y + 8; h = 92
+        legend = max(s.measure(t_, 6.4, .08) for t_ in ('COLOUR KEPT', 'BLEACHED', 'RECOVERS'))
+        px = x + 58; top = y + 8; h = 92
+        pw = min(300, x + w - legend - 16 - 22 - px)
         days = 17
         X = lambda d: px + pw * d / days
         Y = lambda t: top + h * (1 - t / 4)          # t = degC above MMM, 0..4
         s.poly([(px, top - 4), (px, top + h), (px + pw, top + h)], .48, .55, close=False)
         for t in (1, 2, 3):
             s.ln(px, Y(t), px + pw, Y(t), .12, .4)
-        tx(s, 'MMM', px - 8, Y(0) + 3, 6.4, .6, align='r')
-        tx(s, '+3 °C', px - 8, Y(3) + 3, 6.4, .8, align='r', color=GOLD)
+        s.text_mid('MMM', px - 8, Y(0), 6.4, .08, .6, align='r')
+        s.text_mid('+3 °C', px - 8, Y(3), 6.4, .08, .8, align='r', color=GOLD)
         pts = [(X(0), Y(0)), (X(1), Y(0)), (X(4), Y(3)), (X(14), Y(3)), (X(16), Y(0)), (X(17), Y(0))]
         s.poly(pts, .85, .85, close=False, color=GOLD)
         for d in (1, 4, 14, 16):
@@ -116,8 +116,8 @@ def figure(s, side, x, y, w):
         ox = px + pw + 22
         s.circ(ox + 5, top + 22, 5, .85, .8, color=ARC)
         s.circ(ox + 5, top + 22, 2.4, .6, .6, color=ARC)
-        tx(s, 'COLOUR KEPT', ox + 16, top + 25, 6.4, .8)
+        s.text_mid('COLOUR KEPT', ox + 16, top + 22, 6.4, .08, .8)
         tx(s, 'PARENT', ox + 16, top + 38, 6.2, .6)
         s.circ(ox + 5, top + 66, 5, .45, .6, dash=[1.5, 1.5])
-        tx(s, 'BLEACHED', ox + 16, top + 69, 6.4, .66)
+        s.text_mid('BLEACHED', ox + 16, top + 66, 6.4, .08, .66)
         tx(s, 'RECOVERS', ox + 16, top + 82, 6.2, .55)

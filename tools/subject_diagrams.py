@@ -95,13 +95,13 @@ def quantum(p):
     for i in range(5):
         y=57+i*20;p.l(25,y,340,y,.22,.4);p.t('s'+str(i),4,y+2,5.5)
     for j in range(8):
-        x=40+j*41;p.l(x,49,x,148,.15,.4)
+        x=40+j*41;p.l(x,49,x,143,.15,.4)
         for i in range(5):p.c(x,57+i*20,1.3,.35,.4)
     for x,y in [(81,77),(163,97),(245,117),(327,77)]:p.c(x,y,4,.9,.9,ARC)
     p.p([(81,77),(122,77),(122,97),(163,97)],col=ARC)
     p.p([(245,117),(286,117),(286,77),(327,77)],col=GOLD)
-    p.t('PAIR',371,78);p.t('DECODE',371,102);p.t('CHECK',371,126)
-    p.a(40,163,328,163);p.t('SUCCESSIVE CHECK ROUNDS',180,177,5.5,align='c')
+    p.t('PAIR',371,76);p.t('DECODE',371,100);p.t('CHECK',371,124)
+    p.a(40,152,328,152);p.t('SUCCESSIVE CHECK ROUNDS',184,166,5.5,align='c')
 
 @figure('sky-racer','BANKING SPENDS LIFT','THRUST DIRECTION / THREE SCRIPTED ATTITUDES','Vector construction only; no flight envelope or controller tuning.')
 def sky(p):
@@ -122,7 +122,7 @@ def fusion(p):
     for x in range(35,86,10):p.l(x,70,x,109,.4)
     p.r([(18,74),(18,58),(96,58),(96,74)],.35,.5,r=7)
     p.r([(18,106),(18,123),(96,123),(96,106)],.35,.5,r=7)
-    p.t('HOT LOOP',55,151,6,align='c');p.a(90,76,135,76)
+    p.t('HOT LOOP',55,153,6,align='c');p.a(90,76,135,76)
     p.r([(135,76),(150,76),(150,134),(386,134),(386,61),(150,61)],col=ARC)
     for n in range(4):
         x=170+n*55;p.r([(x,72),(x+36,72),(x+36,120),(x,120)],close=True)
@@ -158,23 +158,24 @@ def cortical(p):
         for j in range(6):
             x=321+j*17;y=52+row*30;p.r([(x,y),(x+11,y),(x+11,y+16),(x,y+16)],.45,.5,close=True)
             p.l(x+3,y+4,x+8,y+12,.7,.7,col=ARC if (j+row)%3 else WHITE)
-    p.t('TIME-SLICED RECORD',366,161,5.8,align='c')
+    p.t('TIME-SLICED RECORD',366,150,5.8,align='c')
 
 @figure('bounder','LOAD BEFORE LAUNCH','SPRING COMPRESSION / GEOMETRIC STATE STUDY','The mounting stays on the boot; compression changes spring length.')
 def bounder(p):
     for i,(span,label) in enumerate([(105,'UNLOADED'),(58,'LOADED'),(87,'RELEASING')]):
-        x=20+i*147;p.l(x+10,64,x+10,137,.6,1);p.l(x+10+span,64,x+10+span,137,.6,1)
-        p.coil(x+10,98,span,26)
-        p.l(x+10,146,x+10+span,146,.36,.5);p.ticks(x+10,146,2,span)
-        p.t(label,x+64,166,5.8,align='c')
-        if i==1:p.a(x+120,76,x+span+18,76)
-        if i==2:p.a(x+span+12,76,x+129,76)
+        x=10+i*150;p.l(x,64,x,137,.6,1);p.l(x+span,64,x+span,137,.6,1)
+        p.coil(x,98,span,26)
+        p.l(x,146,x+span,146,.36,.5);p.ticks(x,146,2,span)
+        p.t(label,x+span/2,166,5.8,align='c')
+        # Load pushes the free plate in; release lets it out. Same arrow, same gap.
+        if i==1:p.a(x+span+34,76,x+span+8,76)
+        if i==2:p.a(x+span+8,76,x+span+34,76)
 
 @figure('air-refinery','CARBON HAS TO COME FROM SOMEWHERE','ATOM INVENTORY / SYMBOLIC, NOT A REACTION BALANCE','Carbon feedstock and process energy are different requirements.')
 def air(p):
     for y in (71,119):
         p.c(36,y,8);p.c(66,y,7,.85,.7,ARC);p.c(96,y,8);p.l(44,y-2,59,y-2);p.l(44,y+2,59,y+2);p.l(73,y-2,88,y-2);p.l(73,y+2,88,y+2)
-    p.t('CAPTURED CO2',66,157,6,align='c')
+    p.t('CAPTURED CO₂',66,157,6,align='c')
     p.a(140,95,238,95);p.p([(165,57),(186,57),(177,70),(199,70),(181,87)],col=GOLD)
     p.t('ENERGY',210,52,5.5)
     chain=[(268+i*32,93+(-10 if i%2 else 10)) for i in range(5)]
@@ -194,20 +195,20 @@ def aroma(p):
     p.r([(24,122),(284,122),(319,100),(346,100)],col=ARC)
     p.r([(24,132),(287,132),(322,111),(346,111)])
     for i in range(6):p.l(354+i*10,96-i*2,354+i*10,115+i*2,.45,.5,col=ARC)
-    p.r([(179,132),(179,151),(296,151)],col=GOLD);p.a(296,151,335,151,GOLD)
-    p.t('CARRIER + METERED DOSES',134,171,5.8,align='c');p.t('PURGE',362,155,5.8)
+    p.r([(214,132),(214,151),(296,151)],col=GOLD);p.a(296,151,335,151,GOLD)
+    p.t('CARRIER + METERED DOSES',24,147+p.s.type_growth(5.8),5.8);p.t('PURGE',362,155,5.8)
 
 @figure('tether-climber','POWER HAS A FOOTPRINT','BEAM / RECEIVER ALIGNMENT STUDY','Receiver pointing and ribbon traction solve different problems.')
 def tether(p):
     p.r([(23,132),(53,132),(45,115),(32,115)],close=True)
-    p.p([(37,115),(163,47),(265,47),(42,115)],.45,.55,col=ARC)
-    p.l(168,47,263,47,.8,1.4)
-    for i in range(9):p.l(175+i*10,41,175+i*10,54,.5,.55)
-    for x in (297,306):p.l(x,43,x,153,.65,1)
+    p.p([(37,115),(163,55),(265,55),(42,115)],.45,.55,col=ARC)
+    p.l(168,55,263,55,.8,1.4)
+    for i in range(9):p.l(175+i*10,49,175+i*10,62,.5,.55)
+    for x in (297,306):p.l(x,43,x,148,.65,1)
     for y in (74,119):
         p.c(285,y,12);p.c(318,y,12);p.l(263,y,273,y,.6,.8)
     p.a(350,136,350,59);p.t('UP',369,93,6)
-    p.t('BEAM',73,159);p.t('RECEIVER',211,94,5.8,align='c');p.t('RIBBON CONTACT',302,171,5.8,align='c')
+    p.t('BEAM',118,107);p.t('RECEIVER',215.5,42,5.8,align='c');p.t('RIBBON CONTACT',302,166,5.8,align='c')
 
 @figure('tether-ribbon','ONE FIBRE IS NOT A RIBBON','STAGGERED FIBRE ENDS / CONCEPTUAL LOAD SHARING','Overlapping bundles distribute load; this is not a strength prediction.')
 def ribbon(p):
@@ -218,9 +219,9 @@ def ribbon(p):
         p.l(cut-6,y-2,cut-1,y+2,.5,.6);p.l(cut+2,y-2,cut+7,y+2,.5,.6)
     for x in (81,221,353):
         p.p([(x,49),(x-7,45),(x+23,45),(x+16,49)],.45,.55)
-        p.l(x+8,151,x+8,159,.3,.45)
-    p.a(35,166,137,166);p.a(390,166,287,166)
-    p.t('BUNDLES / OFFSET JOINTS',218,176+.72*p.s.type_growth(5.5),5.5,align='c')
+        p.l(x+8,148,x+8,153,.3,.45)
+    p.a(35,162,137,162);p.a(390,162,287,162)
+    p.t('BUNDLES / OFFSET JOINTS',212,164.5+.5*p.s.type_growth(5.5),5.5,align='c')
 
 @figure('truth-lamp','A DELAY BEFORE THE DAMAGE','SCRIPTED DINNER EVENT / NOT A DETECTION BENCHMARK','Three seconds between the claim and the social consequences.')
 def truth(p):
@@ -243,7 +244,7 @@ def organ(p):
     for x in range(104,380,18):
         p.c(x,137-(x%3)*3,2,.3,.4)
     p.a(3,114,29,114);p.a(405,111,435,111)
-    p.t('SUPPLY',24,172,5.8);p.t('DISTRIBUTED CHANNELS',226,172,5.8,align='c');p.t('RETURN',430,172,5.8,align='r')
+    p.t('SUPPLY',3,166,5.8);p.t('DISTRIBUTED CHANNELS',226,166,5.8,align='c');p.t('RETURN',435,166,5.8,align='r')
 
 @figure('volumetric-stage','A POINT NEEDS AN ADDRESS','THREE SELECTED PLANES / SYMBOLIC VOXEL ADDRESS','The intersection names a point; illumination still needs a medium.')
 def stage(p):
@@ -269,7 +270,7 @@ def stage(p):
     p.c(*c,4,.95,1,ARC);p.c(*c,8,.35,.45,ARC)
     p.r([(218,99),(320,99),(338,90),(360,90)],.4,.5,r=5)
     p.t('SELECTED',365,85,7);p.t('VOXEL',365,99,7)
-    p.t('ROW',51,177,7);p.t('COLUMN',161,177,7);p.t('DEPTH',278,177,7)
+    p.t('ROW',36,95,7,align='r');p.t('DEPTH',102,47,7,align='r');p.t('COLUMN',272,43,7)
 
 
 @figure('proxy','A KERB, THREE SECONDS AHEAD','CUE PATH / ILLUSTRATIVE TIMING','Two pulses in the hand, one word in the ear. The runner takes the step.')
@@ -287,7 +288,7 @@ def proxy(p):
     p.a(137,95,162,95);p.a(235,95,286,95)
     p.r([(302,57),(398,57),(412,70),(412,143),(302,143)],close=True)
     p.t('KERB AHEAD',315,77,6);p.t('3 s / 8 m',315,101,10);p.t('STEP UP',315,125,6,col=ARC)
-    p.t('CHEST SENSORS',73,169,6,align='c');p.t('CUE BAND',198,169,5.8,align='c');p.t("RUNNER'S HAND",356,169,6,align='c')
+    p.t('CHEST SENSORS',73,166,6,align='c');p.t('CUE BAND',198,166,6,align='c');p.t("RUNNER'S HAND",356,166,6,align='c')
 
 @figure('presence-rig','WHERE THE FLOOR PUSHES BACK','CONTACT PATCH / SCRIPTED CENTRE-OF-PRESSURE STUDY','A force target is not a licence to pull the occupant off balance.')
 def presence(p):
@@ -299,7 +300,7 @@ def presence(p):
     p.p([(116,98),(142,111),(181,92),(220,87)],col=ARC);p.c(181,92,4,.9,.8,ARC)
     p.a(181,92,180,44);p.a(181,92,271,116)
     p.t('CONTACT',330,72,6);p.t('FORCE',330,98,6);p.t('RELEASE',330,124,6)
-    p.t('BALANCE ENVELOPE / NOT A GAIT MEASUREMENT',167,170,5.5,align='c')
+    p.t('BALANCE ENVELOPE / NOT A GAIT MEASUREMENT',171,166,5.5,align='c')
 
 @figure('light-sail','LIGHT TURNS, THE SAIL REACTS','REFLECTION GEOMETRY / LOCAL MEMBRANE SECTION','Force follows momentum transfer; the dashed line is the normal.')
 def sail(p):
@@ -309,23 +310,23 @@ def sail(p):
     for i in range(3):
         y=67+i*21;x=249-i*23;p.a(26,y,x,y);p.a(x,y,x,151)
     p.a(211,99,321,53,GOLD)
-    p.t('INCIDENT',44,49,6);p.t('REFLECTED',330,170,7);p.t('SAIL FORCE',327,52,6)
+    p.t('INCIDENT',44,49,6);p.t('REFLECTED',226,166,6,align='c');p.t('SAIL FORCE',327,52,6)
 
 @figure('tidal-loom','THE FLOW COMES BACK','REVERSING CURRENT / TWO ILLUSTRATIVE ROTOR STATES','Same seabed mounting; the direction of the water changes.')
 def tidal(p):
     for i in range(2):
-        x=104+i*234;p.c(x,99,40,.4);p.c(x,99,9,.8,.8)
+        x=104+i*234;cy=93;p.c(x,cy,40,.4);p.c(x,cy,9,.8,.8)
         for a in (0,120,240):
             a=math.radians(a+i*25);pts=[]
-            for r,t in [(10,0),(37,.17),(43,.42),(16,.32)]:pts.append((x+r*math.cos(a+t),99+r*math.sin(a+t)))
+            for r,t in [(10,0),(37,.17),(43,.42),(16,.32)]:pts.append((x+r*math.cos(a+t),cy+r*math.sin(a+t)))
             p.r(pts,.7,.7,col=ARC if i else WHITE,close=True)
-        p.r([(x-9,139),(x-14,157),(x+14,157),(x+9,139)],close=True)
-        p.c(x,99,44,.23,.45)
-        for off in (-8,8):p.screw(x+off,151,1.5)
-        if i:p.a(x+54,62,x-53,62)
-        else:p.a(x-53,62,x+54,62)
-        p.t('RETURN' if i else 'FLOOD',x,174,6,align='c')
-    p.l(184,99,255,99,.3,.55,dash=[3,4]);p.t('SLACK',218,119,5.8,align='c')
+        p.r([(x-9,cy+40),(x-14,cy+58),(x+14,cy+58),(x+9,cy+40)],close=True)
+        p.c(x,cy,44,.23,.45)
+        for off in (-8,8):p.screw(x+off,cy+52,1.5)
+        if i:p.a(x+54,cy-37,x-53,cy-37)
+        else:p.a(x-53,cy-37,x+54,cy-37)
+        p.t('RETURN' if i else 'FLOOD',x,166,6,align='c')
+    p.l(184,93,255,93,.3,.55,dash=[3,4]);p.t('SLACK',219.5,113,5.8,align='c')
 
 @figure('manta-foil','TRIM THE FOIL, KEEP THE HULL LEVEL','FOIL SECTION / CONTROL-SURFACE CONCEPT','Streamlines illustrate direction, not a computed fluid solution.')
 def manta(p):
@@ -335,8 +336,8 @@ def manta(p):
     for dy in (-26,31):p.r([(24,112+dy),(95,102+dy),(184,108+dy),(290,119+dy),(413,120+dy)],.4,.55,col=ARC)
     p.l(12,42,425,42,.3,.6);p.a(178,87,178,54,GOLD)
     if p.s.layer_mode:  # enlarged type: label the strut from its open side
-        p.t('STRUT',108,55,5.8,align='r');p.t('HINGED TRIM',348,157+.72*p.s.type_growth(5.8),5.8,align='c')
-    else:p.t('STRUT',149,55,5.8);p.t('HINGED TRIM',348,157,5.8,align='c')
+        p.t('STRUT',108,55,5.8,align='r');p.t('HINGED TRIM',348,163+.72*p.s.type_growth(5.8),5.8,align='c')
+    else:p.t('STRUT',149,55,5.8);p.t('HINGED TRIM',348,163,5.8,align='c')
 
 @figure('sock-oracle','MATCH THE WEAVE, NOT THE EXCUSE','THREE SPECIMENS / FICTIONAL PAIRING EXAMPLE','A similar stripe does not establish ownership or a missing mate.')
 def socks(p):
@@ -352,11 +353,12 @@ def socks(p):
 @figure('memory-kiln','FOCUS BELOW THE SURFACE','OPTICAL READBACK / EXPLODED GLASS PLANES','The reading optics must find the written layer and orientation.')
 def memory(p):
     for j in range(4):
-        y=91+j*17;p.p([(70,y),(245,y-31),(358,y-8),(184,y+26)],.35,.6,close=True)
+        y=85+j*16;p.p([(70,y),(245,y-31),(358,y-8),(184,y+26)],.35,.6,close=True)
         for k in range(5):p.l(157+k*23,y+6-k*4,160+k*23,y+9-k*4,.6,.8,col=ARC)
-    p.e(181,48,32,7);p.l(149,48,189,117,.5,.65,col=GOLD);p.l(213,48,189,117,.5,.65,col=GOLD)
-    p.c(189,117,4,.9,.8,ARC);p.a(196,117,385,71)
-    p.t('FOCUS',103,50,5.8);p.t('READBACK',378,56,5.8,align='c');p.t('DEPTH-SELECTED LAYER',206,177,5.8,align='c')
+    f=110  # focus point, inside the second plane
+    p.e(181,42,32,7);p.l(149,42,189,f,.5,.65,col=GOLD);p.l(213,42,189,f,.5,.65,col=GOLD)
+    p.c(189,f,4,.9,.8,ARC);p.a(196,f,385,65)
+    p.t('FOCUS',103,44,5.8);p.t('READBACK',378,50,5.8,align='c');p.t('DEPTH-SELECTED LAYER',214,171,5.8,align='c')
 
 @figure('lunar-porch','THE SEAL GETS ITS OWN TEST','DOCKING LIP / TWO SEALS AND A TEST PORT','A leak-check port samples the space between the seals.')
 def lunar(p):
@@ -369,7 +371,7 @@ def lunar(p):
     p.c(330,45,11.5,.35,.45)
     for a in (160,200,240,280,320):
         t=math.radians(a);p.l(330+6*math.cos(t),45+6*math.sin(t),330+7.5*math.cos(t),45+7.5*math.sin(t),.45,.45)
-    p.t('SUIT SIDE',79,155,6);p.t('CABIN SIDE',313,155,6);p.t('TEST PORT',353,47,5.7)
+    p.t('SUIT SIDE',115.5,155,6,align='c');p.t('CABIN SIDE',313.5,155,6,align='c');p.t('TEST PORT',353,47,5.7)
 
 @figure('fibre-braid','THE CARRIERS HAVE RIGHT OF WAY','COUNTER-ROTATING PATHS / TOPOLOGICAL STUDY','Opposite handedness requires crossing paths with scheduled clearance.')
 def fibre(p):
@@ -380,7 +382,7 @@ def fibre(p):
         a=i*math.tau/10;x=222+150*math.cos(a);y=102+48*math.sin(a)*math.cos(a)
         p.r([(x-4,y-4),(x+4,y-4),(x+4,y+4),(x-4,y+4)],.8,.6,close=True)
     p.c(222,102,15,.65,.7,GOLD);p.l(222,82,222,49,.35,.5)
-    p.t('CROSSING CLEARANCE',222,42,5.8,align='c');p.t('TWO CARRIER FAMILIES',222,171,5.8,align='c')
+    p.t('CROSSING CLEARANCE',222,42,5.8,align='c');p.t('TWO CARRIER FAMILIES',222,152,5.8,align='c')
 
 @figure('advice-filter','THE SHUTTER DOES THE INTERRUPTING','MECHANICAL SPEAKER GATE / TWO POSITIONS','The release belongs to the listener, not the louder speaker.')
 def advice(p):
@@ -404,7 +406,7 @@ def petal(p):
         p.l(x+10,150,x+53,150,.6,1)
         p.a(x+31,94+off,372,61,ARC)
     p.l(33,90,314,90,.45,.55,dash=[3,3]);p.c(377,59,5,.8,.8,ARC)
-    p.t('COMMON FOCUS',370,42,5.8,align='c');p.t('INDEPENDENT PISTON ADJUSTMENT',188,171,5.8,align='c')
+    p.t('COMMON FOCUS',377,42,5.8,align='c');p.t('INDEPENDENT PISTON ADJUSTMENT',173.5,166,5.8,align='c')
 
 @figure('quiet-stair','THE DECK MUST STAY LOCKED','LATCH SECTION / MANUAL RELEASE ACCESS','The latch carries the hold; the release remains accessible.')
 def quiet(p):
@@ -422,21 +424,21 @@ def quiet(p):
     p.r([(168,65),(251,45),(372,45),(397,62)],.7,.8,col=GOLD,r=15)
     p.r([(386,64),(399,58),(407,71),(394,77)],.8,.8,close=True,r=5)
     p.l(226,116,284,116,.4,.45);p.t('BEARING FACE',291,119,7)
-    p.t('PULL TO RELEASE',354,165,7,align='c');p.t('RETURN SPRING',69,168,7,align='c')
+    p.t('PULL TO RELEASE',354,166,7,align='c');p.t('RETURN SPRING',69,166,7,align='c')
 
 
 @figure('wind-kite','DEPOWER FOR THE RETURN','WING SECTION / TETHER LOAD DIRECTION','The return stroke changes wing attitude, not the sign of the wind.')
 def wind(p):
     for i,ang in enumerate((-.2,.52)):
-        x=111+i*226;y=91
+        x=111+i*226;y=86
         pts=[(-67,1),(-45,-13),(-8,-16),(28,-10),(72,4),(20,9),(-43,8)]
         p.r([(x+u*math.cos(ang)-v*math.sin(ang),y+u*math.sin(ang)+v*math.cos(ang)) for u,v in pts],.75,.8,close=True,col=ARC if i==0 else WHITE,r=24)
         # Bridle pickups follow the rotated lower wing surface.
         pickups=[(x+u*math.cos(ang)-v*math.sin(ang),y+u*math.sin(ang)+v*math.cos(ang)) for u,v in ((-27,8.25),(28,8.2))]
         p.p([pickups[0],(x,y+60),pickups[1]],.45,.6)
-        p.a(x,y+60,x+29,y+79)
-        p.t('POWERED' if i==0 else 'DEPOWERED',x,48,6,align='c')
-    p.t('BRIDLE LOAD',219,178,5.8,align='c')
+        p.a(x,y+60,x+23,y+75)
+        p.t('POWERED' if i==0 else 'DEPOWERED',x,43,6,align='c')
+    p.t('BRIDLE LOAD',224,163,5.8,align='c')
 
 @figure('coral-cradle','HOLD THE BASE, LEAVE ROOM TO GROW','ATTACHMENT SECTION / ILLUSTRATIVE FRAGMENT','Hardware contacts the dead base; living tissue stays clear.')
 def coral(p):
@@ -447,7 +449,7 @@ def coral(p):
     for x in (146,260):p.r([(x-9,105),(x+9,105),(x+9,129),(x-9,129)],.65,.7,close=True)
     p.l(166,91,124,63,.35,.5);p.t('CLEARANCE',56,58,5.8)
     p.l(231,124,354,110,.35,.5);p.t('BASE ONLY',365,109,5.8)
-    p.t('FLOW-THROUGH SUPPORT',209,173,5.8,align='c')
+    p.t('FLOW-THROUGH SUPPORT',205,166,5.8,align='c')
 
 @figure('dune-skimmer','THE FOOTPRINT IS ADJUSTABLE','TREAD CONTACT / TWO GEOMETRIC WIDTHS','Same wheel load, different contact width; sinkage is not predicted.')
 def dune(p):
@@ -457,7 +459,7 @@ def dune(p):
             y=63+j*10;p.p([(x-w/2+5,y+4),(x-3,y),(x-3,y+5)],.7,.75,col=ARC)
             p.p([(x+3,y+5),(x+3,y),(x+w/2-5,y+4)],.7,.75)
         p.l(x-w/2,153,x+w/2,153,.35,.5);p.ticks(x-w/2,153,2,w)
-        p.t('NARROW' if i==0 else 'WIDENED',x,174,6,align='c')
+        p.t('NARROW' if i==0 else 'WIDENED',x,168,6,align='c')
     p.a(175,102,238,102)
 
 @figure('meeting-buoy','PROCEDURAL ESCALATION','CAM AND FLAG FOLLOWER / CONCEPT SECTION','When the cam runs out of patience, the flag goes up.')
@@ -492,7 +494,7 @@ def seam(p):
     for dx in (0,8,16):p.p([(292+dx,98),(242+dx,146),(203+dx*.25,116)],.65,.6,col=ARC)
     p.r([(198,116),(204,112),(211,115)],.95,1,col=GOLD,r=1)
     p.a(339,59,402,59);p.t('SCAN',370,47,7,align='c')
-    p.t('BEAD / ROOT / FUSION FACES',220,175,7,align='c')
+    p.t('BEAD / ROOT / FUSION FACES',208,167,7,align='c')
 
 
 @figure('queue-garden','ONE CLICK, ONE COMPLETED TURN','RATCHET AND PAWL / LEAF RECORD MECHANISM','The leaf latches an event; it does not forecast the next one.')
@@ -525,10 +527,10 @@ def compliment(p):
 @figure('neutrino-bell','DO THE CLOCKS AGREE?','SCRIPTED SENSOR HITS / NOT PARTICLE EVENT DATA','Coincidence is timing evidence; background can also coincide.')
 def neutrino(p):
     for i,events in enumerate(((62,178,202,333),(104,183,288),(44,189,254,361))):
-        y=61+i*35;p.t('PMT '+str(i+1),0,y+3,5.5);p.l(53,y,426,y,.3,.5)
+        y=61+i*35;p.s.text_mid('PMT '+str(i+1),0,y,5.5,track=.065,a=.68);p.l(53,y,426,y,.3,.5)
         for x in events:p.p([(x+53,y),(x+53,y-14),(x+55,y)],.75,.75,col=ARC if 170<x<205 else WHITE)
     p.p([(224,39),(224,152),(264,152),(264,39)],.5,.55,col=GOLD)
-    p.t('COINCIDENCE WINDOW',244,172,5.8,align='c')
+    p.t('COINCIDENCE WINDOW',244,166,5.8,align='c')
 
 @figure('sleep-cocoon','SUPPORTS BEFORE SCORES','ARTICULATED SUPPORT SECTION / NO CLINICAL CLAIM','Head, pelvis and feet have separate supports and a manual release.')
 def sleep(p):
@@ -539,7 +541,7 @@ def sleep(p):
     p.r([(170,92),(232,91),(236,102),(167,103)],.75,.7,close=True)
     p.r([(316,115),(390,95),(395,106),(312,125)],.75,.7,close=True)
     p.r([(51,148),(128,156),(260,153),(409,145)],.45,.6,col=GOLD);p.c(416,145,6,.8,.7,GOLD)
-    p.t('HEAD',65,49,6,align='c');p.t('PELVIS',202,75,6,align='c');p.t('FEET',355,78,6,align='c')
+    p.t('HEAD',65,51,6,align='c');p.t('PELVIS',202,75,6,align='c');p.t('FEET',355,88,6,align='c')
 
 @figure('plant-alibi','THE METER IS NOT THE ROOT','IRRIGATION SECTION / ILLUSTRATIVE WETTING FRONT','Recorded flow does not prove root uptake or plant health.')
 def plant(p):
@@ -575,7 +577,7 @@ def draw(s,side):
     x=140 if side=='left' else s.W-650
     from triptych import diagram_y,register_section
     lines=s.wrap(foot,440,5.8,.065)
-    foot_y=180 if key=='aroma-organ' else 186
+    foot_y=186
     lead=9
     if s.layer_mode:  # enlarged type: proportional leading, foot moves down
         foot_y+=1.3*s.type_growth(5.8);lead=max(9,s.readable_size(5.8)*1.3)

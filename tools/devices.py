@@ -229,9 +229,8 @@ def organ_foundry(size):
         micro_details.advance_legacy_rng(s,'capillaries')
         s.end_clip()
         s.view_label(dx, dy + 190, "B", "CAPILLARY BED", "SCALE 200 : 1")
-    with auxiliary_panel(s, 'plot', lx, rx):
-        s.chart(rx - 170, 600, 260, 150, "FILTRATION RATE",
-                lambda t: 0.05 + 0.9 / (1 + math.exp(-(t - 0.55) * 11)), "DAY 0 – 21", "ml / min")
+    from original_charts import draw as right_chart
+    right_chart(s)
     with auxiliary_panel(s, 'C', lx, rx):
         from right_aux_panels import kidney as kidney_panel
         kidney_panel(s,rx)
@@ -367,9 +366,8 @@ def quantum_simulator(size):
     with auxiliary_panel(s, 'B', lx, rx):
         from surface_code import draw as draw_surface_code
         draw_surface_code(s,lx)
-    with auxiliary_panel(s, 'plot', lx, rx):
-        s.chart(rx - 170, 600, 260, 150, "LOGICAL ERROR RATE",
-                lambda t: 0.03 + 0.93 * math.exp(-4.2 * t), "CODE DISTANCE 3 – 25", "LOG SCALE")
+    from original_charts import draw as right_chart
+    right_chart(s)
     with auxiliary_panel(s, 'C', lx, rx):
         if hardware_study:
             if radial_study:
@@ -608,21 +606,8 @@ def cortical_mesh(size):
         # Preserve the legacy RNG stream used by the existing activity raster.
         for _ in range(22):s.rng.uniform(-6,6)
         for _ in range(13):s.rng.uniform(-10,10)
-    with auxiliary_panel(s, 'plot', lx, rx):
-        ry0 = 600
-        s.text("UNIT ACTIVITY", rx - 170, ry0 - 14, 7.5, a=0.8)
-        for row in range(14):
-            y = ry0 + row * 11
-            t = 0.0
-            col = ARC if row == 5 else WHITE
-            rate = s.rng.uniform(6, 30)
-            while True:
-                t += s.rng.expovariate(1 / rate)
-                if t > 260:
-                    break
-                s.ln(rx - 170 + t, y, rx - 170 + t, y + 7, 0.8, 0.6, color=col)
-        s.ln(rx - 170, ry0 + 160, rx + 90, ry0 + 160, 0.5, 0.5)
-        s.text("14 OF 1 048 576 CHANNELS / 0 – 500 ms", rx + 90, ry0 + 176, 6, a=0.4, align="r")
+    from original_charts import draw as right_chart
+    right_chart(s)
     with auxiliary_panel(s, 'C', lx, rx):
         from right_aux_panels import node
         node(s,rx)
@@ -746,12 +731,8 @@ def fusion_transport(size):
     with auxiliary_panel(s, 'B', lx, rx):
         from fusion_transit import draw as draw_transit
         draw_transit(s,lx)
-    with auxiliary_panel(s, 'plot', lx, rx):
-        def speed(t):
-            up = 1 / (1 + math.exp(-(t - 0.16) * 30))
-            down = 1 / (1 + math.exp((t - 0.84) * 30))
-            return 0.08 + 0.84 * up * down
-        s.chart(rx - 170, 640, 260, 110, "SPEED RELATIVE TO THE SUN", speed, "DAY 0 – 75", "km/s")
+    from original_charts import draw as right_chart
+    right_chart(s)
     with auxiliary_panel(s, 'C', lx, rx):
         qx, qy = rx + 40, 255
         hardware_view(s,'fusion-transport-front',qx,qy,520,355)
@@ -885,9 +866,8 @@ def air_refinery(size):
         s.text('200 nm',dx-80,dy+160,6.5,a=.8,align='c')
         micro_details.advance_legacy_rng(s,'pellet')
         s.view_label(dx, dy + 190, "B", "BED PELLET", "ENZYMES FIXED IN POROUS SILICA")
-    with auxiliary_panel(s, 'plot', lx, rx):
-        s.chart(rx - 170, 670, 260, 100, "FUEL OUTPUT OVER ONE DAY",
-                lambda t: 0.05 + 0.88 * math.exp(-(((t - 0.52) / 0.2) ** 2)), "HOUR 0 – 24", "t / h")
+    from original_charts import draw as right_chart
+    right_chart(s)
     with auxiliary_panel(s, 'C', lx, rx):
         from right_panel_studies import refinery as refinery_process
         refinery_process(s,rx)
