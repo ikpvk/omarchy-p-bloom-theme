@@ -1,46 +1,29 @@
-<p align="center">
-  <img src="previews/hero.webp" alt="p(bloom), an Omarchy theme: a blueprint lights up tile by tile, a machine is drafted line by line, then one wallpaper per beat" width="100%">
-</p>
+![p(bloom), an Omarchy theme: a blueprint lights up tile by tile, a machine is drafted line by line, then one wallpaper per beat](previews/hero.webp)
 
-<p align="center">
-  <b>p(bloom) is a theme for <a href="https://omarchy.org">Omarchy</a>.</b> Deep-space navy, ice-white text, Signal · Bloom · Sunrise.<br>
-  And 42 blueprint wallpapers of machines from a future worth building.
-</p>
+**p(bloom) is a theme for [Omarchy](https://omarchy.org).** Deep-space navy, ice-white text, Signal · Bloom · Sunrise. And 42 blueprint wallpapers of machines from a future worth building.
 
 ```bash
 omarchy theme install https://github.com/ncr/omarchy-p-bloom-theme.git
 ```
 
-<h3 align="center">Composed for your screen, not scaled to it</h3>
+### Composed for your screen, not scaled to it
 
-<p align="center">
-  <img src="previews/resolution.webp" alt="The same corner of a wallpaper on a 1920 × 1080 monitor: the 5K image scaled down leaves 5-pixel text, the set composed for 1080p keeps it at 11 pixels and readable" width="100%">
-</p>
+![The same corner of a wallpaper on a 1920 × 1080 monitor: the 5K image scaled down leaves 5-pixel text, the set composed for 1080p keeps it at 11 pixels and readable](previews/resolution.webp)
 
-<p align="center">
-  Each wallpaper is laid out again for 18 screens, from 1080p to 7680 × 2160, in 16:9, 16:10, 3:2, 4:3, 21:9 and 32:9.<br>
-  Backgrounds come in three strengths, Muted, Default and Vivid, with every caption kept readable in each.
-</p>
+Each wallpaper is laid out again for 18 screens, from 1080p to 7680 × 2160, in 16:9, 16:10, 3:2, 4:3, 21:9 and 32:9. Backgrounds come in three strengths, Muted, Default and Vivid, with every caption kept readable in each.
 
-<p align="center">
-  <b>p(bloom) Wallpapers</b>, the companion app, is a full-screen browser for the 42 wallpapers.<br>
-  It also downloads the set made for your monitors, switches when you plug in another screen, and sets the background strength.
-</p>
+### p(bloom) Wallpapers
+
+The companion app is a full-screen browser for the 42 wallpapers. It also downloads the set made for your monitors, switches when you plug in another screen, and sets the background strength.
 
 ```bash
 python3 ~/.config/omarchy/themes/p-bloom/companion/install.py
 ```
 
-<p align="center"><sub><a href="companion/README.md">What it installs and how it works</a></sub></p>
+[What it installs and how it works](companion/README.md)
 
-<p align="center">
-  <img src="previews/wallpaper-collage.webp" alt="42 blueprint wallpapers of machines from a future worth building" width="100%">
-</p>
+![42 blueprint wallpapers of machines from a future worth building](previews/wallpaper-collage.webp)
 
-<p align="center">
-  <img src="previews/desktop.webp" alt="p(bloom) on a real desktop: Neovim, LazyGit, btop, Fastfetch" width="100%">
-</p>
+![p(bloom) on a real desktop: Neovim, LazyGit, btop, Fastfetch](previews/desktop.webp)
 
-<p align="center"><sub>
-  <a href="previews/wallpapers.webp">All 42 wallpapers</a> · <a href="LICENSE">MIT</a> · Omarchy wordmark from <a href="https://github.com/basecamp/omarchy">Omarchy</a>.
-</sub></p>
+<sub>[All 42 wallpapers](previews/wallpapers.webp) · [MIT](LICENSE) · Omarchy wordmark from [Omarchy](https://github.com/basecamp/omarchy).</sub>
