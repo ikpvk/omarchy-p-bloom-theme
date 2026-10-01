@@ -1,4 +1,4 @@
-![p(bloom), an Omarchy theme: a blueprint lights up tile by tile, a machine is drafted line by line, then one wallpaper per beat](previews/hero.webp)
+![p(bloom), an Omarchy theme: the name, then one wallpaper per beat of its song](previews/hero.webp)
 
 **p(bloom) is a theme for [Omarchy](https://omarchy.org).** Deep-space navy, ice-white text, Signal · Bloom · Sunrise. And 42 blueprint wallpapers of machines from a future worth building.
 
