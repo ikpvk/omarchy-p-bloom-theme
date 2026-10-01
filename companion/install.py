@@ -49,6 +49,8 @@ def main():
         if local and hook.is_file() and MARKER in hook.read_text():hook.unlink()
         for name in (*RUNTIME, 'wallpaper_setup_ui.py', 'install.json', 'p-bloom-wallpapers'):
             (app/name).unlink(missing_ok=True)
+        # Python's bytecode cache of the copied runtime goes with it; downloaded sets stay
+        shutil.rmtree(app/'__pycache__',ignore_errors=True)
         if not any(app.iterdir()):app.rmdir()
         print('Companion removed. Wallpaper files and theme checkout retained.')
     else:
