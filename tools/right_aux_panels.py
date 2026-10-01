@@ -22,7 +22,7 @@ def owner(s,rx):
 def course(s,rx):
     a=view(s,'sky-racer-course',rx,318,348,314)
     # Number labels follow the projection but sit off each physical gate.
-    offsets={1:(24,-18),2:(-8,-26),3:(-9,-24),4:(-15,-22),5:(-24,-5),6:(-24,14),7:(-10,28),8:(14,24),9:(34,2)}
+    offsets={1:(24,-18),2:(-8,-26),3:(-9,-24),4:(-15,-22),5:(-24,-5),6:(-24,14),7:(-10,28),8:(14,24),9:(90,-18)}
     for j in range(1,10):
         x,y=a[f'G{j}'];dx,dy=offsets[j]
         if dy>=24:dy+=.72*s.type_growth(7)  # enlarged numbers below a gate grow towards it

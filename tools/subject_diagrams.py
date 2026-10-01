@@ -220,7 +220,9 @@ def ribbon(p):
     for x in (81,221,353):
         p.p([(x,49),(x-7,45),(x+23,45),(x+16,49)],.45,.55)
         p.l(x+8,148,x+8,153,.3,.45)
-    p.a(35,162,137,162);p.a(390,162,287,162)
+    # the arrows stop short of the label at every type size
+    g=max(75,p.s.measure('BUNDLES / OFFSET JOINTS',5.5,.065)/2+10)
+    p.a(35,162,212-g,162);p.a(390,162,212+g,162)
     p.t('BUNDLES / OFFSET JOINTS',212,164.5+.5*p.s.type_growth(5.5),5.5,align='c')
 
 @figure('truth-lamp','A DELAY BEFORE THE DAMAGE','SCRIPTED DINNER EVENT / NOT A DETECTION BENCHMARK','Three seconds between the claim and the social consequences.')

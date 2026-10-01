@@ -53,10 +53,13 @@ def draw_view(s,entry,key,cx,cy,width,height):
     if entry['number'] in DATA or entry['number'] in SECOND or entry['number']>100:
         styles['detail']=(.79,.54,WHITE)
         styles['shell']=(.52,.38,WHITE)
+    drawn=[]
     for path in d['paths']:
         a,w,col=styles.get(path['role'],(.56,.45,WHITE))
         pts,closed=points(path)
         s.poly([p(v) for v in pts],a,w,close=closed,color=col)
+        drawn.append([p(v) for v in pts]+([p(pts[0])] if closed else []))
+    if key=='A':s._view_A_paths,s._view_A_centre=drawn,cy
     return {name:p(v) for name,v in d.get('anchors',{}).items()}
 
 
@@ -73,6 +76,19 @@ def callouts(s,entry,anchors,mx,my):
         if ys and ys[-1]>bottom:
             ys[-1]=bottom
             for i in range(len(ys)-2,-1,-1):ys[i]=min(ys[i],ys[i+1]-gap)
+        # where a label at its part's height would sit on the drawing, this side keeps the even slots
+        def on_drawing(i,key):
+            x0=mx+side*374+side*5;w=max(103,max([s.measure(key,7.3,.14)]+[s.measure(l,6,.035) for l in s.wrap(notes[key],227,6,.035)] if notes.get(key) else [0]))
+            bx0,bx1=sorted((x0-side*6,x0+side*(w+6)));by0,by1=ys[i]-22,ys[i]+16+12*len(s.wrap(notes[key],227,6,.035) if notes.get(key) else [])
+            # (the faint centre mark of the main view runs across the label columns too)
+            if by0<=getattr(s,'_view_A_centre',-1e9)<=by1:return True
+            for path in getattr(s,'_view_A_paths',[]):
+                for (ax,ay),(cx_,cy_) in zip(path,path[1:]):
+                    n=max(1,int(math.hypot(cx_-ax,cy_-ay)/4))
+                    if any(bx0<=ax+(cx_-ax)*t/n<=bx1 and by0<=ay+(cy_-ay)*t/n<=by1 for t in range(n+1)):return True
+            return False
+        if any(on_drawing(i,key) for i,key in enumerate(keys)):
+            ys=[top+i*(bottom-top)/max(1,len(keys)-1) for i in range(len(keys))]
         slot=lambda i,key,side=side,ys=ys:(mx+side*374,ys[i])
         from hardware3d.family_drawing import uncrossed
         keys=uncrossed(keys,anchors,slot)
