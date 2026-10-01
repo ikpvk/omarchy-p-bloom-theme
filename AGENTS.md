@@ -27,7 +27,7 @@ byte-identical.
 
 The exported drawing geometry in `tools/assets/` is not in Git (about 170 MB of
 JSON). Run `python3 tools/fetch_render_assets.py` to restore it from the
-`render-assets-v4` release before rendering; after regenerating geometry,
+`render-assets-v5` release before rendering; after regenerating geometry,
 publish a new archive and update the tag and checksum in that script.
 
 Every set also exists at three ground levels, Muted / Default / Vivid
