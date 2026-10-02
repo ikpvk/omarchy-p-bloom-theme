@@ -64,7 +64,9 @@ def display_name(path):
 def notify(title, body=''):
     sender = shutil.which('omarchy-notification-send') or shutil.which('notify-send')
     if sender:
-        args = [sender, '--app-name', 'p(bloom) Wallpapers', title, body] if 'omarchy' in sender else [sender, title, body]
+        # a short confirmation: without -t Omarchy keeps a notification until it is dismissed
+        args = ([sender, '--app-name', 'p(bloom) Wallpapers', '-t', '4000', title, body] if 'omarchy' in sender
+                else [sender, '-t', '4000', title, body])
         subprocess.run(args, check=False, capture_output=True, timeout=5)
 
 
