@@ -61,6 +61,84 @@ def _arrow(cr, x, cy, length, direction):
     cr.line_to(x1 - direction*head, cy + head)
 
 
+def _varrow(cr, cx, y, length, direction):
+    """Path of a vertical arrow: shaft and a 45° head (direction 1 = down)."""
+    head = length*0.42
+    y0, y1 = (y, y + length) if direction > 0 else (y + length, y)
+    cr.move_to(cx, y0)
+    cr.line_to(cx, y1)
+    cr.move_to(cx - head, y1 - direction*head)
+    cr.line_to(cx, y1)
+    cr.line_to(cx + head, y1 - direction*head)
+
+
+def keycap_metrics(cr, u, box_band=None):
+    """Sizes of the boxed keys at unit u: (font size, box height, inner margin, stroke)."""
+    size = 11*u
+    _face(cr, size, bold=True)
+    cap = cr.text_extents('H').height
+    box = round(cap + 2*round(5.5*u))
+    if box_band is not None and (box_band - box) % 2:
+        box += 1                                           # equal space above and below inside the band
+    return size, box, (box - cap)/2, max(1.0, 0.13*size)
+
+
+def keycap(cr, x, top, key, metrics, draw=True):
+    """One boxed key with its top-left corner at (x, top); returns its width. Letters are centred by ink; arrows are
+    strokes with the caps' stem weight, centred by their stroke extents (miter tips included)."""
+    size, box, pad, stroke = metrics
+    _face(cr, size, bold=True)
+    drawn = key in ('←', '→', '↑', '↓', '↵')
+    ext = None if drawn else cr.text_extents(key)
+    w = box if drawn else max(box, round(ext.width + 2*pad))
+    if not draw:
+        return w
+    mid = top + box/2
+    cr.set_source_rgba(*BOX, 0.95)
+    cr.set_line_width(1)
+    cr.rectangle(x + 0.5, top + 0.5, w - 1, box - 1)
+    cr.stroke()
+    cr.set_source_rgb(*ICE)
+    if drawn:
+        cr.set_line_width(stroke)
+        cr.set_line_cap(cairo.LINE_CAP_BUTT)
+        cr.set_line_join(cairo.LINE_JOIN_MITER)
+        length = box - 2*pad
+
+        def shape(dx=0.0, dy=0.0):
+            cr.new_path()
+            if key == '↵':
+                _return(cr, x + pad + dx, mid + dy, length)
+            elif key in ('↑', '↓'):
+                _varrow(cr, x + w/2 + dx, top + pad + dy, length, 1 if key == '↓' else -1)
+            else:
+                _arrow(cr, x + pad + dx, mid + dy, length, 1 if key == '→' else -1)
+        shape()
+        x0, y0, x1, y1 = cr.stroke_extents()
+        shape((x + w/2) - (x0 + x1)/2, mid - (y0 + y1)/2)
+        cr.stroke()
+    else:
+        cr.move_to(x + (w - ext.width)/2 - ext.x_bearing, round(mid - ext.y_bearing - ext.height/2))
+        cr.show_text(key)
+    return w
+
+
+def key_hints(cr, x, top, band_mid, keys, metrics, u, draw=True):
+    """A row of key groups: boxes, then the action in tracked caps; returns the row's width."""
+    x0 = x
+    gap_key, gap_label, gap_group = round(4*u), round(7*u), round(28*u)
+    for caps, label in keys:
+        for key in caps:
+            x = round(x)
+            x += keycap(cr, x, top, key, metrics, draw) + gap_key
+        x = round(x + gap_label - gap_key)
+        _face(cr, 10*u)
+        cr.set_source_rgb(*MUTED)
+        ext = cr.text_extents(label)
+        x += _tracked(cr, x, round(band_mid - (ext.y_bearing + ext.height/2)), label, 0.2, draw) + gap_group
+    return x - gap_group - x0
+
+
 def _return(cr, x, cy, length):
     """Path of the return key's arrow: down the right side, then left, with a 45° head."""
     rise, head = length*0.55, length*0.36
@@ -73,7 +151,7 @@ def _return(cr, x, cy, length):
     cr.line_to(x + head, bottom + head)
 
 
-def draw_strip(cr, width, height, index, count, keys=KEYS):
+def draw_strip(cr, width, height, index, count, keys=KEYS, status=None):
     """The strip, `width` x `height` device pixels, drawn with its top-left corner at the origin.
 
     Units are height/30. The one-pixel hairline is the top edge; everything else is centred by ink in the band below
@@ -110,64 +188,17 @@ def draw_strip(cr, width, height, index, count, keys=KEYS):
     x += snap(7*u)
     x += _tracked(cr, x, base, '/', 0)
     _tracked(cr, x + snap(7*u), base, str(count), 0.08)
-    # keys
-    size = 11*u
-    _face(cr, size, bold=True)
-    cap = cr.text_extents('H').height
-    box = snap(cap + 2*snap(5.5*u))                        # cap height plus equal margins above and below
-    if (height - 1 - box) % 2:
-        box += 1
-    pad = (box - cap)/2                                    # the same margin on the left and right of the caps
-    top = 1 + (height - 1 - box)//2
-    mid = top + box/2
-    stroke = max(1.0, 0.13*size)                           # Nimbus Sans Bold's stem weight
-    gap_key, gap_label, gap_group = snap(4*u), snap(7*u), snap(28*u)
-
-    def layout(draw, x):
-        for caps, label in keys:
-            for key in caps:
-                x = snap(x)                                # box edges on whole device pixels
-                _face(cr, size, bold=True)
-                if key in ('←', '→', '↵'):
-                    w = box
-                else:
-                    ext = cr.text_extents(key)
-                    w = max(box, snap(ext.width + 2*pad))
-                if draw:
-                    cr.set_source_rgba(*BOX, 0.95)
-                    cr.set_line_width(1)
-                    cr.rectangle(x + 0.5, top + 0.5, w - 1, box - 1)
-                    cr.stroke()
-                    cr.set_source_rgb(*ICE)
-                    cr.set_line_width(stroke)
-                    cr.set_line_cap(cairo.LINE_CAP_BUTT)
-                    cr.set_line_join(cairo.LINE_JOIN_MITER)
-                    length = box - 2*pad
-                    if key in ('←', '→', '↵'):
-                        # build the path, measure its ink (miter tips included), then centre that ink in the box
-                        def shape(dx=0.0, dy=0.0):
-                            cr.new_path()
-                            if key == '↵':
-                                _return(cr, x + pad + dx, mid + dy, length)
-                            else:
-                                _arrow(cr, x + pad + dx, mid + dy, length, 1 if key == '→' else -1)
-                        shape()
-                        x0, y0, x1, y1 = cr.stroke_extents()
-                        shape((x + w/2) - (x0 + x1)/2, mid - (y0 + y1)/2)
-                        cr.stroke()
-                    else:
-                        cr.move_to(x + (w - ext.width)/2 - ext.x_bearing, snap(mid - ext.y_bearing - ext.height/2))
-                        cr.show_text(key)
-                x += w + gap_key
-            x = snap(x + gap_label - gap_key)
-            _face(cr, 10*u)
-            cr.set_source_rgb(*MUTED)
-            x += _tracked(cr, x, baseline(label), label, 0.2, draw)
-            x += gap_group
-        return x - gap_group
-
-    total = layout(False, 0)
-    layout(True, snap(width - margin - total))
+    # keys, right-aligned
+    metrics = keycap_metrics(cr, u, height - 1)
+    top = 1 + (height - 1 - metrics[1])//2
+    total = key_hints(cr, 0, top, centre, keys, metrics, u, draw=False)
+    left = round(width - margin - total)
+    key_hints(cr, left, top, centre, keys, metrics, u)
+    if status:                                            # e.g. a set being downloaded: Pollen, before the keys
+        _face(cr, 10*u, bold=True)
+        cr.set_source_rgb(*POLLEN)
+        _tracked(cr, left - snap(28*u) - snap(_tracked(cr, 0, 0, status, 0.24, draw=False)), baseline(status),
+                 status, 0.24)
 
 
 class Gallery:
@@ -178,7 +209,7 @@ class Gallery:
         self.index = self.files.index(Path(first)) if Path(first) in self.files else 0
         self.set_desktop, self.settings = set_desktop, settings
         self.cache, self.mtimes, self.lock = {}, {}, threading.Lock()
-        self.size = None
+        self.size, self.status = None, None
         self.strip_on, self.alpha, self.last_input = True, 1.0, time.monotonic()
         self.loop = GLib.MainLoop()
         GLib.set_prgname('p-bloom-wallpapers')               # the window class Omarchy's Super+O rule matches
@@ -283,12 +314,13 @@ class Gallery:
         want = max(24, height*30/1080)
         logical = min(range(int(want) - 4, int(want) + 5), key=lambda h: (abs(h*scale - round(h*scale)) > 1e-6, abs(h - want)))
         device_w, device_h = round(width*scale), round(logical*scale)
-        key = (self.index, len(self.files), device_w, device_h)
+        key = (self.index, len(self.files), device_w, device_h, self.status)
         if key == self.strip_key:
             return
         self.strip_key = key
         surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, device_w, device_h)
-        draw_strip(cairo.Context(surface), device_w, device_h, self.index + 1, len(self.files), self.keys)
+        draw_strip(cairo.Context(surface), device_w, device_h, self.index + 1, len(self.files), self.keys,
+                   self.status)
         surface.flush()
         texture = Gdk.MemoryTexture.new(device_w, device_h, Gdk.MemoryFormat.B8G8R8A8_PREMULTIPLIED,
                                         GLib.Bytes.new(bytes(surface.get_data())), surface.get_stride())
@@ -301,8 +333,10 @@ class Gallery:
     def _tick(self):
         if self.size is None:
             self._show()
+        elif self.window.get_visible():
+            self._render_strip()                           # a no-op unless what the strip shows has changed
         idle = time.monotonic() - self.last_input
-        want = 1.0 if self.strip_on and idle < IDLE else 0.0
+        want = 1.0 if self.status or (self.strip_on and idle < IDLE) else 0.0
         if want != self.alpha:
             step = 0.016/FADE
             self.alpha = min(want, self.alpha + step) if want > self.alpha else max(want, self.alpha - step)
@@ -332,6 +366,19 @@ class Gallery:
         elif name in ('Escape',) or name.lower() == 'q':
             self.loop.quit()
         return True
+
+    def set_status(self, text):
+        """A line in the strip that stays until it is cleared (None)."""
+        self.status = text
+
+    def hide(self):
+        self.window.set_visible(False)
+
+    def show(self):
+        self.window.set_visible(True)
+        self.window.fullscreen()
+        self.window.present()
+        self._wake()
 
     def replace(self, files):
         """A new set after settings were saved: same wallpaper, new files."""

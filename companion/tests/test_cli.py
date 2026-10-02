@@ -108,15 +108,32 @@ class CLI(unittest.TestCase):
             result.write_text('{"profile": "auto", "level": "muted"}')
             return subprocess.CompletedProcess(args,0)
         with patch('sys.stdin.isatty',return_value=False),patch.dict(os.environ,{'WAYLAND_DISPLAY':'wayland-1'}), \
+             patch.object(cli,'settings_window',return_value=None), \
              patch.object(cli.shutil,'which',return_value='/usr/bin/xdg-terminal-exec'), \
              patch.object(cli.subprocess,'run',side_effect=terminal):
             self.assertEqual(cli.choose_profile(PLAN,True),{'profile':'auto','level':'muted'})
 
     def test_terminal_closed_without_result_is_cancel(self):
         with patch('sys.stdin.isatty',return_value=False),patch.dict(os.environ,{'WAYLAND_DISPLAY':'wayland-1'}), \
+             patch.object(cli,'settings_window',return_value=None), \
              patch.object(cli.shutil,'which',return_value='/usr/bin/xdg-terminal-exec'), \
              patch.object(cli.subprocess,'run',return_value=subprocess.CompletedProcess([],1)):
             self.assertIsNone(cli.choose_profile(PLAN,True))
+
+    def test_a_graphical_session_gets_the_settings_window(self):
+        class Window:
+            def __init__(self, value): self.value=value; self.calls=[]
+            def run(self, plan, backdrop): self.calls.append((plan, backdrop)); return self.value
+        saved=Window({'profile':'big','level':'vivid'})
+        with patch.dict(os.environ,{'WAYLAND_DISPLAY':'wayland-1','PBLOOM_SETTINGS_BACKDROP':'/tmp/x.webp'}), \
+             patch.object(cli,'settings_window',return_value=saved), patch.object(cli,'prompt') as prompt:
+            self.assertEqual(cli.choose_profile(PLAN,True),{'profile':'big','level':'vivid'})
+            prompt.assert_not_called()
+        self.assertEqual(saved.calls,[(PLAN,'/tmp/x.webp')])
+        for value in (None,{'profile':'huge','level':'vivid'},{'profile':'big','level':'neon'}):
+            with patch.dict(os.environ,{'WAYLAND_DISPLAY':'wayland-1'}), \
+                 patch.object(cli,'settings_window',return_value=Window(value)):
+                self.assertIsNone(cli.choose_profile(PLAN,True))
 
 
 if __name__=='__main__':unittest.main()

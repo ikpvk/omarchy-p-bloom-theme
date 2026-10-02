@@ -110,8 +110,23 @@ def prompt(plan,apply):
     except (KeyboardInterrupt,EOFError):return None
 
 
+def settings_window():
+    """The GTK settings module, or None where GTK 4 and python-gobject are missing."""
+    try:
+        import settings_ui
+    except (ImportError, ValueError):
+        return None
+    return settings_ui
+
+
 def choose_profile(plan, apply):
     """Ask for the settings: {'profile': 'auto' or a set id, 'level': a LEVELS name}, or None."""
+    # a graphical session gets the settings window, set like the gallery; a terminal without one gets the TUI
+    if os.environ.get('WAYLAND_DISPLAY') or os.environ.get('DISPLAY'):
+        window = settings_window()
+        if window:
+            value = window.run(plan, os.environ.get('PBLOOM_SETTINGS_BACKDROP'))
+            return value if valid(value, plan) else None
     if sys.stdin.isatty() and sys.stdout.isatty():
         return prompt(plan, apply)
     foot = shutil.which('foot')

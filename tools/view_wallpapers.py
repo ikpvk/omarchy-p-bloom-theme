@@ -187,22 +187,37 @@ def main():
 
 
 def open_settings(view):
-    """The gallery's S key: settings in their own window; when they are saved, the gallery switches to the new set."""
+    """The gallery's S key: settings in their own window over the same wallpaper. The gallery steps aside while they
+    are open; when they are saved it says so in its strip until the new set is in place, then switches to it."""
     from gi.repository import GLib
+    current = view.files[view.index]
     command = [sys.executable, str(Path(__file__).resolve()), '--collection', 'finalized',
-               view.files[view.index].name, '--configure', '--print-files']
+               current.name, '--configure', '--print-files']
+    env = {**os.environ, 'PBLOOM_SETTINGS_BACKDROP': str(current), 'PBLOOM_SETTINGS_REPORT': '1'}
+    view.hide()
 
     def wait():
-        result = subprocess.run(command, capture_output=True, text=True)
-        lines = result.stdout.strip().splitlines()
-        if result.returncode == 0 and lines:
+        process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, env=env)
+        shown = False
+        for line in process.stderr:
+            if line.startswith('p-bloom-settings: '):
+                saved = line.split()[1] == 'saved'
+                GLib.idle_add(view.show)
+                GLib.idle_add(view.set_status, 'UPDATING WALLPAPERS' if saved else None)
+                shown = True
+        out = process.stdout.read()
+        process.wait()
+        if not shown:
+            GLib.idle_add(view.show)
+        GLib.idle_add(view.set_status, None)
+        lines = out.strip().splitlines()
+        if process.returncode == 0 and lines:
             try:
                 files = json.loads(lines[-1])
             except ValueError:
                 return
             GLib.idle_add(view.replace, files)
     threading.Thread(target=wait, daemon=True).start()
-
 
 if __name__ == '__main__':
     main()

@@ -30,32 +30,20 @@ the service waits for p(bloom) and leaves that theme unchanged.
 Unchanged launches do not repeat the notification.
 
 Settings are available through **Wallpaper settings** in the application's
-context menu, or `p-bloom-wallpapers --configure`. This optional TUI offers
-two choices: the **background** (Muted, Default or Vivid: how strong the
-background colour is; ← →) and the **resolution** (**Automatic · Optimal
-set** or a fixed set; ↑ ↓). Both are remembered; selecting Automatic restores
-monitor-based selection, and its row names the optimal set for your monitors, which is also marked in the list. The list shows every
-set, one per line; when the window is too short it scrolls and says how many rows are hidden.
+context menu, the gallery's **S** key, or `p-bloom-wallpapers --configure`.
+They open full screen over the wallpaper, dimmed, set like the gallery's strip,
+with two choices: the **background** (Muted, Default or Vivid: how strong the
+background colour is; ← →) and the **resolution** (**Automatic** or a fixed
+set; ↑ ↓). Both are remembered; selecting Automatic restores monitor-based
+selection, and its row names the optimal set for your monitors, which is also
+marked in the list. Every set shows its size and whether it is optimal,
+installed or still a download; when the screen is too short the list scrolls
+and says which rows it shows. Enter saves, Escape cancels without changing
+anything. When saving needs a download, the gallery comes back at once and its
+strip says **Updating wallpapers** until the new set is in place.
 
-```
-P(BLOOM) / WALLPAPER SETTINGS
-
-BACKGROUND
-  Muted       Default     [ Vivid ]
-How strong the background colour is.
-
-RESOLUTION
-
-▶ Automatic · Optimal set (5120 × 2160)
-  5120 × 2160 / 21.7 MB · optimal · download
-  5120 × 2880 / 25.4 MB
-  …
-  1600 × 1200 /  5.7 MB · download
-
-←→ Background   ↑↓ Resolution   ENTER Save   ESC Cancel
-```
-Escape cancels without changing anything. The settings window uses a large
-font in Foot, without modifying terminal configuration.
+Without a graphical session (over SSH, for example) `--configure` asks the same
+questions in the terminal.
 
 `--show-plan` provides detailed read-only diagnostics. Earlier setup policies
 migrate to automatic selection. No monitor detection means no desktop change;
