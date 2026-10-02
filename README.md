@@ -26,6 +26,6 @@ Removing the theme (Remove > Theme) removes the app with it. To remove only the 
 
 ![42 blueprint wallpapers of machines from a future worth building](previews/wallpaper-collage.webp)
 
-![p(bloom) on a real desktop: Neovim, LazyGit, btop, Fastfetch](previews/desktop.webp)
+![p(bloom) on a real desktop: Neovim and Fastfetch over Reef Nursery, under the see-through bar](previews/desktop.webp)
 
 <sub>[All 42 wallpapers](previews/wallpapers.webp) · [MIT](LICENSE) · Omarchy wordmark from [Omarchy](https://github.com/basecamp/omarchy).</sub>
