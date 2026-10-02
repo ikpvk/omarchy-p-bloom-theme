@@ -69,11 +69,16 @@ def draw_view(s,entry,key,cx,cy,width,height):
 def callouts(s,entry,anchors,mx,my):
     notes=json.loads((ASSETS/(entry['slug']+'-meta.json')).read_text())['notes']
     order=sorted(anchors,key=lambda key:anchors[key][0]);n=len(order)//2
-    for side,keys in ((-1,order[:n]),(1,order[n:])):
+    # per-sheet column choices and extra room at the bottom (century/anchor_shifts.py)
+    from century.anchor_shifts import SIDES,ROOM
+    sides=SIDES.get((entry['slug'],'A'),{});room=ROOM.get((entry['slug'],'A'),{})
+    columns=([k for k in order[:n] if sides.get(k,-1)<0]+[k for k in order[n:] if sides.get(k,1)<0],
+             [k for k in order[:n] if sides.get(k,-1)>0]+[k for k in order[n:] if sides.get(k,1)>0])
+    for side,keys in ((-1,columns[0]),(1,columns[1])):
         keys.sort(key=lambda key:anchors[key][1])
         # labels stay in their column but sit as close to the height of what they name as the spacing allows,
         # so leaders run short and nearly level instead of reaching across the drawing to fixed slots
-        top,bottom,gap=my-260,my+160,82
+        top,bottom,gap=my-260,my+160+room.get(side,0),82
         ys=[min(bottom,max(top,anchors[key][1])) for key in keys]
         for i in range(1,len(ys)):ys[i]=max(ys[i],ys[i-1]+gap)
         if ys and ys[-1]>bottom:

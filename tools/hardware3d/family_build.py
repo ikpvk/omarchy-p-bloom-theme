@@ -59,7 +59,8 @@ def air_refinery():
  g.base(195,121)
  g.casting('tapered process column',[(31,71,62),(55,74,64),(110,64,54),(350,51,48),(465,58,51),(477,63,54)])
  for z in (106,171,236,301,366,440):
-  g.flange(0,0,z,74 if z<180 else 61)
+  # 63, not 61: the column's rounded-square corners reach 61.5 at 236 and 61.0 at 445 and cut the bands' front rims
+  g.flange(0,0,z,74 if z<180 else 63)
   g.dial(0,-58,z+23,9)
   for side in (-1,1):g.softbox('catalyst access cover',(side*28,-54,z+26),(25,11,25),6,'detail')
  g.softbox('contactor crown',(0,0,510),(295,134,60),26)

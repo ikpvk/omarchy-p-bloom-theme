@@ -33,12 +33,30 @@ Windings are made consistent and closed parts face outward (an airfoil rib
 with inward caps counted its visible side as back-facing). The rim of a flat
 n-gon cap is one loop, drawn whole or not at all. Drawn edges are chained into
 polylines through vertices where exactly two meet.
+
+Added 2026-10-03 (gaps left on the hardware family's originals):
+
+Loft rings. A crease continues along its edge loop, through vertices where
+four quads meet, while the dihedral stays below ``WEAK_DOT``. A cast ring
+whose angle wanders around ``CREASE_DOT`` (the widest girth of Air Refinery's
+pedestal, a little flatter on its long sides) otherwise stops in the middle
+of a face, as the cap rims did before the n-gon rule.
+
+Wires on a surface. A wire is drawn as its centreline, so its tube does not
+hide the lines of a part it runs along (most of its length within
+``MOUNT_GAP`` of that part's skin, beyond its own radius): a seam, trim or
+sill lying near an outline cut gaps into it with nothing drawn in them (the
+Sky Racer's nose, the skirt bead under both pedestals). Tubes still hide
+every other part, and every part still hides the wire.
 """
 import math
 from mathutils import Vector
 from mathutils.bvhtree import BVHTree
 
 CREASE_DOT = .75        # unchanged: dihedral cos below this is a drawn crease
+WEAK_DOT = .9           # a crease continues along its edge loop while the cos stays below this
+MOUNT_GAP = 2.5         # model units beyond its radius: a wire this close runs along a part
+MOUNT_SHARE = .8        # ... for at least this share of its length
 FRONT_EPS = 1e-6        # unchanged: facing counts as front above this
 DEPTH_TOL = 0.03        # model units; coplanar contact of touching parts
 GRAZE = 0.12            # |n . view| below this: a grazing hit on a curved surface
@@ -195,7 +213,32 @@ class _Mesh:
                 self.smooth.difference_update(rim)
             else:
                 self.smooth.update(rim)
+        self._continue_creases()
         self.front = [n.dot(toward) > FRONT_EPS for n in self.n]
+
+    def _continue_creases(self):
+        """Creases continue along their edge loop (see the module notes)."""
+        at = {}
+        for e in self.edges:
+            for i in e:
+                at.setdefault(i, []).append(e)
+        def regular(i):
+            fs = self.vfaces[i]
+            return len(at[i]) == 4 and len(fs) == 4 and all(len(self.f[fi]) == 4 for fi in fs)
+        def weak(e):
+            ff = self.edges[e]
+            return len(ff) == 2 and self.n[ff[0]].dot(self.n[ff[1]]) < WEAK_DOT
+        seeds = [e for e, ff in self.edges.items() if len(ff) == 2 and e not in self.smooth]
+        for seed in seeds:
+            for v in seed:
+                e = seed
+                while regular(v):
+                    nxt = [x for x in at[v] if not set(self.edges[x]) & set(self.edges[e])]
+                    if len(nxt) != 1 or nxt[0] not in self.smooth or not weak(nxt[0]):
+                        break
+                    e = nxt[0]
+                    self.smooth.discard(e)
+                    v = e[0] if e[1] == v else e[1]
 
     def drawn_edges(self):
         out = []
@@ -231,6 +274,8 @@ class HiddenLines:
             self.gn.extend(m.n)
             self.byname.setdefault(m.name, []).append(mi)
         self.bvh = BVHTree.FromPolygons(vv, ff, all_triangles=False) if ff else None
+        self.skip = frozenset()                   # tube faces that may not hide the current mesh
+        self.mounted = {}                         # mesh index -> faces of wires along it
         self.paths = []
         self.scale([True]*len(self.meshes), [])
 
@@ -242,6 +287,41 @@ class HiddenLines:
         ys = [v.dot(self.up) for v in pts] or [0.0]
         self.extent = max(max(xs)-min(xs), max(ys)-min(ys), 1.0)
         self.step = self.extent*STEP_FRAC
+
+    def mount(self, wires):
+        """Tubes of wires that run along a part (see the module notes) stop hiding its lines."""
+        def seg_dist(p, a, b):
+            ab = b-a
+            t = 0.0 if ab.length_squared == 0 else max(0.0, min(1.0, (p-a).dot(ab)/ab.length_squared))
+            return (p-(a+ab*t)).length
+        trees = {}
+        for name, pts, _ in wires:
+            pts = [Vector(p) for p in pts]
+            tubes = [mi for mi in self.byname.get(name, ()) if self.meshes[mi].role == 'tube']
+            if len(pts) < 2 or not tubes:
+                continue
+            radius = sorted(min(seg_dist(v, a, b) for a, b in zip(pts, pts[1:]))
+                            for mi in tubes for v in self.meshes[mi].v)
+            reach = radius[len(radius)//2] + MOUNT_GAP
+            samples = []
+            for a, b in zip(pts, pts[1:]):
+                n = max(1, math.ceil((b-a).length/self.step/8))
+                samples += [a.lerp(b, j/n) for j in range(n)]
+            samples.append(pts[-1])
+            lo = Vector((min(p.x for p in samples), min(p.y for p in samples), min(p.z for p in samples)))-Vector((reach,)*3)
+            hi = Vector((max(p.x for p in samples), max(p.y for p in samples), max(p.z for p in samples)))+Vector((reach,)*3)
+            faces = {self.base[mi]+fi for mi in tubes for fi in range(len(self.meshes[mi].f))}
+            for hi_ in range(len(self.meshes)):
+                m = self.meshes[hi_]
+                if m.role == 'tube' or not m.f or hi_ in tubes:
+                    continue
+                if any(max(v[k] for v in m.v) < lo[k] or min(v[k] for v in m.v) > hi[k] for k in range(3)):
+                    continue
+                if hi_ not in trees:
+                    trees[hi_] = BVHTree.FromPolygons(m.v, m.f, all_triangles=False)
+                near = sum(1 for p in samples if trees[hi_].find_nearest(p, reach)[0] is not None)
+                if near >= MOUNT_SHARE*len(samples):
+                    self.mounted.setdefault(hi_, set()).update(faces)
 
     def xy(self, p):
         return [round(p.dot(self.right), 4), round(-p.dot(self.up), 4)]
@@ -257,7 +337,7 @@ class HiddenLines:
             loc, nrm, fi, dist = self.bvh.ray_cast(origin, -t, FAR*2)
             if loc is None or (loc-p).dot(t) <= DEPTH_TOL:
                 return True                       # nothing, or the hit is at/behind p
-            if fi in local or (own is not None and self.owner[fi] == own
+            if fi in local or fi in self.skip or (own is not None and self.owner[fi] == own
                                and abs(self.gn[fi].dot(t)) < GRAZE and (loc-p).length < size):
                 origin = loc - t*1e-4
                 continue
@@ -345,10 +425,12 @@ class HiddenLines:
         def size(e):
             return max((v[x]-v[y]).length for fi in m.edges[e]
                        for f in (m.f[fi],) for x, y in zip(f, f[1:]+f[:1]))
+        self.skip = frozenset(self.mounted.get(mi, ()))
         for vs, ks in chains:
             self.trace(m.name, m.role, [v[i] for i in vs],
                        [self._ring(mi, drawn[k]) for k in ks], own=mi,
                        sizes=[size(drawn[k]) for k in ks])
+        self.skip = frozenset()
 
     def wire(self, name, pts, role):
         own = set()
@@ -363,6 +445,7 @@ def extract(meshes, wires, right, up, toward, draw=lambda name, role: role != 't
     """Visible paths [{name, points, role}] of meshes and wires in the view basis."""
     H = HiddenLines(meshes, right, up, toward)
     H.scale([draw(m.name, m.role) for m in H.meshes], [w for w in wires if draw_wire(w[0])])
+    H.mount(wires)
     for mi, m in enumerate(H.meshes):
         if draw(m.name, m.role):
             H.mesh_lines(mi)
