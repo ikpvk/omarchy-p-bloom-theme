@@ -14,12 +14,11 @@ ma dodatkowe wykresy, faktoidy, detale i humor. B przełącza wersję w podgląd
 Z katalogu projektu:
 
 ```sh
-./century
+python3 tools/view_wallpapers.py --dir concepts/century/finalized/wide
 ```
 
 To istniejąca przeglądarka imv z 20 zachowanymi planszami Century; odrzucone 80 jest wyłącznie w archiwum galerii HTML. ← i → zmieniają tapety,
-Esc zamyka. Można zacząć od numeru lub nazwy: `./century 99`,
-`./century light-sail`. Dotychczasowy `./wallpapers` nadal otwiera zestaw roboczy.
+Esc zamyka. Można zacząć od numeru lub nazwy, dopisując go na końcu polecenia (`99`, `light-sail`). Samo `python3 tools/view_wallpapers.py` otwiera zestaw roboczy.
 
 [Galeria HTML](../../concepts/century/index.html) działa też bez serwera,
 bez pobierania bibliotek z internetu. Ma wyszukiwanie, dziedziny, oba formaty,
@@ -105,4 +104,4 @@ wrócić do pojedynczego projektu dopiero na prośbę użytkownika.
 
 ## Wspólna kolekcja
 
-Obie dopracowane dziesiątki są zaakceptowane. `./finalized` otwiera 34 gotowe plansze (pierwotne 14 + Century 20). [Wspólny rejestr](../collection/README.md) obejmuje również kolejkę 10 nowych pomysłów. [Ranking](../collection/QUALITY-RANKING.md) proponuje próg po pozycji 22. Użytkownik zlecił redesign dwunastu niżej ocenionych; [nowe wersje i porównanie](../../concepts/century/quality-redesign/index.html) oczekują oceny. Kolekcja nadal zawiera wszystkie 34 plansze.
+Obie dopracowane dziesiątki są zaakceptowane. `python3 tools/view_wallpapers.py --collection finalized` otwierało wtedy 34 gotowe plansze (pierwotne 14 + Century 20). [Wspólny rejestr](../collection/README.md) obejmuje również kolejkę 10 nowych pomysłów. [Ranking](../collection/QUALITY-RANKING.md) proponuje próg po pozycji 22. Użytkownik zlecił redesign dwunastu niżej ocenionych; [nowe wersje i porównanie](../../concepts/century/quality-redesign/index.html) oczekują oceny. Kolekcja nadal zawiera wszystkie 34 plansze.

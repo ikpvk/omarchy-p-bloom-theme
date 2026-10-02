@@ -25,8 +25,6 @@ bright_foreground        = "#ffffff"
 # Window borders. The focused window is framed in Signal running into Bloom.
 hyprland_active_border   = "rgba(4cc9ffee) rgba(b97affee) 45deg"
 hyprland_inactive_border = "rgba(586c9666)"
-active_border_color      = "#4cc9ff"
-active_tab_background    = "#1f3a5f"
 
 # Named colours
 red                      = "#ff5468"  # Flare

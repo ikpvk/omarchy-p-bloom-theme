@@ -172,8 +172,8 @@ Keep the checkout in place: the bundled set and the manifest are read from
 it. Rerun the installer after moving it or updating app code. New sets are
 rendered with `tools/render_wallpaper_sets.py` and packaged with
 `tools/package_wallpaper_profiles.py`, which refreshes the verified hashes;
-the archives must then be uploaded to the release named by `RELEASE_TAG`. Development viewers `./wallpapers` and `./century` continue to read
-live renders independently of the packaged release.
+the archives must then be uploaded to the release named by `RELEASE_TAG`. The development viewer (`python3 tools/view_wallpapers.py`) reads live renders,
+independently of the packaged release.
 
 Uninstall stops and removes the desktop service, launcher, owned hook and runtime files. It retains the
 theme, downloaded sets and setup preferences (delete

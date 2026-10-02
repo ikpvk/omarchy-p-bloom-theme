@@ -19,14 +19,13 @@ is stored separately in `quality-ranking.json`; it does not change membership.
 The user authorized the twelve redesigns. They are now complete as new review versions; collection membership remains unchanged. [Compare before / after](../../concepts/century/quality-redesign/index.html).
 
 ```sh
-./finalized              # All 34, in proposed ranking order
-./finalized tether   # Start at a named sheet
-./finalized --list
-./century                # The 20 retained Century sheets, in original ID order
+python3 tools/view_wallpapers.py --collection finalized          # the collection, in order
+python3 tools/view_wallpapers.py --collection finalized tether   # start at a named sheet
+python3 tools/view_wallpapers.py --collection finalized --list
 ```
 
 The collection uses symbolic links to current masters. The quality pass regenerated twelve sheets in both formats and preserved their previous versions. It did not install them on the desktop.
-In `./finalized`, numeric selection is the ranking position; use a name to avoid
+With `--collection finalized`, numeric selection is the ranking position; use a name to avoid
 confusing it with the original series number.
 
 The ranking is the editorial baseline before the twelve redesigns, not a fresh score for the revised artwork. The redesign pass audited both formats and documented the scope and mechanical limitations in [QUALITY-REDESIGN.md](QUALITY-REDESIGN.md). Existing acceptance is retained; being placed below the

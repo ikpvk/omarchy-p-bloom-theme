@@ -24,7 +24,7 @@
 - 200/200 audytów układu PASS; wszystkie obrazy zdekodowane i aktualne wobec geometrii.
 - package.py: PASS, 1,13 GB natywnych obrazów; manifest.json zapisany.
 - Wszystkie kompozycje obejrzane, szczegóły kontrolowane na próbkach 1:1.
-- Galeria lokalna: concepts/century/index.html; przeglądarka desktopowa: ./century.
+- Galeria lokalna: concepts/century/index.html; przeglądarka desktopowa: `python3 tools/view_wallpapers.py --dir concepts/century/finalized/wide`.
 - Poradnik produkcji i katalog opisów uzupełnione.
 - Pozostaje wyłącznie ocena artystyczna użytkownika; nie wznawiać automatycznie produkcji.
 

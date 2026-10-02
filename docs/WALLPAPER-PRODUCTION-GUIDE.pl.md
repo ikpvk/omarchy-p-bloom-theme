@@ -326,7 +326,7 @@ MANNEQUIN_ONLY=proxy blender -b --factory-startup -t 4 --python tools/mannequin3
 /usr/bin/python tools/verify_wallpaper_layout.py --out concepts/new-review/layout.json
 /usr/bin/python tools/verify_wallpaper_layout.py --size 5120x2880 --out concepts/new-review/layout-16-9.json
 git diff --check
-./wallpapers --dir concepts/new-review 13
+python3 tools/view_wallpapers.py --dir concepts/new-review 13
 ```
 
 Audyt analizuje cały obecny zestaw. Jest kontrolą kolizji, nie oceną anatomii,
