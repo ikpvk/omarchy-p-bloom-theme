@@ -223,6 +223,7 @@ class Gallery:
         self.set_desktop, self.settings = set_desktop, settings
         self.cache, self.mtimes, self.lock = {}, {}, threading.Lock()
         self.size, self.status = None, None
+        self.resize_to, self.resize_since = None, 0.0
         self.menu, self.menu_done, self.menu_key, self.menu_alpha = None, None, None, 0.0
         self.strip_on, self.alpha, self.last_input = True, 1.0, time.monotonic()
         self.loop = GLib.MainLoop()
@@ -266,7 +267,6 @@ class Gallery:
         motion.connect('motion', lambda *_: self._wake())
         win.add_controller(motion)
         win.connect('close-request', lambda *_: self.loop.quit() or False)
-        win.connect('notify::default-height', lambda *_: self._resized())
         win.present()
         GLib.timeout_add(16, self._tick)
         GLib.timeout_add(1000, self._watch)
@@ -317,7 +317,15 @@ class Gallery:
             threading.Thread(target=self._prepare, args=(self.index + step, size), daemon=True).start()
 
     def _resized(self):
-        if self._target() != self.size:
+        """F, a new tile, a monitor change: the image is scaled again for the window's new size once it has held
+        still for a moment (Hyprland animates resizes; until then GTK stretches the previous scaling)."""
+        target, now = self._target(), time.monotonic()
+        if not target or target == self.size:
+            self.resize_to = None
+        elif target != self.resize_to:
+            self.resize_to, self.resize_since = target, now
+        elif now - self.resize_since > 0.15:
+            self.resize_to = None
             self._show()
 
     def _watch(self):
@@ -360,6 +368,7 @@ class Gallery:
         if self.size is None:
             self._show()
         else:
+            self._resized()
             self._render_strip()                           # a no-op unless what the strip shows has changed
             self._render_menu()
         idle = time.monotonic() - self.last_input
