@@ -14,6 +14,7 @@ import tempfile
 LEVELS = ('muted', 'default', 'vivid')
 LEVEL_LABELS = {'muted': 'Muted', 'default': 'Default', 'vivid': 'Vivid'}
 LEVEL_HINT = 'How strong the background colour is.'
+PIPE_PREFIX = 'p-bloom-settings-plan '
 
 
 def settings(plan, level=None):
@@ -110,23 +111,16 @@ def prompt(plan,apply):
     except (KeyboardInterrupt,EOFError):return None
 
 
-def settings_window():
-    """The GTK settings module, or None where GTK 4 and python-gobject are missing."""
-    try:
-        import settings_ui
-    except (ImportError, ValueError):
-        return None
-    return settings_ui
-
-
 def choose_profile(plan, apply):
     """Ask for the settings: {'profile': 'auto' or a set id, 'level': a LEVELS name}, or None."""
-    # a graphical session gets the settings window, set like the gallery; a terminal without one gets the TUI
-    if os.environ.get('WAYLAND_DISPLAY') or os.environ.get('DISPLAY'):
-        window = settings_window()
-        if window:
-            value = window.run(plan, os.environ.get('PBLOOM_SETTINGS_BACKDROP'))
-            return value if valid(value, plan) else None
+    # the gallery's menu: the plan goes out as one line on stdout, the choice comes back as one line on stdin
+    if os.environ.get('PBLOOM_SETTINGS_PIPE'):
+        print(PIPE_PREFIX + json.dumps(plan), flush=True)
+        try:
+            value = json.loads(sys.stdin.readline() or 'null')
+        except ValueError:
+            value = None
+        return value if valid(value, plan) else None
     if sys.stdin.isatty() and sys.stdout.isatty():
         return prompt(plan, apply)
     foot = shutil.which('foot')

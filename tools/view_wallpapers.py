@@ -168,9 +168,11 @@ def main():
         import gallery
     except (ImportError, ValueError) as exc:
         ap.error(f'The gallery needs GTK 4 and python-gobject (part of Omarchy): {exc}')
+    # in a graphical session, settings are the gallery's menu: --configure opens the gallery with the menu showing
+    in_gallery = bool(profile_plan) and args.configure and not args.print_files and graphical()
     if profile_plan:
         try:
-            chosen_plan = wp.initialize(ROOT, profile_plan, requested, monitor, args.configure)
+            chosen_plan = wp.initialize(ROOT, profile_plan, requested, monitor, args.configure and not in_gallery)
             if not chosen_plan:
                 return
             if args.print_files:
@@ -183,41 +185,61 @@ def main():
             ap.error(str(exc))
     gallery.run(files, first,
                 set_desktop=set_desktop if profile_plan else None,
-                settings=open_settings if profile_plan else None)
+                settings=open_settings if profile_plan else None,
+                open_settings=in_gallery)
+
+
+def graphical():
+    return bool(os.environ.get('WAYLAND_DISPLAY') or os.environ.get('DISPLAY'))
 
 
 def open_settings(view):
-    """The gallery's S key: settings in their own window over the same wallpaper. The gallery steps aside while they
-    are open; when they are saved it says so in its strip until the new set is in place, then switches to it."""
+    """The gallery's S key: the settings menu in the gallery's own window, over the dimmed wallpaper.
+
+    `--configure --print-files` runs as before (planning, downloads, saving, the desktop), but hands its plan to the
+    gallery on stdout and takes the choice back on stdin. After saving, the strip says so until the new set is in
+    place; the gallery then switches to it at the same wallpaper."""
     from gi.repository import GLib
-    current = view.files[view.index]
+    import settings_ui
+    import wallpaper_setup_cli as cli
+    if getattr(view, 'settings_busy', False):
+        return
+    view.settings_busy = True
     command = [sys.executable, str(Path(__file__).resolve()), '--collection', 'finalized',
-               current.name, '--configure', '--print-files']
-    env = {**os.environ, 'PBLOOM_SETTINGS_BACKDROP': str(current), 'PBLOOM_SETTINGS_REPORT': '1',
-           'PBLOOM_SETTINGS_FULLSCREEN': '1' if view.window.is_fullscreen() else ''}
-    view.hide()
+               view.files[view.index].name, '--configure', '--print-files']
+    process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True,
+                               env={**os.environ, 'PBLOOM_SETTINGS_PIPE': '1'})
+    view.set_status('OPENING SETTINGS')
+
+    def answer(value):
+        view.set_status('UPDATING WALLPAPERS' if value else None)
+        try:
+            process.stdin.write(json.dumps(value) + '\n')
+            process.stdin.close()
+        except OSError:
+            pass
+
+    def finish(files):
+        view.set_status(None)
+        view.settings_busy = False
+        if files:
+            view.replace(files)
 
     def wait():
-        process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, env=env)
-        shown = False
-        for line in process.stderr:
-            if line.startswith('p-bloom-settings: '):
-                saved = line.split()[1] == 'saved'
-                GLib.idle_add(view.show)
-                GLib.idle_add(view.set_status, 'UPDATING WALLPAPERS' if saved else None)
-                shown = True
-        out = process.stdout.read()
-        process.wait()
-        if not shown:
-            GLib.idle_add(view.show)
-        GLib.idle_add(view.set_status, None)
-        lines = out.strip().splitlines()
-        if process.returncode == 0 and lines:
-            try:
-                files = json.loads(lines[-1])
-            except ValueError:
-                return
-            GLib.idle_add(view.replace, files)
+        files = None
+        for line in process.stdout:
+            if line.startswith(cli.PIPE_PREFIX):
+                plan = json.loads(line[len(cli.PIPE_PREFIX):])
+                GLib.idle_add(view.set_status, None)
+                GLib.idle_add(view.show_menu, settings_ui.Menu(plan), answer)
+            elif line.startswith('['):
+                try:
+                    files = json.loads(line)
+                except ValueError:
+                    pass
+        if process.wait() != 0:
+            files = None
+        GLib.idle_add(finish, files)
     threading.Thread(target=wait, daemon=True).start()
 
 if __name__ == '__main__':

@@ -35,6 +35,18 @@ class SettingsUI(unittest.TestCase):
                 ys, xs = np.nonzero(alpha > 230)              # the panel, not the dimmed screen around it
                 self.assertTrue(xs.min() > 0 and ys.min() > 0 and xs.max() < W - 1 and ys.max() < H - 1, (W, H))
 
+    def test_menu_keys(self):
+        menu = settings_ui.Menu(PLAN)
+        self.assertEqual(menu.state(), ('default', 0))
+        self.assertIsNone(menu.key('Right'))
+        self.assertIsNone(menu.key('Down'))
+        self.assertEqual(menu.key('Return'), ('save', {'profile': 'big', 'level': 'vivid'}))
+        self.assertIsNone(menu.key('Up'))
+        self.assertIsNone(menu.key('Up'))                       # wraps to the last row
+        self.assertEqual(menu.key('KP_Enter'), ('save', {'profile': 'small', 'level': 'vivid'}))
+        for name in ('Escape', 's'):
+            self.assertEqual(settings_ui.Menu(PLAN).key(name), ('cancel', None))
+
 
 if __name__ == '__main__':
     unittest.main()

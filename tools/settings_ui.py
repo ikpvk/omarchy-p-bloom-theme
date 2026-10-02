@@ -1,23 +1,14 @@
-"""p(bloom) Wallpapers: the settings screen, set like the gallery and the sheets.
+"""p(bloom) Wallpapers: the settings menu, drawn over the gallery's wallpaper like a game's pause menu.
 
-A window (full screen only if the gallery was): the wallpaper you were looking at, dimmed, and a centred panel. Background level (Muted,
+The gallery dims the wallpaper and shows a centred panel set like its strip and the sheets. Background level (Muted,
 Default, Vivid) is a three-way switch; resolution is a list, Automatic first, every set with its size and whether it is
 the optimal one, installed or still a download. Keys are boxed like the gallery's: ← → background, ↑ ↓ resolution,
-Enter saves, Esc cancels. Units are 1/1080 of the window's height; everything is drawn at the screen's own pixels and
-centred by ink, as in gallery.draw_strip.
+Enter saves, Esc or S closes. Units are 1/1080 of the window's height; everything is drawn at the screen's own pixels
+and centred by ink, as in gallery.draw_strip.
 """
-import os
-from pathlib import Path
-import sys
-
 import cairo
-import gi
-gi.require_version('Gtk', '4.0')
-gi.require_version('Gdk', '4.0')
-gi.require_version('GdkPixbuf', '2.0')
-from gi.repository import Gdk, GdkPixbuf, GLib, Gtk  # noqa: E402
 
-from gallery import (BOX, ICE, MUTED, NAVY, POLLEN, _face, _tracked, key_hints, keycap_metrics)  # noqa: E402
+from gallery import BOX, ICE, MUTED, NAVY, POLLEN, _face, _tracked, key_hints, keycap_metrics
 
 LEVELS = ('muted', 'default', 'vivid')
 LEVEL_LABELS = {'muted': 'MUTED', 'default': 'DEFAULT', 'vivid': 'VIVID'}
@@ -189,67 +180,24 @@ def draw_settings(cr, W, H, plan, level, selected):
     key_hints(cr, snap(x0 + (pw - total)/2), ktop, band, KEYS, metrics, u)
 
 
-class SettingsWindow:
-    def __init__(self, plan, backdrop=None):
-        self.plan, self.result = plan, None
+class Menu:
+    """The menu's state and keys; the gallery draws it with draw() and passes it the keys while it is open."""
+
+    def __init__(self, plan):
+        self.plan = plan
         self.level = plan.get('setting_level', 'default')
         if self.level not in LEVELS:
             self.level = 'default'
-        table = rows(plan, self.level)
-        self.selected = next((i for i, r in enumerate(table) if r[0] == plan.get('setting', 'auto')), 0)
-        self.loop = GLib.MainLoop()
-        GLib.set_prgname('p-bloom-wallpapers')
-        Gtk.Window.set_default_icon_name('p-bloom-wallpapers')
-        win = self.window = Gtk.Window(title='p(bloom) Wallpapers — Settings')
-        win.set_decorated(False)
-        win.set_default_size(1600, 900)
-        provider = Gtk.CssProvider()
-        provider.load_from_string('window { background: #000; }')
-        Gtk.StyleContext.add_provider_for_display(Gdk.Display.get_default(), provider,
-                                                  Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
-        overlay = Gtk.Overlay()
-        self.backdrop = Gtk.Picture(content_fit=Gtk.ContentFit.CONTAIN, can_shrink=True)
-        if backdrop and Path(backdrop).is_file():
-            self.backdrop.set_paintable(Gdk.Texture.new_for_pixbuf(
-                GdkPixbuf.Pixbuf.new_from_file_at_scale(str(backdrop), 2560, -1, True)))
-        overlay.set_child(self.backdrop)
-        self.panel = Gtk.Picture(content_fit=Gtk.ContentFit.FILL, can_shrink=True, can_target=False)
-        overlay.add_overlay(self.panel)
-        win.set_child(overlay)
-        keys = Gtk.EventControllerKey()
-        keys.connect('key-pressed', self._key)
-        win.add_controller(keys)
-        win.connect('close-request', lambda *_: self.loop.quit() or False)
-        win.connect('notify::default-width', lambda *_: self._render())
-        win.connect('notify::default-height', lambda *_: self._render())
-        if os.environ.get('PBLOOM_SETTINGS_FULLSCREEN'):   # only when the gallery it replaces was full screen
-            win.fullscreen()
-        win.present()
-        GLib.timeout_add(50, self._first)
+        self.selected = next((i for i, r in enumerate(rows(plan, self.level)) if r[0] == plan.get('setting', 'auto')), 0)
 
-    def _first(self):
-        if self.window.get_width():
-            self._render()
-            return False
-        return True
+    def state(self):
+        return self.level, self.selected
 
-    def _scale(self):
-        surface = self.window.get_surface()
-        return (surface.get_scale() if surface and hasattr(surface, 'get_scale') else self.window.get_scale_factor()) or 1
+    def draw(self, cr, width, height):
+        draw_settings(cr, width, height, self.plan, self.level, self.selected)
 
-    def _render(self):
-        w, h, scale = self.window.get_width(), self.window.get_height(), self._scale()
-        if not w or not h:
-            return
-        W, H = round(w*scale), round(h*scale)
-        surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, W, H)
-        draw_settings(cairo.Context(surface), W, H, self.plan, self.level, self.selected)
-        surface.flush()
-        self.panel.set_paintable(Gdk.MemoryTexture.new(W, H, Gdk.MemoryFormat.B8G8R8A8_PREMULTIPLIED,
-                                                       GLib.Bytes.new(bytes(surface.get_data())), surface.get_stride()))
-
-    def _key(self, controller, keyval, keycode, state):
-        name = Gdk.keyval_name(keyval) or ''
+    def key(self, name):
+        """('save', choice), ('cancel', None), or None when the menu stays open."""
         count = len(rows(self.plan, self.level))
         if name in ('Left', 'Right'):
             i = LEVELS.index(self.level) + (1 if name == 'Right' else -1)
@@ -259,35 +207,7 @@ class SettingsWindow:
         elif name in ('Home', 'End'):
             self.selected = 0 if name == 'Home' else count - 1
         elif name in ('Return', 'KP_Enter'):
-            self.result = {'profile': rows(self.plan, self.level)[self.selected][0], 'level': self.level}
-            self.loop.quit()
-            return True
-        elif name == 'Escape' or name.lower() == 'q':
-            self.loop.quit()
-            return True
-        else:
-            return False
-        self._render()
-        return True
-
-    def run(self):
-        self.loop.run()
-        self.window.destroy()
-        ctx = GLib.MainContext.default()
-        while ctx.pending():
-            ctx.iteration(False)
-        return self.result
-
-
-def run(plan, backdrop=None):
-    """Show the settings; returns {'profile': 'auto' or a set id, 'level': ...}, or None when cancelled.
-
-    Without a backdrop the desktop's current wallpaper is behind the panel. With PBLOOM_SETTINGS_REPORT set, the
-    window's closing is reported on stderr, so the gallery can come back while a new set is still downloading."""
-    if not backdrop:
-        current = Path.home()/'.config/omarchy/current/background'
-        backdrop = current if current.exists() else None
-    result = SettingsWindow(plan, backdrop).run()
-    if os.environ.get('PBLOOM_SETTINGS_REPORT'):
-        print('p-bloom-settings: ' + ('saved' if result else 'cancelled'), file=sys.stderr, flush=True)
-    return result
+            return 'save', {'profile': rows(self.plan, self.level)[self.selected][0], 'level': self.level}
+        elif name in ('Escape', 's', 'S', 'q', 'Q'):
+            return 'cancel', None
+        return None

@@ -1,12 +1,13 @@
-"""p(bloom) Wallpapers: the full-screen gallery.
+"""p(bloom) Wallpapers: the gallery.
 
 GTK 4 with python-gobject (both in Omarchy's base), drawn like the sheets themselves: the image fills the screen,
 and a 30-unit strip along the bottom edge (units of 1/1080 of the screen height) carries the position and the keys,
 set in Nimbus Sans with the sheets' tracking and their boxed letters. The strip fades out after three seconds without
 input and comes back on any key or pointer movement.
 
-Keys: Left/Right browse (wrapping), Home/End, Enter makes the wallpaper the desktop background, S opens settings and
-reloads the set when they are saved, I hides or shows the strip, F toggles fullscreen, Esc or Q closes.
+Keys: Left/Right browse (wrapping), Home/End, Enter makes the wallpaper the desktop background, S opens the settings
+menu over the dimmed wallpaper (a menu object from the caller, drawn in this window) and reloads the set when they are
+saved, I hides or shows the strip, F toggles fullscreen, Esc or Q closes.
 The file on screen is re-read when it changes on disk, so the development viewers see new renders live.
 """
 import sys
@@ -28,7 +29,8 @@ POLLEN = (245/255, 201/255, 69/255)
 BOX = (150/255, 170/255, 200/255)
 FACE = 'Nimbus Sans'
 CAP = 0.729              # Nimbus Sans cap height, in em
-KEYS = ((('←', '→'), 'BROWSE'), (('↵',), 'SET AS DESKTOP'), (('S',), 'SETTINGS'), (('I',), 'HIDE'), (('ESC',), 'CLOSE'))
+KEYS = ((('←', '→'), 'BROWSE'), (('↵',), 'SET AS DESKTOP'), (('S',), 'SETTINGS'), (('I',), 'HIDE'),
+        (('F',), 'FULLSCREEN'), (('ESC',), 'CLOSE'))
 IDLE = 3.0               # seconds before the strip fades
 FADE = 0.22              # seconds of the fade
 
@@ -209,7 +211,8 @@ class Gallery:
         self.index = self.files.index(Path(first)) if Path(first) in self.files else 0
         self.set_desktop, self.settings = set_desktop, settings
         self.cache, self.mtimes, self.lock = {}, {}, threading.Lock()
-        self.size, self.status, self.was_fullscreen = None, None, False
+        self.size, self.status = None, None
+        self.menu, self.menu_done, self.menu_key, self.menu_alpha = None, None, None, 0.0
         self.strip_on, self.alpha, self.last_input = True, 1.0, time.monotonic()
         self.loop = GLib.MainLoop()
         GLib.set_prgname('p-bloom-wallpapers')               # the window class Omarchy's Super+O rule matches
@@ -230,6 +233,10 @@ class Gallery:
         self.strip = Gtk.Picture(valign=Gtk.Align.END, halign=Gtk.Align.FILL, can_target=False, can_shrink=True,
                                  content_fit=Gtk.ContentFit.FILL)
         overlay.add_overlay(self.strip)
+        # the settings menu: the whole window, dimmed, with the panel in its centre; rendered like the strip
+        self.menu_picture = Gtk.Picture(can_target=False, can_shrink=True, content_fit=Gtk.ContentFit.FILL)
+        self.menu_picture.set_opacity(0)
+        overlay.add_overlay(self.menu_picture)
         self.strip_key = None
         win.set_child(overlay)
         keys = Gtk.EventControllerKey()
@@ -309,8 +316,8 @@ class Gallery:
         width, height, scale = self.window.get_width(), self.window.get_height(), self._scale()
         if not width or not height:
             return
-        # 30/1080 of the screen, in logical pixels that are whole device pixels too
-        want = max(24, height*30/1080)
+        # 30/1080 of the window, in logical pixels that are whole device pixels too
+        want = max(24, min(height*30/1080, width*30/1150))      # a narrow window: the keys and a status still fit
         logical = min(range(int(want) - 4, int(want) + 5), key=lambda h: (abs(h*scale - round(h*scale)) > 1e-6, abs(h - want)))
         device_w, device_h = round(width*scale), round(logical*scale)
         key = (self.index, len(self.files), device_w, device_h, self.status)
@@ -332,20 +339,60 @@ class Gallery:
     def _tick(self):
         if self.size is None:
             self._show()
-        elif self.window.get_visible():
+        else:
             self._render_strip()                           # a no-op unless what the strip shows has changed
+            self._render_menu()
         idle = time.monotonic() - self.last_input
-        want = 1.0 if self.status or (self.strip_on and idle < IDLE) else 0.0
+        want = 0.0 if self.menu else 1.0 if self.status or (self.strip_on and idle < IDLE) else 0.0
+        step = 0.016/FADE
         if want != self.alpha:
-            step = 0.016/FADE
             self.alpha = min(want, self.alpha + step) if want > self.alpha else max(want, self.alpha - step)
             self.strip.set_opacity(self.alpha)
+        want = 1.0 if self.menu else 0.0
+        if want != self.menu_alpha:
+            self.menu_alpha = min(want, self.menu_alpha + step) if want > self.menu_alpha else max(want, self.menu_alpha - step)
+            self.menu_picture.set_opacity(self.menu_alpha)
         return True
+
+    def _render_menu(self):
+        if not self.menu:
+            return
+        width, height, scale = self.window.get_width(), self.window.get_height(), self._scale()
+        if not width or not height:
+            return
+        device_w, device_h = round(width*scale), round(height*scale)
+        key = (device_w, device_h, self.menu.state())
+        if key == self.menu_key:
+            return
+        self.menu_key = key
+        surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, device_w, device_h)
+        self.menu.draw(cairo.Context(surface), device_w, device_h)
+        surface.flush()
+        self.menu_picture.set_paintable(Gdk.MemoryTexture.new(device_w, device_h, Gdk.MemoryFormat.B8G8R8A8_PREMULTIPLIED,
+                                                              GLib.Bytes.new(bytes(surface.get_data())),
+                                                              surface.get_stride()))
+
+    def show_menu(self, menu, done):
+        """Open a menu over the wallpaper; done(result) is called once with what its key() returned."""
+        self.menu, self.menu_done, self.menu_key = menu, done, None
+        self._render_menu()
+
+    def _menu_key(self, name):
+        result = self.menu.key(name)
+        if result is None:
+            self._render_menu()
+            return
+        done = self.menu_done
+        self.menu, self.menu_done = None, None
+        self._wake()
+        done(result[1] if result[0] == 'save' else None)
 
     def _key(self, controller, keyval, keycode, state):
         self._wake()
         name = Gdk.keyval_name(keyval) or ''
-        if name in ('Right', 'Left'):
+        if self.menu and name.lower() != 'f':              # the menu has the keys while it is open; F still works
+            self._menu_key(name)
+        elif name in ('Right', 'Left'):
             self.index = (self.index + (1 if name == 'Right' else -1)) % len(self.files)
             self._show()
         elif name in ('Home', 'End'):
@@ -370,17 +417,6 @@ class Gallery:
         """A line in the strip that stays until it is cleared (None)."""
         self.status = text
 
-    def hide(self):
-        self.was_fullscreen = self.window.is_fullscreen()
-        self.window.set_visible(False)
-
-    def show(self):
-        self.window.set_visible(True)
-        if self.was_fullscreen:
-            self.window.fullscreen()
-        self.window.present()
-        self._wake()
-
     def replace(self, files):
         """A new set after settings were saved: same wallpaper, new files."""
         name = self.files[self.index].name
@@ -394,8 +430,12 @@ class Gallery:
         self.loop.run()
 
 
-def run(files, first, set_desktop=None, settings=None):
-    Gallery(files, first, set_desktop, settings).run()
+def run(files, first, set_desktop=None, settings=None, open_settings=False):
+    """open_settings: start with the settings menu open (the app menu's Wallpaper settings, --configure)."""
+    view = Gallery(files, first, set_desktop, settings)
+    if open_settings and settings:
+        GLib.idle_add(settings, view)
+    view.run()
 
 
 if __name__ == '__main__':
