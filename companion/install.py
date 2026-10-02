@@ -30,6 +30,9 @@ def main():
     app = prefix/'share/p-bloom-wallpapers'
     launcher = prefix/'bin/p-bloom-wallpapers'
     desktop = prefix/'share/applications/p-bloom-wallpapers.desktop'
+    # the app icon in the user's hicolor theme, one PNG per size (tools/make_icon.py)
+    icons = [(prefix/f'share/icons/hicolor/{n}x{n}/apps/p-bloom-wallpapers.png', ROOT/f'companion/icons/p-bloom-wallpapers-{n}.png')
+             for n in (16, 24, 32, 48, 64, 128, 256, 512)]
     local = prefix == (Path.home()/'.local').resolve()
     service = Path.home()/'.config/systemd/user/p-bloom-wallpapers-desktop.service'
     if local and service.exists() and MARKER not in service.read_text():
@@ -46,6 +49,8 @@ def main():
             subprocess.run(['systemctl','--user','daemon-reload'],check=True)
         if launcher.is_file() and MARKER in launcher.read_text():launcher.unlink()
         if desktop.is_file() and 'StartupWMClass=p-bloom-wallpapers' in desktop.read_text():desktop.unlink()
+        for target, _ in icons:
+            target.unlink(missing_ok=True)
         if local and hook.is_file() and MARKER in hook.read_text():hook.unlink()
         for name in (*RUNTIME, 'wallpaper_setup_ui.py', 'wallpaper-viewer.ini', 'install.json', 'p-bloom-wallpapers'):
             (app/name).unlink(missing_ok=True)
@@ -76,9 +81,12 @@ def main():
             'exec '+shlex.quote(sys.executable)+' '+shlex.quote(str(app/'view_wallpapers.py'))+
             ' --collection finalized "$@"\n')
         launcher.chmod(0o755)
+        for target, source in icons:
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source, target)
         desktop.write_text('[Desktop Entry]\nType=Application\nName=p(bloom) Wallpapers\n'
             'Comment=Browse the p(bloom) wallpaper collection\n'
-            'Exec='+desktop_quote(launcher)+'\nIcon=preferences-desktop-wallpaper\n'
+            'Exec='+desktop_quote(launcher)+'\nIcon=p-bloom-wallpapers\n'
             'Terminal=false\nCategories=Graphics;Viewer;\nActions=Settings;\n'
             'Keywords=wallpaper;tapety;p-bloom;pbloom;bloom;blueprint;\nStartupWMClass=p-bloom-wallpapers\n'
             '\n[Desktop Action Settings]\nName=Wallpaper settings\n'

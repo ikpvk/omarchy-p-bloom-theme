@@ -183,6 +183,7 @@ class Gallery:
         self.loop = GLib.MainLoop()
         GLib.set_prgname('p-bloom-wallpapers')               # the window class Omarchy's Super+O rule matches
         GLib.set_application_name('p(bloom) Wallpapers')
+        Gtk.Window.set_default_icon_name('p-bloom-wallpapers')
         win = self.window = Gtk.Window(title='p(bloom) Wallpapers')
         win.set_decorated(False)
         win.set_default_size(1600, 900)                       # the size after F leaves fullscreen
