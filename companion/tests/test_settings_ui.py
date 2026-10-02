@@ -18,11 +18,10 @@ PLAN = dict(profile='big', setting='auto', setting_level='default',
 
 @unittest.skipIf(settings_ui is None, 'GTK 4 not available')
 class SettingsUI(unittest.TestCase):
-    def test_rows_name_the_optimal_installed_and_downloads(self):
-        self.assertEqual(settings_ui.rows(PLAN, 'default'),
-                         [('auto', 'AUTOMATIC', None, None), ('big', '3840 × 2160', '280.0 MB', 'OPTIMAL'),
-                          ('small', '1920 × 1080', '80.0 MB', 'INSTALLED')])
-        self.assertEqual(settings_ui.optimal_size(PLAN, 'default'), '3840 × 2160')
+    def test_rows_are_automatic_then_every_set_with_the_optimal_one_tagged(self):
+        self.assertEqual(settings_ui.rows(PLAN),
+                         [('auto', 'AUTOMATIC', None), ('big', '3840 × 2160', 'OPTIMAL'), ('small', '1920 × 1080', None)])
+        self.assertEqual(settings_ui.optimal_size(PLAN), '3840 × 2160')
 
     def test_the_panel_fits_every_screen(self):
         many = {**PLAN, 'options': [dict(profile=f'p{i}', size=[1920 + i, 1080], total_bytes=1, local=False)
@@ -30,15 +29,16 @@ class SettingsUI(unittest.TestCase):
         for plan in (PLAN, many):
             for W, H in ((1920, 1080), (5120, 2160), (1080, 1920), (1280, 720), (1024, 768)):
                 surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, W, H)
-                settings_ui.draw_settings(cairo.Context(surface), W, H, plan, 'vivid', len(plan['options']))
+                settings_ui.draw_settings(cairo.Context(surface), W, H, plan, len(plan['options']))
                 alpha = np.ndarray((H, W, 4), np.uint8, surface.get_data())[..., 3]
                 ys, xs = np.nonzero(alpha > 230)              # the panel, not the dimmed screen around it
                 self.assertTrue(xs.min() > 0 and ys.min() > 0 and xs.max() < W - 1 and ys.max() < H - 1, (W, H))
 
-    def test_menu_keys(self):
-        menu = settings_ui.Menu(PLAN)
-        self.assertEqual(menu.state(), ('default', 0))
-        self.assertIsNone(menu.key('Right'))
+    def test_menu_keys_choose_the_resolution_and_keep_the_intensity(self):
+        menu = settings_ui.Menu({**PLAN, 'setting_level': 'vivid'})
+        self.assertEqual(menu.state(), 0)
+        for name in ('Left', 'Right'):                          # the intensity is the gallery's, not the menu's
+            self.assertIsNone(menu.key(name))
         self.assertIsNone(menu.key('Down'))
         self.assertEqual(menu.key('Return'), ('save', {'profile': 'big', 'level': 'vivid'}))
         self.assertIsNone(menu.key('Up'))
