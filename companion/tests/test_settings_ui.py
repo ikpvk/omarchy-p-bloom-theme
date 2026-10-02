@@ -11,39 +11,41 @@ except (ImportError, ValueError) as exc:  # GTK 4 / python-gobject missing
     settings_ui = None
     REASON = str(exc)
 
-PLAN = dict(profile='big', setting='auto', setting_level='default',
-            options=[dict(profile='big', size=[3840, 2160], total_bytes=280_000_000, local=False),
-                     dict(profile='small', size=[1920, 1080], total_bytes=80_000_000, local=True)])
+PLAN = dict(profile='big', optimal='big', label='16:9 · 3840 × 2160', setting='auto', setting_level='vivid',
+            monitors=[dict(name='DP-1', width=3840, height=2160, scale=1)],
+            options=[dict(profile='big', size=[3840, 2160]), dict(profile='small', size=[1920, 1080])],
+            packs=[dict(profile='big', level=lv, set=f'big-{lv}', label='16:9 · 3840 × 2160', bytes=20_000_000,
+                        local=lv == 'default') for lv in ('muted', 'default', 'vivid')])
+DONE = {**PLAN, 'packs': [{**k, 'local': True} for k in PLAN['packs']]}
 
 
 @unittest.skipIf(settings_ui is None, 'GTK 4 not available')
 class SettingsUI(unittest.TestCase):
-    def test_rows_are_automatic_then_every_set_with_the_optimal_one_tagged(self):
-        self.assertEqual(settings_ui.rows(PLAN),
-                         [('auto', 'AUTOMATIC', None), ('big', '3840 × 2160', 'OPTIMAL'), ('small', '1920 × 1080', None)])
-        self.assertEqual(settings_ui.optimal_size(PLAN), '3840 × 2160')
+    def test_the_action_downloads_what_is_missing(self):
+        self.assertEqual(settings_ui.action(PLAN), ('download', 40.0))
+        self.assertEqual(settings_ui.keys(PLAN)[0][1], 'DOWNLOAD OPTIMAL · 40 MB')
+        self.assertIsNone(settings_ui.action(DONE))
+        self.assertEqual(settings_ui.keys(DONE), ((('ESC',), 'CLOSE'),))
+        self.assertEqual(settings_ui.action({**DONE, 'setting': 'small'}), ('optimal', 0))
 
     def test_the_panel_fits_every_screen(self):
-        many = {**PLAN, 'options': [dict(profile=f'p{i}', size=[1920 + i, 1080], total_bytes=1, local=False)
-                                    for i in range(40)]}
-        for plan in (PLAN, many):
+        many = {**PLAN, 'monitors': [dict(name=f'DP-{i}', width=1920, height=1080, scale=1) for i in range(6)]}
+        for plan in (PLAN, DONE, many, {**PLAN, 'monitors': []}):
             for W, H in ((1920, 1080), (5120, 2160), (1080, 1920), (1280, 720), (1024, 768)):
                 surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, W, H)
-                settings_ui.draw_settings(cairo.Context(surface), W, H, plan, len(plan['options']))
+                settings_ui.draw_settings(cairo.Context(surface), W, H, plan)
                 alpha = np.ndarray((H, W, 4), np.uint8, surface.get_data())[..., 3]
                 ys, xs = np.nonzero(alpha > 230)              # the panel, not the dimmed screen around it
                 self.assertTrue(xs.min() > 0 and ys.min() > 0 and xs.max() < W - 1 and ys.max() < H - 1, (W, H))
 
-    def test_menu_keys_choose_the_resolution_and_keep_the_intensity(self):
-        menu = settings_ui.Menu({**PLAN, 'setting_level': 'vivid'})
-        self.assertEqual(menu.state(), 0)
-        for name in ('Left', 'Right'):                          # the intensity is the gallery's, not the menu's
-            self.assertIsNone(menu.key(name))
-        self.assertIsNone(menu.key('Down'))
-        self.assertEqual(menu.key('Return'), ('save', {'profile': 'big', 'level': 'vivid'}))
-        self.assertIsNone(menu.key('Up'))
-        self.assertIsNone(menu.key('Up'))                       # wraps to the last row
-        self.assertEqual(menu.key('KP_Enter'), ('save', {'profile': 'small', 'level': 'vivid'}))
+    def test_enter_downloads_the_optimal_set_keeping_the_intensity(self):
+        self.assertEqual(settings_ui.Menu(PLAN).key('Return'),
+                         ('save', {'profile': 'auto', 'level': 'vivid', 'download': 'optimal'}))
+        self.assertIsNone(settings_ui.Menu(DONE).key('Return'))          # nothing to do
+        self.assertEqual(settings_ui.Menu({**DONE, 'setting': 'small'}).key('Return'),
+                         ('save', {'profile': 'auto', 'level': 'vivid'}))   # back to the optimal set
+        for name in ('Up', 'Down', 'Left', 'Right'):
+            self.assertIsNone(settings_ui.Menu(PLAN).key(name))
         for name in ('Escape', 's'):
             self.assertEqual(settings_ui.Menu(PLAN).key(name), ('cancel', None))
 

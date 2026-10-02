@@ -1,10 +1,11 @@
 """p(bloom) Wallpapers: the settings menu, drawn over the gallery's wallpaper like a game's pause menu.
 
-One choice, the resolution: Automatic (the optimal set for the connected monitors, named in its row) or a fixed set.
-Sets that are not installed yet are downloaded after saving, with the progress in the gallery's middle; the intensity
-(Muted, Default, Vivid) is the gallery's ↑ ↓ and Enter, so the menu keeps it. Keys are boxed like the gallery's:
-↑ ↓ choose, Enter saves, Esc or S closes. Units are 1/1080 of the window's height; everything is drawn at the screen's
-own pixels and centred by ink, as in gallery.draw_strip.
+Nothing to choose: the wallpapers follow the optimal set for the connected monitors (one for all of them, as Omarchy
+shows one wallpaper on every monitor). The menu shows the monitors, the set in use, and that set's packs, one per
+intensity, installed or not. Its one action, DOWNLOAD OPTIMAL, fetches the missing packs in the background, with the
+progress in the gallery's middle; then the gallery's ↑ ↓ switch intensity at once. Keys are boxed like the gallery's: Enter
+downloads, Esc or S closes. Units are 1/1080 of the window's height; everything is drawn at the screen's own pixels and
+centred by ink, as in gallery.draw_strip.
 """
 import math
 
@@ -14,24 +15,33 @@ from gallery import ICE, MUTED, NAVY, POLLEN, _face, _tracked, key_hints, keycap
 
 LEVELS = ('muted', 'default', 'vivid')
 LEVEL_LABELS = {'muted': 'MUTED', 'default': 'DEFAULT', 'vivid': 'VIVID'}
-KEYS = ((('↑', '↓'), 'CHOOSE'), (('↵',), 'SAVE'), (('ESC',), 'CANCEL'))
+TEXT = (0.82, 0.88, 0.97)
 
 
-def rows(plan):
-    """(profile, label, tag) for the list: Automatic first, then every set; the optimal one is tagged."""
-    best = plan.get('profile')
-    out = [('auto', 'AUTOMATIC', None)]
-    for o in plan['options']:
-        out.append((o['profile'], ' × '.join(map(str, o['size'])), 'OPTIMAL' if o['profile'] == best else None))
-    return out
+def missing(plan):
+    return [k for k in plan.get('packs', []) if not k['local']]
 
 
-def optimal_size(plan):
-    o = next((o for o in plan['options'] if o['profile'] == plan.get('profile')), None)
-    return ' × '.join(map(str, o['size'])) if o else ''
+def action(plan):
+    """What Enter does: ('download', megabytes) when packs are missing, ('optimal', 0) when a manual set from an
+    earlier version is in use, else None."""
+    lacking = missing(plan)
+    if lacking:
+        return 'download', sum(k['bytes'] for k in lacking)/1e6
+    if plan.get('setting', 'auto') != 'auto':
+        return 'optimal', 0
+    return None
 
 
-def draw_settings(cr, W, H, plan, selected):
+def keys(plan):
+    what = action(plan)
+    if not what:
+        return ((('ESC',), 'CLOSE'),)
+    label = f'DOWNLOAD OPTIMAL · {what[1]:.0f} MB' if what[0] == 'download' else 'USE OPTIMAL'
+    return ((('↵',), label), (('ESC',), 'CLOSE'))
+
+
+def draw_settings(cr, W, H, plan):
     u = min(H/1080, W/1000)                                    # a portrait screen: the panel fits its width
     snap = round
     options = cairo.FontOptions()
@@ -49,15 +59,18 @@ def draw_settings(cr, W, H, plan, selected):
     def width_of(text, track):
         return _tracked(cr, 0, 0, text, track, draw=False)
 
-    table = rows(plan)
-    # one vertical scale: SECTION between the header's rule and the list, and between the list and the keys
-    pw, pad, row_h = snap(560*u), snap(44*u), snap(30*u)
-    SECTION, footer_h = snap(28*u), snap(76*u)
-    title_mid, rule_y = snap(46*u), snap(80*u)                   # from the panel's top padding
-    fixed = pad + rule_y + SECTION + SECTION//2 + footer_h
-    visible = max(5, min(len(table), (H - snap(120*u) - fixed)//row_h))
-    first = min(max(0, selected - visible//2), max(0, len(table) - visible))
-    ph = fixed + visible*row_h
+    screens = plan.get('monitors') or []
+    packs = plan.get('packs') or []
+    in_use = plan.get('label', '')
+    optimal = plan.get('profile') == plan.get('optimal', plan.get('profile'))
+    # one vertical scale: SECTION above each section's label, LABEL from the label to its rows
+    pw, pad, row_h = snap(640*u), snap(44*u), snap(28*u)
+    SECTION, LABEL, footer_h = snap(30*u), snap(14*u), snap(76*u)
+    title_mid, rule_y = snap(46*u), snap(80*u)
+    sections = [('MONITORS', max(1, len(screens))), ('IN USE', 1), ('PACKS', len(packs))]
+    room = H - snap(120*u) - pad - rule_y - footer_h - SECTION//2 - sum(SECTION + LABEL for _ in sections)
+    row_h = min(row_h, max(snap(18*u), room//max(1, sum(n for _, n in sections))))
+    ph = pad + rule_y + sum(SECTION + LABEL + n*row_h for _, n in sections) + SECTION//2 + footer_h
     x0, y0 = snap((W - pw)/2), snap((H - ph)/2)
     inner0, inner1 = x0 + pad, x0 + pw - pad
     # the panel: navy, a hairline border, the sheets' corner marks just outside it
@@ -76,67 +89,82 @@ def draw_settings(cr, W, H, plan, selected):
         cr.line_to(cx + 0.5*sx, cy + 0.5*sy)
         cr.line_to(cx + sx*mark, cy + 0.5*sy)
     cr.stroke()
-    # header: the app's name small, RESOLUTION as a sheet title, a rule
+    # header
     y = y0 + pad
     _face(cr, 10*u)
     cr.set_source_rgb(*MUTED)
     _tracked(cr, inner0, centred('P', y + snap(6*u)), 'P(BLOOM) WALLPAPERS', 0.28)
     _face(cr, 26*u, bold=True)
     cr.set_source_rgb(*ICE)
-    _tracked(cr, inner0, centred('R', y + title_mid), 'RESOLUTION', 0.3)
-    if first > 0 or first + visible < len(table):            # more rows than fit: a quiet count of what is shown
-        _face(cr, 9*u)
-        cr.set_source_rgb(*MUTED)
-        more = f'{first + 1}–{first + visible} OF {len(table)}'
-        _tracked(cr, inner1 - snap(width_of(more, 0.24)), centred('R', y + title_mid), more, 0.24)
+    _tracked(cr, inner0, centred('O', y + title_mid), 'OPTIMAL SET', 0.3)
     y += rule_y
     cr.set_source_rgba(1, 1, 1, 0.14)
     cr.rectangle(inner0, y, inner1 - inner0, 1)
     cr.fill()
-    # the list: Automatic, then every set; the selected row lit, with a Pollen bar in the margin at its left
-    top = y + SECTION
-    for n, (profile, name, tag) in enumerate(table[first:first + visible]):
-        i = first + n
-        ry = top + n*row_h
-        mid = ry + row_h/2
-        on = i == selected
-        if on:
-            bleed = snap(14*u)
-            cr.set_source_rgba(*ICE, 0.08)
-            cr.rectangle(inner0 - bleed, ry, inner1 - inner0 + 2*bleed, row_h)
-            cr.fill()
-            cr.set_source_rgb(*POLLEN)
-            cr.rectangle(inner0 - bleed, ry, max(2, snap(3*u)), row_h)
-            cr.fill()
-        if profile == 'auto':
-            _face(cr, 12*u, bold=True)
-            cr.set_source_rgb(*ICE)
-            _tracked(cr, inner0, centred('A', mid), 'AUTOMATIC', 0.2)
-            note = optimal_size(plan)
-            _face(cr, 12*u)
-            cr.set_source_rgb(*POLLEN)
-            ext = cr.text_extents(note)
-            cr.move_to(inner1 - ext.x_advance, centred('5', mid))
-            cr.show_text(note)
+
+    def label(text, y, note=None):
+        _face(cr, 9*u)
+        cr.set_source_rgb(*MUTED)
+        _tracked(cr, inner0, centred(text[0], y), text, 0.28)
+        if note:
+            _tracked(cr, inner1 - snap(width_of(note, 0.28)), centred(note[0], y), note, 0.28)
+
+    def left(text, mid, color=TEXT, bold=False, x=None):
+        _face(cr, 12*u, bold=bold)
+        cr.set_source_rgb(*color)
+        cr.move_to(inner0 if x is None else x, centred('5', mid))
+        cr.show_text(text)
+        return cr.text_extents(text).x_advance
+
+    def right(text, mid, color, x=None, size=12, track=0.0, bold=False):
+        _face(cr, size*u, bold=bold)
+        cr.set_source_rgb(*color)
+        width = snap(width_of(text, track))
+        _tracked(cr, (inner1 if x is None else x) - width, centred('O' if text[:1].isalpha() else '5', mid), text, track)
+
+    # the monitors the optimal set is chosen for
+    y += SECTION
+    label('MONITORS', y)
+    top = y + LABEL
+    for n, m in enumerate(screens or [None]):
+        mid = top + n*row_h + row_h/2
+        if m is None:
+            left('None detected', mid, MUTED)
             continue
-        _face(cr, 12*u, bold=on)
-        cr.set_source_rgb(*(ICE if on else (0.82, 0.88, 0.97)))
-        cr.move_to(inner0, centred('5', mid))
-        cr.show_text(name)
-        if tag:
-            _face(cr, 9*u, bold=True)
-            cr.set_source_rgb(*POLLEN)
-            _tracked(cr, inner1 - snap(width_of(tag, 0.24)), centred('O', mid), tag, 0.24)
-    # footer: the keys, centred
-    fy = top + visible*row_h + SECTION//2
+        left(m['name'], mid, ICE, bold=True)
+        right(f"{m['width']} × {m['height']}", mid, TEXT)
+    y = top + max(1, len(screens))*row_h
+    # the set in use
+    y += SECTION
+    label('IN USE', y)
+    mid = y + LABEL + row_h/2
+    left(in_use, mid, ICE, bold=True)
+    right('OPTIMAL' if optimal else 'MANUAL', mid, POLLEN if optimal else MUTED, size=9, track=0.24, bold=optimal)
+    y += LABEL + row_h
+    # the set's packs: one per intensity, its size, installed or not
+    y += SECTION
+    lacking = missing(plan)
+    label('PACKS', y, 'ALL INSTALLED' if packs and not lacking else f'{len(packs) - len(lacking)} OF {len(packs)} INSTALLED')
+    top = y + LABEL
+    mb_right = inner0 + snap(330*u)
+    for n, k in enumerate(packs):
+        mid = top + n*row_h + row_h/2
+        left(LEVEL_LABELS[k['level']].capitalize(), mid, TEXT if k['local'] else MUTED)
+        if k['bytes']:
+            right(f"{k['bytes']/1e6:.1f} MB", mid, MUTED, x=mb_right)
+        right('INSTALLED' if k['local'] else 'DOWNLOAD', mid, MUTED if k['local'] else POLLEN, size=9, track=0.24,
+              bold=not k['local'])
+    # footer: the action and the keys, centred
+    fy = top + len(packs)*row_h + SECTION//2
     cr.set_source_rgba(1, 1, 1, 0.14)
     cr.rectangle(inner0, fy, inner1 - inner0, 1)
     cr.fill()
     metrics = keycap_metrics(cr, u, footer_h - 1)
     ktop = fy + 1 + (footer_h - 1 - metrics[1])//2
     band = fy + (1 + footer_h)/2
-    total = key_hints(cr, 0, ktop, band, KEYS, metrics, u, draw=False)
-    key_hints(cr, snap(x0 + (pw - total)/2), ktop, band, KEYS, metrics, u)
+    hints = keys(plan)
+    total = key_hints(cr, 0, ktop, band, hints, metrics, u, draw=False)
+    key_hints(cr, snap(x0 + (pw - total)/2), ktop, band, hints, metrics, u)
 
 
 class Menu:
@@ -145,24 +173,25 @@ class Menu:
     def __init__(self, plan):
         self.plan = plan
         self.level = plan.get('setting_level', 'default') if plan.get('setting_level') in LEVELS else 'default'
-        self.selected = next((i for i, r in enumerate(rows(plan)) if r[0] == plan.get('setting', 'auto')), 0)
 
     def state(self):
-        return self.selected
+        return 0
 
     def draw(self, cr, width, height):
-        draw_settings(cr, width, height, self.plan, self.selected)
+        draw_settings(cr, width, height, self.plan)
 
     def key(self, name):
-        """('save', choice), ('cancel', None), or None when the menu stays open. The intensity is kept."""
-        count = len(rows(self.plan))
-        if name in ('Up', 'Down', 'Tab'):
-            self.selected = (self.selected + (-1 if name == 'Up' else 1)) % count
-        elif name in ('Home', 'End'):
-            self.selected = 0 if name == 'Home' else count - 1
-        elif name in ('Return', 'KP_Enter'):
-            return 'save', {'profile': rows(self.plan)[self.selected][0], 'level': self.level}
-        elif name in ('Escape', 's', 'S', 'q', 'Q'):
+        """('save', choice), ('cancel', None), or None when the menu stays open. The intensity is kept; saving makes
+        the resolution automatic (the optimal set) and, with packs missing, downloads them."""
+        if name in ('Return', 'KP_Enter'):
+            what = action(self.plan)
+            if not what:
+                return None
+            choice = {'profile': 'auto', 'level': self.level}
+            if what[0] == 'download':
+                choice['download'] = 'optimal'
+            return 'save', choice
+        if name in ('Escape', 's', 'S', 'q', 'Q'):
             return 'cancel', None
         return None
 
@@ -297,6 +326,8 @@ def draw_progress(cr, u, t, info):
     level = info.get('level', 'default')
     detail = ' · '.join(p for p in (info.get('label', ''), LEVEL_LABELS.get(level, '') if level != 'default' else '') if p)
     sizes = f'{done/1e6:.1f} / {total/1e6:.1f} MB' if total and phase == 'download' else ''
+    if info.get('packs', 1) > 1:                              # DOWNLOAD OPTIMAL: one pack of several
+        sizes = ' · '.join(x for x in (f"PACK {info['pack']} OF {info['packs']}", sizes) if x)
 
     def line(text, size, bold, color, mid, track):
         if not text:

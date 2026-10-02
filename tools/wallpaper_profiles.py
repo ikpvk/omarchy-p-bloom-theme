@@ -106,6 +106,7 @@ progress = None
 # The wallpaper sync() puts on the desktop instead of the current one (the gallery's Enter on another level)
 desktop_choice = None
 refreshed = None                                    # the wallpaper sync() last put on the desktop
+pack = None                                         # (i, n) while fetch_packs() fetches the i-th of n sets
 
 
 def _marker(folder):
@@ -298,7 +299,7 @@ def fetch(root, profile_id, opener=None, timeout=60, level='default'):
     def report(phase, done):
         if progress:
             progress(phase=phase, done=done, total=archive['bytes'], label=profile.get('label', profile_id),
-                     level=profile['level'])
+                     level=profile['level'], **(dict(pack=pack[0], packs=pack[1]) if pack else {}))
     name = _safe_name(archive['name'])
     expected = {f['name']: f['sha256'] for f in profile['files']}
     target = sets_dir()/folder
@@ -350,17 +351,50 @@ def fetch(root, profile_id, opener=None, timeout=60, level='default'):
     return target
 
 
-def prune(current, keep=3):
+def optimal_packs(root, screens, monitor=None):
+    """The packs DOWNLOAD OPTIMAL fetches: the optimal set for all screens together (the one automatic selection uses;
+    Omarchy shows one wallpaper on every monitor) at every intensity it is published at. A list of dicts: profile,
+    level, set, label, bytes, local. (Sets for each monitor on its own wait for per-monitor wallpapers in Omarchy.)"""
+    pid = plan(root, 'auto', monitor, screens)['profile']
+    packs = []
+    for lv in LEVELS:
+        entry = next(x for x in profiles(root, lv)[1] if x['id'] == pid)
+        if entry['level_missing']:
+            continue
+        packs.append(dict(profile=pid, level=lv, set=set_name(pid, lv), label=entry['label'],
+                          bytes=0 if entry.get('bundled') else entry['archive']['bytes'], local=entry['local']))
+    return packs
+
+
+def fetch_packs(root, packs):
+    """Download the packs that are not installed yet, one after another; the ones that fail are returned (with
+    why), the rest stay installed."""
+    global pack
+    missing = [k for k in packs if not k['local']]
+    failed = []
+    for i, k in enumerate(missing):
+        pack = (i + 1, len(missing))
+        try:
+            fetch(root, k['profile'], level=k['level'])
+        except Exception as exc:  # network, disk, checksum or archive errors alike
+            failed.append((k, f'{exc}'))
+        finally:
+            pack = None
+    return failed
+
+
+def prune(current, keep=3, pinned=()):
     """Keep the `keep` most recently used downloaded sets (docking back and
-    forth should not re-download); `current` is marked as just used."""
+    forth should not re-download); `current` is marked as just used. Sets in
+    `pinned` (DOWNLOAD OPTIMAL's) are kept besides them."""
     base = sets_dir()
     if not base.is_dir():
         return
     mark = base/current
     if mark.is_dir():
         os.utime(mark)
-    sets = sorted((p for p in base.iterdir() if p.is_dir() and not p.is_symlink() and not p.name.startswith('.')),
-                  key=lambda p: p.stat().st_mtime, reverse=True)
+    sets = sorted((p for p in base.iterdir() if p.is_dir() and not p.is_symlink() and not p.name.startswith('.')
+                   and p.name not in pinned), key=lambda p: p.stat().st_mtime, reverse=True)
     for path in sets[keep:]:
         shutil.rmtree(path)
 
@@ -555,6 +589,7 @@ def ensure_local(root, p, requested, monitor, previous):
 
 def _initialize(root, p, requested='auto', monitor=None, configure=False, level=None):
     previous = read_setup()
+    pinned = previous.get('pinned', [])
     level = valid_level(level or saved_level(previous, root))
     # Old chooser preferences migrate to automatic; only explicit new settings
     # can establish a manual override.
@@ -566,7 +601,10 @@ def _initialize(root, p, requested='auto', monitor=None, configure=False, level=
         # Sizes and "download" markers differ per level: give the settings
         # screen the resolution list of every level.
         by_level={lv:plan(root,requested,monitor,p['monitors'],level=lv)['options'] for lv in LEVELS}
-        choice=announce({**p,'setting':requested,'setting_level':level,'options_by_level':by_level}, desktop)
+        # the gallery's menu: the monitors, the set in use, and the optimal set's packs
+        choice=announce({**p,'setting':requested,'setting_level':level,'options_by_level':by_level,
+                         'optimal':plan(root,'auto',monitor,p['monitors'],level=level)['profile'],
+                         'packs':optimal_packs(root,p['monitors'],monitor)}, desktop)
         if not choice:
             return None
         if isinstance(choice, str):
@@ -575,7 +613,14 @@ def _initialize(root, p, requested='auto', monitor=None, configure=False, level=
                 or choice.get('level') not in LEVELS):
             raise ValueError('Invalid wallpaper setting')
         requested, level = choice['profile'], choice['level']
+        failed_packs = []
+        if choice.get('download') == 'optimal':
+            packs = optimal_packs(root, p['monitors'], monitor)
+            pinned = [k['set'] for k in packs]
+            failed_packs = [f"The {k['label']} {LEVEL_LABELS[k['level']]} set could not be downloaded ({reason})."
+                            for k, reason in fetch_packs(root, packs)]
         p=ensure_local(root,plan(root,requested,monitor,p['monitors'],level=level),requested,monitor,previous)
+        p['warnings'] = failed_packs + p['warnings']
     updated=sync(p)
     shown = p.get('level', 'default')
     if p['screen']:
@@ -586,9 +631,9 @@ def _initialize(root, p, requested='auto', monitor=None, configure=False, level=
         save_setup(dict(version=6,root=str(root),profile=requested,level=level,monitor=monitor,
                         selected=p['profile'],selected_level=shown,
                         desktop_selected=set_name(p['profile'], shown) if desktop else previous.get('desktop_selected'),
-                        failed=p.get('failed',{})))
+                        failed=p.get('failed',{}),pinned=pinned))
         if desktop and not p.get('fallback'):
-            prune(set_name(p['profile'], shown))
+            prune(set_name(p['profile'], shown), pinned=pinned)
         if changed:
             notify_selection(p,desktop)
     return p

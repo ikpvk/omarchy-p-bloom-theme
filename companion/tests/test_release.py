@@ -169,6 +169,14 @@ class Download(unittest.TestCase):
         wp.prune('a')
         self.assertEqual(sorted(p.name for p in wp.sets_dir().iterdir()), ['a', 'c', 'd'])
 
+    def test_prune_keeps_the_optimal_sets_packs(self):
+        # the packs never count towards the three recent sets, however old they are
+        for i, name in enumerate(('opt-muted', 'opt-vivid', 'w', 'x', 'y', 'z')):
+            (wp.sets_dir()/name).mkdir(parents=True)
+            wp.os.utime(wp.sets_dir()/name, (1000+i, 1000+i))
+        wp.prune('z', pinned=['opt-muted', 'opt', 'opt-vivid'])
+        self.assertEqual(sorted(p.name for p in wp.sets_dir().iterdir()), ['opt-muted', 'opt-vivid', 'x', 'y', 'z'])
+
 
 MANIFEST = json.loads((ROOT/'docs/collection/profiles.json').read_text())
 # After a collection change the downloadable sets are withdrawn until the

@@ -32,14 +32,20 @@ Unchanged launches do not repeat the notification.
 Settings are available through **Wallpaper settings** in the application's
 context menu, the gallery's **S** key, or `p-bloom-wallpapers --configure`.
 They are a menu in the middle of the gallery's window, over the dimmed
-wallpaper, set like the gallery's strip, with one choice: the **resolution**,
-**Automatic** (the optimal set for your monitors, named in its row) or a fixed
-set, the optimal one tagged (↑ ↓). Enter saves, Escape or S closes the menu
-without changing anything. A set that is not installed yet is downloaded after
-saving. The **intensity** (Muted, Default or Vivid: how strong the background
-colour is) is the gallery's: ↑ ↓ show the same wallpapers at another intensity
-without changing anything, and Enter makes the one on screen the desktop's, at
-that intensity, which is then remembered.
+wallpaper, set like the gallery's strip, with nothing to choose: the
+wallpapers follow the **optimal set** for the connected monitors (one set for
+all of them, as Omarchy shows one wallpaper on every monitor). The menu shows
+the monitors, the set in use and that set's packs, one per **intensity**
+(Muted, Default, Vivid: how strong the background colour is), installed or not.
+Its one action, **Download optimal** (Enter), fetches the missing packs in the
+background; the gallery's ↑ ↓ then switch intensity at once. Escape or S
+closes the menu. Downloaded packs of the optimal set are kept when older sets
+are cleaned up. (Sets for each monitor on its own will follow when Omarchy can
+show a wallpaper per monitor.)
+
+In the gallery, ↑ ↓ show the same wallpapers at another intensity without
+changing anything; Enter makes the one on screen the desktop's, at that
+intensity, which is then remembered.
 
 When a change needs a set that is not installed yet, the gallery dims and shows
 the download in its middle: the emblem from the sheets' corner, turning, its

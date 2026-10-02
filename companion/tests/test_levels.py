@@ -186,6 +186,29 @@ class Levels(unittest.TestCase):
         self.assertEqual(local['vivid']['4k'], False)
         self.assertEqual(set(local), set(wp.LEVELS))
 
+    def test_download_optimal_fetches_every_intensity_of_the_optimal_set(self):
+        seen = {}
+        def announce(p, desktop):
+            seen.update(p)
+            return {'profile': 'auto', 'level': 'default', 'download': 'optimal'}
+        progress = []
+        with patch.object(wp, 'fetch', side_effect=self.fake_fetch(fail=('vivid',))), \
+             patch.object(wp, 'sync', return_value=False), patch.object(wp, 'announce', side_effect=announce), \
+             patch.object(wp, 'progress', lambda **info: progress.append(info)):
+            p = wp.initialize(self.root, wp.plan(self.root, detected=[SCREEN]), configure=True)
+        # the menu is told the set in use and its packs, one per intensity (Default came with the first start)
+        self.assertEqual(seen['optimal'], '4k')
+        self.assertEqual([(k['set'], k['local']) for k in seen['packs']],
+                         [('4k-muted', False), ('4k', True), ('4k-vivid', False)])
+        # every pack is fetched; one that fails is reported, the others stay
+        self.assertTrue((wp.sets_dir()/'4k').is_dir() and (wp.sets_dir()/'4k-muted').is_dir())
+        self.assertFalse((wp.sets_dir()/'4k-vivid').exists())
+        self.assertTrue(any('Vivid set could not be downloaded' in w for w in p['warnings']))
+        self.assertEqual({(i['pack'], i['packs']) for i in progress if 'pack' in i}, {(1, 2)})  # Vivid fails at once
+        saved = wp.read_setup()
+        self.assertEqual((saved['profile'], saved['level']), ('auto', 'default'))
+        self.assertEqual(saved['pinned'], ['4k-muted', '4k', '4k-vivid'])
+
     def test_old_string_setting_keeps_the_current_level(self):
         with patch.object(wp, 'fetch', side_effect=self.fake_fetch()), patch.object(wp, 'sync', return_value=False), \
              patch.object(wp, 'announce', return_value='1440'):
