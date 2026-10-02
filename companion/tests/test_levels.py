@@ -136,7 +136,7 @@ class Levels(unittest.TestCase):
         target = wp.fetch(self.root, '4k', opener=self.opener('muted'), level='muted')
         self.assertEqual(target, wp.sets_dir()/'4k-muted')
         self.assertEqual(self.urls, [wp.archive_url('p-bloom-4k-muted.tar')])
-        self.assertEqual({p.name: p.read_bytes() for p in target.iterdir()}, self.archives['muted'][1])
+        self.assertEqual({p.name: p.read_bytes() for p in target.iterdir() if p.name != wp.MARKER}, self.archives['muted'][1])
         p = wp.plan(self.root, detected=[SCREEN], level='muted')
         self.assertTrue(p['local'])
         # The Default set of the same profile is a different folder, still absent.

@@ -107,6 +107,9 @@ download fails, the set already on the desktop stays and the download is
 retried, as below. `--list` prints the current set and level on stderr;
 `--show-plan` includes `level` and `requested_level`.
 
+Each downloaded set records the SHA-256 of the archive it came from. After a theme update the manifest
+names new archives, so older sets on disk no longer count as installed and are downloaded again.
+
 Offline, or if a download or a checksum fails, the desktop keeps the installed
 set (normally the bundled one) and the companion retries after 15 minutes.
 With no monitors detected nothing is downloaded. `--list` never downloads.
@@ -132,13 +135,17 @@ ratios may crop on the desktop; the viewer always fits the complete sheet.
 
 ## Controls
 
+A bar along the bottom names the wallpaper, its position and the keys; I hides it.
+
 | Key | Action |
 |---|---|
 | Left / Right | Previous / next, wrapping |
-| Esc / Q | Close |
+| Enter | Make this wallpaper the desktop background (p(bloom) must be the active theme) |
+| S | Settings; after saving, the gallery reopens on the new set at the same wallpaper |
+| I | Hide or show the bar |
 | F | Toggle fullscreen |
-| I | Show filename and position |
 | Home / End | First / last |
+| Esc / Q | Close |
 
 The local Super+O integration recognizes the unchanged `p-bloom-wallpapers`
 window class. This app does not install a global keybinding.

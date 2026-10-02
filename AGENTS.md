@@ -37,3 +37,9 @@ Every set also exists at three ground levels, Muted / Default / Vivid
 `concepts/ground-levels/`). Only the ground changes. Default must stay
 byte-identical; Muted and Vivid ship as extra release archives per profile.
 The layout audit includes a per-label contrast check at every level.
+
+Wallpaper archives are published under the release named by `RELEASE_TAG` in
+`tools/wallpaper_profiles.py`. Once the theme is public, never replace the
+assets of a published tag: checkouts in the wild verify downloads against
+their own manifest. Publish a new tag (`wallpapers-v2`, …), point
+`RELEASE_TAG` at it and keep the old release.

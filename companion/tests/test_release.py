@@ -88,7 +88,7 @@ class Download(unittest.TestCase):
     def test_verified_download_installs_the_set(self):
         target = wp.fetch(self.root, '4k', opener=self.opener(self.archive))
         self.assertEqual(self.urls, [wp.archive_url('p-bloom-4k.tar')])
-        self.assertEqual({p.name: p.read_bytes() for p in target.iterdir()}, self.images)
+        self.assertEqual({p.name: p.read_bytes() for p in target.iterdir() if p.name != wp.MARKER}, self.images)
         screen = dict(name='DP-1', width=3840, height=2160, scale=1)
         p = wp.plan(self.root, detected=[screen])
         self.assertEqual((p['profile'], p['local']), ('4k', True))

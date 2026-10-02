@@ -44,6 +44,8 @@ class Profiles(unittest.TestCase):
             for id in ['one', 'two']:
                 path = folder/f'{id}.webp'
                 path.write_bytes(f'{name}-{id}'.encode())
+                if name != '16-9':
+                    (folder/wp.MARKER).write_text('0'*64)  # installed from the archive the manifest names
                 entries.append(dict(id=id, name=path.name, sha256=hashlib.sha256(path.read_bytes()).hexdigest(), bytes=path.stat().st_size))
             self.manifest['profiles'].append(dict(id=name, label=name, files=entries, size=size, min_text_px=14,
                                                   bundled=name == '16-9',
@@ -106,6 +108,7 @@ class Profiles(unittest.TestCase):
             if installed:
                 folder.mkdir(parents=True, exist_ok=True)
                 (folder/f'{key}.webp').write_bytes(data)
+                (folder/wp.MARKER).write_text('0'*64)
             entries.append(dict(id=key, name=f'{key}.webp', bytes=bytes_per_file,
                                 sha256=hashlib.sha256(data).hexdigest()))
         self.manifest['profiles'].append(dict(id=id, label=id, files=entries, size=dimensions, min_text_px=11,
@@ -121,6 +124,16 @@ class Profiles(unittest.TestCase):
         p = wp.plan(self.root, detected=screens)
         self.assertEqual(p['recommended'], '4k')
         self.assertFalse(p['options'][0]['upscale'])
+
+    def test_a_set_from_an_older_archive_is_fetched_again(self):
+        # after a theme update the old files are still on disk, but the manifest names a new archive
+        self.add_sized_profile('4k', [3840,2160], 3)
+        screens = [{**self.screen(3840,2160), 'name':'DP-2'}]
+        self.assertTrue(next(o for o in wp.plan(self.root, detected=screens)['options'] if o['profile']=='4k')['local'])
+        (wp.sets_dir()/'4k'/wp.MARKER).write_text('1'*64)
+        self.assertFalse(next(o for o in wp.plan(self.root, detected=screens)['options'] if o['profile']=='4k')['local'])
+        (wp.sets_dir()/'4k'/wp.MARKER).unlink()
+        self.assertFalse(next(o for o in wp.plan(self.root, detected=screens)['options'] if o['profile']=='4k')['local'])
 
     def test_file_sizes_are_measured_not_estimated(self):
         self.add_sized_profile('4k', [3840,2160], 1234)

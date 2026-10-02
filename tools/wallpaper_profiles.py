@@ -99,6 +99,16 @@ def _at_level(profile, level):
             'archive': entry['archive'], 'files': entry['files'], 'bundled': False}
 
 
+MARKER = '.archive-sha256'
+
+
+def _marker(folder):
+    try:
+        return (folder/MARKER).read_text().strip()
+    except OSError:
+        return None
+
+
 def profiles(root, level='default'):
     """Every published profile at a background level.
 
@@ -131,8 +141,11 @@ def profiles(root, level='default'):
         paths = [base/n for n in names]
         if not profile.get('bundled') and not profile.get('archive'):
             raise ValueError(f"Profile {profile['id']} is neither bundled nor downloadable")
+        # A downloaded set counts only if it came from the archive this manifest names: after a theme update the
+        # old files stay on disk but no longer match, and the set is fetched again instead of failing its hashes.
+        current = profile.get('bundled') or _marker(base) == profile['archive']['sha256']
         out.append({**{k: v for k, v in profile.items() if k != 'levels'}, 'paths': paths,
-                    'local': all(x.is_file() for x in paths), 'level': shown, 'level_missing': missing})
+                    'local': current and all(x.is_file() for x in paths), 'level': shown, 'level_missing': missing})
     if not any(p['local'] for p in out) and level == 'default':
         raise ValueError('No complete wallpaper set is installed. Reinstall from a complete checkout.')
     return manifest, out
@@ -314,6 +327,7 @@ def fetch(root, profile_id, opener=None, timeout=60, level='default'):
         missing = [n for n in expected if not (stage/n).is_file()]
         if missing:
             raise ValueError(f'{name} is missing {len(missing)} wallpapers')
+        (stage/MARKER).write_text(archive['sha256']+'\n')
         tar_path.unlink()
         if target.exists():
             old = work/'previous'

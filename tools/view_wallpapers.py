@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 import re
+import shlex
 import shutil
 import subprocess
 import sys
@@ -54,6 +55,34 @@ def select(files, query):
     return matches[0]
 
 
+def display_name(path):
+    """09-tether-climber.webp -> Tether Climber"""
+    stem = Path(path).stem
+    return stem.split('-', 1)[-1].replace('-', ' ').title()
+
+
+def notify(title, body=''):
+    sender = shutil.which('omarchy-notification-send') or shutil.which('notify-send')
+    if sender:
+        args = [sender, '--app-name', 'p(bloom) Wallpapers', title, body] if 'omarchy' in sender else [sender, title, body]
+        subprocess.run(args, check=False, capture_output=True, timeout=5)
+
+
+def set_desktop(path):
+    """Show one wallpaper on the desktop, from p(bloom)'s staged backgrounds (so Omarchy's next-background keeps working)."""
+    import wallpaper_profiles as wp
+    current = wp.current_dir()
+    if not wp.active_theme(current):
+        notify('p(bloom) is not the active theme', 'Choose p(bloom) in Omarchy\'s theme menu, then press Enter again.')
+        return
+    target = current/'theme/backgrounds'/Path(path).name
+    if not target.is_file():
+        notify('This wallpaper is not on the desktop set yet', 'Its set is still downloading; try again in a moment.')
+        return
+    wp.refresh_desktop(target, current)
+    notify(f'Desktop wallpaper: {display_name(path)}')
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('start', nargs='?', help='Wallpaper number or name, e.g. 9 or tether')
@@ -66,7 +95,12 @@ def main():
     ap.add_argument('--monitor', help="Prefer this monitor's proportions; assess resolution on all monitors")
     ap.add_argument('--show-plan', action='store_true', help='Print automatic setup as JSON without changing anything')
     ap.add_argument('--sync-backgrounds', action='store_true', help='Automatically match the p(bloom) desktop to connected monitors without opening the viewer')
+    ap.add_argument('--set-desktop', type=Path, metavar='FILE', help='Make this wallpaper the desktop background (the gallery\'s Enter key)')
+    ap.add_argument('--replace', metavar='PID', help='With --configure: after saving, close this gallery and reopen it on the new set')
     args = ap.parse_args()
+    if args.set_desktop:
+        set_desktop(args.set_desktop)
+        return
     directory = args.dir.expanduser().resolve() if args.dir else DEVELOPMENT
     if args.render and args.collection == 'finalized':
         ap.error('Render sources separately; --render only supports the development collection')
@@ -136,6 +170,9 @@ def main():
             chosen_plan = wp.initialize(ROOT, profile_plan, requested, monitor, args.configure)
             if not chosen_plan:
                 return
+            if args.replace:
+                # settings opened from a gallery: that gallery shows the old set, so it gives way to this one
+                subprocess.run(['imv-msg', args.replace, 'quit'], check=False, capture_output=True)
             # Preserve the selected sheet when an optimal format changes.
             files = [Path(p) for p in chosen_plan['files']]
             first = next(p for p in files if p.name == first.name)
@@ -143,6 +180,9 @@ def main():
             ap.error(str(exc))
     env = os.environ.copy()
     env['imv_config'] = str(Path(__file__).with_name('wallpaper-viewer.ini'))
+    # the gallery's Enter and S keys call this program again
+    env['PBLOOM_SELF'] = f'{shlex.quote(sys.executable)} {shlex.quote(str(Path(__file__).resolve()))} --collection finalized'
+    env['PBLOOM_KEYS'] = '          ← →  browse      Enter  set as desktop      S  settings      I  hide this bar      Esc  close'
     os.execve(viewer, [viewer, '-f', '-s', 'full', '-b', '000000',
                       '-i', 'p-bloom-wallpapers', '-n', str(first),
                       *map(str, files)], env)
