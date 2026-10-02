@@ -39,8 +39,9 @@ selecting Automatic restores monitor-based selection, and its row names the
 optimal set for your monitors, which is also marked in the list. Every set
 shows its size and whether it is optimal, installed or still a download; when
 the window is too short the list scrolls and says which rows it shows. Enter
-saves, Escape or S closes the menu without changing anything. The background
-level also changes straight from the gallery with ↑ ↓.
+saves, Escape or S closes the menu without changing anything. The gallery's
+↑ ↓ show the same wallpapers at another background level without changing the
+settings; Enter then makes the one on screen the desktop's, at that level.
 
 When a change needs a set that is not installed yet, the gallery dims and shows
 the download in its middle: the emblem from the sheets' corner, turning, its
@@ -134,8 +135,8 @@ A strip along the bottom edge shows the position and the keys, set like the shee
 | Key | Action |
 |---|---|
 | Left / Right | Previous / next, wrapping |
-| Up / Down | Background level at once: Up towards Vivid, Down towards Muted (shown next to the position) |
-| Enter | Make this wallpaper the desktop background (p(bloom) must be the active theme) |
+| Up / Down | Browse the same wallpapers at another background level: Up towards Vivid, Down towards Muted (shown next to the position); settings and desktop stay as they are |
+| Enter | Make this wallpaper, at the level shown, the desktop background (p(bloom) must be the active theme); another level is saved as the setting |
 | S | Settings menu; after saving, the gallery switches to the new set at the same wallpaper |
 | I | Hide or show the strip |
 | F | Toggle fullscreen |

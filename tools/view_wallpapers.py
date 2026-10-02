@@ -99,9 +99,10 @@ def main():
     ap.add_argument('--sync-backgrounds', action='store_true', help='Automatically match the p(bloom) desktop to connected monitors without opening the viewer')
     ap.add_argument('--set-desktop', type=Path, metavar='FILE', help='Make this wallpaper the desktop background (the gallery\'s Enter key)')
     ap.add_argument('--print-files', action='store_true', help='With --configure or --level: print the chosen set as JSON instead of opening the gallery (the gallery\'s S and ↑ ↓ keys)')
-    ap.add_argument('--level', choices=['muted', 'default', 'vivid'], help='Set the background level, keeping the resolution setting')
+    ap.add_argument('--level', choices=['muted', 'default', 'vivid'], help='With --print-files: the set at this background level, downloaded if needed; changes no setting (the gallery\'s ↑ ↓)')
+    ap.add_argument('--save-level', choices=['muted', 'default', 'vivid'], help='Save the background level, keeping the resolution setting (the gallery\'s Enter on another level)')
     args = ap.parse_args()
-    if args.set_desktop:
+    if args.set_desktop and not args.save_level:
         set_desktop(args.set_desktop)
         return
     directory = args.dir.expanduser().resolve() if args.dir else DEVELOPMENT
@@ -173,8 +174,8 @@ def main():
     in_gallery = bool(profile_plan) and args.configure and not args.print_files and graphical()
     if profile_plan:
         try:
+            import wallpaper_setup_cli as cli
             if os.environ.get('PBLOOM_SETTINGS_PIPE'):
-                import wallpaper_setup_cli as cli
 
                 def report(**info):
                     try:
@@ -182,12 +183,27 @@ def main():
                     except OSError:                      # the gallery closed: the download goes on
                         wp.progress = None
                 wp.progress = report
+            if args.level and args.print_files:
+                # only for viewing: no setting, desktop or notification changes
+                shown = wp.ensure_local(ROOT, wp.plan(ROOT, requested, monitor, detected, level=args.level),
+                                        requested, monitor, previous)
+                print(cli.FILES_PREFIX + json.dumps({'files': shown['files'], 'level': shown.get('level', 'default')}),
+                      flush=True)
+                return
+            if args.save_level:
+                wp.notify_selection = lambda *_: None            # Enter's own notification names the wallpaper
+                if args.set_desktop:
+                    wp.desktop_choice = args.set_desktop.name   # the level's set goes on with this wallpaper showing
             chosen_plan = wp.initialize(ROOT, profile_plan, requested, monitor, args.configure and not in_gallery,
-                                        level=args.level)
+                                        level=args.save_level)
             if not chosen_plan:
                 return
+            if args.save_level and args.set_desktop:
+                if wp.refreshed == args.set_desktop.name:
+                    notify(f'Desktop wallpaper: {display_name(args.set_desktop)}')
+                else:
+                    set_desktop(args.set_desktop)               # p(bloom) not active, or the set still downloading
             if args.print_files:
-                import wallpaper_setup_cli as cli
                 try:
                     print(cli.FILES_PREFIX + json.dumps({'files': [str(f) for f in chosen_plan['files']],
                                                          'level': chosen_plan.get('level', 'default')}), flush=True)
@@ -200,7 +216,7 @@ def main():
         except (OSError, ValueError, subprocess.SubprocessError) as exc:
             ap.error(str(exc))
     gallery.run(files, first,
-                set_desktop=set_desktop if profile_plan else None,
+                set_desktop=enter if profile_plan else None,
                 settings=open_settings if profile_plan else None,
                 open_settings=in_gallery,
                 level=(chosen_plan.get('level', 'default') if profile_plan else None),
@@ -240,6 +256,8 @@ def run_job(view, args, target=None):
         view.settings_busy = False
         if result:
             view.replace(result['files'], result.get('level'))
+            if not target:                                 # settings saved (not a level only looked at)
+                view.saved_level = result.get('level')
         if target and view.level_wanted != target:
             change_level(view, view.level_wanted)          # ↑ ↓ pressed again while this set was fetched
         else:
@@ -274,11 +292,23 @@ def open_settings(view):
 
 
 def change_level(view, level):
-    """The gallery's ↑ ↓: the background level, at once; a set that is not installed yet is downloaded first.
-    Presses while one is under way are taken up when it ends."""
+    """The gallery's ↑ ↓: the same wallpapers at another background level, only in the gallery (Enter makes it the
+    desktop's); a set that is not installed yet is downloaded first. Presses while one is under way are taken up
+    when it ends."""
     if getattr(view, 'settings_busy', False):
         return
     run_job(view, ['--level', level], target=level)
+
+
+def enter(view, path):
+    """The gallery's Enter: this wallpaper on the desktop, at the level shown. Another level than the saved one is
+    saved first, which puts its set on the desktop with this wallpaper showing."""
+    if getattr(view, 'settings_busy', False):
+        return
+    if view.level and view.level != getattr(view, 'saved_level', view.level):
+        run_job(view, ['--save-level', view.level, '--set-desktop', str(path)])
+    else:
+        threading.Thread(target=set_desktop, args=(path,), daemon=True).start()
 
 if __name__ == '__main__':
     main()

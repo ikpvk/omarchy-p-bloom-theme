@@ -463,7 +463,7 @@ class Gallery:
                 self.level_wanted = LEVELS[i]
                 self.change_level(self, LEVELS[i])
         elif name in ('Return', 'KP_Enter') and self.set_desktop:
-            threading.Thread(target=self.set_desktop, args=(self.files[self.index],), daemon=True).start()
+            self.set_desktop(self, self.files[self.index])  # the caller runs it off the main thread
         elif name.lower() == 's' and self.settings:
             self.settings(self)
         elif name.lower() == 'i':
@@ -500,6 +500,7 @@ def run(files, first, set_desktop=None, settings=None, open_settings=False, leve
     """open_settings: start with the settings menu open (the app menu's Wallpaper settings, --configure).
     level and change_level(view, level): the background level shown, and what ↑ ↓ call to change it."""
     view = Gallery(files, first, set_desktop, settings, level, change_level)
+    view.saved_level = level
     if open_settings and settings:
         GLib.idle_add(settings, view)
     view.run()

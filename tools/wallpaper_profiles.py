@@ -103,6 +103,9 @@ MARKER = '.archive-sha256'
 # Called while a set downloads and installs: progress(phase='download'|'install', done=bytes, total=bytes,
 # label=..., level=...). The gallery's settings set it to show the download in its window.
 progress = None
+# The wallpaper sync() puts on the desktop instead of the current one (the gallery's Enter on another level)
+desktop_choice = None
+refreshed = None                                    # the wallpaper sync() last put on the desktop
 
 
 def _marker(folder):
@@ -424,6 +427,7 @@ def refresh_desktop(target, current):
 
 def sync(p, current=None):
     """Replace only this collection's files in Omarchy's disposable theme stage."""
+    global refreshed
     current = current or current_dir()
     if not p['screen'] or not active_theme(current):
         return False
@@ -436,7 +440,7 @@ def sync(p, current=None):
     for src, digest in zip(sources, p['hashes'], strict=True):
         if hashlib.sha256(src.read_bytes()).hexdigest() != digest:
             raise ValueError(f'Wallpaper changed since packaging: {src.name}')
-    selected = Path(os.readlink(current/'background')).name if (current/'background').is_symlink() else None
+    selected = desktop_choice or (Path(os.readlink(current/'background')).name if (current/'background').is_symlink() else None)
     changed = False
     # Stage the whole set first so an out-of-space failure cannot leave half copied.
     with tempfile.TemporaryDirectory(prefix='.p-bloom-', dir=theme) as work:
@@ -455,6 +459,7 @@ def sync(p, current=None):
     # so Omarchy's next-background operation can match its current-file list.
     if selected in {s.name for s in sources} and (changed or (current/'background').resolve() != (destination/selected).resolve()):
         refresh_desktop(destination/selected,current)
+        refreshed = selected
     return changed
 
 
