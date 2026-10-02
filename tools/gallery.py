@@ -29,8 +29,9 @@ POLLEN = (245/255, 201/255, 69/255)
 BOX = (150/255, 170/255, 200/255)
 FACE = 'Nimbus Sans'
 CAP = 0.729              # Nimbus Sans cap height, in em
-KEYS = ((('←', '→'), 'BROWSE'), (('↵',), 'SET AS DESKTOP'), (('S',), 'SETTINGS'), (('I',), 'HIDE'),
+KEYS = ((('←', '→'), 'BROWSE'), (('↑', '↓'), 'BACKGROUND'), (('↵',), 'SET AS DESKTOP'), (('S',), 'SETTINGS'), (('I',), 'HIDE'),
         (('F',), 'FULLSCREEN'), (('ESC',), 'CLOSE'))
+LEVELS = ('muted', 'default', 'vivid')
 IDLE = 3.0               # seconds before the strip fades
 FADE = 0.22              # seconds of the fade
 
@@ -153,7 +154,7 @@ def _return(cr, x, cy, length):
     cr.line_to(x + head, bottom + head)
 
 
-def draw_strip(cr, width, height, index, count, keys=KEYS, status=None):
+def draw_strip(cr, width, height, index, count, keys=KEYS, status=None, level=None):
     """The strip, `width` x `height` device pixels, drawn with its top-left corner at the origin.
 
     Units are height/30. The one-pixel hairline is the top edge; everything else is centred by ink in the band below
@@ -189,7 +190,12 @@ def draw_strip(cr, width, height, index, count, keys=KEYS, status=None):
     cr.set_source_rgb(*MUTED)
     x += snap(7*u)
     x += _tracked(cr, x, base, '/', 0)
-    _tracked(cr, x + snap(7*u), base, str(count), 0.08)
+    x += snap(7*u)
+    x += _tracked(cr, x, base, str(count), 0.08)
+    if level and not status:                              # the background level ↑ ↓ change, after the position
+        _face(cr, 10*u)
+        cr.set_source_rgb(*MUTED)
+        _tracked(cr, x + snap(28*u), baseline(level), level, 0.24)
     # keys, right-aligned
     metrics = keycap_metrics(cr, u, height - 1)
     top = 1 + (height - 1 - metrics[1])//2
@@ -204,9 +210,14 @@ def draw_strip(cr, width, height, index, count, keys=KEYS, status=None):
 
 
 class Gallery:
-    def __init__(self, files, first, set_desktop=None, settings=None):
+    def __init__(self, files, first, set_desktop=None, settings=None, level=None, change_level=None):
         # the strip lists only the keys this gallery answers (the development viewers have no desktop or settings)
-        self.keys = tuple(k for k in KEYS if (k[1] != 'SET AS DESKTOP' or set_desktop) and (k[1] != 'SETTINGS' or settings))
+        self.keys = tuple(k for k in KEYS if (k[1] != 'SET AS DESKTOP' or set_desktop) and (k[1] != 'SETTINGS' or settings)
+                          and (k[1] != 'BACKGROUND' or change_level))
+        # the background level: the one shown, and the one asked for with ↑ ↓ (ahead of it while a set is fetched)
+        self.level = self.level_wanted = level
+        self.change_level = change_level
+        self.progress, self.progress_alpha, self.progress_frame = None, 0.0, 0
         self.files = [Path(f) for f in files]
         self.index = self.files.index(Path(first)) if Path(first) in self.files else 0
         self.set_desktop, self.settings = set_desktop, settings
@@ -222,7 +233,7 @@ class Gallery:
         win.set_decorated(False)
         win.set_default_size(1600, 900)                       # a window, as Hyprland tiles it; F for fullscreen
         provider = Gtk.CssProvider()
-        provider.load_from_string('window { background: #000; }')
+        provider.load_from_string('window { background: #000; } .pb-dim { background: rgba(4, 6, 11, 0.72); }')
         Gtk.StyleContext.add_provider_for_display(Gdk.Display.get_default(), provider,
                                                   Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
         overlay = Gtk.Overlay()
@@ -237,6 +248,15 @@ class Gallery:
         self.menu_picture = Gtk.Picture(can_target=False, can_shrink=True, content_fit=Gtk.ContentFit.FILL)
         self.menu_picture.set_opacity(0)
         overlay.add_overlay(self.menu_picture)
+        # a download: the window dimmed, the sheets' emblem turning in its middle as the progress
+        self.dim = Gtk.Box(can_target=False, hexpand=True, vexpand=True)
+        self.dim.add_css_class('pb-dim')
+        self.dim.set_opacity(0)
+        overlay.add_overlay(self.dim)
+        self.progress_picture = Gtk.Picture(can_target=False, can_shrink=False, halign=Gtk.Align.CENTER,
+                                            valign=Gtk.Align.CENTER, content_fit=Gtk.ContentFit.FILL)
+        self.progress_picture.set_opacity(0)
+        overlay.add_overlay(self.progress_picture)
         self.strip_key = None
         win.set_child(overlay)
         keys = Gtk.EventControllerKey()
@@ -320,13 +340,13 @@ class Gallery:
         want = max(24, min(height*30/1080, width*30/1150))      # a narrow window: the keys and a status still fit
         logical = min(range(int(want) - 4, int(want) + 5), key=lambda h: (abs(h*scale - round(h*scale)) > 1e-6, abs(h - want)))
         device_w, device_h = round(width*scale), round(logical*scale)
-        key = (self.index, len(self.files), device_w, device_h, self.status)
+        key = (self.index, len(self.files), device_w, device_h, self.status, self.level_wanted)
         if key == self.strip_key:
             return
         self.strip_key = key
         surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, device_w, device_h)
         draw_strip(cairo.Context(surface), device_w, device_h, self.index + 1, len(self.files), self.keys,
-                   self.status)
+                   self.status, (self.level_wanted or '').upper() or None)
         surface.flush()
         texture = Gdk.MemoryTexture.new(device_w, device_h, Gdk.MemoryFormat.B8G8R8A8_PREMULTIPLIED,
                                         GLib.Bytes.new(bytes(surface.get_data())), surface.get_stride())
@@ -343,7 +363,7 @@ class Gallery:
             self._render_strip()                           # a no-op unless what the strip shows has changed
             self._render_menu()
         idle = time.monotonic() - self.last_input
-        want = 0.0 if self.menu else 1.0 if self.status or (self.strip_on and idle < IDLE) else 0.0
+        want = 0.0 if self.menu or self.progress else 1.0 if self.status or (self.strip_on and idle < IDLE) else 0.0
         step = 0.016/FADE
         if want != self.alpha:
             self.alpha = min(want, self.alpha + step) if want > self.alpha else max(want, self.alpha - step)
@@ -352,7 +372,37 @@ class Gallery:
         if want != self.menu_alpha:
             self.menu_alpha = min(want, self.menu_alpha + step) if want > self.menu_alpha else max(want, self.menu_alpha - step)
             self.menu_picture.set_opacity(self.menu_alpha)
+        want = 1.0 if self.progress else 0.0
+        if want != self.progress_alpha:
+            self.progress_alpha = min(want, self.progress_alpha + step) if want > self.progress_alpha else max(want, self.progress_alpha - step)
+            self.dim.set_opacity(self.progress_alpha)
+            self.progress_picture.set_opacity(self.progress_alpha)
+        self.progress_frame += 1
+        if self.progress and self.progress_frame % 2 == 0:  # the emblem turns at 30 frames a second
+            self._render_progress()
         return True
+
+    def _render_progress(self):
+        from settings_ui import PROGRESS_SIZE, draw_progress
+        width, height, scale = self.window.get_width(), self.window.get_height(), self._scale()
+        if not width or not height:
+            return
+        u = min(height/1080, width/1000)                    # logical pixels per unit, as in the settings menu
+        w, h = round(PROGRESS_SIZE[0]*u), round(PROGRESS_SIZE[1]*u)
+        device_w, device_h = round(w*scale), round(h*scale)
+        surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, device_w, device_h)
+        draw_progress(cairo.Context(surface), u*device_w/w, (time.monotonic()/9) % 1.0, self.progress)
+        surface.flush()
+        self.progress_picture.set_size_request(w, h)
+        self.progress_picture.set_paintable(Gdk.MemoryTexture.new(device_w, device_h, Gdk.MemoryFormat.B8G8R8A8_PREMULTIPLIED,
+                                                                  GLib.Bytes.new(bytes(surface.get_data())),
+                                                                  surface.get_stride()))
+
+    def show_progress(self, info):
+        """A download or install under way (see settings_ui.draw_progress), or None when it is over."""
+        self.progress = info
+        if info:
+            self._render_progress()
 
     def _render_menu(self):
         if not self.menu:
@@ -398,6 +448,11 @@ class Gallery:
         elif name in ('Home', 'End'):
             self.index = 0 if name == 'Home' else len(self.files) - 1
             self._show()
+        elif name in ('Up', 'Down') and self.change_level and self.level_wanted in LEVELS:
+            i = LEVELS.index(self.level_wanted) + (1 if name == 'Up' else -1)   # up is towards Vivid
+            if 0 <= i < len(LEVELS):
+                self.level_wanted = LEVELS[i]
+                self.change_level(self, LEVELS[i])
         elif name in ('Return', 'KP_Enter') and self.set_desktop:
             threading.Thread(target=self.set_desktop, args=(self.files[self.index],), daemon=True).start()
         elif name.lower() == 's' and self.settings:
@@ -417,8 +472,10 @@ class Gallery:
         """A line in the strip that stays until it is cleared (None)."""
         self.status = text
 
-    def replace(self, files):
+    def replace(self, files, level=None):
         """A new set after settings were saved: same wallpaper, new files."""
+        if level:
+            self.level = level
         name = self.files[self.index].name
         self.files = [Path(f) for f in files]
         self.index = next((i for i, f in enumerate(self.files) if f.name == name), 0)
@@ -430,9 +487,10 @@ class Gallery:
         self.loop.run()
 
 
-def run(files, first, set_desktop=None, settings=None, open_settings=False):
-    """open_settings: start with the settings menu open (the app menu's Wallpaper settings, --configure)."""
-    view = Gallery(files, first, set_desktop, settings)
+def run(files, first, set_desktop=None, settings=None, open_settings=False, level=None, change_level=None):
+    """open_settings: start with the settings menu open (the app menu's Wallpaper settings, --configure).
+    level and change_level(view, level): the background level shown, and what ↑ ↓ call to change it."""
+    view = Gallery(files, first, set_desktop, settings, level, change_level)
     if open_settings and settings:
         GLib.idle_add(settings, view)
     view.run()

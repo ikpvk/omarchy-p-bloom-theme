@@ -100,6 +100,9 @@ def _at_level(profile, level):
 
 
 MARKER = '.archive-sha256'
+# Called while a set downloads and installs: progress(phase='download'|'install', done=bytes, total=bytes,
+# label=..., level=...). The gallery's settings set it to show the download in its window.
+progress = None
 
 
 def _marker(folder):
@@ -288,6 +291,11 @@ def fetch(root, profile_id, opener=None, timeout=60, level='default'):
         return sets_dir()
     folder = set_name(profile_id, profile['level'])
     archive = profile['archive']
+
+    def report(phase, done):
+        if progress:
+            progress(phase=phase, done=done, total=archive['bytes'], label=profile.get('label', profile_id),
+                     level=profile['level'])
     name = _safe_name(archive['name'])
     expected = {f['name']: f['sha256'] for f in profile['files']}
     target = sets_dir()/folder
@@ -299,9 +307,10 @@ def fetch(root, profile_id, opener=None, timeout=60, level='default'):
         digest = hashlib.sha256()
         size = 0
         request = urllib.request.Request(archive_url(name), headers={'User-Agent': 'p-bloom-wallpapers'})
+        report('download', 0)
         with opener(request, timeout=timeout) as response, tar_path.open('wb') as out:
             while True:
-                chunk = response.read(1 << 20)
+                chunk = response.read(1 << 18)                 # small reads: the progress ring moves smoothly
                 if not chunk:
                     break
                 size += len(chunk)
@@ -309,8 +318,10 @@ def fetch(root, profile_id, opener=None, timeout=60, level='default'):
                     raise ValueError(f'{name} is larger than the published archive')
                 digest.update(chunk)
                 out.write(chunk)
+                report('download', size)
         if size != archive['bytes'] or digest.hexdigest() != archive['sha256']:
             raise ValueError(f'{name} failed its SHA-256 check; nothing was installed')
+        report('install', size)
         stage = work/folder
         stage.mkdir()
         with tarfile.open(tar_path) as tar:

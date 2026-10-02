@@ -39,9 +39,13 @@ selecting Automatic restores monitor-based selection, and its row names the
 optimal set for your monitors, which is also marked in the list. Every set
 shows its size and whether it is optimal, installed or still a download; when
 the window is too short the list scrolls and says which rows it shows. Enter
-saves, Escape or S closes the menu without changing anything. When saving needs
-a download, the strip says **Updating wallpapers** until the new set is in
-place, and the gallery then switches to it at the same wallpaper.
+saves, Escape or S closes the menu without changing anything. The background
+level also changes straight from the gallery with ↑ ↓.
+
+When a change needs a set that is not installed yet, the gallery dims and shows
+the download in its middle: the emblem from the sheets' corner, turning, its
+Pollen ring filling with the download, the percentage inside and the set and
+megabytes below; then it switches to the new set at the same wallpaper.
 
 Without a graphical session (over SSH, for example) `--configure` asks the same
 questions in the terminal.
@@ -130,6 +134,7 @@ A strip along the bottom edge shows the position and the keys, set like the shee
 | Key | Action |
 |---|---|
 | Left / Right | Previous / next, wrapping |
+| Up / Down | Background level at once: Up towards Vivid, Down towards Muted (shown next to the position) |
 | Enter | Make this wallpaper the desktop background (p(bloom) must be the active theme) |
 | S | Settings menu; after saving, the gallery switches to the new set at the same wallpaper |
 | I | Hide or show the strip |

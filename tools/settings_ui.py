@@ -6,6 +6,8 @@ the optimal one, installed or still a download. Keys are boxed like the gallery'
 Enter saves, Esc or S closes. Units are 1/1080 of the window's height; everything is drawn at the screen's own pixels
 and centred by ink, as in gallery.draw_strip.
 """
+import math
+
 import cairo
 
 from gallery import BOX, ICE, MUTED, NAVY, POLLEN, _face, _tracked, key_hints, keycap_metrics
@@ -211,3 +213,148 @@ class Menu:
         elif name in ('Escape', 's', 'S', 'q', 'Q'):
             return 'cancel', None
         return None
+
+
+def polar(cx, cy, r, deg):
+    a = math.radians(deg)
+    return cx + r*math.cos(a), cy + r*math.sin(a)
+
+
+PROGRESS_SIZE = (560, 430)                                    # the box the progress is drawn in, in units
+
+
+def draw_progress(cr, u, t, info):
+    """The sheets' corner emblem as a progress indicator, drawn in a PROGRESS_SIZE box (units of u).
+
+    The rings turn as on the sheets (t is the loop's phase, 0..1); the Pollen arc is the download's progress, with the
+    percentage in the middle. Without a byte count (installing, or nothing to count) the arc turns on its own and the
+    middle holds the icon's flower. Below: what is happening, the set, and the megabytes."""
+    w, h = PROGRESS_SIZE[0]*u, PROGRESS_SIZE[1]*u
+    options = cairo.FontOptions()
+    options.set_hint_style(cairo.HINT_STYLE_NONE)
+    options.set_hint_metrics(cairo.HINT_METRICS_OFF)
+    options.set_antialias(cairo.ANTIALIAS_GRAY)
+    cr.set_font_options(options)
+    phase = info.get('phase', 'download')
+    total, done = info.get('total') or 0, info.get('done') or 0
+    fraction = min(1.0, done/total) if phase == 'download' and total else None
+    x, y, k = w/2, 160*u, 140*u/140
+    turn = 360*t
+
+    def ink(a, color=ICE):
+        cr.set_source_rgba(*color, a)
+
+    def stroke(a, width, color=ICE, dash=None):
+        ink(a, color)
+        cr.set_line_width(width*u)
+        cr.set_dash([d*u for d in dash] if dash else [])
+        cr.stroke()
+        cr.set_dash([])
+
+    def circ(r, a, width, dash=None):
+        cr.new_sub_path()
+        cr.arc(x, y, r, 0, 2*math.pi)
+        stroke(a, width, dash=dash)
+
+    def arc(r, a0, a1, a, width, color=ICE):
+        cr.new_sub_path()
+        cr.arc(x, y, r, math.radians(a0), math.radians(a1))
+        stroke(a, width, color)
+
+    circ(140*k, 0.12, 0.5)
+    for i in range(4):                                            # diamonds on the outer ring
+        px, py = polar(x, y, 140*k, 45 + 90*i)
+        d = 3.2*k
+        cr.move_to(px, py - d); cr.line_to(px + d, py); cr.line_to(px, py + d); cr.line_to(px - d, py); cr.close_path()
+        ink(0.9)
+        cr.fill()
+    for i in range(2):
+        a0 = turn*2 + 180*i + 20
+        arc(130*k, a0, a0 + 56, 0.45, 0.7)
+    for i in range(8):                                            # the segmented band
+        a0 = -turn + 45*i
+        cr.new_sub_path()
+        cr.arc(x, y, 120*k, math.radians(a0), math.radians(a0 + 34))
+        cr.arc_negative(x, y, 113*k, math.radians(a0 + 34), math.radians(a0))
+        cr.close_path()
+        if i % 2 == 0:
+            ink(0.55)
+            cr.fill_preserve()
+        stroke(0.6, 0.7)
+    circ(105*k, 0.3, 0.5, dash=[2, 4])
+    # progress: the Pollen arc from the top, clockwise; a faint track under it
+    if fraction is not None:
+        circ(99*k, 0.12, 1.6)
+        a0, a1 = -90, -90 + 360*fraction
+    else:
+        a0 = turn*1.5 - 90
+        a1 = a0 + 78
+    if a1 > a0:
+        arc(99*k, a0, a1, 0.95, 2.2, POLLEN)
+    cr.arc(*polar(x, y, 99*k, a1), 2.6*k, 0, 2*math.pi)
+    ink(0.95, POLLEN)
+    cr.fill()
+    cr.save()
+    cr.translate(x, y)
+    cr.rotate(math.radians(-turn/2))
+    for i in range(72):                                           # ticks, every sixth longer
+        length = (7 if i % 6 == 0 else 3.5)*k
+        cr.move_to(*polar(0, 0, 90*k, i*5))
+        cr.line_to(*polar(0, 0, 90*k + length, i*5))
+    stroke(0.45, 0.4)
+    cr.restore()
+    for i in range(3):
+        a0 = turn + 120*i
+        arc(82*k, a0, a0 + 96, 0.9, 2.2)
+    circ(75*k, 0.35, 0.5)
+    for sgn in (-1, 1):
+        cr.move_to(x + sgn*66*k, y)
+        cr.line_to(x + sgn*72*k, y)
+    stroke(0.6, 0.6)
+    # the middle: the percentage, or the flower
+    if fraction is not None:
+        number = f'{int(fraction*100)}'
+        _face(cr, 34*u, bold=True)
+        ext = cr.text_extents(number)
+        _face(cr, 13*u)
+        pct = cr.text_extents('%')
+        gap = 3*u
+        left = x - (ext.x_advance + gap + pct.x_advance)/2
+        base = y - (ext.y_bearing + ext.height/2)
+        _face(cr, 34*u, bold=True)
+        ink(1.0)
+        cr.move_to(left, base)
+        cr.show_text(number)
+        _face(cr, 13*u)
+        ink(1.0, MUTED)
+        cr.move_to(left + ext.x_advance + gap, base)
+        cr.show_text('%')
+    else:
+        R = 20*k
+        for i in range(5):
+            a = -90 + i*72 + turn/3
+            px, py = polar(x, y, R, a)
+            cr.arc(px, py, R*0.74, 0, 2*math.pi)
+            cr.close_path()
+        ink(0.95, POLLEN)
+        cr.fill()
+        cr.arc(x, y, R*0.42, 0, 2*math.pi)
+        cr.set_source_rgba(*NAVY, 1)
+        cr.fill()
+    # the words, centred under the emblem
+    title = {'download': 'DOWNLOADING', 'install': 'INSTALLING'}.get(phase, 'UPDATING WALLPAPERS')
+    level = info.get('level', 'default')
+    detail = ' · '.join(p for p in (info.get('label', ''), LEVEL_LABELS.get(level, '') if level != 'default' else '') if p)
+    sizes = f'{done/1e6:.1f} / {total/1e6:.1f} MB' if total and phase == 'download' else ''
+
+    def line(text, size, bold, color, mid, track):
+        if not text:
+            return
+        _face(cr, size*u, bold=bold)
+        ink(1.0, color)
+        width = _tracked(cr, 0, 0, text, track, draw=False)
+        ext = cr.text_extents('H')
+        _tracked(cr, round(x - width/2), round(mid - (ext.y_bearing + ext.height/2)), text, track)
+    line(title, 13, True, ICE, 340*u, 0.3)
+    line(detail.upper(), 10, False, MUTED, 368*u, 0.24)
+    line(sizes, 10, False, MUTED, 390*u, 0.08)

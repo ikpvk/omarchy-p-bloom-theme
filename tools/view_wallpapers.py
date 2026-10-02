@@ -98,7 +98,8 @@ def main():
     ap.add_argument('--show-plan', action='store_true', help='Print automatic setup as JSON without changing anything')
     ap.add_argument('--sync-backgrounds', action='store_true', help='Automatically match the p(bloom) desktop to connected monitors without opening the viewer')
     ap.add_argument('--set-desktop', type=Path, metavar='FILE', help='Make this wallpaper the desktop background (the gallery\'s Enter key)')
-    ap.add_argument('--print-files', action='store_true', help='With --configure: print the chosen set as JSON instead of opening the gallery (the gallery\'s S key)')
+    ap.add_argument('--print-files', action='store_true', help='With --configure or --level: print the chosen set as JSON instead of opening the gallery (the gallery\'s S and ↑ ↓ keys)')
+    ap.add_argument('--level', choices=['muted', 'default', 'vivid'], help='Set the background level, keeping the resolution setting')
     args = ap.parse_args()
     if args.set_desktop:
         set_desktop(args.set_desktop)
@@ -172,11 +173,26 @@ def main():
     in_gallery = bool(profile_plan) and args.configure and not args.print_files and graphical()
     if profile_plan:
         try:
-            chosen_plan = wp.initialize(ROOT, profile_plan, requested, monitor, args.configure and not in_gallery)
+            if os.environ.get('PBLOOM_SETTINGS_PIPE'):
+                import wallpaper_setup_cli as cli
+
+                def report(**info):
+                    try:
+                        print(cli.PROGRESS_PREFIX + json.dumps(info), flush=True)
+                    except OSError:                      # the gallery closed: the download goes on
+                        wp.progress = None
+                wp.progress = report
+            chosen_plan = wp.initialize(ROOT, profile_plan, requested, monitor, args.configure and not in_gallery,
+                                        level=args.level)
             if not chosen_plan:
                 return
             if args.print_files:
-                print(json.dumps([str(f) for f in chosen_plan['files']]))
+                import wallpaper_setup_cli as cli
+                try:
+                    print(cli.FILES_PREFIX + json.dumps({'files': [str(f) for f in chosen_plan['files']],
+                                                         'level': chosen_plan.get('level', 'default')}), flush=True)
+                except OSError:
+                    pass
                 return
             # Preserve the selected sheet when an optimal format changes.
             files = [Path(p) for p in chosen_plan['files']]
@@ -186,30 +202,29 @@ def main():
     gallery.run(files, first,
                 set_desktop=set_desktop if profile_plan else None,
                 settings=open_settings if profile_plan else None,
-                open_settings=in_gallery)
+                open_settings=in_gallery,
+                level=(chosen_plan.get('level', 'default') if profile_plan else None),
+                change_level=change_level if profile_plan else None)
 
 
 def graphical():
     return bool(os.environ.get('WAYLAND_DISPLAY') or os.environ.get('DISPLAY'))
 
 
-def open_settings(view):
-    """The gallery's S key: the settings menu in the gallery's own window, over the dimmed wallpaper.
+def run_job(view, args, target=None):
+    """Run the companion for the gallery: `--configure` (the settings menu) or `--level` (↑ ↓), with --print-files.
 
-    `--configure --print-files` runs as before (planning, downloads, saving, the desktop), but hands its plan to the
-    gallery on stdout and takes the choice back on stdin. After saving, the strip says so until the new set is in
-    place; the gallery then switches to it at the same wallpaper."""
+    It hands its plan to the gallery's menu on stdout and takes the choice back on stdin, reports a download's
+    progress, which the gallery shows in its middle, and ends with the files of the set it chose; the gallery then
+    switches to them at the same wallpaper."""
     from gi.repository import GLib
     import settings_ui
     import wallpaper_setup_cli as cli
-    if getattr(view, 'settings_busy', False):
-        return
     view.settings_busy = True
     command = [sys.executable, str(Path(__file__).resolve()), '--collection', 'finalized',
-               view.files[view.index].name, '--configure', '--print-files']
+               view.files[view.index].name, *args, '--print-files']
     process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True,
                                env={**os.environ, 'PBLOOM_SETTINGS_PIPE': '1'})
-    view.set_status('OPENING SETTINGS')
 
     def answer(value):
         view.set_status('UPDATING WALLPAPERS' if value else None)
@@ -219,28 +234,51 @@ def open_settings(view):
         except OSError:
             pass
 
-    def finish(files):
+    def finish(result):
+        view.show_progress(None)
         view.set_status(None)
         view.settings_busy = False
-        if files:
-            view.replace(files)
+        if result:
+            view.replace(result['files'], result.get('level'))
+        if target and view.level_wanted != target:
+            change_level(view, view.level_wanted)          # ↑ ↓ pressed again while this set was fetched
+        else:
+            view.level_wanted = view.level                 # the level in use (not the one asked for, if it failed)
 
     def wait():
-        files = None
+        result = None
         for line in process.stdout:
-            if line.startswith(cli.PIPE_PREFIX):
-                plan = json.loads(line[len(cli.PIPE_PREFIX):])
-                GLib.idle_add(view.set_status, None)
-                GLib.idle_add(view.show_menu, settings_ui.Menu(plan), answer)
-            elif line.startswith('['):
-                try:
-                    files = json.loads(line)
-                except ValueError:
-                    pass
+            try:
+                if line.startswith(cli.PIPE_PREFIX):
+                    plan = json.loads(line[len(cli.PIPE_PREFIX):])
+                    GLib.idle_add(view.set_status, None)
+                    GLib.idle_add(view.show_menu, settings_ui.Menu(plan), answer)
+                elif line.startswith(cli.PROGRESS_PREFIX):
+                    GLib.idle_add(view.show_progress, json.loads(line[len(cli.PROGRESS_PREFIX):]))
+                elif line.startswith(cli.FILES_PREFIX):
+                    result = json.loads(line[len(cli.FILES_PREFIX):])
+            except ValueError:
+                pass
         if process.wait() != 0:
-            files = None
-        GLib.idle_add(finish, files)
+            result = None
+        GLib.idle_add(finish, result)
     threading.Thread(target=wait, daemon=True).start()
+
+
+def open_settings(view):
+    """The gallery's S key: the settings menu in the gallery's own window, over the dimmed wallpaper."""
+    if getattr(view, 'settings_busy', False):
+        return
+    view.set_status('OPENING SETTINGS')
+    run_job(view, ['--configure'])
+
+
+def change_level(view, level):
+    """The gallery's ↑ ↓: the background level, at once; a set that is not installed yet is downloaded first.
+    Presses while one is under way are taken up when it ends."""
+    if getattr(view, 'settings_busy', False):
+        return
+    run_job(view, ['--level', level], target=level)
 
 if __name__ == '__main__':
     main()

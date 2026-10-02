@@ -14,7 +14,11 @@ import tempfile
 LEVELS = ('muted', 'default', 'vivid')
 LEVEL_LABELS = {'muted': 'Muted', 'default': 'Default', 'vivid': 'Vivid'}
 LEVEL_HINT = 'How strong the background colour is.'
+# lines a --configure or --level run sends the gallery on stdout (PBLOOM_SETTINGS_PIPE): the plan for its menu,
+# a download's progress, and the files of the set it ends with
 PIPE_PREFIX = 'p-bloom-settings-plan '
+PROGRESS_PREFIX = 'p-bloom-progress '
+FILES_PREFIX = 'p-bloom-files '
 
 
 def settings(plan, level=None):

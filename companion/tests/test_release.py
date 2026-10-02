@@ -86,7 +86,14 @@ class Download(unittest.TestCase):
                          f'https://github.com/ncr/omarchy-p-bloom-theme/releases/download/{wp.RELEASE_TAG}/p-bloom-4k.tar')
 
     def test_verified_download_installs_the_set(self):
-        target = wp.fetch(self.root, '4k', opener=self.opener(self.archive))
+        seen = []
+        with patch.object(wp, 'progress', lambda **info: seen.append(info)):
+            target = wp.fetch(self.root, '4k', opener=self.opener(self.archive))
+        # the gallery's progress: bytes rising to the archive's size, then installing
+        total = len(self.archive)
+        self.assertEqual([i['phase'] for i in seen][-1], 'install')
+        self.assertEqual([i['done'] for i in seen if i['phase'] == 'download'][::len(seen)-2], [0, total])
+        self.assertTrue(all(i['total'] == total and i['level'] == 'default' for i in seen))
         self.assertEqual(self.urls, [wp.archive_url('p-bloom-4k.tar')])
         self.assertEqual({p.name: p.read_bytes() for p in target.iterdir() if p.name != wp.MARKER}, self.images)
         screen = dict(name='DP-1', width=3840, height=2160, scale=1)
