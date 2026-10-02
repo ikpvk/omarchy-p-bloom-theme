@@ -7,9 +7,10 @@ The theme installed through Omarchy's menu is data only: it cannot install or
 launch this app by itself. Explicitly run the companion installer once:
 
 ```sh
-omarchy pkg add imv              # only if missing
 python3 companion/install.py
 ```
+
+The gallery is a small GTK 4 window (python-gobject, GTK 4 and the WebP loader are part of Omarchy).
 
 The installer announces what it installs, adds **p(bloom) Wallpapers** to the
 application menu, and opens it automatically in a graphical session. Use
@@ -135,14 +136,14 @@ ratios may crop on the desktop; the viewer always fits the complete sheet.
 
 ## Controls
 
-A bar along the bottom names the wallpaper, its position and the keys; I hides it.
+A strip along the bottom edge shows the position and the keys, set like the sheets' own labels; it fades after three seconds without input and comes back on any key or pointer movement. I hides it.
 
 | Key | Action |
 |---|---|
 | Left / Right | Previous / next, wrapping |
 | Enter | Make this wallpaper the desktop background (p(bloom) must be the active theme) |
-| S | Settings; after saving, the gallery reopens on the new set at the same wallpaper |
-| I | Hide or show the bar |
+| S | Settings; after saving, the gallery switches to the new set at the same wallpaper |
+| I | Hide or show the strip |
 | F | Toggle fullscreen |
 | Home / End | First / last |
 | Esc / Q | Close |

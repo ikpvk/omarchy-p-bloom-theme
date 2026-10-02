@@ -11,7 +11,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 MARKER = '# p(bloom) Wallpapers companion'
-RUNTIME = ('view_wallpapers.py', 'wallpaper_profiles.py', 'wallpaper_desktop.py', 'wallpaper_setup_cli.py', 'wallpaper-viewer.ini')
+RUNTIME = ('view_wallpapers.py', 'gallery.py', 'wallpaper_profiles.py', 'wallpaper_desktop.py', 'wallpaper_setup_cli.py')
 
 
 def desktop_quote(value):
@@ -47,15 +47,18 @@ def main():
         if launcher.is_file() and MARKER in launcher.read_text():launcher.unlink()
         if desktop.is_file() and 'StartupWMClass=p-bloom-wallpapers' in desktop.read_text():desktop.unlink()
         if local and hook.is_file() and MARKER in hook.read_text():hook.unlink()
-        for name in (*RUNTIME, 'wallpaper_setup_ui.py', 'install.json', 'p-bloom-wallpapers'):
+        for name in (*RUNTIME, 'wallpaper_setup_ui.py', 'wallpaper-viewer.ini', 'install.json', 'p-bloom-wallpapers'):
             (app/name).unlink(missing_ok=True)
         # Python's bytecode cache of the copied runtime goes with it; downloaded sets stay
         shutil.rmtree(app/'__pycache__',ignore_errors=True)
         if not any(app.iterdir()):app.rmdir()
         print('Companion removed. Wallpaper files and theme checkout retained.')
     else:
-        if not shutil.which('imv'):
-            ap.error('imv is required; on Omarchy run: omarchy pkg add imv')
+        try:
+            import gi
+            gi.require_version('Gtk', '4.0')
+        except (ImportError, ValueError):
+            ap.error('The gallery needs GTK 4 and python-gobject; on Omarchy run: omarchy pkg add python-gobject gtk4')
         if local and not (shutil.which('foot') or shutil.which('xdg-terminal-exec')):
             ap.error('foot or xdg-terminal-exec is required for setup from the application menu')
         if launcher.exists() and MARKER not in launcher.read_text():
@@ -64,7 +67,8 @@ def main():
             ap.error(f'Refusing to overwrite an unrelated desktop entry: {desktop}')
         for directory in (app,launcher.parent,desktop.parent):directory.mkdir(parents=True,exist_ok=True)
         print('Installing p(bloom) Wallpapers, its application-menu entry and automatic format selection.', flush=True)
-        (app/'wallpaper_setup_ui.py').unlink(missing_ok=True)
+        for old in ('wallpaper_setup_ui.py', 'wallpaper-viewer.ini'):
+            (app/old).unlink(missing_ok=True)
         for name in RUNTIME:
             shutil.copy2(ROOT/'tools'/name,app/name)
         launcher.write_text('#!/bin/sh\n'+MARKER+'\n'+

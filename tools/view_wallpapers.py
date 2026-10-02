@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-"""Full-screen development gallery, using imv's native live image reload."""
+"""p(bloom) Wallpapers: the full-screen gallery (tools/gallery.py), its settings and the desktop service entry points."""
 import argparse
 import json
 import os
 from pathlib import Path
 import re
-import shlex
 import shutil
 import subprocess
 import sys
+import threading
 
 ROOT = Path(os.environ.get('PBLOOM_THEME_ROOT', Path(__file__).resolve().parents[1])).resolve()
 DEVELOPMENT = ROOT / 'concepts/development'
@@ -98,7 +98,7 @@ def main():
     ap.add_argument('--show-plan', action='store_true', help='Print automatic setup as JSON without changing anything')
     ap.add_argument('--sync-backgrounds', action='store_true', help='Automatically match the p(bloom) desktop to connected monitors without opening the viewer')
     ap.add_argument('--set-desktop', type=Path, metavar='FILE', help='Make this wallpaper the desktop background (the gallery\'s Enter key)')
-    ap.add_argument('--replace', metavar='PID', help='With --configure: after saving, close this gallery and reopen it on the new set')
+    ap.add_argument('--print-files', action='store_true', help='With --configure: print the chosen set as JSON instead of opening the gallery (the gallery\'s S key)')
     args = ap.parse_args()
     if args.set_desktop:
         set_desktop(args.set_desktop)
@@ -164,30 +164,44 @@ def main():
                   f"{'automatic' if requested == 'auto' else 'manual'} resolution", file=sys.stderr)
         print('\n'.join(str(p) for p in files))
         return
-    viewer = shutil.which('imv')
-    if not viewer:
-        ap.error('imv is required. On Omarchy: omarchy pkg add imv')
+    try:
+        import gallery
+    except (ImportError, ValueError) as exc:
+        ap.error(f'The gallery needs GTK 4 and python-gobject (part of Omarchy): {exc}')
     if profile_plan:
         try:
             chosen_plan = wp.initialize(ROOT, profile_plan, requested, monitor, args.configure)
             if not chosen_plan:
                 return
-            if args.replace:
-                # settings opened from a gallery: that gallery shows the old set, so it gives way to this one
-                subprocess.run(['imv-msg', args.replace, 'quit'], check=False, capture_output=True)
+            if args.print_files:
+                print(json.dumps([str(f) for f in chosen_plan['files']]))
+                return
             # Preserve the selected sheet when an optimal format changes.
             files = [Path(p) for p in chosen_plan['files']]
             first = next(p for p in files if p.name == first.name)
         except (OSError, ValueError, subprocess.SubprocessError) as exc:
             ap.error(str(exc))
-    env = os.environ.copy()
-    env['imv_config'] = str(Path(__file__).with_name('wallpaper-viewer.ini'))
-    # the gallery's Enter and S keys call this program again
-    env['PBLOOM_SELF'] = f'{shlex.quote(sys.executable)} {shlex.quote(str(Path(__file__).resolve()))} --collection finalized'
-    env['PBLOOM_KEYS'] = '          ← →  browse      Enter  set as desktop      S  settings      I  hide this bar      Esc  close'
-    os.execve(viewer, [viewer, '-f', '-s', 'full', '-b', '000000',
-                      '-i', 'p-bloom-wallpapers', '-n', str(first),
-                      *map(str, files)], env)
+    gallery.run(files, first,
+                set_desktop=set_desktop if profile_plan else None,
+                settings=open_settings if profile_plan else None)
+
+
+def open_settings(view):
+    """The gallery's S key: settings in their own window; when they are saved, the gallery switches to the new set."""
+    from gi.repository import GLib
+    command = [sys.executable, str(Path(__file__).resolve()), '--collection', 'finalized',
+               view.files[view.index].name, '--configure', '--print-files']
+
+    def wait():
+        result = subprocess.run(command, capture_output=True, text=True)
+        lines = result.stdout.strip().splitlines()
+        if result.returncode == 0 and lines:
+            try:
+                files = json.loads(lines[-1])
+            except ValueError:
+                return
+            GLib.idle_add(view.replace, files)
+    threading.Thread(target=wait, daemon=True).start()
 
 
 if __name__ == '__main__':
