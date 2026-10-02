@@ -65,7 +65,7 @@ def tui(screen,plan,apply):
                 try:screen.addstr(y,left,text[:max(0,w-left-1)],style)
                 except curses.error:pass
         put(top,'P(BLOOM) / WALLPAPER SETTINGS',curses.A_BOLD)
-        put(top+2,'BACKGROUND',curses.A_BOLD)
+        put(top+2,'INTENSITY',curses.A_BOLD)
         put(top+3,level_line(level),curses.A_BOLD)
         put(top+4,LEVEL_HINT)
         put(top+6,'RESOLUTION',curses.A_BOLD)
@@ -78,7 +78,7 @@ def tui(screen,plan,apply):
             style=curses.A_BOLD|(curses.A_REVERSE if i==selected else 0)
             put(top+8+j,('▶ ' if i==selected else '  ')+label,style)
         if start+count<len(rows):put(top+8+count,f'  ↓ {len(rows)-start-count} more')
-        put(h-2,'←→ Background   ↑↓ Resolution   ENTER Save   ESC Cancel',curses.A_BOLD)
+        put(h-2,'←→ Intensity   ↑↓ Resolution   ENTER Save   ESC Cancel',curses.A_BOLD)
         screen.refresh()
         key=screen.get_wch()
         if key in (curses.KEY_DOWN,'j','\t'):selected=(selected+1)%len(rows)
@@ -96,7 +96,7 @@ def prompt(plan,apply):
     level=plan.get('setting_level','default')
     if level not in LEVELS:level='default'
     print('P(BLOOM) / WALLPAPER SETTINGS')
-    print('Background: '+LEVEL_HINT)
+    print('Intensity: '+LEVEL_HINT)
     for i,k in enumerate(LEVELS,1):print(f"{i}. {LEVEL_LABELS[k]}"+(' (current)' if k==level else ''))
     try:
         while True:

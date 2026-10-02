@@ -29,7 +29,7 @@ POLLEN = (245/255, 201/255, 69/255)
 BOX = (150/255, 170/255, 200/255)
 FACE = 'Nimbus Sans'
 CAP = 0.729              # Nimbus Sans cap height, in em
-KEYS = ((('←', '→'), 'BROWSE'), (('↑', '↓'), 'BACKGROUND'), (('↵',), 'SET AS DESKTOP'), (('S',), 'SETTINGS'), (('I',), 'HIDE'),
+KEYS = ((('←', '→'), 'BROWSE'), (('↑', '↓'), 'INTENSITY'), (('↵',), 'SET AS DESKTOP'), (('S',), 'SETTINGS'), (('I',), 'HIDE'),
         (('F',), 'FULLSCREEN'), (('ESC',), 'CLOSE'))
 LEVELS = ('muted', 'default', 'vivid')
 IDLE = 3.0               # seconds before the strip fades
@@ -213,7 +213,7 @@ class Gallery:
     def __init__(self, files, first, set_desktop=None, settings=None, level=None, change_level=None):
         # the strip lists only the keys this gallery answers (the development viewers have no desktop or settings)
         self.keys = tuple(k for k in KEYS if (k[1] != 'SET AS DESKTOP' or set_desktop) and (k[1] != 'SETTINGS' or settings)
-                          and (k[1] != 'BACKGROUND' or change_level))
+                          and (k[1] != 'INTENSITY' or change_level))
         # the background level: the one shown, and the one asked for with ↑ ↓ (ahead of it while a set is fetched)
         self.level = self.level_wanted = level
         self.change_level = change_level

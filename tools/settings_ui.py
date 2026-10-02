@@ -15,7 +15,7 @@ from gallery import BOX, ICE, MUTED, NAVY, POLLEN, _face, _tracked, key_hints, k
 LEVELS = ('muted', 'default', 'vivid')
 LEVEL_LABELS = {'muted': 'MUTED', 'default': 'DEFAULT', 'vivid': 'VIVID'}
 HINT = 'How strong the background colour is.'
-KEYS = ((('←', '→'), 'BACKGROUND'), (('↑', '↓'), 'RESOLUTION'), (('↵',), 'SAVE'), (('ESC',), 'CANCEL'))
+KEYS = ((('←', '→'), 'INTENSITY'), (('↑', '↓'), 'RESOLUTION'), (('↵',), 'SAVE'), (('ESC',), 'CANCEL'))
 
 
 def rows(plan, level):
@@ -104,7 +104,7 @@ def draw_settings(cr, W, H, plan, level, selected):
         _tracked(cr, inner0, centred(text[0], y), text, 0.28)
     # background level: a three-way switch
     y += SECTION
-    label('BACKGROUND', y)
+    label('INTENSITY', y)
     seg_top = y + LABEL
     cell = (inner1 - inner0)//3
     for k, name in enumerate(LEVELS):
