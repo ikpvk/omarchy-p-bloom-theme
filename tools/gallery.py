@@ -50,28 +50,49 @@ def _tracked(cr, x, baseline, text, track, draw=True):
     return x - x0
 
 
-def draw_strip(cr, width, height, index, count, alpha=1.0, keys=KEYS):
-    """The strip, `height` device pixels tall, drawn with its top-left corner at the origin.
+def _arrow(cr, x, cy, length, direction):
+    """Path of a horizontal arrow (the face has none): shaft and a 45° head."""
+    head = length*0.42
+    x0, x1 = (x, x + length) if direction > 0 else (x + length, x)
+    cr.move_to(x0, cy)
+    cr.line_to(x1, cy)
+    cr.move_to(x1 - direction*head, cy - head)
+    cr.line_to(x1, cy)
+    cr.line_to(x1 - direction*head, cy + head)
 
-    Laid out in units of height/30 and snapped to device pixels. The one-pixel hairline is the strip's top edge;
-    everything else is centred in the band below it, by ink: each run of caps or digits, each key box, each glyph
-    inside its box. Box heights are chosen so the space above and below them is equal to the pixel."""
+
+def _return(cr, x, cy, length):
+    """Path of the return key's arrow: down the right side, then left, with a 45° head."""
+    rise, head = length*0.55, length*0.36
+    right, bottom = x + length, cy + rise/2
+    cr.move_to(right, cy - rise/2)
+    cr.line_to(right, bottom)
+    cr.line_to(x, bottom)
+    cr.move_to(x + head, bottom - head)
+    cr.line_to(x, bottom)
+    cr.line_to(x + head, bottom + head)
+
+
+def draw_strip(cr, width, height, index, count, keys=KEYS):
+    """The strip, `width` x `height` device pixels, drawn with its top-left corner at the origin.
+
+    Units are height/30. The one-pixel hairline is the top edge; everything else is centred by ink in the band below
+    it. A key box keeps the same inner margin on every side: the space between the caps and the box's top and bottom
+    is also its left and right padding, so S, I and ESC sit alike; arrow boxes are square, their strokes as long as
+    the caps are tall, with the caps' stem weight. Gaps follow one scale: box to box, box to label, group to group."""
     u = height/30
     snap = round
-    centre = (1 + height)/2                                 # the band below the hairline, rows 1 .. height-1
+    centre = (1 + height)/2
 
     def baseline(text):
         ext = cr.text_extents(text)
         return snap(centre - (ext.y_bearing + ext.height/2))
 
-    cr.save()
-    # unhinted outlines and metrics, so the ink lands where text_extents says it does
     options = cairo.FontOptions()
     options.set_hint_style(cairo.HINT_STYLE_NONE)
     options.set_hint_metrics(cairo.HINT_METRICS_OFF)
     options.set_antialias(cairo.ANTIALIAS_GRAY)
     cr.set_font_options(options)
-    cr.push_group()
     cr.set_source_rgba(*NAVY, 0.93)
     cr.rectangle(0, 0, width, height)
     cr.fill()
@@ -79,50 +100,74 @@ def draw_strip(cr, width, height, index, count, alpha=1.0, keys=KEYS):
     cr.rectangle(0, 0, width, 1)
     cr.fill()
     margin = snap(24*u)
-    # position: the number in Pollen, the count muted, one size, one centre line
+    # position: 09 / 42, one size, one cap line
     _face(cr, 12*u, bold=True)
-    number = f'{index:02d}'
-    base = baseline(number + str(count))
+    base = baseline(f'{index:02d}{count}')
     cr.set_source_rgb(*POLLEN)
-    x = margin + _tracked(cr, margin, base, number, 0.08)
+    x = margin + _tracked(cr, margin, base, f'{index:02d}', 0.08)
     _face(cr, 12*u)
     cr.set_source_rgb(*MUTED)
-    _tracked(cr, x + snap(8*u), base, f'/  {count}', 0.16)
-    # keys, right-aligned: boxed key caps like the sheets' view letters, then the action in tracked caps
-    box_h = snap(19*u)
-    if (height - 1 - box_h) % 2:
-        box_h += 1
-    top = 1 + (height - 1 - box_h)//2
+    x += snap(7*u)
+    x += _tracked(cr, x, base, '/', 0)
+    _tracked(cr, x + snap(7*u), base, str(count), 0.08)
+    # keys
+    size = 11*u
+    _face(cr, size, bold=True)
+    cap = cr.text_extents('H').height
+    box = snap(cap + 2*snap(5.5*u))                        # cap height plus equal margins above and below
+    if (height - 1 - box) % 2:
+        box += 1
+    pad = (box - cap)/2                                    # the same margin on the left and right of the caps
+    top = 1 + (height - 1 - box)//2
+    mid = top + box/2
+    stroke = max(1.0, 0.13*size)                           # Nimbus Sans Bold's stem weight
+    gap_key, gap_label, gap_group = snap(4*u), snap(7*u), snap(28*u)
 
     def layout(draw, x):
         for caps, label in keys:
             for key in caps:
-                arrow = key in '←→↵'
-                _face(cr, (14 if arrow else 11)*u, bold=True)
-                ext = cr.text_extents(key)
-                w = max(box_h, snap(ext.width + 10*u))
+                x = snap(x)                                # box edges on whole device pixels
+                _face(cr, size, bold=True)
+                if key in ('←', '→', '↵'):
+                    w = box
+                else:
+                    ext = cr.text_extents(key)
+                    w = max(box, snap(ext.width + 2*pad))
                 if draw:
                     cr.set_source_rgba(*BOX, 0.95)
                     cr.set_line_width(1)
-                    cr.rectangle(x + 0.5, top + 0.5, w - 1, box_h - 1)
+                    cr.rectangle(x + 0.5, top + 0.5, w - 1, box - 1)
                     cr.stroke()
                     cr.set_source_rgb(*ICE)
-                    cr.move_to(snap(x + (w - ext.width)/2 - ext.x_bearing),
-                               snap(top + box_h/2 - ext.y_bearing - ext.height/2))
-                    cr.show_text(key)
-                x += w + snap(4*u)
-            x += snap(6*u)
+                    cr.set_line_width(stroke)
+                    cr.set_line_cap(cairo.LINE_CAP_BUTT)
+                    cr.set_line_join(cairo.LINE_JOIN_MITER)
+                    length = box - 2*pad
+                    if key in ('←', '→', '↵'):
+                        # build the path, measure its ink (miter tips included), then centre that ink in the box
+                        def shape(dx=0.0, dy=0.0):
+                            cr.new_path()
+                            if key == '↵':
+                                _return(cr, x + pad + dx, mid + dy, length)
+                            else:
+                                _arrow(cr, x + pad + dx, mid + dy, length, 1 if key == '→' else -1)
+                        shape()
+                        x0, y0, x1, y1 = cr.stroke_extents()
+                        shape((x + w/2) - (x0 + x1)/2, mid - (y0 + y1)/2)
+                        cr.stroke()
+                    else:
+                        cr.move_to(x + (w - ext.width)/2 - ext.x_bearing, snap(mid - ext.y_bearing - ext.height/2))
+                        cr.show_text(key)
+                x += w + gap_key
+            x = snap(x + gap_label - gap_key)
             _face(cr, 10*u)
             cr.set_source_rgb(*MUTED)
-            x += _tracked(cr, x, baseline(label), label, 0.24, draw)
-            x += snap(26*u)
-        return x - snap(26*u)
+            x += _tracked(cr, x, baseline(label), label, 0.2, draw)
+            x += gap_group
+        return x - gap_group
 
     total = layout(False, 0)
-    layout(True, width - margin - total)
-    cr.pop_group_to_source()
-    cr.paint_with_alpha(alpha)
-    cr.restore()
+    layout(True, snap(width - margin - total))
 
 
 class Gallery:
@@ -148,10 +193,12 @@ class Gallery:
         overlay = Gtk.Overlay()
         self.picture = Gtk.Picture(content_fit=Gtk.ContentFit.CONTAIN, can_shrink=True)
         overlay.set_child(self.picture)
-        self.strip = Gtk.DrawingArea(valign=Gtk.Align.END, halign=Gtk.Align.FILL, can_target=False)
-        self.strip.set_draw_func(self._draw_strip)
-        self.strip.set_content_height(30)
+        # the strip is rendered into a texture at the screen's own pixels (fractional scales included), so every
+        # hairline and gap lands on a device pixel; fading is the widget's opacity
+        self.strip = Gtk.Picture(valign=Gtk.Align.END, halign=Gtk.Align.FILL, can_target=False, can_shrink=True,
+                                 content_fit=Gtk.ContentFit.FILL)
         overlay.add_overlay(self.strip)
+        self.strip_key = None
         win.set_child(overlay)
         keys = Gtk.EventControllerKey()
         keys.connect('key-pressed', self._key)
@@ -167,10 +214,14 @@ class Gallery:
         GLib.timeout_add(1000, self._watch)
 
     # images: scaled once to the window on a worker thread, neighbours prepared ahead
+    def _scale(self):
+        surface = self.window.get_surface()
+        return (surface.get_scale() if surface and hasattr(surface, 'get_scale') else self.window.get_scale_factor()) or 1
+
     def _target(self):
         w, h = self.window.get_width(), self.window.get_height()
-        scale = self.window.get_scale_factor() or 1
-        return (max(1, w*scale), max(1, h*scale)) if w and h else None
+        scale = self._scale()
+        return (max(1, round(w*scale)), max(1, round(h*scale))) if w and h else None
 
     def _load(self, path, size):
         pixbuf = GdkPixbuf.Pixbuf.new_from_file(str(path))
@@ -201,10 +252,9 @@ class Gallery:
         if not size:
             return
         self.size = size
-        self.strip.set_content_height(self._strip_height())
+        self._render_strip()
         self.picture.set_paintable(self._prepare(self.index, size))
         self.window.set_title(f'p(bloom) Wallpapers — {self.index + 1}/{len(self.files)} — {self.files[self.index].name}')
-        self.strip.queue_draw()
         for step in (1, -1):
             threading.Thread(target=self._prepare, args=(self.index + step, size), daemon=True).start()
 
@@ -224,12 +274,25 @@ class Gallery:
         return True
 
     # the strip: drawn in cairo, faded by alpha
-    def _strip_height(self):
-        return max(24, round((self.window.get_height() or 1080)*30/1080))
-
-    def _draw_strip(self, area, cr, width, height):
-        if self.alpha > 0:
-            draw_strip(cr, width, height, self.index + 1, len(self.files), self.alpha, self.keys)
+    def _render_strip(self):
+        width, height, scale = self.window.get_width(), self.window.get_height(), self._scale()
+        if not width or not height:
+            return
+        # 30/1080 of the screen, in logical pixels that are whole device pixels too
+        want = max(24, height*30/1080)
+        logical = min(range(int(want) - 4, int(want) + 5), key=lambda h: (abs(h*scale - round(h*scale)) > 1e-6, abs(h - want)))
+        device_w, device_h = round(width*scale), round(logical*scale)
+        key = (self.index, len(self.files), device_w, device_h)
+        if key == self.strip_key:
+            return
+        self.strip_key = key
+        surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, device_w, device_h)
+        draw_strip(cairo.Context(surface), device_w, device_h, self.index + 1, len(self.files), self.keys)
+        surface.flush()
+        texture = Gdk.MemoryTexture.new(device_w, device_h, Gdk.MemoryFormat.B8G8R8A8_PREMULTIPLIED,
+                                        GLib.Bytes.new(bytes(surface.get_data())), surface.get_stride())
+        self.strip.set_size_request(-1, logical)
+        self.strip.set_paintable(texture)
 
     def _wake(self):
         self.last_input = time.monotonic()
@@ -242,7 +305,7 @@ class Gallery:
         if want != self.alpha:
             step = 0.016/FADE
             self.alpha = min(want, self.alpha + step) if want > self.alpha else max(want, self.alpha - step)
-            self.strip.queue_draw()
+            self.strip.set_opacity(self.alpha)
         return True
 
     def _key(self, controller, keyval, keycode, state):
