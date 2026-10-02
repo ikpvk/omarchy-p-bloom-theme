@@ -31,7 +31,7 @@ Unchanged launches do not repeat the notification.
 
 Settings are available through **Wallpaper settings** in the application's
 context menu, the gallery's **S** key, or `p-bloom-wallpapers --configure`.
-They open full screen over the wallpaper, dimmed, set like the gallery's strip,
+They open in a window over the wallpaper, dimmed, set like the gallery's strip,
 with two choices: the **background** (Muted, Default or Vivid: how strong the
 background colour is; ← →) and the **resolution** (**Automatic** or a fixed
 set; ↑ ↓). Both are remembered; selecting Automatic restores monitor-based

@@ -1,9 +1,9 @@
 """p(bloom) Wallpapers: the settings screen, set like the gallery and the sheets.
 
-A full-screen window: the wallpaper you were looking at, dimmed, and a centred panel. Background level (Muted,
+A window (full screen only if the gallery was): the wallpaper you were looking at, dimmed, and a centred panel. Background level (Muted,
 Default, Vivid) is a three-way switch; resolution is a list, Automatic first, every set with its size and whether it is
 the optimal one, installed or still a download. Keys are boxed like the gallery's: ← → background, ↑ ↓ resolution,
-Enter saves, Esc cancels. Units are 1/1080 of the screen height; everything is drawn at the screen's own pixels and
+Enter saves, Esc cancels. Units are 1/1080 of the window's height; everything is drawn at the screen's own pixels and
 centred by ink, as in gallery.draw_strip.
 """
 import os
@@ -222,7 +222,8 @@ class SettingsWindow:
         win.connect('close-request', lambda *_: self.loop.quit() or False)
         win.connect('notify::default-width', lambda *_: self._render())
         win.connect('notify::default-height', lambda *_: self._render())
-        win.fullscreen()
+        if os.environ.get('PBLOOM_SETTINGS_FULLSCREEN'):   # only when the gallery it replaces was full screen
+            win.fullscreen()
         win.present()
         GLib.timeout_add(50, self._first)
 

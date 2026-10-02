@@ -193,7 +193,8 @@ def open_settings(view):
     current = view.files[view.index]
     command = [sys.executable, str(Path(__file__).resolve()), '--collection', 'finalized',
                current.name, '--configure', '--print-files']
-    env = {**os.environ, 'PBLOOM_SETTINGS_BACKDROP': str(current), 'PBLOOM_SETTINGS_REPORT': '1'}
+    env = {**os.environ, 'PBLOOM_SETTINGS_BACKDROP': str(current), 'PBLOOM_SETTINGS_REPORT': '1',
+           'PBLOOM_SETTINGS_FULLSCREEN': '1' if view.window.is_fullscreen() else ''}
     view.hide()
 
     def wait():

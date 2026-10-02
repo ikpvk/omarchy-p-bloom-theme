@@ -209,7 +209,7 @@ class Gallery:
         self.index = self.files.index(Path(first)) if Path(first) in self.files else 0
         self.set_desktop, self.settings = set_desktop, settings
         self.cache, self.mtimes, self.lock = {}, {}, threading.Lock()
-        self.size, self.status = None, None
+        self.size, self.status, self.was_fullscreen = None, None, False
         self.strip_on, self.alpha, self.last_input = True, 1.0, time.monotonic()
         self.loop = GLib.MainLoop()
         GLib.set_prgname('p-bloom-wallpapers')               # the window class Omarchy's Super+O rule matches
@@ -217,7 +217,7 @@ class Gallery:
         Gtk.Window.set_default_icon_name('p-bloom-wallpapers')
         win = self.window = Gtk.Window(title='p(bloom) Wallpapers')
         win.set_decorated(False)
-        win.set_default_size(1600, 900)                       # the size after F leaves fullscreen
+        win.set_default_size(1600, 900)                       # a window, as Hyprland tiles it; F for fullscreen
         provider = Gtk.CssProvider()
         provider.load_from_string('window { background: #000; }')
         Gtk.StyleContext.add_provider_for_display(Gdk.Display.get_default(), provider,
@@ -240,7 +240,6 @@ class Gallery:
         win.add_controller(motion)
         win.connect('close-request', lambda *_: self.loop.quit() or False)
         win.connect('notify::default-height', lambda *_: self._resized())
-        win.fullscreen()
         win.present()
         GLib.timeout_add(16, self._tick)
         GLib.timeout_add(1000, self._watch)
@@ -372,11 +371,13 @@ class Gallery:
         self.status = text
 
     def hide(self):
+        self.was_fullscreen = self.window.is_fullscreen()
         self.window.set_visible(False)
 
     def show(self):
         self.window.set_visible(True)
-        self.window.fullscreen()
+        if self.was_fullscreen:
+            self.window.fullscreen()
         self.window.present()
         self._wake()
 
