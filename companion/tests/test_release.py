@@ -1,10 +1,10 @@
-"""Release sets: download verification, offline fallback, real-matrix selection."""
+"""Wallpaper sets: per-file downloads and their verification, updates, offline fallback, real-matrix selection."""
 import hashlib
 import io
 import json
+import os
 from pathlib import Path
 import sys
-import tarfile
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -13,24 +13,15 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT/'tools'))
 import wallpaper_profiles as wp
 
+BASE = 'https://objects.test/p-bloom/'
+
 
 def sha(data):
     return hashlib.sha256(data).hexdigest()
 
 
-def tar_bytes(entries):
-    """entries: [(name, bytes or None for a directory)]"""
-    buf = io.BytesIO()
-    with tarfile.open(fileobj=buf, mode='w') as tar:
-        for name, data in entries:
-            info = tarfile.TarInfo(name)
-            if data is None:
-                info.type = tarfile.DIRTYPE
-                tar.addfile(info)
-            else:
-                info.size = len(data)
-                tar.addfile(info, io.BytesIO(data))
-    return buf.getvalue()
+def item(key, data):
+    return dict(id=key, name=f'{key}.webp', sha256=sha(data), bytes=len(data))
 
 
 class Response(io.BytesIO):
@@ -48,7 +39,7 @@ class Download(unittest.TestCase):
         self.root = Path(self.temp.name)
         for p in (patch.dict(wp.os.environ, {'XDG_DATA_HOME': str(self.root/'data')}),
                   patch.object(wp, 'setup_path', return_value=self.root/'state/setup.json'),
-                  patch.object(wp, 'notify_selection')):
+                  patch.object(wp, 'notify_selection'), patch.object(wp.time, 'sleep')):
             p.start()
             self.addCleanup(p.stop)
         docs = self.root/'docs/collection'
@@ -60,14 +51,14 @@ class Download(unittest.TestCase):
         for key in ('one', 'two'):
             data = f'1440-{key}'.encode()
             (self.root/'backgrounds'/f'{key}.webp').write_bytes(data)
-            bundled.append(dict(id=key, name=f'{key}.webp', sha256=sha(data), bytes=len(data)))
-        self.archive = tar_bytes([('4k', None)] + [(f'4k/{n}', d) for n, d in self.images.items()])
-        self.manifest = {'default': '1440', 'profiles': [
+            bundled.append(item(key, data))
+        # what the object store holds, by URL
+        self.store = {f'{BASE}{sha(d)}.webp': d for d in self.images.values()}
+        self.manifest = {'default': '1440', 'objects_base': BASE, 'profiles': [
             dict(id='1440', label='16:9 · 2560 × 1440', size=[2560, 1440], min_text_px=11, bundled=True,
-                 archive=dict(name='p-bloom-1440.tar', bytes=1, sha256='0'*64), files=bundled),
+                 packs=dict(default=dict(objects=bundled)), files=bundled),
             dict(id='4k', label='16:9 · 3840 × 2160', size=[3840, 2160], min_text_px=11,
-                 archive=dict(name='p-bloom-4k.tar', bytes=len(self.archive), sha256=sha(self.archive)),
-                 files=[dict(id=n.split('.')[0], name=n, sha256=sha(d), bytes=len(d)) for n, d in self.images.items()]),
+                 packs=dict(default=dict(objects=[item(n.split('.')[0], d) for n, d in self.images.items()]))),
         ]}
         self.save()
         self.urls = []
@@ -75,60 +66,105 @@ class Download(unittest.TestCase):
     def save(self):
         (self.root/'docs/collection/profiles.json').write_text(json.dumps(self.manifest))
 
-    def opener(self, payload):
+    def opener(self, fail=0):
+        """The object store; the first `fail` requests break off like a dropped connection."""
         def open_(request, timeout):
             self.urls.append(request.full_url)
-            return Response(payload)
+            if len(self.urls) <= fail:
+                raise OSError('connection reset')
+            if request.full_url not in self.store:
+                raise OSError('HTTP Error 404: Not Found')
+            return Response(self.store[request.full_url])
         return open_
 
-    def test_url_uses_the_single_release_tag(self):
-        self.assertEqual(wp.archive_url('p-bloom-4k.tar'),
-                         f'https://github.com/ncr/omarchy-p-bloom-theme/releases/download/{wp.RELEASE_TAG}/p-bloom-4k.tar')
+    def change_two(self, data):
+        """A new version of one wallpaper: published as a new object, named in the manifest."""
+        self.store[f'{BASE}{sha(data)}.webp'] = data
+        self.manifest['profiles'][1]['packs']['default']['objects'][1] = item('two', data)
+        self.save()
+
+    def test_objects_are_named_by_their_content(self):
+        one = self.manifest['profiles'][1]['packs']['default']['objects'][0]
+        self.assertEqual(wp.object_url(BASE, one), f"{BASE}{one['sha256']}.webp")
+        for bad in (dict(one, name='../x.webp'), dict(one, name='x.exe'), dict(one, sha256='abc')):
+            with self.assertRaises(ValueError):
+                wp.object_url(BASE, bad)
 
     def test_verified_download_installs_the_set(self):
         seen = []
         with patch.object(wp, 'progress', lambda **info: seen.append(info)):
-            target = wp.fetch(self.root, '4k', opener=self.opener(self.archive))
-        # the gallery's progress: bytes rising to the archive's size, then installing
-        total = len(self.archive)
-        self.assertEqual([i['phase'] for i in seen][-1], 'install')
-        self.assertEqual([i['done'] for i in seen if i['phase'] == 'download'][::len(seen)-2], [0, total])
+            target = wp.fetch(self.root, '4k', opener=self.opener())
+        # the gallery's progress: bytes rising to the set's size, then installing
+        total = sum(len(d) for d in self.images.values())
+        self.assertEqual(seen[-1]['phase'], 'install')
+        self.assertEqual(seen[0]['done'], 0)
+        self.assertEqual(max(i['done'] for i in seen), total)
         self.assertTrue(all(i['total'] == total and i['level'] == 'default' for i in seen))
-        self.assertEqual(self.urls, [wp.archive_url('p-bloom-4k.tar')])
+        self.assertEqual(sorted(self.urls), sorted(self.store))
         self.assertEqual({p.name: p.read_bytes() for p in target.iterdir() if p.name != wp.MARKER}, self.images)
+        self.assertEqual((target/wp.MARKER).read_text().strip(), wp.set_digest(self.manifest['profiles'][1]['packs']['default']['objects']))
         screen = dict(name='DP-1', width=3840, height=2160, scale=1)
         p = wp.plan(self.root, detected=[screen])
         self.assertEqual((p['profile'], p['local']), ('4k', True))
         self.assertEqual([Path(f).parent for f in p['files']], [target, target])
         self.assertEqual([p.name for p in wp.sets_dir().iterdir()], ['4k'])  # no temporary leftovers
 
-    def test_archive_checksum_mismatch_installs_nothing(self):
-        bad = self.archive[:-1] + b'x'
+    def test_an_update_downloads_only_the_changed_files(self):
+        target = wp.fetch(self.root, '4k', opener=self.opener())
+        before = (target/'one.webp').stat().st_ino
+        self.change_two(b'4k-two, fixed')
+        screen = dict(name='DP-1', width=3840, height=2160, scale=1)
+        self.assertFalse(wp.plan(self.root, detected=[screen])['local'])      # the set is out of date
+        self.urls.clear()
+        target = wp.fetch(self.root, '4k', opener=self.opener())
+        self.assertEqual(self.urls, [f"{BASE}{sha(b'4k-two, fixed')}.webp"])
+        self.assertEqual((target/'two.webp').read_bytes(), b'4k-two, fixed')
+        self.assertEqual((target/'one.webp').stat().st_ino, before)              # reused, not copied
+        self.assertTrue(wp.plan(self.root, detected=[screen])['local'])
+
+    def test_a_dropped_connection_is_retried(self):
+        target = wp.fetch(self.root, '4k', opener=self.opener(fail=1), workers=1)
+        self.assertEqual(len(self.urls), 3)
+        self.assertEqual({p.name: p.read_bytes() for p in target.iterdir() if p.name != wp.MARKER}, self.images)
+
+    def test_checksum_mismatch_installs_nothing(self):
+        url = f"{BASE}{sha(self.images['two.webp'])}.webp"
+        self.store[url] = b'4k-twX'
         with self.assertRaisesRegex(ValueError, 'SHA-256'):
-            wp.fetch(self.root, '4k', opener=self.opener(bad))
+            wp.fetch(self.root, '4k', opener=self.opener())
         self.assertFalse((wp.sets_dir()/'4k').exists())
+        self.assertEqual([p.name for p in wp.sets_dir().iterdir()], [])
 
     def test_oversized_download_is_refused(self):
+        url = f"{BASE}{sha(self.images['two.webp'])}.webp"
+        self.store[url] = self.images['two.webp'] + b'\0'*64
         with self.assertRaisesRegex(ValueError, 'larger'):
-            wp.fetch(self.root, '4k', opener=self.opener(self.archive + b'\0'*4096))
+            wp.fetch(self.root, '4k', opener=self.opener())
 
-    def test_tampered_image_in_matching_archive_is_refused(self):
-        tampered = tar_bytes([('4k/one.webp', b'evil'), ('4k/two.webp', self.images['two.webp'])])
-        self.manifest['profiles'][1]['archive'].update(bytes=len(tampered), sha256=sha(tampered))
+    def test_a_failed_update_keeps_the_installed_set(self):
+        target = wp.fetch(self.root, '4k', opener=self.opener())
+        marker = (target/wp.MARKER).read_text()
+        self.manifest['profiles'][1]['packs']['default']['objects'][1] = item('two', b'never published')
         self.save()
-        with self.assertRaisesRegex(ValueError, 'one.webp failed'):
-            wp.fetch(self.root, '4k', opener=self.opener(tampered))
-        self.assertFalse((wp.sets_dir()/'4k').exists())
+        with self.assertRaisesRegex(OSError, '404'):
+            wp.fetch(self.root, '4k', opener=self.opener())
+        self.assertEqual({p.name: p.read_bytes() for p in target.iterdir() if p.name != wp.MARKER}, self.images)
+        self.assertEqual((target/wp.MARKER).read_text(), marker)
 
-    def test_path_traversal_and_unknown_entries_are_refused(self):
-        for name in ('../escape.webp', '4k/../../escape.webp', 'other/one.webp', '4k/extra.webp'):
-            evil = tar_bytes([(name, b'x')])
-            self.manifest['profiles'][1]['archive'].update(bytes=len(evil), sha256=sha(evil))
-            self.save()
-            with self.assertRaisesRegex(ValueError, 'Unexpected entry'):
-                wp.fetch(self.root, '4k', opener=self.opener(evil))
+    def test_unsafe_names_are_refused(self):
+        self.manifest['profiles'][1]['packs']['default']['objects'][0]['name'] = '../escape.webp'
+        self.save()
+        with self.assertRaisesRegex(ValueError, 'Unsafe'):
+            wp.fetch(self.root, '4k', opener=self.opener())
         self.assertFalse((self.root/'escape.webp').exists())
-        self.assertFalse((wp.sets_dir()/'4k').exists())
+
+    def test_a_set_from_the_bundled_files_downloads_nothing(self):
+        # a set whose files the theme already ships (the same bytes) is put together from them
+        self.manifest['profiles'][1]['packs']['default']['objects'] = self.manifest['profiles'][0]['packs']['default']['objects']
+        self.save()
+        target = wp.fetch(self.root, '4k', opener=self.opener())
+        self.assertEqual(self.urls, [])
+        self.assertEqual((target/'one.webp').read_bytes(), b'1440-one')
 
     def test_offline_keeps_the_bundled_set_and_backs_off(self):
         screen = dict(name='DP-1', width=3840, height=2160, scale=1)
@@ -149,7 +185,7 @@ class Download(unittest.TestCase):
     def test_successful_download_is_used_for_the_desktop(self):
         screen = dict(name='DP-1', width=3840, height=2160, scale=1)
         real = wp.fetch
-        with patch.object(wp, 'fetch', side_effect=lambda root, pid: real(root, pid, opener=self.opener(self.archive))), \
+        with patch.object(wp, 'fetch', side_effect=lambda root, pid: real(root, pid, opener=self.opener())), \
              patch.object(wp, 'sync', return_value=False) as sync:
             p = wp.initialize(self.root, wp.plan(self.root, detected=[screen]))
         self.assertEqual((p['profile'], p['local']), ('4k', True))
@@ -200,17 +236,23 @@ class PublishedMatrix(unittest.TestCase):
         return wp.plan(ROOT, detected=rows)
 
     def test_manifest_is_complete_and_bundles_one_default(self):
-        self.assertEqual(self.manifest['version'], 2)
+        self.assertEqual(self.manifest['version'], 3)
+        self.assertRegex(self.manifest['objects_base'], r'^https://[^ ]+/$')
         bundled = [p for p in self.manifest['profiles'] if p.get('bundled')]
         self.assertEqual([p['id'] for p in bundled], [self.manifest['default']])
         for p in self.manifest['profiles']:
-            self.assertEqual(len(p['files']), self.manifest['count'])
-            if not p.get('bundled') or 'archive' in p:
-                self.assertRegex(p['archive']['name'], r'^p-bloom-[0-9a-z-]+\.tar$')
-                self.assertRegex(p['archive']['sha256'], r'^[0-9a-f]{64}$')
+            # exactly three packs per resolution: Muted, Default, Vivid
+            self.assertEqual(list(p['packs']), ['muted', 'default', 'vivid'] if MATRIX_PUBLISHED else list(p['packs']))
+            for entry in p['packs'].values():
+                self.assertEqual(len(entry['objects']), self.manifest['count'])
+                for f in entry['objects']:
+                    self.assertRegex(f['sha256'], r'^[0-9a-f]{64}$')
             self.assertGreaterEqual(p['min_text_px'], 11)
-        self.assertEqual({f['name'] for f in bundled[0]['files']}, {p.name for p in (ROOT/'backgrounds').glob('*.webp')})
-        for f in bundled[0]['files']:
+        # what the theme ships is exactly the bundled set, for this app and for older ones
+        shipped = bundled[0]['packs']['default']['objects']
+        self.assertEqual(bundled[0]['files'], shipped)
+        self.assertEqual({f['name'] for f in shipped}, {p.name for p in (ROOT/'backgrounds').glob('*.webp')})
+        for f in shipped:
             self.assertEqual(sha((ROOT/'backgrounds'/f['name']).read_bytes()), f['sha256'])
         if not MATRIX_PUBLISHED:
             self.assertEqual(len(self.manifest['profiles']), 1)

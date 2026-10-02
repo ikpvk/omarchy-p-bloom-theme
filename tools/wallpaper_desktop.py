@@ -1,5 +1,6 @@
 """Keep the active p(bloom) desktop matched to connected monitors."""
 import argparse
+import os
 from pathlib import Path
 import sys
 import time
@@ -71,6 +72,15 @@ def main():
             time.sleep(10)
             continue
         gone=None
+        # `omarchy theme update` pulls the checkout; the installed copy of the app follows it, then restarts
+        app=Path(__file__).resolve().parent
+        if app!=args.root.resolve()/'tools':
+            import wallpaper_runtime
+            try:
+                if wallpaper_runtime.refresh(app,args.root):
+                    os.execv(sys.executable,[sys.executable,str(app/'wallpaper_desktop.py'),*sys.argv[1:]])
+            except OSError as exc:
+                print(f'p(bloom) app update failed: {exc}',file=sys.stderr,flush=True)
         try:
             watcher.tick()
             last_error=None

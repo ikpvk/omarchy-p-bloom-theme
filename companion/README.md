@@ -73,21 +73,18 @@ The theme itself ships one set in `backgrounds/`: the accepted 16:9
 only ever downscales on 16:9 screens. Shipped files are WebP quality 90
 (the render pipeline keeps and audits lossless originals), which keeps the
 theme checkout and every download small. The companion downloads the set
-that best matches your monitors from the GitHub Release named in
-`tools/wallpaper_profiles.py` (`RELEASE_TAG`), one archive per set:
-`https://github.com/ncr/omarchy-p-bloom-theme/releases/download/<tag>/p-bloom-<set>.tar`.
-Only the Python standard library is used. The archive's SHA-256 must match the
-manifest before anything is unpacked, and every image is checked again; only
-the 42 named files are extracted. Sets are stored in
-`$XDG_DATA_HOME/p-bloom-wallpapers/sets/` (default `~/.local/share/`); the
-three most recently used are kept, so docking back and forth does not
-download again.
-
-After a change to the collection, the release archives still hold the
-previous sheets. The manifest then publishes only the bundled set
-(`release.pending` in `profiles.json` lists the withdrawn sets) until the
-matrix is rendered and packaged again; the companion keeps using the bundled
-set meanwhile.
+that best matches your monitors file by file. Every published file is stored
+once under its own SHA-256 (`objects_base` in `profiles.json`):
+`https://media.jacekbecela.com/p-bloom/<sha256>.webp`. These files never
+change; a fixed wallpaper is a new file with a new name. Each file is checked
+against its SHA-256 and size as it arrives and retried a few times if the
+connection drops. Files the set needs that are already on disk (in the bundled
+set or another downloaded set) are linked instead of downloaded. The set is
+assembled in a staging folder and replaces the installed one only when all 42
+files are there, so a failed download changes nothing. Only the Python standard
+library is used. Sets are stored in `$XDG_DATA_HOME/p-bloom-wallpapers/sets/`
+(default `~/.local/share/`); the three most recently used are kept, so docking
+back and forth does not download again.
 
 ### Background level
 
@@ -95,10 +92,10 @@ Every set exists at three background levels. Only the background changes
 (its gradient, central glow and vignette); lines, type and accents are the
 same. **Default** is the design and the one bundled with the theme.
 **Muted** is quieter and a little darker; **Vivid** is more colourful. Both
-are separate release archives per set,
-`p-bloom-<set>-muted.tar` and `p-bloom-<set>-vivid.tar`, listed under
-`levels` in `profiles.json`; the companion downloads only the level you
-chose, with the same checksum verification, into `sets/<set>-<level>/`, and
+are separate packs: every resolution has exactly three, Muted, Default and
+Vivid, listed under `packs` in `profiles.json`, each a group of 42 files. The
+companion downloads only the pack you chose, the same way, into
+`sets/<set>-<level>/`, and
 refreshes the desktop. Levels are designed so that type never becomes less
 legible than in the Default design (`tools/ground_levels.py`). If a level is
 not published for a set, that set is shown at Default with a notice; if its
@@ -106,8 +103,14 @@ download fails, the set already on the desktop stays and the download is
 retried, as below. `--list` prints the current set and level on stderr;
 `--show-plan` includes `level` and `requested_level`.
 
-Each downloaded set records the SHA-256 of the archive it came from. After a theme update the manifest
-names new archives, so older sets on disk no longer count as installed and are downloaded again.
+Each downloaded set records a digest of the file list it was built from (`.set-sha256`). After a theme
+update that changes some wallpapers, an older set on disk no longer counts as installed; updating it
+downloads only the changed files and links the rest from the old copy.
+
+The installed app is a copy of the checkout's `tools/` files. After `omarchy theme update` pulls new app
+code, the desktop service and the launcher notice that the copy differs from the checkout it was installed
+from, copy the changed files and restart into them; rerunning the installer is needed only after moving the
+checkout.
 
 Offline, or if a download or a checksum fails, the desktop keeps the installed
 set (normally the bundled one) and the companion retries after 15 minutes.
@@ -169,11 +172,14 @@ live under `$XDG_STATE_HOME/p-bloom-wallpapers/setup.json` (default
 `~/.local/state/`). Omarchy's own staged files follow its fixed state path.
 
 Keep the checkout in place: the bundled set and the manifest are read from
-it. Rerun the installer after moving it or updating app code. New sets are
-rendered with `tools/render_wallpaper_sets.py` and packaged with
-`tools/package_wallpaper_profiles.py`, which refreshes the verified hashes;
-the archives must then be uploaded to the release named by `RELEASE_TAG`. The development viewer (`python3 tools/view_wallpapers.py`) reads live renders,
-independently of the packaged release.
+it. Rerun the installer after moving it. New sets are rendered with
+`tools/run_matrix.sh` (all sets, or `tools/run_matrix.sh o02,b13` for a few
+sheets in every set), packaged with `tools/package_wallpaper_profiles.py`,
+which writes the manifest, and published with
+`tools/publish_wallpaper_objects.py`, which uploads only the files that are
+not online yet and checks them by downloading them; commit the manifest only
+after that. The development viewer (`python3 tools/view_wallpapers.py`) reads live renders,
+independently of the packaged sets.
 
 Uninstall stops and removes the desktop service, launcher, menu entry, icons, owned hook and runtime files.
 It keeps the theme, the downloaded sets and the settings; `--purge` deletes the sets and settings as well.

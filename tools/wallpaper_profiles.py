@@ -41,14 +41,11 @@ def normalize_monitors(rows):
     return out
 
 
-# The one place that names the GitHub Release holding the wallpaper sets.
-REPOSITORY = 'ncr/omarchy-p-bloom-theme'
-RELEASE_TAG = 'wallpapers-v1'
 RETRY_SECONDS = 900
 
 # Background intensity: how strong the background colour is. Default is the
 # design (and the only level bundled with the theme); Muted and Vivid are
-# separate release archives per screen profile (`levels` in profiles.json).
+# their own sets per screen profile (`levels` in profiles.json).
 LEVELS = ('muted', 'default', 'vivid')
 LEVEL_LABELS = {'muted': 'Muted', 'default': 'Default', 'vivid': 'Vivid'}
 LEVEL_HINT = 'How strong the background colour is.'
@@ -59,12 +56,21 @@ def valid_level(level):
 
 
 def set_name(profile_id, level='default'):
-    """Folder and archive stem of one set: the profile id, plus the level unless Default."""
+    """Folder of one set: the profile id, plus the level unless Default."""
     return profile_id if level == 'default' else f'{profile_id}-{level}'
 
 
-def archive_url(name):
-    return f'https://github.com/{REPOSITORY}/releases/download/{RELEASE_TAG}/{name}'
+def object_url(base, item):
+    """Each file is published once under its own SHA-256 (content-addressed): <objects_base><sha256><suffix>."""
+    suffix = Path(_safe_name(item['name'])).suffix.lower()
+    if suffix not in ('.webp', '.png', '.jpg', '.jpeg') or len(item['sha256']) != 64:
+        raise ValueError(f"Invalid wallpaper object: {item['name']}")
+    return f"{base}{item['sha256']}{suffix}"
+
+
+def set_digest(files):
+    """One SHA-256 for a set's file list: a set on disk is current when its marker holds the manifest's digest."""
+    return hashlib.sha256(''.join(f"{f['sha256']}  {f['name']}\n" for f in files).encode()).hexdigest()
 
 
 def data_dir():
@@ -82,24 +88,24 @@ def _safe_name(name):
 
 
 def _at_level(profile, level):
-    """The profile's set at a background level, or None if it is not published.
+    """The profile's pack at a background level, or None if it is not published.
 
-    Levels other than Default are never bundled: they come from their own
-    archive, listed under profile['levels'][level] with their own files.
+    Each profile lists its packs under `packs`: Muted, Default and Vivid, each a group of files (`objects`) that is
+    downloaded and installed together, into its own folder (set_name). Here `files` becomes that pack's list.
+    `files`, `archive` and `levels` are the frozen first release, kept for apps from before per-file downloads.
+    Only the bundled profile's Default pack ships in backgrounds/.
     """
-    if level == 'default':
-        return profile
-    entry = (profile.get('levels') or {}).get(level)
+    entry = (profile.get('packs') or {}).get(level)
     if not entry:
         return None
-    if not isinstance(entry, dict) or not entry.get('archive') or not isinstance(entry.get('files'), list):
+    if not isinstance(entry, dict) or not isinstance(entry.get('objects'), list):
         raise ValueError(f"Invalid {level} set in profile {profile['id']}")
-    rest = {k: v for k, v in profile.items() if k not in ('levels', 'bundled', 'archive', 'files')}
-    return {**rest, 'min_text_px': entry.get('min_text_px', profile['min_text_px']),
-            'archive': entry['archive'], 'files': entry['files'], 'bundled': False}
+    rest = {k: v for k, v in profile.items() if k not in ('packs', 'levels', 'bundled', 'archive', 'files')}
+    return {**rest, 'min_text_px': entry.get('min_text_px', profile['min_text_px']), 'files': entry['objects'],
+            'bundled': bool(profile.get('bundled')) and level == 'default'}
 
 
-MARKER = '.archive-sha256'
+MARKER = '.set-sha256'
 # Called while a set downloads and installs: progress(phase='download'|'install', done=bytes, total=bytes,
 # label=..., level=...). The gallery's settings set it to show the download in its window.
 progress = None
@@ -135,7 +141,9 @@ def profiles(root, level='default'):
         profile = _at_level(base_profile, level)
         missing = profile is None
         if missing:
-            profile = base_profile
+            profile = _at_level(base_profile, 'default')
+        if profile is None:
+            raise ValueError(f"Profile {base_profile['id']} publishes no Default pack")
         shown = 'default' if missing else level
         if [x['id'] for x in profile['files']] != ids:
             raise ValueError(f"Incomplete collection in profile {profile['id']}")
@@ -146,11 +154,9 @@ def profiles(root, level='default'):
             raise ValueError('Invalid profile dimensions')
         base = root/'backgrounds' if profile.get('bundled') else sets_dir()/set_name(profile['id'], shown)
         paths = [base/n for n in names]
-        if not profile.get('bundled') and not profile.get('archive'):
-            raise ValueError(f"Profile {profile['id']} is neither bundled nor downloadable")
-        # A downloaded set counts only if it came from the archive this manifest names: after a theme update the
-        # old files stay on disk but no longer match, and the set is fetched again instead of failing its hashes.
-        current = profile.get('bundled') or _marker(base) == profile['archive']['sha256']
+        # A downloaded set counts only if it matches the file list this manifest names: after a theme update that
+        # changes some wallpapers, the set is brought up to date (only the changed files are downloaded).
+        current = profile.get('bundled') or _marker(base) == set_digest(profile['files'])
         out.append({**{k: v for k, v in profile.items() if k != 'levels'}, 'paths': paths,
                     'local': current and all(x.is_file() for x in paths), 'level': shown, 'level_missing': missing})
     if not any(p['local'] for p in out) and level == 'default':
@@ -267,7 +273,7 @@ def plan(root, requested='auto', monitor=None, detected=None, local_only=False, 
                 reason=recommendation_reason(recommended_option, options), options=options,
                 label=profile['label'], size=profile['size'], count=len(profile['paths']),
                 level=profile['level'], requested_level=level, set=set_name(profile['id'], profile['level']),
-                local=profile['local'], archive=profile.get('archive'),
+                local=profile['local'],
                 screen=detected[0] if detected else None, monitors=detected, warnings=warnings,
                 files=[str(p) for p in profile['paths']], hashes=[r['sha256'] for r in profile['files']])
 
@@ -277,76 +283,111 @@ def _manifest_profile(root, profile_id, level='default'):
     profile = next(p for p in every if p['id'] == profile_id)
     if profile['level_missing']:
         raise ValueError(f"No {LEVEL_LABELS[valid_level(level)]} background is published for {profile_id}")
-    return profile
+    return manifest, profile
 
 
-def fetch(root, profile_id, opener=None, timeout=60, level='default'):
-    """Download one release archive, verify it, and install it atomically.
+def _local_copy(root, item):
+    """A file already on disk with this name and content (any installed set, or the bundled one), or None."""
+    candidates = [root/'backgrounds'/item['name']]
+    if sets_dir().is_dir():
+        candidates += [d/item['name'] for d in sets_dir().iterdir() if d.is_dir() and not d.name.startswith('.')]
+    for path in candidates:
+        try:
+            if path.is_file() and path.stat().st_size == item['bytes'] and \
+                    hashlib.sha256(path.read_bytes()).hexdigest() == item['sha256']:
+                return path
+        except OSError:
+            continue
+    return None
 
-    The archive's SHA-256 must match the manifest before anything is
-    unpacked; every image is then checked against its own hash. Only
-    regular files named in the manifest are extracted. Each level of a
-    profile is its own archive and folder (set_name).
+
+def fetch(root, profile_id, opener=None, timeout=60, level='default', attempts=3, workers=4):
+    """Install one set from its per-file objects, atomically.
+
+    Files the set needs that are already on disk (an older copy of this set, another set, the bundled one) are
+    reused when their SHA-256 matches; the rest are downloaded from the manifest's `objects_base`, each checked
+    against its own hash (retried a few times), into a staging folder that replaces the set only when complete.
+    A theme update that changes a few wallpapers therefore downloads only those files. Each level of a profile is
+    its own folder (set_name).
     """
-    import tarfile
+    import threading
     import urllib.request
-    profile = _manifest_profile(root, profile_id, level)
+    from concurrent.futures import ThreadPoolExecutor
+    root = Path(root)
+    manifest, profile = _manifest_profile(root, profile_id, level)
     if profile.get('bundled'):
         return sets_dir()
+    base = manifest.get('objects_base')
+    if not isinstance(base, str) or not base.startswith('https://') or not base.endswith('/'):
+        raise ValueError('The wallpaper manifest names no download location')
     folder = set_name(profile_id, profile['level'])
-    archive = profile['archive']
-
-    def report(phase, done):
-        if progress:
-            progress(phase=phase, done=done, total=archive['bytes'], label=profile.get('label', profile_id),
-                     level=profile['level'], **(dict(pack=pack[0], packs=pack[1]) if pack else {}))
-    name = _safe_name(archive['name'])
-    expected = {f['name']: f['sha256'] for f in profile['files']}
+    files = profile['files']
     target = sets_dir()/folder
     sets_dir().mkdir(parents=True, exist_ok=True)
     opener = opener or urllib.request.urlopen
     with tempfile.TemporaryDirectory(prefix='.download-', dir=sets_dir()) as work:
         work = Path(work)
-        tar_path = work/name
-        digest = hashlib.sha256()
-        size = 0
-        request = urllib.request.Request(archive_url(name), headers={'User-Agent': 'p-bloom-wallpapers'})
-        report('download', 0)
-        with opener(request, timeout=timeout) as response, tar_path.open('wb') as out:
-            while True:
-                chunk = response.read(1 << 18)                 # small reads: the progress ring moves smoothly
-                if not chunk:
-                    break
-                size += len(chunk)
-                if size > archive['bytes']:
-                    raise ValueError(f'{name} is larger than the published archive')
-                digest.update(chunk)
-                out.write(chunk)
-                report('download', size)
-        if size != archive['bytes'] or digest.hexdigest() != archive['sha256']:
-            raise ValueError(f'{name} failed its SHA-256 check; nothing was installed')
-        report('install', size)
         stage = work/folder
         stage.mkdir()
-        with tarfile.open(tar_path) as tar:
-            for member in tar.getmembers():
-                if member.isdir() and member.name.rstrip('/') == folder:
-                    continue
-                top, _, file = member.name.partition('/')
-                if not member.isfile() or top != folder or file not in expected:
-                    raise ValueError(f'Unexpected entry in {name}: {member.name}')
-                data = tar.extractfile(member).read()
-                if hashlib.sha256(data).hexdigest() != expected[file]:
-                    raise ValueError(f'{file} failed its SHA-256 check; nothing was installed')
-                (stage/file).write_bytes(data)
-        missing = [n for n in expected if not (stage/n).is_file()]
+        needed = []
+        for item in files:
+            name = _safe_name(item['name'])
+            local = _local_copy(root, item)
+            if local:
+                try:
+                    os.link(local, stage/name)
+                except OSError:
+                    shutil.copyfile(local, stage/name)
+            else:
+                needed.append(item)
+        total = sum(f['bytes'] for f in needed)
+        state = dict(done=0)
+        lock = threading.Lock()
+
+        def report(phase):
+            if progress:
+                progress(phase=phase, done=state['done'], total=total, label=profile.get('label', profile_id),
+                         level=profile['level'], **(dict(pack=pack[0], packs=pack[1]) if pack else {}))
+
+        def get(item):
+            url = object_url(base, item)
+            for attempt in range(attempts):
+                got = 0
+                try:
+                    request = urllib.request.Request(url, headers={'User-Agent': 'p-bloom-wallpapers'})
+                    digest = hashlib.sha256()
+                    tmp = stage/('.' + item['name'] + '.part')
+                    with opener(request, timeout=timeout) as response, tmp.open('wb') as out:
+                        while chunk := response.read(1 << 18):
+                            got += len(chunk)
+                            if got > item['bytes']:
+                                raise ValueError(f"{item['name']} is larger than published")
+                            digest.update(chunk)
+                            out.write(chunk)
+                            with lock:                  # one report at a time: they are lines on a pipe
+                                state['done'] += len(chunk)
+                                report('download')
+                    if got != item['bytes'] or digest.hexdigest() != item['sha256']:
+                        raise ValueError(f"{item['name']} failed its SHA-256 check")
+                    tmp.replace(stage/item['name'])
+                    return
+                except (OSError, ValueError):
+                    with lock:
+                        state['done'] -= got
+                    if attempt == attempts - 1:
+                        raise
+                    time.sleep(1 + attempt)
+
+        report('download')
+        with ThreadPoolExecutor(workers) as pool:
+            list(pool.map(get, needed))
+        report('install')
+        missing = [f['name'] for f in files if not (stage/f['name']).is_file()]
         if missing:
-            raise ValueError(f'{name} is missing {len(missing)} wallpapers')
-        (stage/MARKER).write_text(archive['sha256']+'\n')
-        tar_path.unlink()
+            raise ValueError(f'{folder} is missing {len(missing)} wallpapers; nothing was installed')
+        (stage/MARKER).write_text(set_digest(files) + '\n')
         if target.exists():
-            old = work/'previous'
-            os.replace(target, old)
+            os.replace(target, work/'previous')
         os.replace(stage, target)
     return target
 
@@ -362,7 +403,8 @@ def optimal_packs(root, screens, monitor=None):
         if entry['level_missing']:
             continue
         packs.append(dict(profile=pid, level=lv, set=set_name(pid, lv), label=entry['label'],
-                          bytes=0 if entry.get('bundled') else entry['archive']['bytes'], local=entry['local']))
+                          bytes=0 if entry.get('bundled') else sum(f['bytes'] for f in entry['files']),
+                          local=entry['local']))
     return packs
 
 

@@ -12,9 +12,9 @@ from pathlib import Path
 import shutil
 import subprocess
 
+from wallpaper_runtime import RUNTIME
+
 MARKER = '# p(bloom) Wallpapers companion'
-RUNTIME = ('view_wallpapers.py', 'gallery.py', 'wallpaper_profiles.py', 'wallpaper_desktop.py', 'wallpaper_setup_cli.py',
-           'settings_ui.py', 'wallpaper_uninstall.py')
 ICON_SIZES = (16, 24, 32, 48, 64, 128, 256, 512)
 SERVICE = 'p-bloom-wallpapers-desktop.service'
 

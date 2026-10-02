@@ -85,7 +85,22 @@ def set_desktop(path):
     notify(f'Desktop wallpaper: {display_name(path)}')
 
 
+def follow_checkout():
+    """The installed app is a copy of the checkout's tools/; after `omarchy theme update` it refreshes itself from the
+    checkout it was installed from (PBLOOM_THEME_ROOT, set by the launcher) and restarts into the new code."""
+    here = Path(__file__).resolve().parent
+    if 'PBLOOM_THEME_ROOT' not in os.environ or here == ROOT/'tools':
+        return
+    try:
+        import wallpaper_runtime
+        if wallpaper_runtime.refresh(here, ROOT):
+            os.execv(sys.executable, [sys.executable, str(here/'view_wallpapers.py'), *sys.argv[1:]])
+    except (ImportError, OSError):
+        return
+
+
 def main():
+    follow_checkout()
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('start', nargs='?', help='Wallpaper number or name, e.g. 9 or tether')
     ap.add_argument('--collection', choices=['development', 'finalized'], default='development',

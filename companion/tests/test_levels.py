@@ -4,7 +4,6 @@ import io
 import json
 from pathlib import Path
 import sys
-import tarfile
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -18,20 +17,6 @@ def sha(data):
     return hashlib.sha256(data).hexdigest()
 
 
-def tar_bytes(entries):
-    buf = io.BytesIO()
-    with tarfile.open(fileobj=buf, mode='w') as tar:
-        for name, data in entries:
-            info = tarfile.TarInfo(name)
-            if data is None:
-                info.type = tarfile.DIRTYPE
-                tar.addfile(info)
-            else:
-                info.size = len(data)
-                tar.addfile(info, io.BytesIO(data))
-    return buf.getvalue()
-
-
 class Response(io.BytesIO):
     def __enter__(self):
         return self
@@ -40,6 +25,7 @@ class Response(io.BytesIO):
         self.close()
 
 
+BASE = 'https://objects.test/p-bloom/'
 SCREEN = dict(name='DP-1', width=3840, height=2160, scale=1)
 
 
@@ -63,23 +49,17 @@ class Levels(unittest.TestCase):
             data = f'1440-{key}'.encode()
             (self.root/'backgrounds'/f'{key}.webp').write_bytes(data)
             bundled.append(dict(id=key, name=f'{key}.webp', sha256=sha(data), bytes=len(data)))
-        self.archives = {}
-        files = {}
+        self.images, self.store, files = {}, {}, {}
         for level in ('default', 'muted', 'vivid'):
-            folder = wp.set_name('4k', level)
-            images = {f'{k}.webp': f'4k-{level}-{k}'.encode() for k in ('one', 'two')}
-            self.archives[level] = (tar_bytes([(folder, None)] + [(f'{folder}/{n}', d) for n, d in images.items()]), images)
-            files[level] = [dict(id=n.split('.')[0], name=n, sha256=sha(d), bytes=len(d)) for n, d in images.items()]
-
-        def archive(level):
-            data = self.archives[level][0]
-            return dict(name=f'p-bloom-{wp.set_name("4k", level)}.tar', bytes=len(data), sha256=sha(data))
-        self.manifest = {'default': '1440', 'profiles': [
-            dict(id='1440', label='16:9 · 2560 × 1440', size=[2560, 1440], min_text_px=11, bundled=True, files=bundled),
+            self.images[level] = {f'{k}.webp': f'4k-{level}-{k}'.encode() for k in ('one', 'two')}
+            files[level] = [dict(id=n.split('.')[0], name=n, sha256=sha(d), bytes=len(d))
+                            for n, d in self.images[level].items()]
+            self.store.update({f'{BASE}{sha(d)}.webp': d for d in self.images[level].values()})
+        self.manifest = {'default': '1440', 'objects_base': BASE, 'profiles': [
+            dict(id='1440', label='16:9 · 2560 × 1440', size=[2560, 1440], min_text_px=11, bundled=True,
+                 files=bundled, packs=dict(default=dict(objects=bundled))),
             dict(id='4k', label='16:9 · 3840 × 2160', size=[3840, 2160], min_text_px=11,
-                 archive=archive('default'), files=files['default'],
-                 levels={level: dict(archive=archive(level), files=files[level], min_text_px=11)
-                         for level in ('muted', 'vivid')}),
+                 packs={level: dict(objects=files[level], min_text_px=11) for level in wp.LEVELS}),
         ]}
         self.save()
         self.urls = []
@@ -87,39 +67,39 @@ class Levels(unittest.TestCase):
     def save(self):
         (self.root/'docs/collection/profiles.json').write_text(json.dumps(self.manifest))
 
-    def opener(self, level):
-        def open_(request, timeout):
-            self.urls.append(request.full_url)
-            return Response(self.archives[level][0])
-        return open_
+    def opener(self, request, timeout):
+        self.urls.append(request.full_url)
+        if request.full_url not in self.store:
+            raise OSError('HTTP Error 404: Not Found')
+        return Response(self.store[request.full_url])
 
     def fake_fetch(self, fail=()):
-        """fetch() with the test archives; levels in `fail` behave like a 404."""
+        """fetch() from the test objects; levels in `fail` behave like a 404."""
         real = wp.fetch
 
         def fetch(root, pid, level='default'):
             if level in fail:
                 raise OSError('HTTP Error 404: Not Found')
-            return real(root, pid, opener=self.opener(level), level=level)
+            return real(root, pid, opener=self.opener, level=level, attempts=1)
         return fetch
 
     # -- manifest ------------------------------------------------------------
 
-    def test_manifest_levels_resolve_to_their_own_archive_and_folder(self):
+    def test_manifest_levels_resolve_to_their_own_files_and_folder(self):
         _, every = wp.profiles(self.root, 'vivid')
         four = next(p for p in every if p['id'] == '4k')
         self.assertEqual((four['level'], four['level_missing'], four['local']), ('vivid', False, False))
-        self.assertEqual(four['archive']['name'], 'p-bloom-4k-vivid.tar')
+        self.assertEqual({f['sha256'] for f in four['files']}, {sha(d) for d in self.images['vivid'].values()})
         self.assertEqual({p.parent for p in four['paths']}, {wp.sets_dir()/'4k-vivid'})
-        self.assertNotIn('levels', four)
-        # The bundled set publishes no Vivid archive: offered at Default, marked.
+        self.assertNotIn('packs', four)
+        # The bundled set publishes no Vivid files: offered at Default, marked.
         bundled = next(p for p in every if p['id'] == '1440')
         self.assertEqual((bundled['level'], bundled['level_missing'], bundled['local']), ('default', True, True))
 
     def test_unknown_level_means_default_and_broken_level_entry_is_refused(self):
         _, every = wp.profiles(self.root, 'neon')
         self.assertTrue(all(p['level'] == 'default' for p in every))
-        self.manifest['profiles'][1]['levels']['muted'] = {'files': []}
+        self.manifest['profiles'][1]['packs']['muted'] = {'files': [], 'archive': {}}
         self.save()
         with self.assertRaisesRegex(ValueError, 'Invalid muted set'):
             wp.profiles(self.root, 'muted')
@@ -132,27 +112,27 @@ class Levels(unittest.TestCase):
 
     # -- download ------------------------------------------------------------
 
-    def test_level_archive_downloads_into_its_own_set(self):
-        target = wp.fetch(self.root, '4k', opener=self.opener('muted'), level='muted')
+    def test_level_downloads_into_its_own_set(self):
+        target = wp.fetch(self.root, '4k', opener=self.opener, level='muted')
         self.assertEqual(target, wp.sets_dir()/'4k-muted')
-        self.assertEqual(self.urls, [wp.archive_url('p-bloom-4k-muted.tar')])
-        self.assertEqual({p.name: p.read_bytes() for p in target.iterdir() if p.name != wp.MARKER}, self.archives['muted'][1])
+        self.assertEqual(sorted(self.urls), sorted(f'{BASE}{sha(d)}.webp' for d in self.images['muted'].values()))
+        self.assertEqual({p.name: p.read_bytes() for p in target.iterdir() if p.name != wp.MARKER}, self.images['muted'])
         p = wp.plan(self.root, detected=[SCREEN], level='muted')
         self.assertTrue(p['local'])
         # The Default set of the same profile is a different folder, still absent.
         self.assertFalse(wp.plan(self.root, detected=[SCREEN])['local'])
 
-    def test_level_archive_must_contain_its_own_folder(self):
-        wrong = tar_bytes([(f'4k/{n}', d) for n, d in self.archives['vivid'][1].items()])
-        self.manifest['profiles'][1]['levels']['vivid']['archive'].update(bytes=len(wrong), sha256=sha(wrong))
-        self.save()
-        with self.assertRaisesRegex(ValueError, 'Unexpected entry'):
-            wp.fetch(self.root, '4k', opener=lambda request, timeout: Response(wrong), level='vivid')
+    def test_level_files_are_checked_against_their_own_hashes(self):
+        # Vivid's objects served with Muted's bytes (the same size): refused, nothing installed
+        for name, data in self.images['vivid'].items():
+            self.store[f'{BASE}{sha(data)}.webp'] = self.images['muted'][name]
+        with self.assertRaisesRegex(ValueError, 'SHA-256'):
+            wp.fetch(self.root, '4k', opener=self.opener, level='vivid', attempts=1)
         self.assertFalse((wp.sets_dir()/'4k-vivid').exists())
 
     def test_unpublished_level_cannot_be_fetched(self):
         with self.assertRaisesRegex(ValueError, 'No Muted background'):
-            wp.fetch(self.root, '1440', opener=self.opener('muted'), level='muted')
+            wp.fetch(self.root, '1440', opener=self.opener, level='muted')
 
     # -- settings and fallback -----------------------------------------------
 
@@ -173,7 +153,7 @@ class Levels(unittest.TestCase):
         self.assertEqual(p['level'], 'vivid')
 
     def test_settings_screen_gets_every_levels_resolution_list(self):
-        wp.fetch(self.root, '4k', opener=self.opener('muted'), level='muted')
+        wp.fetch(self.root, '4k', opener=self.opener, level='muted')
         seen = {}
         def announce(p, desktop):
             seen.update(p)
@@ -224,7 +204,7 @@ class Levels(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'Invalid wallpaper setting'):
                 wp.initialize(self.root, wp.plan(self.root, detected=[SCREEN]), configure=True)
 
-    def test_missing_level_archive_keeps_the_current_set_and_retries(self):
+    def test_missing_level_set_keeps_the_current_set_and_retries(self):
         with patch.object(wp, 'fetch', side_effect=self.fake_fetch()), patch.object(wp, 'sync', return_value=False):
             p = wp.initialize(self.root, wp.plan(self.root, detected=[SCREEN]))
         self.assertEqual((p['profile'], p['level']), ('4k', 'default'))

@@ -27,19 +27,30 @@ byte-identical.
 
 The exported drawing geometry in `tools/assets/` is not in Git (about 170 MB of
 JSON). Run `python3 tools/fetch_render_assets.py` to restore it from the
-`render-assets-v5` release before rendering; after regenerating geometry,
-publish a new archive and update the tag and checksum in that script.
+`render-assets-v6` release before rendering; after regenerating geometry,
+publish a new release (`render-assets-v7`, …) and update the tag and checksum
+in that script. Build the archive deterministically from `tools/assets/`:
+`find . -type f | LC_ALL=C sort > list` and `tar --format=gnu --mtime=@0
+--owner=0 --group=0 --numeric-owner --mode=644 --no-recursion -cf - -T list |
+xz -9e -T0` (this reproduces v5 and v6 byte for byte).
 
 Every set also exists at three ground levels, Muted / Default / Vivid
 (`Sheet.ground_level`, `--level` on the render and audit tools; values in
 `docs/collection/palettes.json` → `levels`, derived and checked by
 `tools/ground_levels.py`; review sheets by `tools/ground_level_review.py` in
 `concepts/ground-levels/`). Only the ground changes. Default must stay
-byte-identical; Muted and Vivid ship as extra release archives per profile.
+byte-identical; every resolution ships three packs (`packs` → muted, default, vivid in
+`profiles.json`), each a group of per-file objects.
 The layout audit includes a per-label contrast check at every level.
 
-Wallpaper archives are published under the release named by `RELEASE_TAG` in
-`tools/wallpaper_profiles.py`. Once the theme is public, never replace the
-assets of a published tag: checkouts in the wild verify downloads against
-their own manifest. Publish a new tag (`wallpapers-v2`, …), point
-`RELEASE_TAG` at it and keep the old release.
+Shipped wallpapers are per-file objects on Cloudflare R2 (bucket `media`, key
+`p-bloom/<sha256>.webp`, served at `objects_base` in
+`docs/collection/profiles.json`). An object is never replaced or deleted:
+checkouts in the wild download the files their own manifest names. To fix
+wallpapers: `tools/run_matrix.sh o02,b13` (those sheets in every set, all
+levels; it accepts the new 5K masters), audit, `python3
+tools/package_wallpaper_profiles.py`, `python3 tools/publish_wallpaper_objects.py`
+(uploads only new files with Wrangler, then downloads them to check), and only
+then commit the manifest and `backgrounds/`. The `files`/`archive` entries and
+the `wallpapers-v1` release are the frozen first release for older companion
+apps; leave them as they are.
