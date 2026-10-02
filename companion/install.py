@@ -10,9 +10,8 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-MARKER = '# p(bloom) Wallpapers companion'
-RUNTIME = ('view_wallpapers.py', 'gallery.py', 'wallpaper_profiles.py', 'wallpaper_desktop.py', 'wallpaper_setup_cli.py',
-           'settings_ui.py')
+sys.path.insert(0, str(ROOT/'tools'))
+from wallpaper_uninstall import ICON_SIZES, MARKER, RUNTIME, remove  # noqa: E402
 
 
 def desktop_quote(value):
@@ -25,6 +24,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--prefix', type=Path, default=Path.home()/'.local')
     ap.add_argument('--uninstall', action='store_true')
+    ap.add_argument('--purge', action='store_true', help='With --uninstall: also delete the downloaded sets and the settings')
     ap.add_argument('--no-launch', action='store_true', help='Install without opening the app')
     args = ap.parse_args()
     prefix = args.prefix.expanduser().resolve()
@@ -33,7 +33,7 @@ def main():
     desktop = prefix/'share/applications/p-bloom-wallpapers.desktop'
     # the app icon in the user's hicolor theme, one PNG per size (tools/make_icon.py)
     icons = [(prefix/f'share/icons/hicolor/{n}x{n}/apps/p-bloom-wallpapers.png', ROOT/f'companion/icons/p-bloom-wallpapers-{n}.png')
-             for n in (16, 24, 32, 48, 64, 128, 256, 512)]
+             for n in ICON_SIZES]
     local = prefix == (Path.home()/'.local').resolve()
     service = Path.home()/'.config/systemd/user/p-bloom-wallpapers-desktop.service'
     if local and service.exists() and MARKER not in service.read_text():
@@ -44,29 +44,15 @@ def main():
     if args.uninstall:
         if not (app/'install.json').is_file():
             ap.error('No companion installation recorded at this prefix')
-        if local and service.is_file():
-            subprocess.run(['systemctl','--user','disable','--now',service.name],check=True)
-            service.unlink()
-            subprocess.run(['systemctl','--user','daemon-reload'],check=True)
-        if launcher.is_file() and MARKER in launcher.read_text():launcher.unlink()
-        if desktop.is_file() and 'StartupWMClass=p-bloom-wallpapers' in desktop.read_text():desktop.unlink()
-        for target, _ in icons:
-            target.unlink(missing_ok=True)
-        if local and hook.is_file() and MARKER in hook.read_text():hook.unlink()
-        for name in (*RUNTIME, 'wallpaper_setup_ui.py', 'wallpaper-viewer.ini', 'install.json', 'p-bloom-wallpapers'):
-            (app/name).unlink(missing_ok=True)
-        # Python's bytecode cache of the copied runtime goes with it; downloaded sets stay
-        shutil.rmtree(app/'__pycache__',ignore_errors=True)
-        if not any(app.iterdir()):app.rmdir()
-        print('Companion removed. Wallpaper files and theme checkout retained.')
+        remove(prefix, purge=args.purge)
+        print('Companion removed.' + (' Downloaded sets and settings deleted.' if args.purge else
+              ' Downloaded sets and settings kept (--purge deletes them).') + ' The theme is unchanged.')
     else:
         try:
             import gi
             gi.require_version('Gtk', '4.0')
         except (ImportError, ValueError):
             ap.error('The gallery needs GTK 4 and python-gobject; on Omarchy run: omarchy pkg add python-gobject gtk4')
-        if local and not (shutil.which('foot') or shutil.which('xdg-terminal-exec')):
-            ap.error('foot or xdg-terminal-exec is required for setup from the application menu')
         if launcher.exists() and MARKER not in launcher.read_text():
             ap.error(f'Refusing to overwrite an unrelated executable: {launcher}')
         if desktop.exists() and 'StartupWMClass=p-bloom-wallpapers' not in desktop.read_text():

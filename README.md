@@ -14,11 +14,13 @@ Each wallpaper is laid out again for 18 screens, from 1080p to 7680 × 2160, in 
 
 ### p(bloom) Wallpapers
 
-The companion app is a full-screen browser for the 42 wallpapers. It also downloads the set made for your monitors, switches when you plug in another screen, and sets the background strength.
+The companion app is a gallery for the 42 wallpapers: ← → browse, ↑ ↓ show one at another intensity, Enter puts it on your desktop. It also downloads the set made for your monitors and switches when you plug in another screen. Open it from Omarchy's menu (Super + Space, type `pbloom`).
 
 ```bash
 python3 ~/.config/omarchy/themes/p-bloom/companion/install.py
 ```
+
+Removing the theme (Remove > Theme) removes the app with it. To remove only the app, add `--uninstall`; `--purge` also deletes its downloaded sets and settings.
 
 [What it installs and how it works](companion/README.md)
 

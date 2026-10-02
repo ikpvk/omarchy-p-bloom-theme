@@ -153,12 +153,12 @@ window class. This app does not install a global keybinding.
 ```sh
 p-bloom-wallpapers tether
 p-bloom-wallpapers 3                  # Collection position, not filename number
-p-bloom-wallpapers --configure        # Background level and resolution
+p-bloom-wallpapers --configure        # The gallery with its settings open (the optimal set)
 p-bloom-wallpapers --show-plan        # JSON; no changes or setup dialog
 p-bloom-wallpapers --list             # All 42 chosen files; read-only
 p-bloom-wallpapers --monitor DP-1     # Prefer its proportions; still avoid upscaling on all screens
 p-bloom-wallpapers --dir /path/to/numbered-images
-python3 companion/install.py --uninstall
+python3 companion/install.py --uninstall           # add --purge to delete the downloads and settings too
 ```
 
 Installation is user-local: `~/.local/bin/p-bloom-wallpapers`,
@@ -175,7 +175,8 @@ rendered with `tools/render_wallpaper_sets.py` and packaged with
 the archives must then be uploaded to the release named by `RELEASE_TAG`. The development viewer (`python3 tools/view_wallpapers.py`) reads live renders,
 independently of the packaged release.
 
-Uninstall stops and removes the desktop service, launcher, owned hook and runtime files. It retains the
-theme, downloaded sets and setup preferences (delete
-`~/.local/share/p-bloom-wallpapers/sets/` to reclaim the space). A custom `--prefix /some/path`
+Uninstall stops and removes the desktop service, launcher, menu entry, icons, owned hook and runtime files.
+It keeps the theme, the downloaded sets and the settings; `--purge` deletes the sets and settings as well.
+Removing the theme with Omarchy (Remove > Theme) removes the app too: once the theme's folder has been gone
+for a minute, the desktop service purges the app the same way, disables itself and sends a notification. A custom `--prefix /some/path`
 is a staging installation: it installs no hooks or service and launches nothing.

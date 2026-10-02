@@ -57,7 +57,20 @@ def main():
     args=parser.parse_args()
     watcher=DesktopWatcher(args.root.resolve())
     last_error=None
+    gone=None
     while True:
+        # Omarchy's Remove > Theme deletes the theme's folder: once it has been gone for a minute (a reinstall clones
+        # it back within seconds), the app removes itself, its downloads and settings with it, and stops
+        if not args.root.is_dir():
+            gone=gone or time.time()
+            if time.time()-gone>=60:
+                import wallpaper_uninstall
+                wallpaper_uninstall.remove(Path(__file__).resolve().parents[2],purge=True,from_service=True)
+                wallpaper_uninstall.notify('p(bloom) Wallpapers removed','The p(bloom) theme was removed, so its app and downloaded wallpapers went with it.')
+                return
+            time.sleep(10)
+            continue
+        gone=None
         try:
             watcher.tick()
             last_error=None
