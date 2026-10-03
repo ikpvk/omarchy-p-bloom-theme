@@ -1,6 +1,8 @@
-![p(bloom), an Omarchy theme: the name, then one wallpaper per beat of its song](previews/hero.webp)
+[![p(bloom), an Omarchy theme: the name, then one wallpaper per beat of its song](previews/hero.webp)](https://jacekbecela.com/blog/omarchy-p-bloom-theme/)
 
 **p(bloom) is a theme for [Omarchy](https://omarchy.org).** Deep-space navy, ice-white text, Signal · Bloom · Sunrise. And 42 blueprint wallpapers of machines from a future worth building.
+
+**[▶ Watch the music video (sound on) and read how it was made](https://jacekbecela.com/blog/omarchy-p-bloom-theme/)**
 
 ```bash
 omarchy theme install https://github.com/ncr/omarchy-p-bloom-theme.git
